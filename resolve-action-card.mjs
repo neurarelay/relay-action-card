@@ -49,5 +49,5 @@ if (jsonOutput) {
   console.log(`Trace: ${result.trace_ref}`);
   console.log(`Boundary: ${result.relay_boundary}`);
   console.log("");
-  console.log("Your app keeps execution ownership. Relay only returns the governed decision before execution.");
+  console.log("Your system keeps execution ownership. Relay only returns the governed decision before execution.");
 }

@@ -4,7 +4,7 @@ Send an Action Card to Neura Relay. Get a Decision Receipt before execution.
 
 This is the public developer starting point for Neura Relay. It keeps the first interaction simple: your Agent proposes an action, Relay reviews it, and your system receives a governed receipt before deciding what to execute.
 
-## Run the example
+## Run in 60 seconds
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -26,16 +26,56 @@ Trace: trace_ref_...
 Boundary: decision_gate_only_developer_keeps_execution
 ```
 
-Use a local Relay server instead:
+For machine-readable output:
+
+```bash
+npm run example:relay -- --json
+```
+
+To point the example at a local Relay server:
 
 ```bash
 RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 ```
 
-Machine-readable output:
+## Copy the request
 
-```bash
-npm run example:relay -- --json
+The example sends `action-card.v0.1.json` to Relay:
+
+```json
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_support_reply_001",
+    "owner": "acme_support",
+    "capability": "customer_message_draft",
+    "capabilityVersion": "0.1.0"
+  },
+  "proposedAction": {
+    "type": "send_message",
+    "summary": "Send a customer reply confirming that the document was received and will be reviewed today.",
+    "target": "customer_thread_123"
+  },
+  "affectedObject": "customer_thread_123",
+  "context": {
+    "evidenceRefs": ["ticket_123", "uploaded_document_456"],
+    "ruleRefs": ["customer_reply_policy"],
+    "riskCategory": "customer_communication",
+    "requestedOutcome": "proceed_or_review"
+  }
+}
+```
+
+The script wraps that Action Card for the Relay resolve endpoint:
+
+```js
+const response = await fetch("https://www.neurarelay.com/api/resolve", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action_card: actionCard })
+});
+
+const { decision_receipt: receipt } = await response.json();
 ```
 
 ## What just happened
@@ -47,6 +87,22 @@ npm run example:relay -- --json
 5. Your system keeps execution ownership.
 
 Relay is a decision gate. It does not host your Agent, replace your product, store private payloads, or execute downstream actions.
+
+## Decision Receipt
+
+Relay returns a governed receipt your system can store and route:
+
+```json
+{
+  "decision": "human_review",
+  "reason": "Relay has enough context to identify the action, but routes it through review before anything is sent downstream",
+  "recommended_next_step": "Route this proposed action to human review before execution.",
+  "trace_ref": "trace_ref_...",
+  "relay_boundary": "decision_gate_only_developer_keeps_execution"
+}
+```
+
+Your system decides what happens after the receipt. Relay only returns the governed decision before execution.
 
 ## Files
 
