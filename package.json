@@ -1,0 +1,10 @@
+{
+  "name": "relay-action-card",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Run a Neura Relay Action Card and receive a Decision Receipt before execution.",
+  "scripts": {
+    "example:relay": "node resolve-action-card.mjs",
+    "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs"
+  }
+}

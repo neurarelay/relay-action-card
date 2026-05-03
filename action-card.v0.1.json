@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_support_reply_001",
+    "owner": "acme_support",
+    "capability": "customer_message_draft",
+    "capabilityVersion": "0.1.0"
+  },
+  "proposedAction": {
+    "type": "send_message",
+    "summary": "Send a customer reply confirming that the document was received and will be reviewed today.",
+    "target": "customer_thread_123"
+  },
+  "affectedObject": "customer_thread_123",
+  "context": {
+    "evidenceRefs": ["ticket_123", "uploaded_document_456"],
+    "ruleRefs": ["customer_reply_policy"],
+    "riskCategory": "customer_communication",
+    "requestedOutcome": "proceed_or_review"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "receipt_id": "decision_receipt_example_001",
+  "action_card_version": "0.1",
+  "action_card_ref": "action_card_example_001",
+  "decision": "human_review",
+  "reason": "The proposed action is safe enough to inspect, but the launch example preserves the human-review boundary before any downstream execution.",
+  "reviewed_output": "Send a customer reply confirming that the document was received and will be reviewed today.",
+  "recommended_next_step": "Route this proposed action to human review before execution.",
+  "evidence_refs": ["ticket_123", "uploaded_document_456"],
+  "trace_ref": "trace_ref_example_001",
+  "confidence": {
+    "low": 84,
+    "high": 93
+  },
+  "resolution_score": 88,
+  "relay_boundary": "decision_gate_only_developer_keeps_execution"
+}
