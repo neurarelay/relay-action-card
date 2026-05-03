@@ -2,7 +2,7 @@
 
 Send an Action Card to Neura Relay. Get a Decision Receipt before execution.
 
-This is the public developer starting point for Neura Relay. It keeps the first interaction simple: your Agent proposes an action, Relay reviews it, and your app receives a governed receipt before deciding what to execute.
+This is the public developer starting point for Neura Relay. It keeps the first interaction simple: your Agent proposes an action, Relay reviews it, and your system receives a governed receipt before deciding what to execute.
 
 ## Run the example
 
@@ -43,15 +43,15 @@ npm run example:relay -- --json
 1. The example loads `action-card.v0.1.json`.
 2. It sends the Action Card to `POST /api/resolve`.
 3. Relay returns a Decision Receipt v0.1.
-4. Your app stores the receipt next to the proposed action.
-5. Your app keeps execution ownership.
+4. Your system stores the receipt next to the proposed action.
+5. Your system keeps execution ownership.
 
 Relay is a decision gate. It does not host your Agent, replace your product, store private payloads, or execute downstream actions.
 
 ## Files
 
 - `action-card.v0.1.json`: the proposed Agent action
-- `decision-receipt.v0.1.json`: the example response shape your app stores
+- `decision-receipt.v0.1.json`: the example response shape your system stores
 - `resolve-action-card.mjs`: sends the Action Card to Relay
 - `scripts/verify-relay-action-card-example.mjs`: production example verifier
 
@@ -66,7 +66,7 @@ npm run verify:relay-example
 - Relay reviews proposed Agent actions before execution
 - Registry is where Agents are registered
 - Protocol defines the message and reference language
-- Your app owns the Agent, data, workflow, and final execution
+- Your system owns the Agent, data, workflow, and final execution
 
 ## Launch boundary
 
