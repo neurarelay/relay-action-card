@@ -2,10 +2,37 @@
   "receipt_id": "decision_receipt_example_001",
   "action_card_version": "0.1",
   "action_card_ref": "action_card_example_001",
-  "decision": "human_review",
-  "reason": "The proposed action is safe enough to inspect, but the launch example preserves the human-review boundary before any downstream execution.",
+  "decision": "proceed",
+  "reason": "This output acknowledges receipt or next-step review without creating premature commitment or operational risk.",
   "reviewed_output": "Send a customer reply confirming that the document was received and will be reviewed today.",
-  "recommended_next_step": "Route this proposed action to human review before execution.",
+  "recommended_next_step": "Developer may continue to execution.",
+  "decision_factors": {
+    "identity_check": {
+      "status": "pass",
+      "summary": "Agent identity, owner, capability, and version are present.",
+      "refs": ["agent_support_reply_001", "customer_message_draft", "0.1.0"]
+    },
+    "authority_check": {
+      "status": "pass",
+      "summary": "Authority context is sufficient for this action posture."
+    },
+    "evidence_check": {
+      "status": "pass",
+      "summary": "Evidence references are present for review.",
+      "refs": ["ticket_123", "uploaded_document_456"]
+    },
+    "policy_check": {
+      "status": "pass",
+      "summary": "Policy or rule references are present.",
+      "refs": ["customer_reply_policy"]
+    },
+    "risk_check": {
+      "status": "pass",
+      "summary": "Action appears low-risk and acknowledgement-oriented."
+    },
+    "missing_requirements": [],
+    "routing_reason": "Identity, authority, evidence, policy, and risk checks support the returned route."
+  },
   "evidence_refs": ["ticket_123", "uploaded_document_456"],
   "trace_ref": "trace_ref_example_001",
   "confidence": {

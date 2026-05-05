@@ -38,6 +38,15 @@ const result = {
   relay: relayBaseUrl,
   input_model: payload.input_model,
   decision: receipt?.decision,
+  decision_factors: receipt?.decision_factors
+    ? {
+        identity: receipt.decision_factors.identity_check?.status,
+        authority: receipt.decision_factors.authority_check?.status,
+        evidence: receipt.decision_factors.evidence_check?.status,
+        policy: receipt.decision_factors.policy_check?.status,
+        risk: receipt.decision_factors.risk_check?.status,
+      }
+    : null,
   trace_ref: receipt?.trace_ref,
   relay_boundary: receipt?.relay_boundary,
   failures,

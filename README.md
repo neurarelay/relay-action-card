@@ -1,8 +1,8 @@
 # Relay Action Card
 
-Send an Action Card to Neura Relay. Get a Decision Receipt before execution.
+Send an Action Card to Neura Relay. Get a governed Decision Receipt before execution.
 
-This is the public developer starting point for Neura Relay. It keeps the first interaction simple: your Agent proposes an action, Relay reviews it, and your system receives a governed receipt before deciding what to execute.
+This is the public developer starting point for Neura Relay. It keeps the first interaction simple: your Agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
 
 ## Run in 60 seconds
 
@@ -19,9 +19,10 @@ Neura Relay returned a Decision Receipt
 
 Relay: https://www.neurarelay.com
 Input: action_card_v0_1
-Decision: human_review
+Decision: proceed
 Reason: ...
-Next step: Route this proposed action to human review before execution.
+Decision factors: identity pass · authority pass · evidence pass · policy pass · risk pass
+Next step: Developer may continue to execution.
 Trace: trace_ref_...
 Boundary: decision_gate_only_developer_keeps_execution
 ```
@@ -82,11 +83,11 @@ const { decision_receipt: receipt } = await response.json();
 
 1. The example loads `action-card.v0.1.json`.
 2. It sends the Action Card to `POST /api/resolve`.
-3. Relay returns a Decision Receipt v0.1.
+3. Relay returns a Decision Receipt v0.1 with decision factors.
 4. Your system stores the receipt next to the proposed action.
 5. Your system keeps execution ownership.
 
-Relay is a decision gate. It does not host your Agent, replace your product, store private payloads, or execute downstream actions.
+Relay is a governed decision gate. Your Agent, product, private payloads, and downstream execution stay in your system.
 
 ## Decision Receipt
 
@@ -94,9 +95,16 @@ Relay returns a governed receipt your system can store and route:
 
 ```json
 {
-  "decision": "human_review",
-  "reason": "Relay has enough context to identify the action, but routes it through review before anything is sent downstream",
-  "recommended_next_step": "Route this proposed action to human review before execution.",
+  "decision": "proceed",
+  "reason": "This output acknowledges receipt or next-step review without creating premature commitment or operational risk.",
+  "recommended_next_step": "Developer may continue to execution.",
+  "decision_factors": {
+    "identity_check": { "status": "pass" },
+    "authority_check": { "status": "pass" },
+    "evidence_check": { "status": "pass" },
+    "policy_check": { "status": "pass" },
+    "risk_check": { "status": "pass" }
+  },
   "trace_ref": "trace_ref_...",
   "relay_boundary": "decision_gate_only_developer_keeps_execution"
 }
@@ -119,11 +127,11 @@ npm run verify:relay-example
 
 ## Ecosystem fit
 
-- Relay reviews proposed Agent actions before execution
-- Registry is where Agents are registered
-- Protocol defines the message and reference language
+- Relay evaluates proposed Agent actions before execution
+- Registry supplies Agent Passport identity and capability-version context
+- Protocol defines the Action Card, decision factor, receipt, and trace language
 - Your system owns the Agent, data, workflow, and final execution
 
 ## Launch boundary
 
-This is a runnable public example. It is not a published npm package, API key flow, hosted Agent runtime, or execution system.
+This is a runnable public example for the live Relay Action Card path.

@@ -26,11 +26,22 @@ if (!response.ok || payload.ok !== true) {
 }
 
 const receipt = payload.decision_receipt;
+const factors = receipt?.decision_factors;
+const factorSummary = factors
+  ? [
+      `identity ${factors.identity_check?.status ?? "unknown"}`,
+      `authority ${factors.authority_check?.status ?? "unknown"}`,
+      `evidence ${factors.evidence_check?.status ?? "unknown"}`,
+      `policy ${factors.policy_check?.status ?? "unknown"}`,
+      `risk ${factors.risk_check?.status ?? "unknown"}`,
+    ].join(" · ")
+  : null;
 const result = {
   relay: RELAY_BASE_URL,
   input_model: payload.input_model,
   decision: receipt?.decision,
   reason: receipt?.reason,
+  decision_factors: factorSummary,
   trace_ref: receipt?.trace_ref,
   next_step: receipt?.recommended_next_step,
   relay_boundary: receipt?.relay_boundary,
@@ -45,6 +56,9 @@ if (jsonOutput) {
   console.log(`Input: ${result.input_model}`);
   console.log(`Decision: ${result.decision}`);
   console.log(`Reason: ${result.reason}`);
+  if (result.decision_factors) {
+    console.log(`Decision factors: ${result.decision_factors}`);
+  }
   console.log(`Next step: ${result.next_step}`);
   console.log(`Trace: ${result.trace_ref}`);
   console.log(`Boundary: ${result.relay_boundary}`);
