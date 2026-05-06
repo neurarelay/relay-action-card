@@ -2,9 +2,30 @@
 
 Send an Action Card to Neura Relay. Get a governed Decision Receipt before execution.
 
-This is the public developer starting point for Neura Relay. It keeps the first interaction simple: your Agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
+This is the public developer starting point for Neura Relay. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
 
-## Run in 60 seconds
+## Start Here
+
+There are two paths in this repo:
+
+| Path | Folder | Access | Purpose |
+| --- | --- | --- | --- |
+| Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
+| Optional MCP examples | `examples/mcp` | Controlled access | Call the same Relay spine through protected MCP-compatible tools |
+
+The core path is the default Neura path:
+
+```text
+Action Card -> Relay -> Decision Receipt
+```
+
+The MCP path is optional compatibility:
+
+```text
+MCP-capable runtime -> protected /mcp -> same Relay decision spine
+```
+
+## Run The Core Example In 60 Seconds
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -21,7 +42,7 @@ Relay: https://www.neurarelay.com
 Input: action_card_v0_1
 Decision: proceed
 Reason: ...
-Decision factors: identity pass · authority pass · evidence pass · policy pass · risk pass
+Decision factors: identity pass - authority pass - evidence pass - policy pass - risk pass
 Next step: Developer may continue to execution.
 Trace: trace_ref_...
 Boundary: decision_gate_only_developer_keeps_execution
@@ -39,9 +60,9 @@ To point the example at a local Relay server:
 RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 ```
 
-## Copy the request
+## Copy The Core Request
 
-The example sends `action-card.v0.1.json` to Relay:
+The core example sends `examples/core/action-card.json` to Relay:
 
 ```json
 {
@@ -79,30 +100,23 @@ const response = await fetch("https://www.neurarelay.com/api/resolve", {
 const { decision_receipt: receipt } = await response.json();
 ```
 
-## What just happened
+## What Just Happened
 
-1. The example loads `action-card.v0.1.json`.
+1. The example loads `examples/core/action-card.json`.
 2. It sends the Action Card to `POST /api/resolve`.
 3. Relay returns a Decision Receipt v0.1 with decision factors.
 4. Your system stores the receipt next to the proposed action.
 5. Your system keeps execution ownership.
 
-Relay is a governed decision gate. Your Agent, product, private payloads, and downstream execution stay in your system.
+Relay is a governed decision gate. Your agent, product, private payloads, and downstream execution stay in your system.
 
-## MCP Developer Adoption Pack
+## Optional MCP Examples
 
 MCP makes tool access easier. Neura makes consequential MCP tool use governable before it happens.
 
 Use Neura Relay through MCP when an agent can reach real tools, records, messages, money workflows, deployments, or customer data and you need a pre-action record before the action becomes real.
 
-```text
-Action Card in.
-Decision Receipt out.
-Your agent keeps execution.
-Your customer gets proof.
-```
-
-Current boundary:
+Current MCP boundary:
 
 - the open public path is still `POST /api/resolve`
 - protected MCP access is controlled beta through `NEURA_RELAY_MCP_ACCESS_TOKEN`
@@ -119,48 +133,41 @@ NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_ca
 
 The MCP example pack includes:
 
-- safe Action Card scenarios for customer reply, CRM update, refund review, and deployment change
-- a direct MCP JSON-RPC client for the protected production `/mcp` endpoint
-- an OpenAI Responses remote MCP template
-- a Claude Code remote HTTP MCP configuration template
-- a compatibility matrix that separates verified, prepared, planned, and not-claimed surfaces
+- 4 safe Action Card scenarios: customer reply, CRM update, refund review, and deployment change
+- 1 direct MCP JSON-RPC client for the protected production `/mcp` endpoint
+- 1 OpenAI Responses remote MCP template
+- 1 Claude Code remote HTTP MCP configuration template
+- 1 compatibility matrix that separates verified, prepared, planned, and not-claimed surfaces
 
 Start here:
 
 - `examples/mcp/README.md`
 - `examples/mcp/compatibility-matrix.md`
 
-## Decision Receipt
+## Repository Map
 
-Relay returns a governed receipt your system can store and route:
-
-```json
-{
-  "decision": "proceed",
-  "reason": "This output acknowledges receipt or next-step review without creating premature commitment or operational risk.",
-  "recommended_next_step": "Developer may continue to execution.",
-  "decision_factors": {
-    "identity_check": { "status": "pass" },
-    "authority_check": { "status": "pass" },
-    "evidence_check": { "status": "pass" },
-    "policy_check": { "status": "pass" },
-    "risk_check": { "status": "pass" }
-  },
-  "trace_ref": "trace_ref_...",
-  "relay_boundary": "decision_gate_only_developer_keeps_execution"
-}
+```text
+examples/
+  core/
+    README.md
+    action-card.json
+    resolve-action-card.mjs
+    decision-receipt.example.json
+  mcp/
+    README.md
+    compatibility-matrix.md
+    direct-mcp-client.mjs
+    openai-responses-remote-mcp.mjs
+    claude-code-neura.mcp.example.json
+    action-cards/
+      customer-reply.json
+      crm-update.json
+      refund-review.json
+      deploy-change.json
+scripts/
+  verify-relay-action-card-example.mjs
+  verify-mcp-developer-adoption-pack.mjs
 ```
-
-Your system decides what happens after the receipt. Relay only returns the governed decision before execution.
-
-## Files
-
-- `action-card.v0.1.json`: the proposed Agent action
-- `decision-receipt.v0.1.json`: the example response shape your system stores
-- `resolve-action-card.mjs`: sends the Action Card to Relay
-- `examples/mcp/`: controlled-access MCP developer adoption examples
-- `scripts/verify-relay-action-card-example.mjs`: production example verifier
-- `scripts/verify-mcp-developer-adoption-pack.mjs`: static MCP adoption-pack verifier with optional live MCP check
 
 ## Verify
 
@@ -169,14 +176,16 @@ npm run verify:relay-example
 npm run verify:mcp-adoption-pack
 ```
 
-## Ecosystem fit
+`verify:mcp-adoption-pack` performs static checks by default. When `NEURA_RELAY_MCP_ACCESS_TOKEN` is present, it also performs live protected production validation and resolution through `/mcp`.
 
-- Relay evaluates proposed Agent actions before execution
-- Registry supplies Agent Passport identity and capability-version context
-- Protocol defines the Action Card, decision factor, receipt, and trace language
-- Your system owns the Agent, data, workflow, and final execution
+## Ecosystem Fit
 
-## Launch boundary
+- Relay evaluates proposed agent actions before execution.
+- Registry supplies Agent Passport identity and capability-version context.
+- Protocol defines the Action Card, decision factor, receipt, and trace language.
+- Your system owns the agent, data, workflow, and final execution.
+
+## Launch Boundary
 
 This is a runnable public example for the live Relay Action Card path.
 

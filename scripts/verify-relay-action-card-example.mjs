@@ -1,13 +1,37 @@
 #!/usr/bin/env node
 
 import { readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
+const failures = [];
+const coreFiles = [
+  "examples/core/README.md",
+  "examples/core/action-card.json",
+  "examples/core/decision-receipt.example.json",
+  "examples/core/resolve-action-card.mjs",
+];
+
+for (const file of coreFiles) {
+  if (!existsSync(join(repoRoot, file))) {
+    failures.push(`missing_${file}`);
+  }
+}
+
 const actionCard = JSON.parse(
-  await readFile(join(repoRoot, "action-card.v0.1.json"), "utf8"),
+  await readFile(join(repoRoot, "examples/core/action-card.json"), "utf8"),
 );
+const readme = await readFile(join(repoRoot, "README.md"), "utf8");
+
+if (!readme.includes("examples/core")) {
+  failures.push("top_level_readme_must_name_core_examples");
+}
+
+if (!readme.includes("examples/mcp")) {
+  failures.push("top_level_readme_must_name_mcp_examples");
+}
 
 const relayBaseUrl = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
 
@@ -19,7 +43,6 @@ const response = await fetch(new URL("/api/resolve", relayBaseUrl), {
 
 const payload = await response.json();
 const receipt = payload.decision_receipt;
-const failures = [];
 
 if (!response.ok) failures.push(`http_status_${response.status}`);
 if (payload.ok !== true) failures.push("payload_not_ok");

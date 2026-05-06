@@ -55,6 +55,10 @@ assert(
   "readme_missing_developer_positioning",
 );
 assert(
+  readme.includes("optional MCP path") && readme.includes("../core"),
+  "readme_must_distinguish_mcp_from_core_path",
+);
+assert(
   readme.includes("does not currently offer public self-serve token issuance"),
   "readme_must_preserve_no_public_token_boundary",
 );

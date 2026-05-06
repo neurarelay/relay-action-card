@@ -2,6 +2,8 @@
 
 Add Neura as the governed decision gate before your MCP-connected agent acts.
 
+This folder is the optional MCP path. For the open public non-MCP example, start with `../core`.
+
 ```text
 Action Card in.
 Decision Receipt out.

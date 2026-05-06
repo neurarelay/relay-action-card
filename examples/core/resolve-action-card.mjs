@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const exampleDir = dirname(fileURLToPath(import.meta.url));
 const actionCard = JSON.parse(
-  await readFile(join(exampleDir, "action-card.v0.1.json"), "utf8"),
+  await readFile(join(exampleDir, "action-card.json"), "utf8"),
 );
 
 const RELAY_BASE_URL = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
@@ -34,7 +34,7 @@ const factorSummary = factors
       `evidence ${factors.evidence_check?.status ?? "unknown"}`,
       `policy ${factors.policy_check?.status ?? "unknown"}`,
       `risk ${factors.risk_check?.status ?? "unknown"}`,
-    ].join(" · ")
+    ].join(" - ")
   : null;
 const result = {
   relay: RELAY_BASE_URL,
