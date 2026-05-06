@@ -89,6 +89,47 @@ const { decision_receipt: receipt } = await response.json();
 
 Relay is a governed decision gate. Your Agent, product, private payloads, and downstream execution stay in your system.
 
+## MCP Developer Adoption Pack
+
+MCP makes tool access easier. Neura makes consequential MCP tool use governable before it happens.
+
+Use Neura Relay through MCP when an agent can reach real tools, records, messages, money workflows, deployments, or customer data and you need a pre-action record before the action becomes real.
+
+```text
+Action Card in.
+Decision Receipt out.
+Your agent keeps execution.
+Your customer gets proof.
+```
+
+Current boundary:
+
+- the open public path is still `POST /api/resolve`
+- protected MCP access is controlled beta through `NEURA_RELAY_MCP_ACCESS_TOKEN`
+- Neura does not currently offer public self-serve token issuance
+- Neura does not execute downstream actions
+
+Run the direct MCP client when Neura has issued an MCP token:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --list-tools
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=validate_action_card --json
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_card --json
+```
+
+The MCP example pack includes:
+
+- safe Action Card scenarios for customer reply, CRM update, refund review, and deployment change
+- a direct MCP JSON-RPC client for the protected production `/mcp` endpoint
+- an OpenAI Responses remote MCP template
+- a Claude Code remote HTTP MCP configuration template
+- a compatibility matrix that separates verified, prepared, planned, and not-claimed surfaces
+
+Start here:
+
+- `examples/mcp/README.md`
+- `examples/mcp/compatibility-matrix.md`
+
 ## Decision Receipt
 
 Relay returns a governed receipt your system can store and route:
@@ -117,12 +158,15 @@ Your system decides what happens after the receipt. Relay only returns the gover
 - `action-card.v0.1.json`: the proposed Agent action
 - `decision-receipt.v0.1.json`: the example response shape your system stores
 - `resolve-action-card.mjs`: sends the Action Card to Relay
+- `examples/mcp/`: controlled-access MCP developer adoption examples
 - `scripts/verify-relay-action-card-example.mjs`: production example verifier
+- `scripts/verify-mcp-developer-adoption-pack.mjs`: static MCP adoption-pack verifier with optional live MCP check
 
 ## Verify
 
 ```bash
 npm run verify:relay-example
+npm run verify:mcp-adoption-pack
 ```
 
 ## Ecosystem fit
@@ -135,3 +179,5 @@ npm run verify:relay-example
 ## Launch boundary
 
 This is a runnable public example for the live Relay Action Card path.
+
+MCP examples are controlled-access examples until Neura ships a real beta or public token system.

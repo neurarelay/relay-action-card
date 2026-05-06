@@ -1,0 +1,114 @@
+# Neura Relay MCP Examples
+
+Add Neura as the governed decision gate before your MCP-connected agent acts.
+
+```text
+Action Card in.
+Decision Receipt out.
+Your agent keeps execution.
+Your customer gets proof.
+```
+
+## What This Solves
+
+MCP makes tool access easier. Neura makes consequential tool use governable before it happens.
+
+Use these examples when your agent can reach real tools, records, messages, money workflows, deployments, or customer data and you need a pre-action record before the action becomes real.
+
+## Current Access Boundary
+
+The open public developer path is still `POST /api/resolve`.
+
+The MCP endpoint is protected controlled access:
+
+```bash
+export NEURA_RELAY_MCP_ACCESS_TOKEN="issued-by-neura"
+```
+
+Neura does not currently offer public self-serve token issuance.
+
+## Run The Direct MCP Client
+
+List the five protected Neura tools:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --list-tools
+```
+
+Validate an Action Card:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=validate_action_card --json
+```
+
+Resolve an Action Card and receive Decision Receipt, trace, and transaction refs:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_card --json
+```
+
+Try a different safe scenario:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --action-card=examples/mcp/action-cards/refund-review.json --json
+```
+
+## Scenarios
+
+- `customer-reply.json`: govern a customer message before sending
+- `crm-update.json`: govern a CRM record update before changing business state
+- `refund-review.json`: govern a refund recommendation before money movement
+- `deploy-change.json`: govern a production deployment request before release action
+
+## OpenAI Responses Template
+
+`openai-responses-remote-mcp.mjs` shows the remote MCP shape for the OpenAI Responses API:
+
+- `server_url`: `https://www.neurarelay.com/mcp`
+- `authorization`: `NEURA_RELAY_MCP_ACCESS_TOKEN`
+- `allowed_tools`: `validate_action_card`, `resolve_action_card`
+- `require_approval`: `always`
+
+Run it only after setting both tokens:
+
+```bash
+OPENAI_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... node examples/mcp/openai-responses-remote-mcp.mjs
+```
+
+Live OpenAI client verification is pending. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
+
+## Claude Code Template
+
+`claude-code-neura.mcp.example.json` shows an HTTP MCP configuration for Claude Code:
+
+```json
+{
+  "mcpServers": {
+    "neura-relay": {
+      "type": "http",
+      "url": "${NEURA_RELAY_MCP_URL:-https://www.neurarelay.com/mcp}",
+      "headers": {
+        "Authorization": "Bearer ${NEURA_RELAY_MCP_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+Live Claude client verification is pending.
+
+## Verification
+
+```bash
+npm run verify:mcp-adoption-pack
+```
+
+The verifier checks the pack structure, claim boundaries, client templates, safe scenario Action Cards, and direct MCP client shape. When `NEURA_RELAY_MCP_ACCESS_TOKEN` is present, it also performs live protected production validation and resolution through `/mcp`.
+
+## Compatibility Matrix
+
+See `compatibility-matrix.md`.
+
+## Boundary
+
+Neura Relay does not execute downstream actions. It returns the governed decision record your system can store before your system decides what to execute.

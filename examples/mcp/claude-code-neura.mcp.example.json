@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "neura-relay": {
+      "type": "http",
+      "url": "${NEURA_RELAY_MCP_URL:-https://www.neurarelay.com/mcp}",
+      "headers": {
+        "Authorization": "Bearer ${NEURA_RELAY_MCP_ACCESS_TOKEN}"
+      }
+    }
+  }
+}

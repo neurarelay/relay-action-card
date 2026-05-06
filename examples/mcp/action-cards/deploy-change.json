@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_devops_004",
+    "owner": "acme_platform",
+    "capability": "deployment_change_request",
+    "capabilityVersion": "0.1.0"
+  },
+  "proposedAction": {
+    "type": "request_deploy",
+    "summary": "Request production deployment after tests passed and the change owner approved the release window.",
+    "target": "service_checkout_api"
+  },
+  "affectedObject": "deployment_release_2026_05_06_checkout",
+  "context": {
+    "evidenceRefs": ["ci_run_1432", "owner_approval_release_window", "change_ticket_991"],
+    "ruleRefs": ["production_deploy_policy", "change_management_policy"],
+    "riskCategory": "production_change",
+    "requestedOutcome": "proceed_or_review"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_sales_ops_002",
+    "owner": "acme_revenue_ops",
+    "capability": "crm_record_update",
+    "capabilityVersion": "0.1.0"
+  },
+  "proposedAction": {
+    "type": "update_record",
+    "summary": "Update the opportunity stage to legal review after the account owner confirmed procurement approval.",
+    "target": "opportunity_456"
+  },
+  "affectedObject": "opportunity_456",
+  "context": {
+    "evidenceRefs": ["account_owner_note_456", "procurement_approval_ref_789"],
+    "ruleRefs": ["crm_stage_change_policy", "sales_ops_review_policy"],
+    "riskCategory": "business_record_change",
+    "requestedOutcome": "proceed_or_review"
+  }
+}

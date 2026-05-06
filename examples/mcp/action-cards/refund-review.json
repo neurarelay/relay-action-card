@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_billing_ops_003",
+    "owner": "acme_billing",
+    "capability": "refund_recommendation",
+    "capabilityVersion": "0.1.0"
+  },
+  "proposedAction": {
+    "type": "recommend_refund",
+    "summary": "Recommend a partial refund for a duplicate monthly charge after matching invoice and support records.",
+    "target": "billing_account_789"
+  },
+  "affectedObject": "invoice_789_duplicate_charge",
+  "context": {
+    "evidenceRefs": ["invoice_789", "support_case_2201", "payment_event_8842"],
+    "ruleRefs": ["refund_review_policy", "billing_authority_policy"],
+    "riskCategory": "money_movement",
+    "requestedOutcome": "human_review"
+  }
+}
