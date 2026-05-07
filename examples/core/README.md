@@ -32,7 +32,7 @@ After the CLI returns a receipt, open Relay Developer Workspace and paste or edi
 https://www.neurarelay.com/developers/workspace
 ```
 
-Workspace shows the same adoption path with receipt, trace, transaction refs, and Registry readiness context.
+Workspace shows the same adoption path with receipt, trace, transaction refs, and Registry readiness context. It also provides copyable JavaScript or curl handoff for `POST /api/resolve`.
 
 ## Action Card Examples
 
@@ -51,7 +51,7 @@ You can copy any Action Card into your own agent workflow or paste it into the p
 https://www.neurarelay.com/developers/workspace
 ```
 
-The Workspace lets you edit the Action Card JSON, run Relay, and inspect the returned receipt, trace, transaction refs, and Registry readiness context.
+The Workspace lets you edit the Action Card JSON, run Relay, inspect receipt, trace, transaction refs, and Registry readiness context. It also lets you copy the integration handoff for your own agent workflow.
 
 For machine-readable output:
 

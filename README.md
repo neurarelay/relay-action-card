@@ -34,6 +34,7 @@ Use this repo to prove the adoption loop before wiring Neura into your own agent
 3. Confirm Relay returns a Decision Receipt and trace ref
 4. Open Relay Developer Workspace
 5. Paste or edit the same Action Card and inspect receipt, trace, transaction refs, and Registry readiness context
+6. Copy the Workspace JavaScript or curl handoff when you are ready to wire the same call into your own agent workflow
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -59,6 +60,8 @@ Then open Workspace:
 ```text
 https://www.neurarelay.com/developers/workspace
 ```
+
+Workspace keeps the proposed action visible, returns a safe receipt, and gives copyable JavaScript and curl for the public `POST /api/resolve` path. Your app still owns execution.
 
 ## Run The Core Example In 60 Seconds
 
@@ -123,7 +126,7 @@ The default core example sends `examples/core/action-card.json` to Relay. The br
 | Data export | `examples/core/action-cards/data-export.json` | A workspace export before content leaves the system |
 | Payment release | `examples/core/action-cards/payment-release.json` | A partner payment before funds move |
 
-Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then run Relay and inspect the returned receipt, trace, transaction refs, and Registry readiness context.
+Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then run Relay and inspect the returned receipt, trace, transaction refs, Registry readiness context, and copyable integration handoff.
 
 The default support-reply Action Card looks like this:
 
@@ -179,7 +182,7 @@ For a product UI walkthrough, open the protected Relay Developer Workspace:
 https://www.neurarelay.com/developers/workspace
 ```
 
-The Workspace uses the same four examples, lets you edit the Action Card JSON, and links the returned Decision Receipt to trace replay and transaction proof.
+The Workspace uses the same four examples, keeps the proposed action visible while you edit JSON, links the returned Decision Receipt to trace replay and transaction proof, and provides JavaScript and curl handoff snippets for your own agent workflow.
 
 ## Why Agent Developers Add Neura
 
