@@ -124,6 +124,23 @@ OPENAI_AUTO_APPROVE_MCP=true OPENAI_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=...
 
 Live OpenAI client verification is pending until an `OPENAI_API_KEY` is available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
 
+## Anthropic Messages Template
+
+`anthropic-messages-mcp.mjs` shows the Claude Messages MCP connector shape:
+
+- `mcp_servers`: one protected Neura Relay server at `https://www.neurarelay.com/mcp`
+- `authorization_token`: `NEURA_RELAY_MCP_ACCESS_TOKEN`
+- `tools`: one `mcp_toolset` with only the five Neura tools enabled
+- `anthropic-beta`: `mcp-client-2025-11-20`
+
+Run it only after setting both tokens:
+
+```bash
+ANTHROPIC_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:anthropic-mcp
+```
+
+Live Claude client verification is pending until an `ANTHROPIC_API_KEY` is available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
+
 ## Claude Code Template
 
 `claude-code-neura.mcp.example.json` shows an HTTP MCP configuration for Claude Code:
@@ -155,6 +172,10 @@ The verifier checks the pack structure, claim boundaries, client templates, safe
 ## Compatibility Matrix
 
 See `compatibility-matrix.md`.
+
+## Provider Runtime Paths
+
+See `provider-runtime-paths.md` for the current rollout split across direct Neura MCP, OpenAI Responses, Claude Messages, Claude Code, and planned Google/Microsoft paths.
 
 ## Boundary
 

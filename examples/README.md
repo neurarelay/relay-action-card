@@ -35,7 +35,11 @@ examples/
       deploy-change.json
       registry-ready-evidence-capture.json
       blocked-funds-transfer.json
+    provider-runtime-paths.md
     direct-mcp-client.mjs
+    openai-responses-remote-mcp.mjs
+    anthropic-messages-mcp.mjs
+    claude-code-neura.mcp.example.json
     agent-passport-authority-standing.example.json
 ```
 

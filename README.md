@@ -153,13 +153,16 @@ The MCP example pack includes:
 - 1 blocked high-risk Action Card that should not proceed automatically
 - 1 direct MCP JSON-RPC client for all five protected Neura tools
 - 1 OpenAI Responses remote MCP template
+- 1 Anthropic Claude Messages MCP connector template
 - 1 Claude Code remote HTTP MCP configuration template
+- 1 provider-runtime path guide for developer rollout decisions
 - 1 compatibility matrix that separates verified, prepared, planned, and not-claimed surfaces
 
 Start here:
 
 - `examples/README.md`
 - `examples/mcp/README.md`
+- `examples/mcp/provider-runtime-paths.md`
 - `examples/mcp/compatibility-matrix.md`
 
 ## Repository Map
@@ -175,8 +178,10 @@ examples/
   mcp/
     README.md
     compatibility-matrix.md
+    provider-runtime-paths.md
     direct-mcp-client.mjs
     openai-responses-remote-mcp.mjs
+    anthropic-messages-mcp.mjs
     claude-code-neura.mcp.example.json
     agent-passport-authority-standing.example.json
     action-cards/

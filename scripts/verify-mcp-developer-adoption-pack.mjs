@@ -31,8 +31,10 @@ const requiredFiles = [
   "examples/core/action-card-high-risk.json",
   "examples/mcp/README.md",
   "examples/mcp/compatibility-matrix.md",
+  "examples/mcp/provider-runtime-paths.md",
   "examples/mcp/direct-mcp-client.mjs",
   "examples/mcp/openai-responses-remote-mcp.mjs",
+  "examples/mcp/anthropic-messages-mcp.mjs",
   "examples/mcp/claude-code-neura.mcp.example.json",
   "examples/mcp/agent-passport-authority-standing.example.json",
   "examples/mcp/action-cards/customer-reply.json",
@@ -51,16 +53,26 @@ const examplesReadme = await readText("examples/README.md");
 const rootReadme = await readText("README.md");
 const readme = await readText("examples/mcp/README.md");
 const matrix = await readText("examples/mcp/compatibility-matrix.md");
+const providerRuntimePaths = await readText("examples/mcp/provider-runtime-paths.md");
 const directClient = await readText("examples/mcp/direct-mcp-client.mjs");
 const openaiTemplate = await readText(
   "examples/mcp/openai-responses-remote-mcp.mjs",
+);
+const anthropicTemplate = await readText(
+  "examples/mcp/anthropic-messages-mcp.mjs",
 );
 const claudeConfig = await readJson("examples/mcp/claude-code-neura.mcp.example.json");
 const authorityStandingExample = await readJson(
   "examples/mcp/agent-passport-authority-standing.example.json",
 );
 
-const combinedDocs = [rootReadme, examplesReadme, readme, matrix].join("\n");
+const combinedDocs = [
+  rootReadme,
+  examplesReadme,
+  readme,
+  matrix,
+  providerRuntimePaths,
+].join("\n");
 
 assert(
   examplesReadme.includes("Core Relay") &&
@@ -96,6 +108,8 @@ assert(
   matrix.includes("Production verified") &&
     matrix.includes("Source-aligned template prepared") &&
     matrix.includes("live OpenAI client verification is pending") &&
+    matrix.includes("Anthropic Claude Messages MCP") &&
+    matrix.includes("mcp-client-2025-11-20") &&
     matrix.includes("authority_standing"),
   "matrix_must_distinguish_verified_from_prepared",
 );
@@ -103,6 +117,15 @@ assert(
   matrix.includes("A2A discoverability") &&
     matrix.includes("Separate later story"),
   "matrix_must_keep_a2a_separate",
+);
+assert(
+  providerRuntimePaths.includes("MCP Provider Example Pack v0.3") &&
+    providerRuntimePaths.includes("OpenAI Responses remote MCP") &&
+    providerRuntimePaths.includes("Claude Messages MCP connector") &&
+    providerRuntimePaths.includes("Google ADK is not included as runnable code in v0.3") &&
+    providerRuntimePaths.includes("Microsoft Agent Framework is not included as runnable code in v0.3") &&
+    providerRuntimePaths.includes("A2A discoverability is a separate later story"),
+  "provider_runtime_paths_must_explain_provider_rollout_and_boundaries",
 );
 assert(
   directClient.includes("tools/list") &&
@@ -133,6 +156,21 @@ assert(
     openaiTemplate.includes("get_trace_replay") &&
     openaiTemplate.includes("lookup_agent_passport"),
   "openai_template_must_match_remote_mcp_shape",
+);
+assert(
+  anthropicTemplate.includes("ANTHROPIC_API_KEY") &&
+    anthropicTemplate.includes('"anthropic-beta"') &&
+    anthropicTemplate.includes("mcp-client-2025-11-20") &&
+    anthropicTemplate.includes("mcp_servers") &&
+    anthropicTemplate.includes("authorization_token") &&
+    anthropicTemplate.includes('"mcp_toolset"') &&
+    anthropicTemplate.includes("default_config") &&
+    anthropicTemplate.includes("validate_action_card") &&
+    anthropicTemplate.includes("resolve_action_card") &&
+    anthropicTemplate.includes("get_decision_receipt") &&
+    anthropicTemplate.includes("get_trace_replay") &&
+    anthropicTemplate.includes("lookup_agent_passport"),
+  "anthropic_template_must_match_messages_mcp_connector_shape",
 );
 assert(
   claudeConfig.mcpServers?.["neura-relay"]?.type === "http",
