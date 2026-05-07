@@ -80,3 +80,5 @@ NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
 ```
 
 Neura returns governed proof before execution. Your system still owns the agent, private payloads, workflow, and final downstream action.
+
+The demo Action Cards include a demo Agent Passport. Production agents need a Registry Agent Passport before Relay can validate identity, capability, version, and standing.

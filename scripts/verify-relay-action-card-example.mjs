@@ -73,7 +73,8 @@ for (const phrase of [
 for (const phrase of [
   "First Receipt Path",
   "Action Card -> Relay -> Decision Receipt -> trace ref",
-  "receipt, trace, transaction refs, and Registry readiness context",
+  "Decision Receipt, Registry status, and trace replay",
+  "Registry Agent Passport before Relay can validate identity",
 ]) {
   if (!coreReadme.includes(phrase)) {
     failures.push(`core_readme_missing_${phrase.replaceAll(" ", "_")}`);

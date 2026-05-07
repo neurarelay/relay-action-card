@@ -19,7 +19,7 @@ Neura is protocol-first. MCP is an optional adapter for MCP-capable runtimes tha
 
 - Do claim: Neura Relay has a production-verified protected MCP-compatible tool surface.
 - Do claim: MCP-capable runtimes can route Action Cards to Neura before downstream execution when they have controlled access.
-- Do claim: Neura returns Decision Receipt, trace, transaction, Registry readiness, and safe authority-standing context without downstream execution.
+- Do claim: Neura returns a Decision Receipt, trace replay refs, Registry status, and safe authority-standing context without downstream execution.
 - Do not claim: public token issuance, official ecosystem partnership, broad compatibility with every MCP client, packaged SDK, hosted agents, or downstream execution.
 
 ## Verification Notes

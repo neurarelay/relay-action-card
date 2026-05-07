@@ -33,8 +33,8 @@ Use this repo to prove the adoption loop before wiring Neura into your own agent
 2. Run one public Action Card example
 3. Confirm Relay returns a Decision Receipt and trace ref
 4. Open Relay Developer Workspace
-5. Paste or edit the same Action Card and inspect receipt, trace, transaction refs, and Registry readiness context
-6. Copy the Workspace JavaScript or curl handoff when you are ready to wire the same call into your own agent workflow
+5. Send the same Action Card through Workspace and inspect the Decision Receipt, Registry status, and trace replay
+6. Copy the Workspace JavaScript or curl handoff when you are ready to wire the same call into your agent workflow
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -62,6 +62,8 @@ https://www.neurarelay.com/developers/workspace
 ```
 
 Workspace keeps the proposed action visible, returns a safe receipt, and gives copyable JavaScript and curl for the public `POST /api/resolve` path. Your app still owns execution.
+
+The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing.
 
 ## Run The Core Example In 60 Seconds
 
@@ -126,7 +128,7 @@ The default core example sends `examples/core/action-card.json` to Relay. The br
 | Data export | `examples/core/action-cards/data-export.json` | A workspace export before content leaves the system |
 | Payment release | `examples/core/action-cards/payment-release.json` | A partner payment before funds move |
 
-Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then run Relay and inspect the returned receipt, trace, transaction refs, Registry readiness context, and copyable integration handoff.
+Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then send it to Relay and inspect the returned Decision Receipt, Registry status, trace replay, and copyable integration handoff.
 
 The default support-reply Action Card looks like this:
 
@@ -182,7 +184,7 @@ For a product UI walkthrough, open the protected Relay Developer Workspace:
 https://www.neurarelay.com/developers/workspace
 ```
 
-The Workspace uses the same four examples, keeps the proposed action visible while you edit JSON, links the returned Decision Receipt to trace replay and transaction proof, and provides JavaScript and curl handoff snippets for your own agent workflow.
+The Workspace uses the same four examples, keeps the proposed action visible while you edit JSON, links the returned Decision Receipt to trace replay, and provides JavaScript and curl handoff snippets for your own agent workflow.
 
 ## Why Agent Developers Add Neura
 
@@ -193,7 +195,7 @@ Use Neura when an agent is about to touch customer messages, CRM records, refund
 - pre-action validation
 - Agent Passport identity and authority-standing context
 - a governed Decision Receipt
-- trace and transaction refs for replay
+- trace refs for replay and receipt IDs for audit
 - no private payload exposure
 - no downstream execution by Neura
 

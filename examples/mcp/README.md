@@ -101,6 +101,8 @@ NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_ca
 
 `agent-passport-authority-standing.example.json` shows the safe `lookup_agent_passport` response shape. It includes authority standing, scope, audit counts, and boundary flags without private Registry payloads.
 
+The demo Action Cards include demo Agent Passport references. Production agents need Registry Agent Passports before Relay can validate identity, capability, version, and standing through MCP.
+
 ## OpenAI Responses Template
 
 `openai-responses-remote-mcp.mjs` shows the remote MCP shape for the OpenAI Responses API:
