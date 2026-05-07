@@ -44,6 +44,10 @@ const highRiskActionCard = JSON.parse(
   await readFile(join(repoRoot, "examples/core/action-card-high-risk.json"), "utf8"),
 );
 const readme = await readFile(join(repoRoot, "README.md"), "utf8");
+const coreReadme = await readFile(
+  join(repoRoot, "examples/core/README.md"),
+  "utf8",
+);
 
 if (!readme.includes("examples/core")) {
   failures.push("top_level_readme_must_name_core_examples");
@@ -51,6 +55,28 @@ if (!readme.includes("examples/core")) {
 
 if (!readme.includes("examples/mcp")) {
   failures.push("top_level_readme_must_name_mcp_examples");
+}
+
+for (const phrase of [
+  "Get Your First Receipt In 5 Minutes",
+  "Open Relay Developer Workspace",
+  "decision_gate_only_developer_keeps_execution",
+  "npm run example:relay -- --example=support-reply --json",
+  "https://www.neurarelay.com/developers/workspace",
+]) {
+  if (!readme.includes(phrase)) {
+    failures.push(`top_level_readme_missing_${phrase.replaceAll(" ", "_")}`);
+  }
+}
+
+for (const phrase of [
+  "First Receipt Path",
+  "Action Card -> Relay -> Decision Receipt -> trace ref",
+  "receipt, trace, ledger refs, and Registry readiness context",
+]) {
+  if (!coreReadme.includes(phrase)) {
+    failures.push(`core_readme_missing_${phrase.replaceAll(" ", "_")}`);
+  }
 }
 
 for (const [index, { file, actionCard: example }] of actionCards.entries()) {

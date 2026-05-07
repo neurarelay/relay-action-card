@@ -25,6 +25,39 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
+## Get Your First Receipt In 5 Minutes
+
+Use this repo to prove the adoption loop before wiring Neura into your own agent:
+
+1. Clone this repo
+2. Run one public Action Card example
+3. Confirm Relay returns a Decision Receipt and trace ref
+4. Open Relay Developer Workspace
+5. Paste or edit the same Action Card and inspect receipt, trace, ledger refs, and Registry readiness context
+
+```bash
+git clone https://github.com/neurarelay/relay-action-card.git
+cd relay-action-card
+npm run example:relay -- --example=support-reply --json
+```
+
+Expected safe output shape:
+
+```json
+{
+  "input_model": "action_card_v0_1",
+  "decision": "human_review",
+  "trace_ref": "trace_ref_...",
+  "relay_boundary": "decision_gate_only_developer_keeps_execution"
+}
+```
+
+Then open Workspace:
+
+```text
+https://www.neurarelay.com/developers/workspace
+```
+
 ## Run The Core Example In 60 Seconds
 
 ```bash

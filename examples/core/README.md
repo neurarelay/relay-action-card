@@ -14,6 +14,26 @@ npm run example:relay
 
 The example sends `action-card.json` to production Relay by default and prints the governed Decision Receipt. Your system keeps execution ownership; Relay only returns the decision record before execution.
 
+## First Receipt Path
+
+```bash
+npm run example:relay -- --example=support-reply --json
+```
+
+That command proves the core loop:
+
+```text
+Action Card -> Relay -> Decision Receipt -> trace ref
+```
+
+After the CLI returns a receipt, open Relay Developer Workspace and paste or edit the same Action Card:
+
+```text
+https://www.neurarelay.com/developers/workspace
+```
+
+Workspace shows the same adoption path with receipt, trace, ledger refs, and Registry readiness context.
+
 ## Action Card Examples
 
 The public example library mirrors the Relay Developer Workspace:
