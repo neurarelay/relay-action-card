@@ -63,7 +63,7 @@ https://www.neurarelay.com/developers/workspace
 
 Workspace keeps the proposed action visible, returns a safe receipt, and gives copyable JavaScript and curl for the public `POST /api/resolve` path. Your app still owns execution.
 
-The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing.
+The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
 
 ## Run The Core Example In 60 Seconds
 

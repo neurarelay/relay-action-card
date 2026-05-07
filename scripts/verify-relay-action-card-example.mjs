@@ -63,6 +63,7 @@ for (const phrase of [
   "decision_gate_only_developer_keeps_execution",
   "npm run example:relay -- --example=support-reply --json",
   "https://www.neurarelay.com/developers/workspace",
+  "https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew",
   "transaction_ref",
 ]) {
   if (!readme.includes(phrase)) {
@@ -75,6 +76,7 @@ for (const phrase of [
   "Action Card -> Relay -> Decision Receipt -> trace ref",
   "Decision Receipt, Registry status, and trace replay",
   "Registry Agent Passport before Relay can validate identity",
+  "https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew",
 ]) {
   if (!coreReadme.includes(phrase)) {
     failures.push(`core_readme_missing_${phrase.replaceAll(" ", "_")}`);

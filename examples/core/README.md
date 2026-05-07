@@ -53,7 +53,7 @@ https://www.neurarelay.com/developers/workspace
 
 The Workspace lets you edit the Action Card JSON, send it to Relay, inspect the Decision Receipt, Registry status, and trace replay, then copy the integration handoff for your own agent workflow.
 
-The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing.
+The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
 
 For machine-readable output:
 
