@@ -63,6 +63,7 @@ for (const phrase of [
   "decision_gate_only_developer_keeps_execution",
   "npm run example:relay -- --example=support-reply --json",
   "https://www.neurarelay.com/developers/workspace",
+  "transaction_ref",
 ]) {
   if (!readme.includes(phrase)) {
     failures.push(`top_level_readme_missing_${phrase.replaceAll(" ", "_")}`);
@@ -72,7 +73,7 @@ for (const phrase of [
 for (const phrase of [
   "First Receipt Path",
   "Action Card -> Relay -> Decision Receipt -> trace ref",
-  "receipt, trace, ledger refs, and Registry readiness context",
+  "receipt, trace, transaction refs, and Registry readiness context",
 ]) {
   if (!coreReadme.includes(phrase)) {
     failures.push(`core_readme_missing_${phrase.replaceAll(" ", "_")}`);
@@ -137,6 +138,9 @@ for (const { file, actionCard: example } of actionCards) {
   if (!exampleReceipt?.receipt_id) failures.push(`${file}_missing_receipt_id`);
   if (!exampleReceipt?.decision) failures.push(`${file}_missing_decision`);
   if (!exampleReceipt?.trace_ref) failures.push(`${file}_missing_trace_ref`);
+  if (!examplePayload.transaction_ledger?.transaction_ref) {
+    failures.push(`${file}_missing_transaction_ref`);
+  }
   if (
     exampleReceipt?.relay_boundary !==
     "decision_gate_only_developer_keeps_execution"
@@ -147,7 +151,9 @@ for (const { file, actionCard: example } of actionCards) {
   exampleResults.push({
     file,
     decision: exampleReceipt?.decision,
+    receipt_id: exampleReceipt?.receipt_id,
     trace_ref: exampleReceipt?.trace_ref,
+    transaction_ref: examplePayload.transaction_ledger?.transaction_ref,
   });
 }
 
@@ -169,6 +175,7 @@ if (!receipt?.decision) failures.push("missing_decision");
 if (!receipt?.reason) failures.push("missing_reason");
 if (!receipt?.recommended_next_step) failures.push("missing_recommended_next_step");
 if (!receipt?.trace_ref) failures.push("missing_trace_ref");
+if (!payload.transaction_ledger?.transaction_ref) failures.push("missing_transaction_ref");
 if (receipt?.relay_boundary !== "decision_gate_only_developer_keeps_execution") {
   failures.push("wrong_relay_boundary");
 }
@@ -202,6 +209,7 @@ const result = {
       }
     : null,
   trace_ref: receipt?.trace_ref,
+  transaction_ref: payload.transaction_ledger?.transaction_ref,
   examples: exampleResults,
   high_risk_decision: highRiskReceipt?.decision,
   high_risk_trace_ref: highRiskReceipt?.trace_ref,

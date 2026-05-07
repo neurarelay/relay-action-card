@@ -33,7 +33,7 @@ Use this repo to prove the adoption loop before wiring Neura into your own agent
 2. Run one public Action Card example
 3. Confirm Relay returns a Decision Receipt and trace ref
 4. Open Relay Developer Workspace
-5. Paste or edit the same Action Card and inspect receipt, trace, ledger refs, and Registry readiness context
+5. Paste or edit the same Action Card and inspect receipt, trace, transaction refs, and Registry readiness context
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -46,8 +46,10 @@ Expected safe output shape:
 ```json
 {
   "input_model": "action_card_v0_1",
+  "receipt_id": "decision_receipt_...",
   "decision": "human_review",
   "trace_ref": "trace_ref_...",
+  "transaction_ref": "relay_txn_...",
   "relay_boundary": "decision_gate_only_developer_keeps_execution"
 }
 ```
@@ -91,6 +93,8 @@ Input: action_card_v0_1
 Decision: proceed
 Reason: ...
 Decision factors: identity pass - authority pass - evidence pass - policy pass - risk pass
+Receipt: decision_receipt_...
+Transaction: relay_txn_...
 Next step: Developer may continue to execution.
 Trace: trace_ref_...
 Boundary: decision_gate_only_developer_keeps_execution
@@ -119,7 +123,7 @@ The default core example sends `examples/core/action-card.json` to Relay. The br
 | Data export | `examples/core/action-cards/data-export.json` | A workspace export before content leaves the system |
 | Payment release | `examples/core/action-cards/payment-release.json` | A partner payment before funds move |
 
-Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then run Relay and inspect the returned receipt and trace.
+Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then run Relay and inspect the returned receipt, trace, transaction refs, and Registry readiness context.
 
 The default support-reply Action Card looks like this:
 
@@ -175,7 +179,7 @@ For a product UI walkthrough, open the protected Relay Developer Workspace:
 https://www.neurarelay.com/developers/workspace
 ```
 
-The Workspace uses the same four examples, lets you edit the Action Card JSON, and links the returned Decision Receipt to trace replay.
+The Workspace uses the same four examples, lets you edit the Action Card JSON, and links the returned Decision Receipt to trace replay and transaction proof.
 
 ## Why Agent Developers Add Neura
 

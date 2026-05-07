@@ -73,10 +73,12 @@ const result = {
   relay: RELAY_BASE_URL,
   action_card_path: actionCardPath.replace(`${repoRoot}/`, ""),
   input_model: payload.input_model,
+  receipt_id: receipt?.receipt_id,
   decision: receipt?.decision,
   reason: receipt?.reason,
   decision_factors: factorSummary,
   trace_ref: receipt?.trace_ref,
+  transaction_ref: payload.transaction_ledger?.transaction_ref,
   next_step: receipt?.recommended_next_step,
   relay_boundary: receipt?.relay_boundary,
 };
@@ -92,6 +94,10 @@ if (jsonOutput) {
   console.log(`Reason: ${result.reason}`);
   if (result.decision_factors) {
     console.log(`Decision factors: ${result.decision_factors}`);
+  }
+  console.log(`Receipt: ${result.receipt_id}`);
+  if (result.transaction_ref) {
+    console.log(`Transaction: ${result.transaction_ref}`);
   }
   console.log(`Next step: ${result.next_step}`);
   console.log(`Trace: ${result.trace_ref}`);
