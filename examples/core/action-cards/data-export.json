@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "export_workspace_data",
+    "summary": "Export selected workspace records for an enterprise account",
+    "target": "workspace_export_2381"
+  },
+  "affectedObject": "workspace_export_2381",
+  "context": {
+    "evidenceRefs": ["workspace:2381", "request:legal_export"],
+    "ruleRefs": ["policy:data_export_review"],
+    "riskCategory": "data_access",
+    "requestedOutcome": "decision_receipt"
+  }
+}

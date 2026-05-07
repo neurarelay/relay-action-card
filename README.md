@@ -33,6 +33,21 @@ cd relay-action-card
 npm run example:relay
 ```
 
+List the public Action Card examples:
+
+```bash
+npm run example:relay -- --list-examples
+```
+
+Run a specific example:
+
+```bash
+npm run example:relay -- --example=support-reply
+npm run example:relay -- --example=refund-exception
+npm run example:relay -- --example=data-export
+npm run example:relay -- --example=payment-release
+```
+
 The example calls production Relay by default:
 
 ```txt
@@ -60,30 +75,41 @@ To point the example at a local Relay server:
 RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 ```
 
-## Copy The Core Request
+## Copy The Core Examples
 
-The core example sends `examples/core/action-card.json` to Relay:
+The default core example sends `examples/core/action-card.json` to Relay. The broader public example library lives in `examples/core/action-cards`:
+
+| Example | File | What Relay reviews |
+| --- | --- | --- |
+| Support reply | `examples/core/action-cards/support-reply.json` | A customer reply before it is sent |
+| Refund exception | `examples/core/action-cards/refund-exception.json` | A refund exception before approval |
+| Data export | `examples/core/action-cards/data-export.json` | A workspace export before content leaves the system |
+| Payment release | `examples/core/action-cards/payment-release.json` | A partner payment before funds move |
+
+Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then run Relay and inspect the returned receipt and trace.
+
+The default support-reply Action Card looks like this:
 
 ```json
 {
   "version": "0.1",
   "agent": {
-    "id": "agent_support_reply_001",
-    "owner": "acme_support",
-    "capability": "customer_message_draft",
-    "capabilityVersion": "0.1.0"
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
   },
   "proposedAction": {
-    "type": "send_message",
-    "summary": "Send a customer reply confirming that the document was received and will be reviewed today.",
-    "target": "customer_thread_123"
+    "type": "send_customer_reply",
+    "summary": "Send a prepared support reply after policy and evidence review",
+    "target": "support_thread_8421"
   },
-  "affectedObject": "customer_thread_123",
+  "affectedObject": "support_thread_8421",
   "context": {
-    "evidenceRefs": ["ticket_123", "uploaded_document_456"],
-    "ruleRefs": ["customer_reply_policy"],
+    "evidenceRefs": ["support_thread:8421", "policy:refund_window"],
+    "ruleRefs": ["policy:customer_communication_review"],
     "riskCategory": "customer_communication",
-    "requestedOutcome": "proceed_or_review"
+    "requestedOutcome": "decision_receipt"
   }
 }
 ```
@@ -109,6 +135,14 @@ const { decision_receipt: receipt } = await response.json();
 5. Your system keeps execution ownership.
 
 Relay is a governed decision gate. Your agent, product, private payloads, and downstream execution stay in your system.
+
+For a product UI walkthrough, open the protected Relay Developer Workspace:
+
+```text
+https://www.neurarelay.com/developers/workspace
+```
+
+The Workspace uses the same four examples, lets you edit the Action Card JSON, and links the returned Decision Receipt to trace replay.
 
 ## Why Agent Developers Add Neura
 
@@ -175,6 +209,11 @@ examples/
     action-card-high-risk.json
     resolve-action-card.mjs
     decision-receipt.example.json
+    action-cards/
+      support-reply.json
+      refund-exception.json
+      data-export.json
+      payment-release.json
   mcp/
     README.md
     compatibility-matrix.md

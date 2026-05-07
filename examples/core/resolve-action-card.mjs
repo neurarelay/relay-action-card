@@ -7,6 +7,13 @@ import { fileURLToPath } from "node:url";
 const exampleDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(exampleDir, "../..");
 const defaultActionCardPath = join(exampleDir, "action-card.json");
+const examplePaths = {
+  "support-reply": "examples/core/action-cards/support-reply.json",
+  "refund-exception": "examples/core/action-cards/refund-exception.json",
+  "data-export": "examples/core/action-cards/data-export.json",
+  "payment-release": "examples/core/action-cards/payment-release.json",
+  "high-risk": "examples/core/action-card-high-risk.json",
+};
 
 function argValue(name) {
   const prefix = `--${name}=`;
@@ -14,9 +21,23 @@ function argValue(name) {
   return arg ? arg.slice(prefix.length) : null;
 }
 
-const actionCardPath = argValue("action-card")
-  ? resolve(repoRoot, argValue("action-card"))
-  : defaultActionCardPath;
+if (process.argv.includes("--list-examples")) {
+  console.log(Object.keys(examplePaths).join("\n"));
+  process.exit(0);
+}
+
+const selectedExample = argValue("example");
+if (selectedExample && !examplePaths[selectedExample]) {
+  console.error(`Unknown example: ${selectedExample}`);
+  console.error(`Available examples: ${Object.keys(examplePaths).join(", ")}`);
+  process.exit(1);
+}
+
+const actionCardPath = selectedExample
+  ? resolve(repoRoot, examplePaths[selectedExample])
+  : argValue("action-card")
+    ? resolve(repoRoot, argValue("action-card"))
+    : defaultActionCardPath;
 const actionCard = JSON.parse(
   await readFile(actionCardPath, "utf8"),
 );

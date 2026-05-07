@@ -26,6 +26,11 @@ examples/
   core/
     action-card.json
     action-card-high-risk.json
+    action-cards/
+      support-reply.json
+      refund-exception.json
+      data-export.json
+      payment-release.json
     resolve-action-card.mjs
   mcp/
     action-cards/
@@ -53,10 +58,19 @@ Run the public core path:
 npm run example:relay
 ```
 
+List and run the public Action Card examples:
+
+```bash
+npm run example:relay -- --list-examples
+npm run example:relay -- --example=refund-exception
+npm run example:relay -- --example=data-export
+npm run example:relay -- --example=payment-release
+```
+
 Run the high-risk core example:
 
 ```bash
-npm run example:relay -- --action-card=examples/core/action-card-high-risk.json
+npm run example:relay -- --example=high-risk
 ```
 
 Run the protected MCP proof sequence after Neura issues access:

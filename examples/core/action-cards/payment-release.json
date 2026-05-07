@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "release_partner_payment",
+    "summary": "Release a partner payment after invoice and authority review",
+    "target": "invoice_7714"
+  },
+  "affectedObject": "invoice_7714",
+  "context": {
+    "evidenceRefs": ["invoice:7714", "contract:partner_terms"],
+    "ruleRefs": ["policy:payment_authority_review"],
+    "riskCategory": "payment",
+    "requestedOutcome": "decision_receipt"
+  }
+}

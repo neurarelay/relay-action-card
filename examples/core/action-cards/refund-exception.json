@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "approve_refund_exception",
+    "summary": "Approve a refund exception for a high-value customer",
+    "target": "order_59318"
+  },
+  "affectedObject": "order_59318",
+  "context": {
+    "evidenceRefs": ["order:59318", "customer:lifetime_value:high"],
+    "ruleRefs": ["policy:refund_exception_review"],
+    "riskCategory": "financial_refund",
+    "requestedOutcome": "decision_receipt"
+  }
+}
