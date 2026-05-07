@@ -11,6 +11,11 @@ const defaultActionCardPath = join(
   "action-cards",
   "customer-reply.json",
 );
+const defaultProofActionCardPath = join(
+  exampleDir,
+  "action-cards",
+  "registry-ready-evidence-capture.json",
+);
 
 const PROTOCOL_VERSION =
   process.env.NEURA_RELAY_MCP_PROTOCOL_VERSION ?? "2025-11-25";
@@ -28,18 +33,27 @@ function argValue(name) {
 
 const jsonOutput = process.argv.includes("--json");
 const listToolsOnly = process.argv.includes("--list-tools");
+const proofSequence =
+  process.argv.includes("--proof") || process.argv.includes("--spine-proof");
 const requestedTool = argValue("tool") ?? "resolve_action_card";
+const providedActionCardPath = argValue("action-card");
 const actionCardPath = resolve(
   repoRoot,
-  argValue("action-card") ?? defaultActionCardPath,
+  providedActionCardPath ??
+    (proofSequence ? defaultProofActionCardPath : defaultActionCardPath),
 );
+
+function relativePath(path) {
+  return path.startsWith(`${repoRoot}/`) ? path.slice(repoRoot.length + 1) : path;
+}
 
 function print(value) {
   if (jsonOutput) {
     console.log(JSON.stringify(value, null, 2));
   } else {
     for (const [key, item] of Object.entries(value)) {
-      console.log(`${key}: ${item}`);
+      const rendered = Array.isArray(item) ? item.join(", ") : item;
+      console.log(`${key}: ${rendered}`);
     }
   }
 }
@@ -51,6 +65,68 @@ function requireToken() {
     );
     process.exit(1);
   }
+}
+
+function compactReceipt(payload) {
+  const receipt = payload.decision_receipt ?? payload.receipt ?? {};
+  const transaction = payload.transaction ?? {};
+  const trace = payload.trace ?? {};
+
+  return {
+    ok: payload.ok,
+    decision: receipt.decision ?? null,
+    receipt_id: receipt.receipt_id ?? null,
+    transaction_ref:
+      transaction.transaction_ref ?? receipt.transaction_ref ?? null,
+    trace_ref: trace.trace_ref ?? receipt.trace_ref ?? null,
+    relay_boundary: receipt.relay_boundary ?? payload.relay_boundary ?? null,
+    private_payload_returned: payload.private_payload_returned ?? false,
+    downstream_execution_performed:
+      payload.downstream_execution_performed ?? false,
+  };
+}
+
+function compactPassport(payload) {
+  const passport = payload.agent_passport ?? {};
+  const readiness = passport.readiness ?? {};
+  const authority = payload.authority_standing ?? {};
+  const ownerAuthority = authority.owner_authority ?? {};
+  const scope = authority.authority_scope ?? {};
+  const standingAudit = authority.standing_audit ?? {};
+  const relayReferenceGate = authority.relay_reference_gate ?? {};
+
+  return {
+    ok: payload.ok,
+    participant_ref: passport.participant_ref ?? null,
+    display_name: passport.display_name ?? null,
+    owner_ref: passport.owner_ref ?? null,
+    capability_version_ref: passport.capability_version_ref ?? null,
+    relay_reference_status: readiness.relay_reference_status ?? null,
+    authority_reference_status: authority.authority_reference_status ?? null,
+    human_authority_mode: ownerAuthority.human_authority_mode ?? null,
+    permitted_action_classes: scope.permitted_action_classes ?? [],
+    prohibited_action_classes: scope.prohibited_action_classes ?? [],
+    external_submission: scope.environment_posture?.external_submission ?? null,
+    downstream_execution: scope.environment_posture?.downstream_execution ?? null,
+    standing_status: standingAudit.standing_status ?? null,
+    total_audit_event_count: standingAudit.total_audit_event_count ?? null,
+    registry_standing_is_not_relay_acceptance:
+      standingAudit.registry_standing_is_not_relay_acceptance ?? null,
+    relay_reference_gate: relayReferenceGate.status ?? null,
+    boundaries: authority.boundaries ?? null,
+  };
+}
+
+function compactTrace(payload) {
+  const replay = payload.replay ?? {};
+
+  return {
+    ok: payload.ok,
+    trace_ref: replay.trace_ref ?? null,
+    event_count: replay.event_count ?? null,
+    payload_redaction: replay.payload_redaction ?? null,
+    private_payload_stored: replay.private_payload_stored ?? null,
+  };
 }
 
 let rpcId = 1;
@@ -116,7 +192,7 @@ async function initialize() {
         capabilities: {},
         clientInfo: {
           name: "relay-action-card-mcp-example",
-          version: "0.1.0",
+          version: "0.2.0",
         },
       },
     },
@@ -143,6 +219,74 @@ async function callTool(name, args) {
   return toolPayload(response);
 }
 
+function passportArgs(actionCard) {
+  return {
+    agent_ref: argValue("agent-ref") ?? actionCard.agent?.id,
+    capability_version_ref:
+      argValue("capability-version-ref") ?? actionCard.agent?.capabilityVersion,
+  };
+}
+
+function toolArgs(name, actionCard) {
+  if (name === "validate_action_card" || name === "resolve_action_card") {
+    return { action_card: actionCard };
+  }
+
+  if (name === "get_decision_receipt") {
+    return {
+      decision_receipt_id:
+        argValue("decision-receipt-id") ?? argValue("receipt-id") ?? undefined,
+      transaction_ref: argValue("transaction-ref") ?? undefined,
+    };
+  }
+
+  if (name === "get_trace_replay") {
+    return {
+      trace_ref: argValue("trace-ref") ?? undefined,
+    };
+  }
+
+  if (name === "lookup_agent_passport") {
+    return passportArgs(actionCard);
+  }
+
+  return {};
+}
+
+async function runProofSequence(actionCard) {
+  const resolved = await callTool("resolve_action_card", { action_card: actionCard });
+  const receiptSummary = compactReceipt(resolved);
+  const receipt = await callTool("get_decision_receipt", {
+    decision_receipt_id: receiptSummary.receipt_id,
+    transaction_ref: receiptSummary.transaction_ref,
+  });
+  const replay = await callTool("get_trace_replay", {
+    trace_ref: receiptSummary.trace_ref,
+  });
+  const passport = await callTool("lookup_agent_passport", passportArgs(actionCard));
+  const passportSummary = compactPassport(passport);
+
+  return {
+    mcp_server: MCP_URL,
+    proof: "mcp_runtime_to_same_relay_spine",
+    action_card_path: relativePath(actionCardPath),
+    ok:
+      resolved.ok === true &&
+      receipt.ok === true &&
+      replay.ok === true &&
+      passport.ok === true,
+    resolve_action_card: receiptSummary,
+    get_decision_receipt: compactReceipt(receipt),
+    get_trace_replay: compactTrace(replay),
+    lookup_agent_passport: passportSummary,
+    private_payload_returned: false,
+    downstream_execution_performed: false,
+    core_path_preserved:
+      "Action Card -> Relay -> Decision Receipt -> trace/ledger/Registry context",
+    mcp_role: "optional_adapter_not_core_dependency",
+  };
+}
+
 requireToken();
 
 const actionCard = JSON.parse(await readFile(actionCardPath, "utf8"));
@@ -159,8 +303,13 @@ const tools = toolsList.payload.result.tools.map((tool) => tool.name);
 if (listToolsOnly) {
   print({
     mcp_server: MCP_URL,
-    tools: tools.join(", "),
+    tools,
   });
+  process.exit(0);
+}
+
+if (proofSequence) {
+  print(await runProofSequence(actionCard));
   process.exit(0);
 }
 
@@ -168,12 +317,13 @@ if (!tools.includes(requestedTool)) {
   throw new Error(`Unknown MCP tool requested: ${requestedTool}`);
 }
 
-const payload = await callTool(requestedTool, { action_card: actionCard });
+const payload = await callTool(requestedTool, toolArgs(requestedTool, actionCard));
 
 if (requestedTool === "validate_action_card") {
   print({
     mcp_server: MCP_URL,
     tool: requestedTool,
+    action_card_path: relativePath(actionCardPath),
     ok: payload.ok,
     validation_status: payload.validation?.status,
     action_type: payload.normalized_action_card?.action_type,
@@ -181,21 +331,32 @@ if (requestedTool === "validate_action_card") {
     downstream_execution_performed: "false",
   });
 } else if (requestedTool === "resolve_action_card") {
-  const receiptId = payload.decision_receipt?.receipt_id;
-  const traceRef = payload.trace?.trace_ref;
-  const transactionRef = payload.transaction?.transaction_ref;
-
   print({
     mcp_server: MCP_URL,
     tool: requestedTool,
-    ok: payload.ok,
-    decision: payload.decision_receipt?.decision,
-    receipt_id: receiptId,
-    transaction_ref: transactionRef,
-    trace_ref: traceRef,
-    private_payload_returned: payload.private_payload_returned,
-    downstream_execution_performed: payload.downstream_execution_performed,
-    relay_boundary: payload.decision_receipt?.relay_boundary,
+    action_card_path: relativePath(actionCardPath),
+    ...compactReceipt(payload),
+  });
+} else if (requestedTool === "get_decision_receipt") {
+  print({
+    mcp_server: MCP_URL,
+    tool: requestedTool,
+    ...compactReceipt(payload),
+  });
+} else if (requestedTool === "get_trace_replay") {
+  print({
+    mcp_server: MCP_URL,
+    tool: requestedTool,
+    ...compactTrace(payload),
+  });
+} else if (requestedTool === "lookup_agent_passport") {
+  print({
+    mcp_server: MCP_URL,
+    tool: requestedTool,
+    action_card_path: relativePath(actionCardPath),
+    ...compactPassport(payload),
+    private_payload_returned: false,
+    downstream_execution_performed: false,
   });
 } else {
   print({

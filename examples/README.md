@@ -1,0 +1,64 @@
+# Neura Developer Examples
+
+This folder has two lanes.
+
+| Lane | Folder | Use when |
+| --- | --- | --- |
+| Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
+| Optional MCP | `mcp` | Your agent runtime can call MCP tools and Neura has issued controlled MCP access |
+
+The core path is the default:
+
+```text
+Action Card -> Relay -> Decision Receipt -> trace
+```
+
+The MCP path is only an adapter:
+
+```text
+MCP runtime -> protected Neura MCP tool -> same Relay decision spine
+```
+
+## Structure
+
+```text
+examples/
+  core/
+    action-card.json
+    action-card-high-risk.json
+    resolve-action-card.mjs
+  mcp/
+    action-cards/
+      customer-reply.json
+      crm-update.json
+      refund-review.json
+      deploy-change.json
+      registry-ready-evidence-capture.json
+      blocked-funds-transfer.json
+    direct-mcp-client.mjs
+    agent-passport-authority-standing.example.json
+```
+
+`examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
+
+## Fast Checks
+
+Run the public core path:
+
+```bash
+npm run example:relay
+```
+
+Run the high-risk core example:
+
+```bash
+npm run example:relay -- --action-card=examples/core/action-card-high-risk.json
+```
+
+Run the protected MCP proof sequence after Neura issues access:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
+```
+
+Neura returns governed proof before execution. Your system still owns the agent, private payloads, workflow, and final downstream action.

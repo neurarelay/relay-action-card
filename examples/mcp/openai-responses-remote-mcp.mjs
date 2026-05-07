@@ -82,7 +82,13 @@ const firstResponse = await createResponse({
       server_url: NEURA_RELAY_MCP_URL,
       authorization: NEURA_RELAY_MCP_ACCESS_TOKEN,
       require_approval: "always",
-      allowed_tools: ["validate_action_card", "resolve_action_card"],
+      allowed_tools: [
+        "validate_action_card",
+        "resolve_action_card",
+        "get_decision_receipt",
+        "get_trace_replay",
+        "lookup_agent_passport",
+      ],
     },
   ],
   input: [
@@ -93,6 +99,7 @@ const firstResponse = await createResponse({
           type: "input_text",
           text:
             "Use Neura Relay to validate this Action Card before any downstream execution. " +
+            "If Registry refs are available, look up the Agent Passport before resolution. " +
             JSON.stringify(actionCard),
         },
       ],
@@ -143,7 +150,13 @@ const approvedResponse = await createResponse({
       server_url: NEURA_RELAY_MCP_URL,
       authorization: NEURA_RELAY_MCP_ACCESS_TOKEN,
       require_approval: "always",
-      allowed_tools: ["validate_action_card", "resolve_action_card"],
+      allowed_tools: [
+        "validate_action_card",
+        "resolve_action_card",
+        "get_decision_receipt",
+        "get_trace_replay",
+        "lookup_agent_passport",
+      ],
     },
   ],
   input: [

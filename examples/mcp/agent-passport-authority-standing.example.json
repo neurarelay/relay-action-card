@@ -1,0 +1,71 @@
+{
+  "tool": "lookup_agent_passport",
+  "ok": true,
+  "agent_passport": {
+    "participant_ref": "3df67d18-319a-4115-9dac-705e107ccf5f",
+    "display_name": "Capital Guide Agent A",
+    "owner_ref": "capital-guide",
+    "participant_kind": "agent",
+    "participation_mode": "relay_reference_only",
+    "participant_status": "active",
+    "capability_version_ref": "6c6fd9ff-1a2e-4780-ab30-ff8c3086f9f2",
+    "capability_ref": "evidence-capture",
+    "capability_name": "Evidence Capture",
+    "capability_version": "0.1.0",
+    "capability_status": "active",
+    "readiness": {
+      "lookup_status": "available",
+      "registry_lookup_status": "available",
+      "relay_reference_status": "ready_for_relay_reference",
+      "blockers": []
+    }
+  },
+  "authority_standing": {
+    "lookup_status": "available",
+    "registry_lookup_status": "available",
+    "authority_reference_status": "ready_for_relay_authority_reference",
+    "owner_authority": {
+      "owner_ref": "capital-guide",
+      "owner_profile_resolved": true,
+      "owner_name": "Capital Guide",
+      "owner_reference": "capital-guide",
+      "authority_model": "human_owner_controls_agent",
+      "human_authority_mode": "not_modeled_as_ai_agent"
+    },
+    "authority_scope": {
+      "scope_status": "declared",
+      "permitted_action_classes": ["capture_evidence", "draft_review_context"],
+      "prohibited_action_classes": ["downstream_execution", "relay_acceptance_claim"],
+      "capability_keys": ["evidence-capture"],
+      "categories": ["operator_review"],
+      "participation_mode": "relay_reference_only",
+      "environment_posture": {
+        "relay_reference_use": "allowed",
+        "external_submission": "blocked",
+        "downstream_execution": "not_enabled_by_registry"
+      },
+      "declaration": "Registry standing can support Relay reference, but it is not Relay acceptance and it does not authorize execution"
+    },
+    "standing_audit": {
+      "current_standing": "active",
+      "standing_status": "eligible_for_relay_reference",
+      "latest_status_event_at": "2026-05-07T00:00:00.000Z",
+      "status_event_count": 1,
+      "reputation_event_count": 0,
+      "total_audit_event_count": 1,
+      "registry_standing_is_not_relay_acceptance": true
+    },
+    "relay_reference_gate": {
+      "status": "ready_for_relay_authority_reference",
+      "blockers": [],
+      "reason": "Active Registry standing and declared authority scope are sufficient for Relay reference"
+    },
+    "boundaries": {
+      "claimsRelayAcceptance": false,
+      "enablesDownstreamExecution": false,
+      "exposesPrivatePayload": false
+    }
+  },
+  "private_payload_returned": false,
+  "downstream_execution_performed": false
+}

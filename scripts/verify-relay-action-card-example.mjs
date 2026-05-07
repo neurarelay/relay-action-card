@@ -10,6 +10,7 @@ const failures = [];
 const coreFiles = [
   "examples/core/README.md",
   "examples/core/action-card.json",
+  "examples/core/action-card-high-risk.json",
   "examples/core/decision-receipt.example.json",
   "examples/core/resolve-action-card.mjs",
 ];
@@ -22,6 +23,9 @@ for (const file of coreFiles) {
 
 const actionCard = JSON.parse(
   await readFile(join(repoRoot, "examples/core/action-card.json"), "utf8"),
+);
+const highRiskActionCard = JSON.parse(
+  await readFile(join(repoRoot, "examples/core/action-card-high-risk.json"), "utf8"),
 );
 const readme = await readFile(join(repoRoot, "README.md"), "utf8");
 
@@ -44,6 +48,14 @@ const response = await fetch(new URL("/api/resolve", relayBaseUrl), {
 const payload = await response.json();
 const receipt = payload.decision_receipt;
 
+const highRiskResponse = await fetch(new URL("/api/resolve", relayBaseUrl), {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ action_card: highRiskActionCard }),
+});
+const highRiskPayload = await highRiskResponse.json();
+const highRiskReceipt = highRiskPayload.decision_receipt;
+
 if (!response.ok) failures.push(`http_status_${response.status}`);
 if (payload.ok !== true) failures.push("payload_not_ok");
 if (payload.input_model !== "action_card_v0_1") failures.push("wrong_input_model");
@@ -54,6 +66,20 @@ if (!receipt?.recommended_next_step) failures.push("missing_recommended_next_ste
 if (!receipt?.trace_ref) failures.push("missing_trace_ref");
 if (receipt?.relay_boundary !== "decision_gate_only_developer_keeps_execution") {
   failures.push("wrong_relay_boundary");
+}
+if (!highRiskResponse.ok) failures.push(`high_risk_http_status_${highRiskResponse.status}`);
+if (highRiskPayload.ok !== true) failures.push("high_risk_payload_not_ok");
+if (
+  highRiskReceipt?.decision !== "stop" &&
+  highRiskReceipt?.decision !== "human_review"
+) {
+  failures.push("high_risk_must_not_auto_proceed");
+}
+if (
+  highRiskReceipt?.relay_boundary !==
+  "decision_gate_only_developer_keeps_execution"
+) {
+  failures.push("high_risk_wrong_relay_boundary");
 }
 
 const result = {
@@ -71,6 +97,8 @@ const result = {
       }
     : null,
   trace_ref: receipt?.trace_ref,
+  high_risk_decision: highRiskReceipt?.decision,
+  high_risk_trace_ref: highRiskReceipt?.trace_ref,
   relay_boundary: receipt?.relay_boundary,
   failures,
 };

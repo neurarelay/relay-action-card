@@ -110,6 +110,19 @@ const { decision_receipt: receipt } = await response.json();
 
 Relay is a governed decision gate. Your agent, product, private payloads, and downstream execution stay in your system.
 
+## Why Agent Developers Add Neura
+
+MCP gives agents a standard way to reach tools. Neura gives teams a governed checkpoint before those tool calls create business impact.
+
+Use Neura when an agent is about to touch customer messages, CRM records, refunds, deployments, account state, or other consequential systems and you need:
+
+- pre-action validation
+- Agent Passport identity and authority-standing context
+- a governed Decision Receipt
+- trace and transaction refs for replay
+- no private payload exposure
+- no downstream execution by Neura
+
 ## Optional MCP Examples
 
 MCP makes tool access easier. Neura makes consequential MCP tool use governable before it happens.
@@ -129,18 +142,23 @@ Run the direct MCP client when Neura has issued an MCP token:
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --list-tools
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=validate_action_card --json
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_card --json
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=lookup_agent_passport --action-card=examples/mcp/action-cards/registry-ready-evidence-capture.json --json
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
 ```
 
 The MCP example pack includes:
 
 - 4 safe Action Card scenarios: customer reply, CRM update, refund review, and deployment change
-- 1 direct MCP JSON-RPC client for the protected production `/mcp` endpoint
+- 1 Registry-ready Action Card for Agent Passport and authority-standing lookup
+- 1 blocked high-risk Action Card that should not proceed automatically
+- 1 direct MCP JSON-RPC client for all five protected Neura tools
 - 1 OpenAI Responses remote MCP template
 - 1 Claude Code remote HTTP MCP configuration template
 - 1 compatibility matrix that separates verified, prepared, planned, and not-claimed surfaces
 
 Start here:
 
+- `examples/README.md`
 - `examples/mcp/README.md`
 - `examples/mcp/compatibility-matrix.md`
 
@@ -151,6 +169,7 @@ examples/
   core/
     README.md
     action-card.json
+    action-card-high-risk.json
     resolve-action-card.mjs
     decision-receipt.example.json
   mcp/
@@ -159,11 +178,14 @@ examples/
     direct-mcp-client.mjs
     openai-responses-remote-mcp.mjs
     claude-code-neura.mcp.example.json
+    agent-passport-authority-standing.example.json
     action-cards/
       customer-reply.json
       crm-update.json
       refund-review.json
       deploy-change.json
+      registry-ready-evidence-capture.json
+      blocked-funds-transfer.json
 scripts/
   verify-relay-action-card-example.mjs
   verify-mcp-developer-adoption-pack.mjs

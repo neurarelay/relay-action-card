@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "3df67d18-319a-4115-9dac-705e107ccf5f",
+    "owner": "capital-guide",
+    "capability": "evidence-capture",
+    "capabilityVersion": "6c6fd9ff-1a2e-4780-ab30-ff8c3086f9f2"
+  },
+  "proposedAction": {
+    "type": "capture_evidence",
+    "summary": "Record a sourced evidence reference for a Capital Guide review packet before any recommendation is updated.",
+    "target": "capital_guide_review_packet_demo"
+  },
+  "affectedObject": "capital_guide_review_packet_demo",
+  "context": {
+    "evidenceRefs": ["source_profile_ref_001", "review_packet_ref_001"],
+    "ruleRefs": ["protocol:action-card-v0.1", "relay:pre-execution-review"],
+    "riskCategory": "business_record_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

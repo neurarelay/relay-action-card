@@ -27,21 +27,28 @@ function assert(condition, message) {
 }
 
 const requiredFiles = [
+  "examples/README.md",
+  "examples/core/action-card-high-risk.json",
   "examples/mcp/README.md",
   "examples/mcp/compatibility-matrix.md",
   "examples/mcp/direct-mcp-client.mjs",
   "examples/mcp/openai-responses-remote-mcp.mjs",
   "examples/mcp/claude-code-neura.mcp.example.json",
+  "examples/mcp/agent-passport-authority-standing.example.json",
   "examples/mcp/action-cards/customer-reply.json",
   "examples/mcp/action-cards/crm-update.json",
   "examples/mcp/action-cards/refund-review.json",
   "examples/mcp/action-cards/deploy-change.json",
+  "examples/mcp/action-cards/registry-ready-evidence-capture.json",
+  "examples/mcp/action-cards/blocked-funds-transfer.json",
 ];
 
 for (const file of requiredFiles) {
   assert(existsSync(join(repoRoot, file)), `missing_${file}`);
 }
 
+const examplesReadme = await readText("examples/README.md");
+const rootReadme = await readText("README.md");
 const readme = await readText("examples/mcp/README.md");
 const matrix = await readText("examples/mcp/compatibility-matrix.md");
 const directClient = await readText("examples/mcp/direct-mcp-client.mjs");
@@ -49,6 +56,23 @@ const openaiTemplate = await readText(
   "examples/mcp/openai-responses-remote-mcp.mjs",
 );
 const claudeConfig = await readJson("examples/mcp/claude-code-neura.mcp.example.json");
+const authorityStandingExample = await readJson(
+  "examples/mcp/agent-passport-authority-standing.example.json",
+);
+
+const combinedDocs = [rootReadme, examplesReadme, readme, matrix].join("\n");
+
+assert(
+  examplesReadme.includes("Core Relay") &&
+    examplesReadme.includes("Optional MCP") &&
+    examplesReadme.includes("MCP runtime -> protected Neura MCP tool -> same Relay decision spine"),
+  "examples_readme_must_separate_core_and_optional_mcp_paths",
+);
+assert(
+  examplesReadme.includes("It is not a separate protocol") &&
+    examplesReadme.includes("does not replace `examples/core`"),
+  "examples_readme_must_explain_mcp_action_card_folder",
+);
 
 assert(
   readme.includes("Add Neura as the governed decision gate"),
@@ -63,9 +87,16 @@ assert(
   "readme_must_preserve_no_public_token_boundary",
 );
 assert(
+  readme.includes("Five MCP Tools") &&
+    readme.includes("lookup_agent_passport") &&
+    readme.includes("authority-standing"),
+  "readme_must_explain_five_tools_and_authority_standing",
+);
+assert(
   matrix.includes("Production verified") &&
     matrix.includes("Source-aligned template prepared") &&
-    matrix.includes("live OpenAI client verification is pending"),
+    matrix.includes("live OpenAI client verification is pending") &&
+    matrix.includes("authority_standing"),
   "matrix_must_distinguish_verified_from_prepared",
 );
 assert(
@@ -78,8 +109,13 @@ assert(
     directClient.includes("tools/call") &&
     directClient.includes("resolve_action_card") &&
     directClient.includes("validate_action_card") &&
+    directClient.includes("get_decision_receipt") &&
+    directClient.includes("get_trace_replay") &&
+    directClient.includes("lookup_agent_passport") &&
+    directClient.includes("authority_standing") &&
+    directClient.includes("--proof") &&
     directClient.includes("NEURA_RELAY_MCP_ACCESS_TOKEN"),
-  "direct_client_must_call_mcp_tools_with_token",
+  "direct_client_must_call_all_mcp_tools_with_token",
 );
 assert(
   openaiTemplate.includes('type: "mcp"') &&
@@ -92,7 +128,10 @@ assert(
     openaiTemplate.includes("mcp_list_tools") &&
     openaiTemplate.includes("mcp_call") &&
     openaiTemplate.includes("validate_action_card") &&
-    openaiTemplate.includes("resolve_action_card"),
+    openaiTemplate.includes("resolve_action_card") &&
+    openaiTemplate.includes("get_decision_receipt") &&
+    openaiTemplate.includes("get_trace_replay") &&
+    openaiTemplate.includes("lookup_agent_passport"),
   "openai_template_must_match_remote_mcp_shape",
 );
 assert(
@@ -112,11 +151,40 @@ assert(
   "claude_config_must_use_token_env",
 );
 
+assert(
+  authorityStandingExample.tool === "lookup_agent_passport" &&
+    authorityStandingExample.ok === true &&
+    authorityStandingExample.authority_standing?.authority_reference_status ===
+      "ready_for_relay_authority_reference" &&
+    authorityStandingExample.authority_standing?.owner_authority
+      ?.human_authority_mode === "not_modeled_as_ai_agent" &&
+    authorityStandingExample.authority_standing?.standing_audit
+      ?.registry_standing_is_not_relay_acceptance === true &&
+    authorityStandingExample.authority_standing?.boundaries
+      ?.enablesDownstreamExecution === false,
+  "authority_standing_example_must_show_safe_lookup_shape",
+);
+
+for (const forbidden of [
+  "npm install @neura",
+  "public token issuance is available",
+  "self-serve token issuance is available",
+  "official OpenAI partnership",
+  "official Anthropic partnership",
+  "official Google partnership",
+  "official Microsoft partnership",
+  "Neura executes downstream actions",
+]) {
+  assert(!combinedDocs.includes(forbidden), `docs_must_not_claim:${forbidden}`);
+}
+
 for (const scenario of [
   "customer-reply",
   "crm-update",
   "refund-review",
   "deploy-change",
+  "registry-ready-evidence-capture",
+  "blocked-funds-transfer",
 ]) {
   const actionCard = await readJson(`examples/mcp/action-cards/${scenario}.json`);
   assert(actionCard.version === "0.1", `${scenario}_version_must_be_0_1`);
@@ -126,14 +194,42 @@ for (const scenario of [
   assert(actionCard.affectedObject, `${scenario}_must_have_affected_object`);
   assert(
     Array.isArray(actionCard.context?.evidenceRefs) &&
-      actionCard.context.evidenceRefs.length > 0,
-    `${scenario}_must_have_evidence_refs`,
+      (scenario === "blocked-funds-transfer"
+        ? actionCard.context.evidenceRefs.length === 0
+        : actionCard.context.evidenceRefs.length > 0),
+    `${scenario}_must_have_expected_evidence_refs`,
   );
+  assert(Array.isArray(actionCard.context?.ruleRefs), `${scenario}_must_have_rule_refs`);
+  if (scenario === "blocked-funds-transfer") {
+    assert(
+      actionCard.proposedAction.type === "send_funds" &&
+        actionCard.context.riskCategory.includes("financial") &&
+        actionCard.context.ruleRefs.length === 0,
+      "blocked_funds_transfer_must_model_unsafe_financial_action",
+    );
+  }
+  if (scenario === "registry-ready-evidence-capture") {
+    assert(
+      actionCard.agent.id === "3df67d18-319a-4115-9dac-705e107ccf5f" &&
+        actionCard.agent.capabilityVersion ===
+          "6c6fd9ff-1a2e-4780-ab30-ff8c3086f9f2",
+      "registry_ready_scenario_must_use_known_registry_refs",
+    );
+  }
   assert(
     !JSON.stringify(actionCard).includes("PRIVATE_"),
     `${scenario}_must_not_include_private_canary`,
   );
 }
+
+const coreHighRisk = await readJson("examples/core/action-card-high-risk.json");
+assert(
+  coreHighRisk.proposedAction?.type === "send_funds" &&
+    coreHighRisk.context?.riskCategory?.includes("financial") &&
+    coreHighRisk.context?.evidenceRefs?.length === 0 &&
+    coreHighRisk.context?.ruleRefs?.length === 0,
+  "core_high_risk_example_must_route_away_from_auto_execution",
+);
 
 if (process.env.NEURA_RELAY_MCP_ACCESS_TOKEN) {
   const liveValidation = spawnSync(
@@ -195,6 +291,78 @@ if (process.env.NEURA_RELAY_MCP_ACCESS_TOKEN) {
       "live_mcp_resolution_must_not_execute_downstream",
     );
     notes.push("live_mcp_resolution=passed");
+  }
+
+  const liveProof = spawnSync(
+    process.execPath,
+    ["examples/mcp/direct-mcp-client.mjs", "--proof", "--json"],
+    {
+      cwd: repoRoot,
+      env: process.env,
+      encoding: "utf8",
+    },
+  );
+
+  if (liveProof.status !== 0) {
+    fail(`live_mcp_proof_sequence_failed:${liveProof.stderr || liveProof.stdout}`);
+  } else {
+    const payload = JSON.parse(liveProof.stdout);
+    assert(payload.ok === true, "live_mcp_proof_sequence_must_pass");
+    assert(
+      payload.resolve_action_card?.receipt_id &&
+        payload.get_decision_receipt?.trace_ref &&
+        payload.get_trace_replay?.event_count,
+      "live_mcp_proof_must_return_receipt_trace_refs",
+    );
+    assert(
+      payload.lookup_agent_passport?.authority_reference_status ===
+        "ready_for_relay_authority_reference",
+      "live_mcp_proof_must_return_authority_standing",
+    );
+    assert(
+      payload.lookup_agent_passport?.human_authority_mode ===
+        "not_modeled_as_ai_agent",
+      "live_mcp_proof_must_preserve_human_authority_boundary",
+    );
+    assert(
+      payload.private_payload_returned === false &&
+        payload.downstream_execution_performed === false,
+      "live_mcp_proof_must_preserve_private_and_execution_boundaries",
+    );
+    notes.push("live_mcp_proof_sequence=passed");
+  }
+
+  const liveBlockedResolution = spawnSync(
+    process.execPath,
+    [
+      "examples/mcp/direct-mcp-client.mjs",
+      "--tool=resolve_action_card",
+      "--action-card=examples/mcp/action-cards/blocked-funds-transfer.json",
+      "--json",
+    ],
+    {
+      cwd: repoRoot,
+      env: process.env,
+      encoding: "utf8",
+    },
+  );
+
+  if (liveBlockedResolution.status !== 0) {
+    fail(
+      `live_mcp_blocked_resolution_failed:${liveBlockedResolution.stderr || liveBlockedResolution.stdout}`,
+    );
+  } else {
+    const payload = JSON.parse(liveBlockedResolution.stdout);
+    assert(payload.ok === true, "live_mcp_blocked_resolution_must_pass");
+    assert(
+      payload.decision === "stop" || payload.decision === "human_review",
+      "live_mcp_blocked_resolution_must_not_auto_proceed",
+    );
+    assert(
+      payload.downstream_execution_performed === false,
+      "live_mcp_blocked_resolution_must_not_execute_downstream",
+    );
+    notes.push(`live_mcp_blocked_resolution=${payload.decision}`);
   }
 } else {
   notes.push("live_mcp_direct_client=skipped_missing_token");

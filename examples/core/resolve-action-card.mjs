@@ -1,12 +1,24 @@
 #!/usr/bin/env node
 
 import { readFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const exampleDir = dirname(fileURLToPath(import.meta.url));
+const repoRoot = resolve(exampleDir, "../..");
+const defaultActionCardPath = join(exampleDir, "action-card.json");
+
+function argValue(name) {
+  const prefix = `--${name}=`;
+  const arg = process.argv.find((item) => item.startsWith(prefix));
+  return arg ? arg.slice(prefix.length) : null;
+}
+
+const actionCardPath = argValue("action-card")
+  ? resolve(repoRoot, argValue("action-card"))
+  : defaultActionCardPath;
 const actionCard = JSON.parse(
-  await readFile(join(exampleDir, "action-card.json"), "utf8"),
+  await readFile(actionCardPath, "utf8"),
 );
 
 const RELAY_BASE_URL = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
@@ -38,6 +50,7 @@ const factorSummary = factors
   : null;
 const result = {
   relay: RELAY_BASE_URL,
+  action_card_path: actionCardPath.replace(`${repoRoot}/`, ""),
   input_model: payload.input_model,
   decision: receipt?.decision,
   reason: receipt?.reason,

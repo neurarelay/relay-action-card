@@ -26,9 +26,16 @@ To point the same example at a local Relay server:
 RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 ```
 
+To see a high-risk action route away from automatic execution:
+
+```bash
+npm run example:relay -- --action-card=examples/core/action-card-high-risk.json
+```
+
 ## Files
 
 - `action-card.json`: proposed agent action.
+- `action-card-high-risk.json`: proposed financial action with missing evidence and policy refs.
 - `resolve-action-card.mjs`: sends the Action Card to `POST /api/resolve`.
 - `decision-receipt.example.json`: example receipt shape your system can store.
 

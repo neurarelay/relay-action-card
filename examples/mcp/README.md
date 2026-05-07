@@ -37,6 +37,12 @@ List the five protected Neura tools:
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --list-tools
 ```
 
+Run the full proof sequence against the same Relay spine:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
+```
+
 Validate an Action Card:
 
 ```bash
@@ -49,11 +55,40 @@ Resolve an Action Card and receive Decision Receipt, trace, and transaction refs
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_card --json
 ```
 
+Look up an Agent Passport with authority-standing context:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=lookup_agent_passport --action-card=examples/mcp/action-cards/registry-ready-evidence-capture.json --json
+```
+
+Fetch a receipt or trace after resolving:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=get_decision_receipt --receipt-id=decision_receipt_... --json
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=get_trace_replay --trace-ref=trace_ref_... --json
+```
+
 Try a different safe scenario:
 
 ```bash
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --action-card=examples/mcp/action-cards/refund-review.json --json
 ```
+
+Try the blocked high-risk scenario:
+
+```bash
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --tool=resolve_action_card --action-card=examples/mcp/action-cards/blocked-funds-transfer.json --json
+```
+
+## Five MCP Tools
+
+| Tool | What it proves |
+| --- | --- |
+| `validate_action_card` | Protocol shape validation before Relay review |
+| `resolve_action_card` | Decision Receipt, transaction ref, trace ref, and no downstream execution |
+| `get_decision_receipt` | Safe receipt lookup by receipt id or transaction ref |
+| `get_trace_replay` | Redacted trace replay by trace ref |
+| `lookup_agent_passport` | Registry identity, readiness, authority scope, and standing context |
 
 ## Scenarios
 
@@ -61,6 +96,10 @@ NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --action-card=examples/m
 - `crm-update.json`: govern a CRM record update before changing business state
 - `refund-review.json`: govern a refund recommendation before money movement
 - `deploy-change.json`: govern a production deployment request before release action
+- `registry-ready-evidence-capture.json`: use a Registry-ready agent for Agent Passport and authority-standing lookup
+- `blocked-funds-transfer.json`: show a high-risk action that should not proceed automatically
+
+`agent-passport-authority-standing.example.json` shows the safe `lookup_agent_passport` response shape. It includes authority standing, scope, audit counts, and boundary flags without private Registry payloads.
 
 ## OpenAI Responses Template
 
@@ -68,7 +107,7 @@ NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --action-card=examples/m
 
 - `server_url`: `https://www.neurarelay.com/mcp`
 - `authorization`: `NEURA_RELAY_MCP_ACCESS_TOKEN`
-- `allowed_tools`: `validate_action_card`, `resolve_action_card`
+- `allowed_tools`: all five Neura MCP tools
 - `require_approval`: `always`
 
 Run it only after setting both tokens:
