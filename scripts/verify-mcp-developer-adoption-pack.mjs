@@ -64,7 +64,7 @@ assert(
 );
 assert(
   matrix.includes("Production verified") &&
-    matrix.includes("Template prepared") &&
+    matrix.includes("Source-aligned template prepared") &&
     matrix.includes("live OpenAI client verification is pending"),
   "matrix_must_distinguish_verified_from_prepared",
 );
@@ -87,6 +87,10 @@ assert(
     openaiTemplate.includes("authorization") &&
     openaiTemplate.includes("allowed_tools") &&
     openaiTemplate.includes("require_approval") &&
+    openaiTemplate.includes("mcp_approval_response") &&
+    openaiTemplate.includes("OPENAI_AUTO_APPROVE_MCP") &&
+    openaiTemplate.includes("mcp_list_tools") &&
+    openaiTemplate.includes("mcp_call") &&
     openaiTemplate.includes("validate_action_card") &&
     openaiTemplate.includes("resolve_action_card"),
   "openai_template_must_match_remote_mcp_shape",

@@ -77,7 +77,13 @@ Run it only after setting both tokens:
 OPENAI_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... node examples/mcp/openai-responses-remote-mcp.mjs
 ```
 
-Live OpenAI client verification is pending. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
+The default run verifies listing and approval posture. To approve the MCP tool call in the example run:
+
+```bash
+OPENAI_AUTO_APPROVE_MCP=true OPENAI_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:openai-mcp
+```
+
+Live OpenAI client verification is pending until an `OPENAI_API_KEY` is available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
 
 ## Claude Code Template
 
@@ -97,7 +103,7 @@ Live OpenAI client verification is pending. The production Neura MCP server and 
 }
 ```
 
-Live Claude client verification is pending.
+Live Claude client verification is pending until Claude Code or Anthropic API credentials are available in the verification environment.
 
 ## Verification
 
