@@ -17,6 +17,8 @@ MCP makes tool access easier. Neura makes consequential tool use governable befo
 
 Use these examples when your agent can reach real tools, records, messages, money workflows, deployments, or customer data and you need a pre-action record before the action becomes real.
 
+For the full pattern, read `../../docs/mcp-tool-call-governance-walkthrough.md`.
+
 ## Current Access Boundary
 
 The open public developer path is still `POST /api/resolve`.

@@ -80,6 +80,8 @@ Once you have a Decision Receipt, choose one next action:
 
 Read the full path in [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md).
 
+For the MCP tool-call governance pattern, read [`docs/mcp-tool-call-governance-walkthrough.md`](docs/mcp-tool-call-governance-walkthrough.md).
+
 Read the controlled beta access operating path in [`docs/controlled-mcp-beta-access.md`](docs/controlled-mcp-beta-access.md).
 
 For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md).
@@ -324,6 +326,7 @@ docs/
   controlled-mcp-beta-access.md
   developer-feedback-and-controlled-access.md
   developer-owned-agent-walkthrough.md
+  mcp-tool-call-governance-walkthrough.md
 .github/
   ISSUE_TEMPLATE/
     first-receipt-feedback.yml

@@ -43,6 +43,7 @@ const requiredFiles = [
   "examples/mcp/README.md",
   "examples/mcp/compatibility-matrix.md",
   "examples/mcp/provider-runtime-paths.md",
+  "docs/mcp-tool-call-governance-walkthrough.md",
   "examples/mcp/direct-mcp-client.mjs",
   "examples/mcp/openai-responses-remote-mcp.mjs",
   "examples/mcp/anthropic-messages-mcp.mjs",
@@ -67,6 +68,9 @@ const rootReadme = await readText("README.md");
 const readme = await readText("examples/mcp/README.md");
 const matrix = await readText("examples/mcp/compatibility-matrix.md");
 const providerRuntimePaths = await readText("examples/mcp/provider-runtime-paths.md");
+const governanceWalkthrough = await readText(
+  "docs/mcp-tool-call-governance-walkthrough.md",
+);
 const directClient = await readText("examples/mcp/direct-mcp-client.mjs");
 const openaiTemplate = await readText(
   "examples/mcp/openai-responses-remote-mcp.mjs",
@@ -91,6 +95,7 @@ const combinedDocs = [
   readme,
   matrix,
   providerRuntimePaths,
+  governanceWalkthrough,
 ].join("\n");
 
 assert(
@@ -146,6 +151,18 @@ assert(
     providerRuntimePaths.includes("Microsoft Agent Framework / Foundry MCP") &&
     providerRuntimePaths.includes("A2A discoverability is a separate later story"),
   "provider_runtime_paths_must_explain_provider_rollout_and_boundaries",
+);
+assert(
+  governanceWalkthrough.includes("Before your MCP tool call executes, get a Decision Receipt") &&
+    governanceWalkthrough.includes("MCP-capable agent -> proposed tool call -> Action Card -> Relay -> Decision Receipt -> developer-owned execution") &&
+    governanceWalkthrough.includes("Neura does not execute the downstream tool call") &&
+    governanceWalkthrough.includes("Relay Workspace sandbox MCP") &&
+    governanceWalkthrough.includes("Production/private MCP") &&
+    governanceWalkthrough.includes("OpenAI Responses remote MCP") &&
+    governanceWalkthrough.includes("Anthropic Claude Messages MCP connector") &&
+    governanceWalkthrough.includes("Neura does not issue public production MCP tokens") &&
+    governanceWalkthrough.includes("Neura does not provide public A2A discoverability"),
+  "governance_walkthrough_must_explain_mcp_tool_call_governance_and_boundaries",
 );
 assert(
   directClient.includes("tools/list") &&
