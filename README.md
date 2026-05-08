@@ -2,7 +2,7 @@
 
 Send an Action Card to Neura Relay. Get a governed Decision Receipt before execution.
 
-This is the public developer starting point for Neura Relay. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
+This is the public developer starting point for Neura Relay: a runnable example for agent developers building AI agents, autonomous-agent workflows, or MCP-capable runtimes that need a governed checkpoint before execution. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
 
 ## Start Here
 
@@ -27,7 +27,7 @@ MCP-capable runtime -> protected /mcp -> same Relay decision spine
 
 ## Get Your First Receipt In 5 Minutes
 
-Use this repo to prove the adoption loop before wiring Neura into your own agent:
+Use this repo to prove the agent governance adoption loop before wiring Neura into your own AI agent or autonomous-agent workflow:
 
 1. Clone this repo
 2. Run one public Action Card example
@@ -224,9 +224,9 @@ Workspace uses the same example pattern, keeps the action visible while you edit
 
 ## Why Agent Developers Add Neura
 
-MCP gives agents a standard way to reach tools. Neura gives teams a governed checkpoint before those tool calls create business impact.
+MCP gives AI agents a standard way to reach tools. Neura gives agent developers a governed checkpoint before those tool calls create business impact.
 
-Use Neura when an agent is about to touch customer messages, CRM records, refunds, deployments, account state, or other consequential systems and you need:
+Use Neura when an AI agent, autonomous agent, or agent-to-agent workflow is about to touch customer messages, CRM records, refunds, deployments, account state, or other consequential systems and you need:
 
 - pre-action validation
 - Agent Passport identity and authority-standing context
@@ -249,6 +249,8 @@ Current MCP boundary:
 - Neura does not offer public production MCP token issuance
 - Neura does not execute downstream actions
 - sandbox tokens are limited and expire; approved production/private token handoff happens privately and can be rotated or revoked by Neura
+
+A2A boundary: Neura can review proposed actions that originate inside agent-to-agent systems, but this repo does not provide A2A discoverability, an agent network, or downstream execution. The public proof remains `Action Card -> Relay -> Decision Receipt`.
 
 Run the direct MCP client after copying a sandbox token from Workspace or after Neura has issued production/private MCP access:
 
