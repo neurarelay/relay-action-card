@@ -155,6 +155,10 @@ assert(
 assert(
   governanceWalkthrough.includes("Before your MCP tool call executes, get a Decision Receipt") &&
     governanceWalkthrough.includes("MCP-capable agent -> proposed tool call -> Action Card -> Relay -> Decision Receipt -> developer-owned execution") &&
+    governanceWalkthrough.includes("If You Arrived From LinkedIn") &&
+    governanceWalkthrough.includes("https://github.com/neurarelay/relay-action-card") &&
+    governanceWalkthrough.includes("https://www.neurarelay.com/developers/workspace") &&
+    governanceWalkthrough.includes("https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew") &&
     governanceWalkthrough.includes("Neura does not execute the downstream tool call") &&
     governanceWalkthrough.includes("Relay Workspace sandbox MCP") &&
     governanceWalkthrough.includes("Production/private MCP") &&

@@ -12,6 +12,32 @@ MCP-capable agent -> proposed tool call -> Action Card -> Relay -> Decision Rece
 
 Neura does not execute the downstream tool call. Relay returns the governed decision record your app can store before your app decides what to execute.
 
+## If You Arrived From LinkedIn
+
+Start with the fastest proof path:
+
+1. Open the repo root: [relay-action-card](https://github.com/neurarelay/relay-action-card).
+2. Run a public Action Card example and inspect the Decision Receipt:
+
+   ```bash
+   git clone https://github.com/neurarelay/relay-action-card.git
+   cd relay-action-card
+   npm run example:relay -- --example=support-reply --json
+   ```
+
+3. Open [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace) to try the same Action Card pattern in the product surface.
+4. Activate sandbox MCP in Workspace only if you want to test the protected MCP path.
+5. Create a [Registry Agent Passport](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew) before production identity validation.
+6. Request [controlled production/private MCP access](https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml) only after you have a concrete MCP runtime and governed-action use case.
+
+The core proof does not require MCP:
+
+```text
+Action Card -> Relay -> Decision Receipt
+```
+
+MCP is optional compatibility for runtimes that already use MCP.
+
 ## When To Use This Pattern
 
 Use this pattern when an MCP-capable agent is about to call a tool that can change business state, expose sensitive data, contact a customer, move money, ship code, or trigger a workflow transition.
