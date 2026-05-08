@@ -78,6 +78,8 @@ Once you have a Decision Receipt, choose one next action:
 
 Read the full path in [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md).
 
+For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md).
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
@@ -108,9 +110,11 @@ Run a specific example:
 
 ```bash
 npm run example:relay -- --example=support-reply
+npm run example:relay -- --example=account-api-write
 npm run example:relay -- --example=refund-exception
 npm run example:relay -- --example=data-export
 npm run example:relay -- --example=payment-release
+npm run example:relay -- --example=workflow-state-change
 ```
 
 The example calls production Relay by default:
@@ -149,9 +153,11 @@ The default core example sends `examples/core/action-card.json` to Relay. The br
 | Example | File | What Relay reviews |
 | --- | --- | --- |
 | Support reply | `examples/core/action-cards/support-reply.json` | A customer reply before it is sent |
+| Account API write | `examples/core/action-cards/account-api-write.json` | A CRM/account update before an API write |
 | Refund exception | `examples/core/action-cards/refund-exception.json` | A refund exception before approval |
 | Data export | `examples/core/action-cards/data-export.json` | A workspace export before content leaves the system |
 | Payment release | `examples/core/action-cards/payment-release.json` | A partner payment before funds move |
+| Workflow state change | `examples/core/action-cards/workflow-state-change.json` | A workflow transition before state changes |
 
 Each file is an Action Card v0.1. Copy one into your agent workflow or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace), then send it to Relay and inspect the returned Decision Receipt, Registry status, trace replay, and copyable integration handoff.
 
@@ -210,7 +216,7 @@ For a product UI walkthrough, open the protected Relay Developer Workspace:
 https://www.neurarelay.com/developers/workspace
 ```
 
-The Workspace uses the same four examples, keeps the proposed action visible while you edit JSON, links the returned Decision Receipt to trace replay, and provides JavaScript and curl handoff snippets for your own agent workflow.
+The Workspace uses the same example pattern, keeps the proposed action visible while you edit JSON, links the returned Decision Receipt to trace replay, and provides JavaScript and curl handoff snippets for your own agent workflow.
 
 ## Why Agent Developers Add Neura
 

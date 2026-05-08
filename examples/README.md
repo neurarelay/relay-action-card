@@ -28,9 +28,11 @@ examples/
     action-card-high-risk.json
     action-cards/
       support-reply.json
+      account-api-write.json
       refund-exception.json
       data-export.json
       payment-release.json
+      workflow-state-change.json
     resolve-action-card.mjs
   mcp/
     action-cards/
@@ -62,9 +64,11 @@ List and run the public Action Card examples:
 
 ```bash
 npm run example:relay -- --list-examples
+npm run example:relay -- --example=account-api-write
 npm run example:relay -- --example=refund-exception
 npm run example:relay -- --example=data-export
 npm run example:relay -- --example=payment-release
+npm run example:relay -- --example=workflow-state-change
 ```
 
 Run the high-risk core example:
@@ -90,6 +94,8 @@ Run demo Action Card -> create Registry Agent Passport -> send production Action
 ```
 
 Registry is required for production identity. Relay uses the Agent Passport refs; Relay does not create or approve the Agent Passport.
+
+For the end-to-end developer-owned agent flow, see [`../docs/developer-owned-agent-walkthrough.md`](../docs/developer-owned-agent-walkthrough.md).
 
 ## Feedback And Controlled Access
 

@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "advance_workflow_state",
+    "summary": "Move an onboarding workflow from verification to active before state changes",
+    "target": "workflow_onboarding_7714"
+  },
+  "affectedObject": "workflow_onboarding_7714",
+  "context": {
+    "evidenceRefs": ["workflow:7714", "identity_check:passed", "policy:onboarding_state_change"],
+    "ruleRefs": ["policy:workflow_transition_review"],
+    "riskCategory": "workflow_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

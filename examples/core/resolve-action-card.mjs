@@ -9,9 +9,11 @@ const repoRoot = resolve(exampleDir, "../..");
 const defaultActionCardPath = join(exampleDir, "action-card.json");
 const examplePaths = {
   "support-reply": "examples/core/action-cards/support-reply.json",
+  "account-api-write": "examples/core/action-cards/account-api-write.json",
   "refund-exception": "examples/core/action-cards/refund-exception.json",
   "data-export": "examples/core/action-cards/data-export.json",
   "payment-release": "examples/core/action-cards/payment-release.json",
+  "workflow-state-change": "examples/core/action-cards/workflow-state-change.json",
   "high-risk": "examples/core/action-card-high-risk.json",
 };
 

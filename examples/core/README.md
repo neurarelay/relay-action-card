@@ -41,9 +41,11 @@ The public example library mirrors the Relay Developer Workspace:
 | Example | Run command | File |
 | --- | --- | --- |
 | Support reply | `npm run example:relay -- --example=support-reply` | `action-cards/support-reply.json` |
+| Account API write | `npm run example:relay -- --example=account-api-write` | `action-cards/account-api-write.json` |
 | Refund exception | `npm run example:relay -- --example=refund-exception` | `action-cards/refund-exception.json` |
 | Data export | `npm run example:relay -- --example=data-export` | `action-cards/data-export.json` |
 | Payment release | `npm run example:relay -- --example=payment-release` | `action-cards/payment-release.json` |
+| Workflow state change | `npm run example:relay -- --example=workflow-state-change` | `action-cards/workflow-state-change.json` |
 
 You can copy any Action Card into your own agent workflow or paste it into the protected Relay Developer Workspace:
 
@@ -60,6 +62,8 @@ Production order:
 ```text
 Create Registry Agent Passport -> put its refs in the Action Card -> send to Relay -> route execution from the Decision Receipt
 ```
+
+The four primary developer patterns are API write, customer notification, financial or operational commitment, and workflow state change. See [`../../docs/developer-owned-agent-walkthrough.md`](../../docs/developer-owned-agent-walkthrough.md) for the full flow.
 
 For machine-readable output:
 

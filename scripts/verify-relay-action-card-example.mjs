@@ -11,12 +11,15 @@ const coreFiles = [
   "examples/core/README.md",
   "examples/core/action-card.json",
   "examples/core/action-cards/support-reply.json",
+  "examples/core/action-cards/account-api-write.json",
   "examples/core/action-cards/refund-exception.json",
   "examples/core/action-cards/data-export.json",
   "examples/core/action-cards/payment-release.json",
+  "examples/core/action-cards/workflow-state-change.json",
   "examples/core/action-card-high-risk.json",
   "examples/core/decision-receipt.example.json",
   "examples/core/resolve-action-card.mjs",
+  "docs/developer-owned-agent-walkthrough.md",
 ];
 
 for (const file of coreFiles) {
@@ -30,9 +33,11 @@ const actionCard = JSON.parse(
 );
 const actionCardExamples = [
   "examples/core/action-cards/support-reply.json",
+  "examples/core/action-cards/account-api-write.json",
   "examples/core/action-cards/refund-exception.json",
   "examples/core/action-cards/data-export.json",
   "examples/core/action-cards/payment-release.json",
+  "examples/core/action-cards/workflow-state-change.json",
 ];
 const actionCards = await Promise.all(
   actionCardExamples.map(async (file) => ({
@@ -65,6 +70,9 @@ for (const phrase of [
   "https://www.neurarelay.com/developers/workspace",
   "https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew",
   "transaction_ref",
+  "docs/developer-owned-agent-walkthrough.md",
+  "account-api-write",
+  "workflow-state-change",
 ]) {
   if (!readme.includes(phrase)) {
     failures.push(`top_level_readme_missing_${phrase.replaceAll(" ", "_")}`);
@@ -77,6 +85,8 @@ for (const phrase of [
   "Decision Receipt, Registry status, and trace replay",
   "Registry Agent Passport before Relay can validate identity",
   "https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew",
+  "API write",
+  "workflow state change",
 ]) {
   if (!coreReadme.includes(phrase)) {
     failures.push(`core_readme_missing_${phrase.replaceAll(" ", "_")}`);
