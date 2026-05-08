@@ -25,6 +25,8 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, and Registry Agent Passport context. It is an example repo, not a packaged SDK.
+
 ## Get Your First Receipt In 5 Minutes
 
 Use this repo to prove the agent governance adoption loop before wiring Neura into your own AI agent or autonomous-agent workflow:

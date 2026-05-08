@@ -19,6 +19,8 @@ The MCP path is only an adapter:
 MCP runtime -> protected Neura MCP tool -> same Relay decision spine
 ```
 
+For MCP-capable runtimes, start here when you need a protected tool-call governance example rather than a standalone SDK. The examples show how to validate or resolve an Action Card before developer-owned execution.
+
 ## Structure
 
 ```text
