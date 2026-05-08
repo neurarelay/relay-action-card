@@ -38,7 +38,8 @@ assert(
   includesAll(contents.readme, [
     "After The First Receipt",
     "First receipt feedback",
-    "Controlled MCP access",
+    "Sandbox MCP access",
+    "Production/private MCP access",
     "Create the production Agent Passport",
     registrySignup,
   ]),
@@ -58,9 +59,9 @@ assert(
 
 assert(
   includesAll(contents.mcp, [
-    "Request Controlled MCP Access",
-    "controlled beta token",
-    "not public self-serve token issuance",
+    "Try Sandbox MCP First",
+    "Request Production/Private MCP Access",
+    "public production MCP token issuance",
     "Registry Agent Passport",
   ]),
   "MCP README must preserve controlled access and Registry identity boundaries",
@@ -72,7 +73,8 @@ assert(
     "Run the public proof first",
     "Relay does not create or approve the Agent Passport",
     "Share refs only",
-    "not public self-serve token issuance",
+    "signed-in Relay Workspace can issue a one-time limited sandbox MCP token",
+    "not public production token issuance",
     "Relay returns a Decision Receipt and does not execute downstream actions",
     "docs/controlled-mcp-beta-access.md",
     "private token handoff",
@@ -85,9 +87,10 @@ assert(
 assert(
   includesAll(contents.betaAccess, [
     "Controlled MCP Beta Access",
-    "It is not public token issuance",
+    "It is not public production token issuance",
     "It is not a self-serve API-key system",
-    "Public proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation",
+    "Sandbox proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation",
+    "Workspace sandbox",
     "NEURA_RELAY_MCP_ACCESS_TOKEN",
     "https://www.neurarelay.com/mcp",
     "validate_action_card",
@@ -96,8 +99,8 @@ assert(
     "get_trace_replay",
     "lookup_agent_passport",
     "no raw private payload",
-    "Rotate or revoke controlled MCP access",
-    "public MCP token issuance",
+    "Rotate or revoke controlled production/private MCP access",
+    "public production MCP token issuance",
     "A2A discoverability",
   ]),
   "controlled beta access doc must define qualification, token handoff, proof, revocation, and non-claims",
@@ -118,6 +121,7 @@ assert(
 assert(
   includesAll(contents.mcpIssue, [
     "Controlled MCP access",
+    "Relay Workspace sandbox MCP",
     "Registry Agent Passport status",
     "validate_action_card",
     "resolve_action_card",
@@ -127,7 +131,7 @@ assert(
     "Public Action Card proof",
     "Beta proof plan",
     "Private token handoff contact",
-    "not public token issuance",
+    "not offer public production MCP token issuance",
     "tokens must not appear in GitHub issues",
     "rotate or revoke controlled beta access",
     "does not execute downstream actions",
@@ -173,7 +177,7 @@ console.log(
       boundaries: [
         "refs_only",
         "registry_agent_passport_required_for_production_identity",
-        "controlled_mcp_access_only",
+        "sandbox_and_controlled_mcp_access",
         "no_downstream_execution",
       ],
     },

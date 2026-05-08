@@ -33,15 +33,22 @@ https://github.com/neurarelay/relay-action-card/issues/new?template=first-receip
 
 ## Controlled MCP Access
 
-Request controlled MCP access only when you have a concrete MCP-capable agent runtime and a consequential pre-action decision to prove.
+Start with Workspace sandbox MCP when you want immediate MCP proof. Request controlled production/private MCP access only when you have a concrete MCP-capable agent runtime and a consequential pre-action decision beyond sandbox.
 
 Current boundary:
 
 - public open path: `POST /api/resolve`
 - protected MCP path: `https://www.neurarelay.com/mcp`
-- access model: controlled beta token, not public self-serve token issuance
+- sandbox access: signed-in Relay Workspace can issue a one-time limited sandbox MCP token
+- production/private access model: controlled beta token, not public production token issuance
 - execution model: Relay returns a Decision Receipt and does not execute downstream actions
 - privacy model: refs only, no private payload exposure
+
+Workspace sandbox:
+
+```text
+https://www.neurarelay.com/developers/workspace
+```
 
 Controlled MCP access issue:
 
@@ -52,7 +59,7 @@ https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-m
 Controlled MCP beta access has its own operating path:
 
 ```text
-Public proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation
+Sandbox proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation
 ```
 
 Read the operating path before requesting access:
@@ -73,4 +80,4 @@ Store Decision Receipt and trace ref
 Open feedback or controlled-access issue with refs only
 ```
 
-This keeps the public path frictionless while keeping production identity, protected MCP access, and private payload boundaries explicit.
+This keeps the public and sandbox paths frictionless while keeping production identity, protected MCP access, and private payload boundaries explicit.

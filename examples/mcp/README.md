@@ -21,15 +21,27 @@ Use these examples when your agent can reach real tools, records, messages, mone
 
 The open public developer path is still `POST /api/resolve`.
 
-The MCP endpoint is protected controlled access:
+The MCP endpoint is protected. There are two access lanes:
 
 ```bash
-export NEURA_RELAY_MCP_ACCESS_TOKEN="issued-by-neura"
+export NEURA_RELAY_MCP_ACCESS_TOKEN="workspace-sandbox-or-issued-private-token"
 ```
 
-Neura does not currently offer public self-serve token issuance. This is controlled beta token access, not public self-serve token issuance.
+- signed-in Relay Workspace can issue a one-time sandbox MCP token for first proof
+- production/private MCP access uses controlled beta token handoff and review
+- Neura does not offer public production MCP token issuance
 
-## Request Controlled MCP Access
+## Try Sandbox MCP First
+
+Open Relay Workspace, activate sandbox MCP access, and copy the one-time token into `NEURA_RELAY_MCP_ACCESS_TOKEN`:
+
+```text
+https://www.neurarelay.com/developers/workspace
+```
+
+Sandbox access is limited, expires, stores only token hash/fingerprint/preview metadata, and does not create production Registry standing.
+
+## Request Production/Private MCP Access
 
 Run the public core example first, then request MCP access when you have a concrete MCP-capable runtime and a governed-action use case.
 
@@ -37,7 +49,7 @@ Run the public core example first, then request MCP access when you have a concr
 https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml
 ```
 
-Controlled beta access uses private token handoff and rotation/revocation, not public token issuance. Read `../../docs/controlled-mcp-beta-access.md` before requesting access.
+Production/private beta access uses private token handoff and rotation/revocation, not public production token issuance. Read `../../docs/controlled-mcp-beta-access.md` before requesting access.
 
 Production MCP use still needs Registry Agent Passport identity refs in the Action Card before Relay can validate identity, capability, version, and standing.
 

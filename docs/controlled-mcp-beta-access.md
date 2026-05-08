@@ -2,12 +2,20 @@
 
 This is the operating path for requesting protected Neura Relay MCP access.
 
-It is not public token issuance. It is not a self-serve API-key system. It is not a packaged SDK. It is a controlled beta path for qualified developers who already proved the open Action Card loop and have a concrete MCP-capable runtime.
+It is not public production token issuance. It is not a self-serve API-key system. It is not a packaged SDK. It is the production/private beta path for qualified developers who already proved the open Action Card loop and have a concrete MCP-capable runtime.
+
+For first proof, signed-in Relay Workspace can issue a one-time sandbox MCP token instantly:
+
+```text
+https://www.neurarelay.com/developers/workspace
+```
+
+Sandbox access is limited, expires, stores only token hash/fingerprint/preview metadata, and does not create production Registry standing.
 
 ## Access Model
 
 ```text
-Public proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation
+Sandbox proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation
 ```
 
 The open public path stays first:
@@ -22,11 +30,14 @@ The MCP path stays optional:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
+Use the Workspace sandbox for immediate MCP testing. Use this controlled-access path for production/private MCP, higher trust, organization use, or longer-running beta access.
+
 ## Qualification Checklist
 
-A controlled MCP request is ready for review when it includes:
+A production/private MCP request is ready for review when it includes:
 
 - public Action Card receipt ref or clear reason the public path cannot be run yet
+- sandbox MCP proof, when available
 - concrete MCP runtime, such as OpenAI Responses remote MCP, Claude Messages MCP, Claude Code, Google ADK, Microsoft Agent Framework / Foundry, or a custom MCP client
 - governed-action use case with no private payload content
 - requested Neura MCP tools from the five-tool protected surface
@@ -36,7 +47,7 @@ A controlled MCP request is ready for review when it includes:
 
 ## Token Handoff Rules
 
-Controlled beta token handoff is private. Do not paste tokens into GitHub issues, README files, screenshots, logs, or Action Cards.
+Controlled production/private beta token handoff is private. Do not paste tokens into GitHub issues, README files, screenshots, logs, or Action Cards.
 
 For the current v0.1 protected MCP surface:
 
@@ -46,11 +57,11 @@ For the current v0.1 protected MCP surface:
 - allowed tools: `validate_action_card`, `resolve_action_card`, `get_decision_receipt`, `get_trace_replay`, `lookup_agent_passport`
 - exposure rule: token stays in the developer's runtime environment or provider secret store
 - proof rule: share receipt refs, trace refs, and high-level status only
-- revocation rule: Neura can rotate the controlled token and invalidate beta access
+- revocation rule: sandbox access can expire or be revoked; Neura can rotate controlled production/private tokens and invalidate beta access
 
 ## Beta Proof Sequence
 
-After private token handoff, run:
+After copying a Workspace sandbox token or receiving private token handoff, run:
 
 ```bash
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --list-tools
@@ -70,7 +81,7 @@ Expected safe proof:
 
 ## Revocation And Rotation
 
-Rotate or revoke controlled MCP access when:
+Rotate or revoke controlled production/private MCP access when:
 
 - token exposure is suspected
 - the beta use case is complete
@@ -107,7 +118,7 @@ Do not share:
 
 This beta path does not claim:
 
-- public MCP token issuance
+- public production MCP token issuance
 - public API-key issuance
 - self-serve approval
 - external Registry submission

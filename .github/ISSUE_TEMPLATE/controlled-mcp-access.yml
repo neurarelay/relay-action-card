@@ -1,5 +1,5 @@
 name: Controlled MCP access
-description: Request controlled access to the protected Neura Relay MCP tool surface
+description: Request production/private access to the protected Neura Relay MCP tool surface
 title: "Controlled MCP access: "
 labels:
   - controlled-access
@@ -8,7 +8,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        MCP access is controlled beta access. Neura does not currently offer public self-serve token issuance.
+        Start with Relay Workspace sandbox MCP for immediate first proof:
+        https://www.neurarelay.com/developers/workspace
+
+        This issue is for production/private MCP access beyond sandbox. Neura does not offer public production MCP token issuance.
 
         Share refs only. Do not paste customer data, private payloads, API keys, tokens, secrets, or proprietary policy content.
 
@@ -71,8 +74,8 @@ body:
     id: public_receipt_ref
     attributes:
       label: Public Action Card proof
-      description: Share a Decision Receipt ref or explain why the public proof cannot be run yet
-      placeholder: "decision_receipt_... or demo proof pending because ..."
+      description: Share a Decision Receipt ref, sandbox MCP proof, or explain why proof cannot be run yet
+      placeholder: "decision_receipt_..., sandbox MCP proof complete, or demo proof pending because ..."
     validations:
       required: true
   - type: checkboxes
@@ -114,9 +117,9 @@ body:
     attributes:
       label: Boundaries
       options:
-        - label: I understand this is controlled access, not public token issuance
+        - label: I understand Workspace sandbox MCP is limited and production/private MCP access is controlled
           required: true
-        - label: I understand any token handoff must happen privately and tokens must not appear in GitHub issues, logs, screenshots, or Action Cards
+        - label: I understand any production/private token handoff must happen privately and tokens must not appear in GitHub issues, logs, screenshots, or Action Cards
           required: true
         - label: I understand Neura can rotate or revoke controlled beta access
           required: true

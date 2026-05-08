@@ -11,7 +11,7 @@ There are two paths in this repo:
 | Path | Folder | Access | Purpose |
 | --- | --- | --- | --- |
 | Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
-| Optional MCP examples | `examples/mcp` | Controlled access | Call the same Relay spine through protected MCP-compatible tools |
+| Optional MCP examples | `examples/mcp` | Sandbox or controlled production access | Call the same Relay spine through protected MCP-compatible tools |
 
 The core path is the default Neura path:
 
@@ -32,10 +32,11 @@ Use this repo to prove the adoption loop before wiring Neura into your own agent
 1. Clone this repo
 2. Run one public Action Card example
 3. Confirm Relay returns a Decision Receipt and trace ref
-4. Create a Registry Agent Passport for your production agent
-5. Open Relay Developer Workspace
-6. Inspect the same card in Workspace
-7. Copy the JavaScript or curl handoff
+4. Open Relay Developer Workspace
+5. Inspect the same receipt and trace pattern
+6. Activate sandbox MCP access if you want to test MCP immediately
+7. Copy the JavaScript, curl, or MCP handoff
+8. Create a Registry Agent Passport before production Relay review
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -62,7 +63,7 @@ Then open Workspace:
 https://www.neurarelay.com/developers/workspace
 ```
 
-Workspace keeps the action visible, returns a safe receipt, and gives JavaScript/curl for `POST /api/resolve`. Your app owns execution.
+Workspace keeps the action visible, returns a safe receipt, gives JavaScript/curl for `POST /api/resolve`, and can issue a one-time sandbox MCP token. Your app owns execution.
 
 The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
 
@@ -74,7 +75,8 @@ Once you have a Decision Receipt, choose one next action:
 | --- | --- | --- |
 | First receipt feedback | You ran the public example and want to share refs-only feedback or a blocker | [Open feedback issue](https://github.com/neurarelay/relay-action-card/issues/new?template=first-receipt-feedback.yml) |
 | Create the production Agent Passport | You are moving from demo refs to your own production agent identity | [Open Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew) |
-| Controlled MCP access | You have an MCP-capable runtime and a concrete governed-action use case | [Request controlled access](https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml) |
+| Sandbox MCP access | You want to test protected MCP immediately with a signed-in Workspace account | [Open Workspace](https://www.neurarelay.com/developers/workspace) |
+| Production/private MCP access | You have an MCP-capable runtime and a concrete governed-action use case beyond sandbox | [Request controlled access](https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml) |
 
 Read the full path in [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md).
 
@@ -242,12 +244,13 @@ Use Neura Relay through MCP when an agent can reach real tools, records, message
 Current MCP boundary:
 
 - the open public path is still `POST /api/resolve`
-- protected MCP access is controlled beta through `NEURA_RELAY_MCP_ACCESS_TOKEN`
-- Neura does not currently offer public self-serve token issuance
+- signed-in Relay Workspace can issue a one-time sandbox MCP token for first proof
+- production/private MCP access is controlled beta through `NEURA_RELAY_MCP_ACCESS_TOKEN`
+- Neura does not offer public production MCP token issuance
 - Neura does not execute downstream actions
-- approved beta token handoff happens privately and can be rotated or revoked by Neura
+- sandbox tokens are limited and expire; approved production/private token handoff happens privately and can be rotated or revoked by Neura
 
-Run the direct MCP client when Neura has issued an MCP token:
+Run the direct MCP client after copying a sandbox token from Workspace or after Neura has issued production/private MCP access:
 
 ```bash
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp -- --list-tools
@@ -345,4 +348,4 @@ npm run verify:developer-feedback-access-path
 
 This is a runnable public example for the live Relay Action Card path.
 
-MCP examples are controlled-access examples. The current beta path uses private handoff and rotation/revocation, not public token issuance.
+MCP examples can be used with a Workspace sandbox token for first proof. Production/private MCP remains controlled access with private handoff and rotation/revocation, not public production token issuance.

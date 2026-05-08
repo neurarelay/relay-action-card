@@ -5,7 +5,7 @@ This folder has two lanes.
 | Lane | Folder | Use when |
 | --- | --- | --- |
 | Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
-| Optional MCP | `mcp` | Your agent runtime can call MCP tools and Neura has issued controlled MCP access |
+| Optional MCP | `mcp` | Your agent runtime can call MCP tools with a Workspace sandbox token or controlled production access |
 
 The core path is the default:
 
@@ -79,7 +79,7 @@ Run the high-risk core example:
 npm run example:relay -- --example=high-risk
 ```
 
-Run the protected MCP proof sequence after Neura issues access:
+Run the protected MCP proof sequence after copying a sandbox token from Relay Workspace or after Neura issues production/private access:
 
 ```bash
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json

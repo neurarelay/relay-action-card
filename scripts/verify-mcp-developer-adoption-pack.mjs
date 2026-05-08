@@ -114,7 +114,8 @@ assert(
   "readme_must_distinguish_mcp_from_core_path",
 );
 assert(
-  readme.includes("does not currently offer public self-serve token issuance"),
+  readme.includes("one-time sandbox MCP token") &&
+    readme.includes("does not offer public production MCP token issuance"),
   "readme_must_preserve_no_public_token_boundary",
 );
 assert(
