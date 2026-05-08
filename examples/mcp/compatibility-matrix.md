@@ -1,6 +1,6 @@
 # Neura MCP Compatibility Matrix
 
-Status: MCP Provider Example Pack v0.3
+Status: MCP Provider Example Pack v0.4
 
 Neura is protocol-first. MCP is an optional adapter for MCP-capable runtimes that need to route proposed actions through Relay before downstream execution.
 
@@ -11,9 +11,9 @@ Neura is protocol-first. MCP is an optional adapter for MCP-capable runtimes tha
 | OpenAI Responses remote MCP | Source-aligned template prepared | `examples/mcp/openai-responses-remote-mcp.mjs` follows the OpenAI remote MCP shape with `server_url`, `authorization`, all five `allowed_tools`, approval request handling, and optional approval response; live OpenAI client verification is pending until `OPENAI_API_KEY` is available |
 | Anthropic Claude Messages MCP | Source-aligned template prepared | `examples/mcp/anthropic-messages-mcp.mjs` follows the Claude Messages MCP connector shape with `mcp_servers`, `authorization_token`, `mcp_toolset`, five enabled Neura tool configs, and `mcp-client-2025-11-20`; live Claude client verification is pending until `ANTHROPIC_API_KEY` is available |
 | Claude Code remote HTTP MCP | Config template prepared | `examples/mcp/claude-code-neura.mcp.example.json` follows the Claude Code HTTP MCP configuration shape with bearer-token header; live Claude Code verification depends on local client setup |
-| Google ADK MCP | Planned | Pending a verified Google ADK example |
-| Microsoft Agent Framework / Foundry MCP | Planned | Pending a verified Microsoft example |
-| A2A discoverability | Separate later story | Not part of MCP Provider Example Pack v0.3 |
+| Google ADK MCP | Source-aligned template prepared | `examples/mcp/google-adk-remote-mcp.py` follows the Google ADK remote MCP shape with `McpToolset`, Streamable HTTP connection params, Authorization header, and a five-tool Neura allowlist; live Google ADK verification is pending until ADK runtime credentials and controlled Neura MCP access are available |
+| Microsoft Agent Framework / Foundry MCP | Source-aligned template prepared | `examples/mcp/microsoft-agent-framework-mcp.py` follows Microsoft Agent Framework remote MCP with `MCPStreamableHTTPTool` and Foundry's remote MCP tool shape with `server_url`, `server_label`, `allowed_tools`, and approval posture; live Microsoft verification is pending until the agent runtime/project connection and controlled Neura MCP access are available |
+| A2A discoverability | Separate later story | Not part of MCP Provider Example Pack v0.4 |
 
 ## Claim Boundary
 
@@ -27,6 +27,7 @@ Neura is protocol-first. MCP is an optional adapter for MCP-capable runtimes tha
 - OpenAI Responses remote MCP source alignment checked against the official OpenAI MCP and connectors guide.
 - Claude Messages MCP source alignment checked against the official Anthropic MCP connector guide.
 - Claude Code remote HTTP MCP source alignment checked against the official Claude Code MCP guide.
-- Google ADK and Microsoft Agent Framework were researched for later rollout, but runnable examples are intentionally not included in v0.3.
+- Google ADK remote MCP source alignment checked against the official Google ADK MCP tools guide.
+- Microsoft Agent Framework / Foundry MCP source alignment checked against the official Microsoft Agent Framework and Foundry MCP guides.
 - The current repository can verify direct Neura MCP JSON-RPC calls when `NEURA_RELAY_MCP_ACCESS_TOKEN` is present.
 - Live OpenAI or Claude client verification requires provider credentials and controlled Neura MCP access in the local verification environment.

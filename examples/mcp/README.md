@@ -153,6 +153,30 @@ ANTHROPIC_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:anthropic
 
 Live Claude client verification is pending until an `ANTHROPIC_API_KEY` is available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
 
+## Google ADK Template
+
+`google-adk-remote-mcp.py` shows the Google ADK `McpToolset` shape for a remote Streamable HTTP MCP server with an Authorization header and a five-tool Neura allowlist.
+
+Inspect the source-aligned config:
+
+```bash
+npm run example:google-adk-mcp
+```
+
+Live Google ADK verification is pending until a Google ADK runtime, model credentials, and controlled Neura MCP access are available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
+
+## Microsoft Agent Framework / Foundry Template
+
+`microsoft-agent-framework-mcp.py` shows the Microsoft Agent Framework `MCPStreamableHTTPTool` shape for authenticated remote MCP and a Foundry remote MCP tool definition with `server_url`, `server_label`, `allowed_tools`, and `require_approval`.
+
+Inspect the source-aligned config:
+
+```bash
+npm run example:microsoft-mcp
+```
+
+Live Microsoft Agent Framework / Foundry verification is pending until the Microsoft agent runtime, project connection or runtime header path, model credentials, and controlled Neura MCP access are available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
+
 ## Claude Code Template
 
 `claude-code-neura.mcp.example.json` shows an HTTP MCP configuration for Claude Code:
@@ -187,7 +211,7 @@ See `compatibility-matrix.md`.
 
 ## Provider Runtime Paths
 
-See `provider-runtime-paths.md` for the current rollout split across direct Neura MCP, OpenAI Responses, Claude Messages, Claude Code, and planned Google/Microsoft paths.
+See `provider-runtime-paths.md` for the current rollout split across direct Neura MCP, OpenAI Responses, Claude Messages, Claude Code, Google ADK, and Microsoft Agent Framework / Foundry paths.
 
 ## Boundary
 

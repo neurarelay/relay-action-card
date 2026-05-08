@@ -263,6 +263,8 @@ The MCP example pack includes:
 - 1 OpenAI Responses remote MCP template
 - 1 Anthropic Claude Messages MCP connector template
 - 1 Claude Code remote HTTP MCP configuration template
+- 1 Google ADK remote MCP template
+- 1 Microsoft Agent Framework / Foundry MCP template
 - 1 provider-runtime path guide for developer rollout decisions
 - 1 compatibility matrix that separates verified, prepared, planned, and not-claimed surfaces
 
@@ -295,6 +297,8 @@ examples/
     direct-mcp-client.mjs
     openai-responses-remote-mcp.mjs
     anthropic-messages-mcp.mjs
+    google-adk-remote-mcp.py
+    microsoft-agent-framework-mcp.py
     claude-code-neura.mcp.example.json
     agent-passport-authority-standing.example.json
     action-cards/

@@ -1,6 +1,6 @@
 {
   "name": "relay-action-card",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "description": "Run a Neura Relay Action Card and receive a Decision Receipt before execution.",
   "scripts": {
@@ -9,6 +9,8 @@
     "example:mcp-proof": "node examples/mcp/direct-mcp-client.mjs --proof",
     "example:openai-mcp": "node examples/mcp/openai-responses-remote-mcp.mjs",
     "example:anthropic-mcp": "node examples/mcp/anthropic-messages-mcp.mjs",
+    "example:google-adk-mcp": "python3 examples/mcp/google-adk-remote-mcp.py --print-config",
+    "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs",
     "verify:mcp-adoption-pack": "node scripts/verify-mcp-developer-adoption-pack.mjs",
     "verify:developer-feedback-access-path": "node scripts/verify-developer-feedback-access-path.mjs",

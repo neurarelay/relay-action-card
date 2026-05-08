@@ -35,6 +35,8 @@ const requiredFiles = [
   "examples/mcp/direct-mcp-client.mjs",
   "examples/mcp/openai-responses-remote-mcp.mjs",
   "examples/mcp/anthropic-messages-mcp.mjs",
+  "examples/mcp/google-adk-remote-mcp.py",
+  "examples/mcp/microsoft-agent-framework-mcp.py",
   "examples/mcp/claude-code-neura.mcp.example.json",
   "examples/mcp/agent-passport-authority-standing.example.json",
   "examples/mcp/action-cards/customer-reply.json",
@@ -60,6 +62,12 @@ const openaiTemplate = await readText(
 );
 const anthropicTemplate = await readText(
   "examples/mcp/anthropic-messages-mcp.mjs",
+);
+const googleAdkTemplate = await readText(
+  "examples/mcp/google-adk-remote-mcp.py",
+);
+const microsoftTemplate = await readText(
+  "examples/mcp/microsoft-agent-framework-mcp.py",
 );
 const claudeConfig = await readJson("examples/mcp/claude-code-neura.mcp.example.json");
 const authorityStandingExample = await readJson(
@@ -119,11 +127,11 @@ assert(
   "matrix_must_keep_a2a_separate",
 );
 assert(
-  providerRuntimePaths.includes("MCP Provider Example Pack v0.3") &&
+  providerRuntimePaths.includes("MCP Provider Example Pack v0.4") &&
     providerRuntimePaths.includes("OpenAI Responses remote MCP") &&
     providerRuntimePaths.includes("Claude Messages MCP connector") &&
-    providerRuntimePaths.includes("Google ADK is not included as runnable code in v0.3") &&
-    providerRuntimePaths.includes("Microsoft Agent Framework is not included as runnable code in v0.3") &&
+    providerRuntimePaths.includes("Google ADK remote MCP") &&
+    providerRuntimePaths.includes("Microsoft Agent Framework / Foundry MCP") &&
     providerRuntimePaths.includes("A2A discoverability is a separate later story"),
   "provider_runtime_paths_must_explain_provider_rollout_and_boundaries",
 );
@@ -173,6 +181,37 @@ assert(
   "anthropic_template_must_match_messages_mcp_connector_shape",
 );
 assert(
+  googleAdkTemplate.includes("McpToolset") &&
+    googleAdkTemplate.includes("StreamableHTTPConnectionParams") &&
+    googleAdkTemplate.includes("tool_filter=ALLOWED_NEURA_TOOLS") &&
+    googleAdkTemplate.includes("NEURA_RELAY_MCP_ACCESS_TOKEN") &&
+    googleAdkTemplate.includes("Authorization") &&
+    googleAdkTemplate.includes("validate_action_card") &&
+    googleAdkTemplate.includes("resolve_action_card") &&
+    googleAdkTemplate.includes("get_decision_receipt") &&
+    googleAdkTemplate.includes("get_trace_replay") &&
+    googleAdkTemplate.includes("lookup_agent_passport") &&
+    googleAdkTemplate.includes("source_aligned_template"),
+  "google_adk_template_must_match_remote_mcp_shape",
+);
+assert(
+  microsoftTemplate.includes("MCPStreamableHTTPTool") &&
+    microsoftTemplate.includes("header_provider") &&
+    microsoftTemplate.includes("function_invocation_kwargs") &&
+    microsoftTemplate.includes("server_url") &&
+    microsoftTemplate.includes("server_label") &&
+    microsoftTemplate.includes("allowed_tools") &&
+    microsoftTemplate.includes("require_approval") &&
+    microsoftTemplate.includes("project_connection_id") &&
+    microsoftTemplate.includes("validate_action_card") &&
+    microsoftTemplate.includes("resolve_action_card") &&
+    microsoftTemplate.includes("get_decision_receipt") &&
+    microsoftTemplate.includes("get_trace_replay") &&
+    microsoftTemplate.includes("lookup_agent_passport") &&
+    microsoftTemplate.includes("source_aligned_template"),
+  "microsoft_template_must_match_agent_framework_and_foundry_mcp_shape",
+);
+assert(
   claudeConfig.mcpServers?.["neura-relay"]?.type === "http",
   "claude_config_must_use_http_mcp",
 );
@@ -212,6 +251,8 @@ for (const forbidden of [
   "official Google partnership",
   "official Microsoft partnership",
   "Neura executes downstream actions",
+  "Google ADK support is live verified",
+  "Microsoft Agent Framework support is live verified",
 ]) {
   assert(!combinedDocs.includes(forbidden), `docs_must_not_claim:${forbidden}`);
 }
@@ -268,6 +309,54 @@ assert(
     coreHighRisk.context?.ruleRefs?.length === 0,
   "core_high_risk_example_must_route_away_from_auto_execution",
 );
+
+for (const pythonTemplate of [
+  "examples/mcp/google-adk-remote-mcp.py",
+  "examples/mcp/microsoft-agent-framework-mcp.py",
+]) {
+  const syntaxCheck = spawnSync(
+    "python3",
+    [
+      "-c",
+      "import os, py_compile, sys, tempfile; f=tempfile.NamedTemporaryFile(delete=False); cfile=f.name; f.close(); os.unlink(cfile); py_compile.compile(sys.argv[1], cfile=cfile, doraise=True); os.unlink(cfile)",
+      pythonTemplate,
+    ],
+    {
+      cwd: repoRoot,
+      env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+      encoding: "utf8",
+    },
+  );
+
+  if (syntaxCheck.status !== 0) {
+    fail(`python_template_syntax_failed:${pythonTemplate}:${syntaxCheck.stderr}`);
+  }
+}
+
+for (const [script, provider] of [
+  ["examples/mcp/google-adk-remote-mcp.py", "google_adk"],
+  ["examples/mcp/microsoft-agent-framework-mcp.py", "microsoft_agent_framework_foundry"],
+]) {
+  const configCheck = spawnSync("python3", [script, "--print-config"], {
+    cwd: repoRoot,
+    env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+    encoding: "utf8",
+  });
+
+  if (configCheck.status !== 0) {
+    fail(`provider_config_print_failed:${script}:${configCheck.stderr}`);
+  } else {
+    const payload = JSON.parse(configCheck.stdout);
+    assert(payload.status === "source_aligned_template", `${provider}_must_be_source_aligned`);
+    assert(payload.provider === provider, `${provider}_must_report_provider`);
+    assert(
+      JSON.stringify(payload).includes("validate_action_card") &&
+        JSON.stringify(payload).includes("resolve_action_card") &&
+        JSON.stringify(payload).includes("lookup_agent_passport"),
+      `${provider}_must_report_neura_tool_allowlist`,
+    );
+  }
+}
 
 if (process.env.NEURA_RELAY_MCP_ACCESS_TOKEN) {
   const liveValidation = spawnSync(

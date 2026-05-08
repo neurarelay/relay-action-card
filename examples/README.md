@@ -46,6 +46,8 @@ examples/
     direct-mcp-client.mjs
     openai-responses-remote-mcp.mjs
     anthropic-messages-mcp.mjs
+    google-adk-remote-mcp.py
+    microsoft-agent-framework-mcp.py
     claude-code-neura.mcp.example.json
     agent-passport-authority-standing.example.json
 ```
@@ -81,6 +83,13 @@ Run the protected MCP proof sequence after Neura issues access:
 
 ```bash
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
+```
+
+Inspect the source-aligned Google ADK and Microsoft templates:
+
+```bash
+npm run example:google-adk-mcp
+npm run example:microsoft-mcp
 ```
 
 Neura returns governed proof before execution. Your system still owns the agent, private payloads, workflow, and final downstream action.
