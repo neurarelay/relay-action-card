@@ -82,3 +82,11 @@ NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
 Neura returns governed proof before execution. Your system still owns the agent, private payloads, workflow, and final downstream action.
 
 The demo Action Cards include a demo Agent Passport. Production agents need a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
+
+## Production Path
+
+```text
+Run demo Action Card -> create Registry Agent Passport -> send production Action Card to Relay -> store Decision Receipt and trace ref
+```
+
+Registry is required for production identity. Relay uses the Agent Passport refs; Relay does not create or approve the Agent Passport.

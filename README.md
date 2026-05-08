@@ -32,9 +32,10 @@ Use this repo to prove the adoption loop before wiring Neura into your own agent
 1. Clone this repo
 2. Run one public Action Card example
 3. Confirm Relay returns a Decision Receipt and trace ref
-4. Open Relay Developer Workspace
-5. Send the same Action Card through Workspace and inspect the Decision Receipt, Registry status, and trace replay
-6. Copy the Workspace JavaScript or curl handoff when you are ready to wire the same call into your agent workflow
+4. Create a Registry Agent Passport for your production agent
+5. Open Relay Developer Workspace
+6. Send the same Action Card through Workspace and inspect the Decision Receipt, Registry status, and trace replay
+7. Copy the Workspace JavaScript or curl handoff when you are ready to wire the same call into your agent workflow
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -64,6 +65,18 @@ https://www.neurarelay.com/developers/workspace
 Workspace keeps the proposed action visible, returns a safe receipt, and gives copyable JavaScript and curl for the public `POST /api/resolve` path. Your app still owns execution.
 
 The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
+
+## Production Agent Identity
+
+Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
+
+Create the Agent Passport in Registry first:
+
+```text
+https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew
+```
+
+Then place the Registry-backed agent id, owner, capability, and capability version in the Action Card before sending it to Relay.
 
 ## Run The Core Example In 60 Seconds
 
@@ -173,8 +186,9 @@ const { decision_receipt: receipt } = await response.json();
 1. The example loads `examples/core/action-card.json`.
 2. It sends the Action Card to `POST /api/resolve`.
 3. Relay returns a Decision Receipt v0.1 with decision factors.
-4. Your system stores the receipt next to the proposed action.
-5. Your system keeps execution ownership.
+4. Registry identity and capability context appear in the receipt when the agent has a valid Agent Passport.
+5. Your system stores the receipt next to the proposed action.
+6. Your system keeps execution ownership.
 
 Relay is a governed decision gate. Your agent, product, private payloads, and downstream execution stay in your system.
 
