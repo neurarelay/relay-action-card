@@ -90,3 +90,19 @@ Run demo Action Card -> create Registry Agent Passport -> send production Action
 ```
 
 Registry is required for production identity. Relay uses the Agent Passport refs; Relay does not create or approve the Agent Passport.
+
+## Feedback And Controlled Access
+
+Open a first-receipt feedback issue after you run the public example and receive safe refs:
+
+```text
+https://github.com/neurarelay/relay-action-card/issues/new?template=first-receipt-feedback.yml
+```
+
+Request controlled MCP access only after you have an MCP-capable runtime and a concrete governed-action use case:
+
+```text
+https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml
+```
+
+Use refs only. Do not share private payloads, customer data, secrets, API keys, or access tokens.

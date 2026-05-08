@@ -66,6 +66,18 @@ Workspace keeps the proposed action visible, returns a safe receipt, and gives c
 
 The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
 
+## After The First Receipt
+
+Once you have a Decision Receipt, choose one next action:
+
+| Next action | Use when | Link |
+| --- | --- | --- |
+| First receipt feedback | You ran the public example and want to share refs-only feedback or a blocker | [Open feedback issue](https://github.com/neurarelay/relay-action-card/issues/new?template=first-receipt-feedback.yml) |
+| Create the production Agent Passport | You are moving from demo refs to your own production agent identity | [Open Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew) |
+| Controlled MCP access | You have an MCP-capable runtime and a concrete governed-action use case | [Request controlled access](https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml) |
+
+Read the full path in [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md).
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
@@ -289,6 +301,13 @@ examples/
 scripts/
   verify-relay-action-card-example.mjs
   verify-mcp-developer-adoption-pack.mjs
+  verify-developer-feedback-access-path.mjs
+docs/
+  developer-feedback-and-controlled-access.md
+.github/
+  ISSUE_TEMPLATE/
+    first-receipt-feedback.yml
+    controlled-mcp-access.yml
 ```
 
 ## Verify
@@ -296,6 +315,7 @@ scripts/
 ```bash
 npm run verify:relay-example
 npm run verify:mcp-adoption-pack
+npm run verify:developer-feedback-access-path
 ```
 
 `verify:mcp-adoption-pack` performs static checks by default. When `NEURA_RELAY_MCP_ACCESS_TOKEN` is present, it also performs live protected production validation and resolution through `/mcp`.

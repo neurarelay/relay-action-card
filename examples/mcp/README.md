@@ -27,7 +27,17 @@ The MCP endpoint is protected controlled access:
 export NEURA_RELAY_MCP_ACCESS_TOKEN="issued-by-neura"
 ```
 
-Neura does not currently offer public self-serve token issuance.
+Neura does not currently offer public self-serve token issuance. This is controlled beta token access, not public self-serve token issuance.
+
+## Request Controlled MCP Access
+
+Run the public core example first, then request MCP access when you have a concrete MCP-capable runtime and a governed-action use case.
+
+```text
+https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml
+```
+
+Production MCP use still needs Registry Agent Passport identity refs in the Action Card before Relay can validate identity, capability, version, and standing.
 
 ## Run The Direct MCP Client
 

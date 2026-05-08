@@ -1,0 +1,95 @@
+name: Controlled MCP access
+description: Request controlled access to the protected Neura Relay MCP tool surface
+title: "Controlled MCP access: "
+labels:
+  - controlled-access
+  - mcp
+body:
+  - type: markdown
+    attributes:
+      value: |
+        MCP access is controlled beta access. Neura does not currently offer public self-serve token issuance.
+
+        Share refs only. Do not paste customer data, private payloads, API keys, tokens, secrets, or proprietary policy content.
+  - type: input
+    id: company_project
+    attributes:
+      label: Company or project
+      placeholder: "Acme agent platform"
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Contact
+      description: GitHub handle, work email, or public profile
+      placeholder: "@handle or name@example.com"
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Agent runtime
+      options:
+        - OpenAI Responses remote MCP
+        - Claude Messages MCP connector
+        - Claude Code remote HTTP MCP
+        - Cursor or coding-agent MCP client
+        - Custom MCP client
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: action_category
+    attributes:
+      label: Proposed action category
+      options:
+        - Customer communication
+        - CRM or record update
+        - Refund or payment workflow
+        - Deployment or production change
+        - Data export or access
+        - Other consequential action
+    validations:
+      required: true
+  - type: dropdown
+    id: agent_passport
+    attributes:
+      label: Registry Agent Passport status
+      description: Production MCP use requires Registry-backed agent identity refs
+      options:
+        - Production Agent Passport created
+        - Creating Agent Passport now
+        - Need Registry guidance first
+        - Demo proof only
+    validations:
+      required: true
+  - type: checkboxes
+    id: tools
+    attributes:
+      label: MCP tools requested
+      options:
+        - label: validate_action_card
+        - label: resolve_action_card
+        - label: get_decision_receipt
+        - label: get_trace_replay
+        - label: lookup_agent_passport
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: Describe the governed pre-action decision you want to prove without exposing private payloads
+      placeholder: "Before our support agent sends a customer reply, Relay should validate Action Card shape, identity, authority, evidence refs, policy refs, and risk, then return a Decision Receipt"
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Boundaries
+      options:
+        - label: I understand this is controlled access, not public token issuance
+          required: true
+        - label: I understand Neura Relay returns a decision record and does not execute downstream actions
+          required: true
+        - label: I will not include private payloads, customer data, secrets, API keys, or access tokens in this issue
+          required: true

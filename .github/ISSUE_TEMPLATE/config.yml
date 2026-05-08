@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Create a Registry Agent Passport
+    url: https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew
+    about: Production agents need Registry Agent Passport identity before Relay can validate identity, capability, version, and standing.
+  - name: Open Relay Developer Workspace
+    url: https://www.neurarelay.com/developers/workspace
+    about: Send an Action Card through Relay, receive a Decision Receipt, and inspect safe trace refs.
+  - name: Read Neura Protocol
+    url: https://www.neuraprotocol.com
+    about: Review Action Card, Decision Receipt, trace, and lifecycle language.
