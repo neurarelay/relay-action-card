@@ -321,6 +321,7 @@ scripts/
 docs/
   controlled-mcp-beta-access.md
   developer-feedback-and-controlled-access.md
+  developer-owned-agent-walkthrough.md
 .github/
   ISSUE_TEMPLATE/
     first-receipt-feedback.yml
