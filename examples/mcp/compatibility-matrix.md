@@ -29,5 +29,5 @@ Neura is protocol-first. MCP is an optional adapter for MCP-capable runtimes tha
 - Claude Code remote HTTP MCP source alignment checked against the official Claude Code MCP guide.
 - Google ADK remote MCP source alignment checked against the official Google ADK MCP tools guide.
 - Microsoft Agent Framework / Foundry MCP source alignment checked against the official Microsoft Agent Framework and Foundry MCP guides.
-- The current repository can verify direct Neura MCP JSON-RPC calls when `NEURA_RELAY_MCP_ACCESS_TOKEN` is present.
+- The current repository can verify direct Neura MCP JSON-RPC calls, auth rejection, exact tool listing, receipt lookup, trace replay, Agent Passport lookup, and blocked-action routing when `NEURA_RELAY_MCP_ACCESS_TOKEN` is present.
 - Live OpenAI or Claude client verification requires provider credentials and controlled Neura MCP access in the local verification environment.

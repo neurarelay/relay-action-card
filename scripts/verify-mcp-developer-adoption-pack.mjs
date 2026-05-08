@@ -9,6 +9,17 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const notes = [];
+const expectedTools = [
+  "validate_action_card",
+  "resolve_action_card",
+  "get_decision_receipt",
+  "get_trace_replay",
+  "lookup_agent_passport",
+];
+const mcpUrl =
+  process.env.NEURA_RELAY_MCP_URL ?? "https://www.neurarelay.com/mcp";
+const mcpProtocolVersion =
+  process.env.NEURA_RELAY_MCP_PROTOCOL_VERSION ?? "2025-11-25";
 
 function fail(message) {
   failures.push(message);
@@ -196,8 +207,9 @@ assert(
 );
 assert(
   microsoftTemplate.includes("MCPStreamableHTTPTool") &&
-    microsoftTemplate.includes("header_provider") &&
-    microsoftTemplate.includes("function_invocation_kwargs") &&
+    microsoftTemplate.includes("headers=neura_mcp_headers()") &&
+    microsoftTemplate.includes("allowed_tools=ALLOWED_NEURA_TOOLS") &&
+    microsoftTemplate.includes('approval_mode="always_require"') &&
     microsoftTemplate.includes("server_url") &&
     microsoftTemplate.includes("server_label") &&
     microsoftTemplate.includes("allowed_tools") &&
@@ -355,10 +367,70 @@ for (const [script, provider] of [
         JSON.stringify(payload).includes("lookup_agent_passport"),
       `${provider}_must_report_neura_tool_allowlist`,
     );
+    if (provider === "microsoft_agent_framework_foundry") {
+      assert(
+        payload.agent_framework_auth?.approval_mode === "always_require",
+        "microsoft_agent_framework_must_require_approval",
+      );
+      assert(
+        JSON.stringify(payload.agent_framework_auth).includes("Authorization"),
+        "microsoft_agent_framework_must_report_authorization_header",
+      );
+    }
   }
 }
 
 if (process.env.NEURA_RELAY_MCP_ACCESS_TOKEN) {
+  const unauthenticatedMcp = await fetch(mcpUrl, {
+    method: "POST",
+    headers: {
+      accept: "application/json, text/event-stream",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: "unauthenticated-check",
+      method: "initialize",
+      params: {
+        protocolVersion: mcpProtocolVersion,
+        capabilities: {},
+        clientInfo: {
+          name: "relay-action-card-mcp-pack-verifier",
+          version: "0.1.0",
+        },
+      },
+    }),
+  });
+  const unauthenticatedPayload = await unauthenticatedMcp.json();
+  assert(unauthenticatedMcp.status === 401, "live_mcp_auth_rejection_must_return_401");
+  assert(
+    unauthenticatedPayload?.error?.message?.toLowerCase?.().includes("unauthorized"),
+    "live_mcp_auth_rejection_must_be_mcp_shaped",
+  );
+  notes.push("live_mcp_auth_rejection=passed");
+
+  const liveToolsList = spawnSync(
+    process.execPath,
+    ["examples/mcp/direct-mcp-client.mjs", "--list-tools", "--json"],
+    {
+      cwd: repoRoot,
+      env: process.env,
+      encoding: "utf8",
+    },
+  );
+
+  if (liveToolsList.status !== 0) {
+    fail(`live_mcp_tools_list_failed:${liveToolsList.stderr || liveToolsList.stdout}`);
+  } else {
+    const payload = JSON.parse(liveToolsList.stdout);
+    assert(
+      JSON.stringify([...(payload.tools ?? [])].sort()) ===
+        JSON.stringify([...expectedTools].sort()),
+      "live_mcp_tools_list_must_return_exact_tool_set",
+    );
+    notes.push("live_mcp_tools_list=passed");
+  }
+
   const liveValidation = spawnSync(
     process.execPath,
     [

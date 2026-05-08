@@ -38,7 +38,7 @@ Claude Messages MCP uses `mcp_servers`, `authorization_token`, and a `tools` ent
 
 Google ADK remote MCP uses `McpToolset` with Streamable HTTP connection params, an Authorization header, and a Neura tool filter. The template is source-aligned but not live-verified without a Google ADK runtime and model credentials.
 
-Microsoft Agent Framework uses `MCPStreamableHTTPTool` for remote MCP endpoints, with authenticated endpoint headers supplied at runtime. Foundry Agent Service uses a remote MCP tool definition with `server_url`, `server_label`, optional `allowed_tools`, and approval posture. The template is source-aligned but not live-verified without a Microsoft agent runtime or Foundry project connection.
+Microsoft Agent Framework uses `MCPStreamableHTTPTool` for remote MCP endpoints with `headers`, `allowed_tools`, and `approval_mode` set on the tool. Foundry Agent Service uses a remote MCP tool definition with `server_url`, `server_label`, `allowed_tools`, and approval posture. The template is source-aligned but not live-verified without a Microsoft agent runtime or Foundry project connection.
 
 A2A discoverability is a separate later story. It is not part of this MCP example pack.
 

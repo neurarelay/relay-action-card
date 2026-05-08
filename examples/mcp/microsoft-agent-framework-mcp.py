@@ -21,7 +21,6 @@ Neura boundary:
 
 from __future__ import annotations
 
-import asyncio
 import json
 import os
 import sys
@@ -44,23 +43,13 @@ ALLOWED_NEURA_TOOLS: Final[list[str]] = [
 ]
 
 
-async def neura_header_provider(function_invocation_kwargs=None):
-    """
-    Return per-run headers for authenticated Agent Framework MCP calls.
+def neura_mcp_headers() -> dict[str, str]:
+    """Return authenticated headers for Microsoft Agent Framework MCP calls."""
 
-    Microsoft guidance prefers runtime-provided headers for authenticated HTTP
-    endpoints so secrets are not baked into a shared client.
-    """
+    if not NEURA_RELAY_MCP_ACCESS_TOKEN:
+        raise RuntimeError("Set NEURA_RELAY_MCP_ACCESS_TOKEN before connecting to Neura MCP.")
 
-    runtime_kwargs = function_invocation_kwargs or {}
-    token = runtime_kwargs.get("neura_relay_mcp_access_token") or NEURA_RELAY_MCP_ACCESS_TOKEN
-
-    if not token:
-        raise RuntimeError(
-            "Set NEURA_RELAY_MCP_ACCESS_TOKEN or pass neura_relay_mcp_access_token at run time."
-        )
-
-    return {"Authorization": f"Bearer {token}"}
+    return {"Authorization": f"Bearer {NEURA_RELAY_MCP_ACCESS_TOKEN}"}
 
 
 async def run_agent_framework_template(prompt: str) -> str:
@@ -72,21 +61,23 @@ async def run_agent_framework_template(prompt: str) -> str:
     Neura before execution.
     """
 
-    from agent_framework import Agent, MCPStreamableHTTPTool
+    from agent_framework import ChatAgent, MCPStreamableHTTPTool
     from agent_framework.openai import OpenAIChatClient
 
     async with (
         MCPStreamableHTTPTool(
             name="Neura Relay MCP",
             url=NEURA_RELAY_MCP_URL,
-            header_provider=neura_header_provider,
+            headers=neura_mcp_headers(),
+            allowed_tools=ALLOWED_NEURA_TOOLS,
+            approval_mode="always_require",
             description=(
                 "Validate and resolve Action Cards through Neura Relay before "
                 "downstream execution. Use only the five approved Neura MCP tools."
             ),
         ) as neura_mcp,
-        Agent(
-            client=OpenAIChatClient(),
+        ChatAgent(
+            chat_client=OpenAIChatClient(),
             name="NeuraGovernedActionAgent",
             instructions=(
                 "Use Neura Relay MCP to validate or resolve proposed Action Cards. "
@@ -95,14 +86,7 @@ async def run_agent_framework_template(prompt: str) -> str:
             ),
         ) as agent,
     ):
-        result = await agent.run(
-            prompt,
-            tools=neura_mcp,
-            function_invocation_kwargs={
-                "neura_relay_mcp_access_token": NEURA_RELAY_MCP_ACCESS_TOKEN,
-                "allowed_tools": ALLOWED_NEURA_TOOLS,
-            },
-        )
+        result = await agent.run(prompt)
         return str(result)
 
 
@@ -132,8 +116,13 @@ def print_source_aligned_config() -> None:
                 "status": "source_aligned_template",
                 "provider": "microsoft_agent_framework_foundry",
                 "agent_framework_tool": "MCPStreamableHTTPTool",
+                "agent_framework_auth": {
+                    "headers": "Authorization: Bearer ${NEURA_RELAY_MCP_ACCESS_TOKEN}",
+                    "allowed_tools": ALLOWED_NEURA_TOOLS,
+                    "approval_mode": "always_require",
+                },
                 "foundry_tool_shape": foundry_mcp_tool_definition_shape(),
-                "authorization": "runtime_header_or_foundry_project_connection",
+                "authorization": "environment_header_or_foundry_project_connection",
                 "live_verification": "pending_microsoft_agent_runtime_and_neura_controlled_access",
                 "neura_boundary": {
                     "core_path": "Action Card -> Relay -> Decision Receipt -> trace/ledger/Registry context",
@@ -156,4 +145,6 @@ if __name__ == "__main__":
         "Validate this proposed Action Card with Neura Relay before any downstream "
         "execution, then summarize only safe Decision Receipt and trace refs."
     )
+    import asyncio
+
     print(asyncio.run(run_agent_framework_template(prompt)))

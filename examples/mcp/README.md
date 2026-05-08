@@ -167,7 +167,7 @@ Live Google ADK verification is pending until a Google ADK runtime, model creden
 
 ## Microsoft Agent Framework / Foundry Template
 
-`microsoft-agent-framework-mcp.py` shows the Microsoft Agent Framework `MCPStreamableHTTPTool` shape for authenticated remote MCP and a Foundry remote MCP tool definition with `server_url`, `server_label`, `allowed_tools`, and `require_approval`.
+`microsoft-agent-framework-mcp.py` shows the Microsoft Agent Framework `MCPStreamableHTTPTool` shape with authenticated `headers`, `allowed_tools`, and `approval_mode`, plus a Foundry remote MCP tool definition with `server_url`, `server_label`, `allowed_tools`, and `require_approval`.
 
 Inspect the source-aligned config:
 
@@ -203,7 +203,7 @@ Live Claude client verification is pending until Claude Code or Anthropic API cr
 npm run verify:mcp-adoption-pack
 ```
 
-The verifier checks the pack structure, claim boundaries, client templates, safe scenario Action Cards, and direct MCP client shape. When `NEURA_RELAY_MCP_ACCESS_TOKEN` is present, it also performs live protected production validation and resolution through `/mcp`.
+The verifier checks the pack structure, claim boundaries, client templates, safe scenario Action Cards, and direct MCP client shape. When `NEURA_RELAY_MCP_ACCESS_TOKEN` is present, it also performs live auth rejection, exact tool-list, validation, resolution, receipt lookup, trace replay, Agent Passport lookup, and blocked-action checks through `/mcp`.
 
 ## Compatibility Matrix
 
