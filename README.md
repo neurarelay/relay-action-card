@@ -208,7 +208,7 @@ const { decision_receipt: receipt } = await response.json();
 5. Your system stores the receipt next to the proposed action.
 6. Your system keeps execution ownership.
 
-Relay is a governed decision gate. Your agent, product, private payloads, and downstream execution stay in your system.
+Relay is a governed decision gate. Your agent, payloads, and execution stay in your system.
 
 For a product UI walkthrough, open the protected Relay Developer Workspace:
 
