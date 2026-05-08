@@ -78,6 +78,8 @@ Once you have a Decision Receipt, choose one next action:
 
 Read the full path in [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md).
 
+Read the controlled beta access operating path in [`docs/controlled-mcp-beta-access.md`](docs/controlled-mcp-beta-access.md).
+
 For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md).
 
 ## Production Agent Identity
@@ -243,6 +245,7 @@ Current MCP boundary:
 - protected MCP access is controlled beta through `NEURA_RELAY_MCP_ACCESS_TOKEN`
 - Neura does not currently offer public self-serve token issuance
 - Neura does not execute downstream actions
+- approved beta token handoff happens privately and can be rotated or revoked by Neura
 
 Run the direct MCP client when Neura has issued an MCP token:
 
@@ -313,6 +316,7 @@ scripts/
   verify-mcp-developer-adoption-pack.mjs
   verify-developer-feedback-access-path.mjs
 docs/
+  controlled-mcp-beta-access.md
   developer-feedback-and-controlled-access.md
 .github/
   ISSUE_TEMPLATE/
@@ -341,4 +345,4 @@ npm run verify:developer-feedback-access-path
 
 This is a runnable public example for the live Relay Action Card path.
 
-MCP examples are controlled-access examples until Neura ships a real beta or public token system.
+MCP examples are controlled-access examples. The current beta path uses private handoff and rotation/revocation, not public token issuance.

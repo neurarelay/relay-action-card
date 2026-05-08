@@ -49,6 +49,20 @@ Controlled MCP access issue:
 https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml
 ```
 
+Controlled MCP beta access has its own operating path:
+
+```text
+Public proof -> Registry Agent Passport -> controlled MCP request -> private token handoff -> live proof -> rotation or revocation
+```
+
+Read the operating path before requesting access:
+
+```text
+docs/controlled-mcp-beta-access.md
+```
+
+Tokens are never shared in GitHub issues. If access is approved, handoff happens privately, and Neura can rotate or revoke controlled beta access.
+
 ## Production Adoption Loop
 
 ```text

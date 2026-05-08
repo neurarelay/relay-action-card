@@ -121,3 +121,9 @@ https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-m
 ```
 
 Use refs only. Do not share private payloads, customer data, secrets, API keys, or access tokens.
+
+Read the controlled beta access operating path first:
+
+```text
+docs/controlled-mcp-beta-access.md
+```

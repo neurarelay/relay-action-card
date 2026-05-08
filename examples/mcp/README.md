@@ -37,6 +37,8 @@ Run the public core example first, then request MCP access when you have a concr
 https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml
 ```
 
+Controlled beta access uses private token handoff and rotation/revocation, not public token issuance. Read `../../docs/controlled-mcp-beta-access.md` before requesting access.
+
 Production MCP use still needs Registry Agent Passport identity refs in the Action Card before Relay can validate identity, capability, version, and standing.
 
 ## Run The Direct MCP Client

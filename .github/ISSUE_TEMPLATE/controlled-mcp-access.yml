@@ -11,6 +11,9 @@ body:
         MCP access is controlled beta access. Neura does not currently offer public self-serve token issuance.
 
         Share refs only. Do not paste customer data, private payloads, API keys, tokens, secrets, or proprietary policy content.
+
+        Review the controlled beta operating path before requesting access:
+        https://github.com/neurarelay/relay-action-card/blob/main/docs/controlled-mcp-beta-access.md
   - type: input
     id: company_project
     attributes:
@@ -64,6 +67,14 @@ body:
         - Demo proof only
     validations:
       required: true
+  - type: input
+    id: public_receipt_ref
+    attributes:
+      label: Public Action Card proof
+      description: Share a Decision Receipt ref or explain why the public proof cannot be run yet
+      placeholder: "decision_receipt_... or demo proof pending because ..."
+    validations:
+      required: true
   - type: checkboxes
     id: tools
     attributes:
@@ -82,12 +93,32 @@ body:
       placeholder: "Before our support agent sends a customer reply, Relay should validate Action Card shape, identity, authority, evidence refs, policy refs, and risk, then return a Decision Receipt"
     validations:
       required: true
+  - type: textarea
+    id: beta_proof_plan
+    attributes:
+      label: Beta proof plan
+      description: Describe which runtime, tools, Action Card examples, receipt lookup, trace replay, and Agent Passport lookup you will verify
+      placeholder: "We will run tools/list, validate_action_card, resolve_action_card, get_decision_receipt, get_trace_replay, and lookup_agent_passport against a safe support-reply Action Card"
+    validations:
+      required: true
+  - type: input
+    id: private_handoff_contact
+    attributes:
+      label: Private token handoff contact
+      description: Provide the private contact path Neura should use if access is approved. Do not paste tokens here.
+      placeholder: "work email, GitHub private contact, or other private handoff channel"
+    validations:
+      required: true
   - type: checkboxes
     id: boundaries
     attributes:
       label: Boundaries
       options:
         - label: I understand this is controlled access, not public token issuance
+          required: true
+        - label: I understand any token handoff must happen privately and tokens must not appear in GitHub issues, logs, screenshots, or Action Cards
+          required: true
+        - label: I understand Neura can rotate or revoke controlled beta access
           required: true
         - label: I understand Neura Relay returns a decision record and does not execute downstream actions
           required: true
