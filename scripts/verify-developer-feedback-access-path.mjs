@@ -41,6 +41,8 @@ assert(
     "Sandbox MCP access",
     "Production/private MCP access",
     "Create the production Agent Passport",
+    "Official MCP Registry",
+    "com.neurarelay/relay-mcp",
     registrySignup,
   ]),
   "README must route first receipt to feedback, controlled access, and Registry Agent Passport",

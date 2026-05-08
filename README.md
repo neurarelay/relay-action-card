@@ -4,6 +4,11 @@ Send an Action Card to Neura Relay. Get a governed Decision Receipt before execu
 
 This is the public developer starting point for Neura Relay: a runnable example for agent developers building AI agents, autonomous-agent workflows, or MCP-capable runtimes that need a governed checkpoint before execution. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
 
+Distribution proof:
+
+- Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
+- The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
+
 ## Start Here
 
 There are two paths in this repo:
