@@ -19,6 +19,8 @@ const coreFiles = [
   "examples/core/action-card-high-risk.json",
   "examples/core/decision-receipt.example.json",
   "examples/core/resolve-action-card.mjs",
+  "examples/sdk/README.md",
+  "examples/sdk/resolve-action-card-sdk.mjs",
   "docs/developer-owned-agent-walkthrough.md",
 ];
 
@@ -53,6 +55,12 @@ const coreReadme = await readFile(
   join(repoRoot, "examples/core/README.md"),
   "utf8",
 );
+const examplesReadme = await readFile(join(repoRoot, "examples/README.md"), "utf8");
+const sdkReadme = await readFile(join(repoRoot, "examples/sdk/README.md"), "utf8");
+const sdkExample = await readFile(
+  join(repoRoot, "examples/sdk/resolve-action-card-sdk.mjs"),
+  "utf8",
+);
 
 if (!readme.includes("examples/core")) {
   failures.push("top_level_readme_must_name_core_examples");
@@ -60,6 +68,10 @@ if (!readme.includes("examples/core")) {
 
 if (!readme.includes("examples/mcp")) {
   failures.push("top_level_readme_must_name_mcp_examples");
+}
+
+if (!readme.includes("examples/sdk")) {
+  failures.push("top_level_readme_must_name_sdk_examples");
 }
 
 for (const phrase of [
@@ -71,11 +83,48 @@ for (const phrase of [
   "https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew",
   "transaction_ref",
   "docs/developer-owned-agent-walkthrough.md",
+  "examples/sdk/README.md",
   "account-api-write",
   "workflow-state-change",
 ]) {
   if (!readme.includes(phrase)) {
     failures.push(`top_level_readme_missing_${phrase.replaceAll(" ", "_")}`);
+  }
+}
+
+for (const phrase of [
+  "SDK alpha",
+  "@neurarelay/sdk",
+  "not claimed until the package is actually published",
+  "SDK client -> Action Card -> Relay -> Decision Receipt",
+  "npm run example:sdk",
+]) {
+  if (!examplesReadme.includes(phrase) && !readme.includes(phrase)) {
+    failures.push(`sdk_public_docs_missing_${phrase.replaceAll(" ", "_")}`);
+  }
+}
+
+for (const phrase of [
+  "npm publication is not claimed",
+  "createNeuraRelaySdk",
+  "relay.mcp.resolveActionCard",
+  "relay.a2a.sendActionCard",
+  "does not issue public API keys",
+]) {
+  if (!sdkReadme.includes(phrase)) {
+    failures.push(`sdk_readme_missing_${phrase.replaceAll(" ", "_")}`);
+  }
+}
+
+for (const phrase of [
+  'await import("@neurarelay/sdk")',
+  "npm run example:relay",
+  "createNeuraRelaySdk",
+  "decision_receipt",
+  "relay_boundary",
+]) {
+  if (!sdkExample.includes(phrase)) {
+    failures.push(`sdk_example_missing_${phrase.replaceAll(" ", "_")}`);
   }
 }
 

@@ -11,12 +11,13 @@ Distribution proof:
 
 ## Start Here
 
-There are two paths in this repo:
+There are three paths in this repo:
 
 | Path | Folder | Access | Purpose |
 | --- | --- | --- | --- |
 | Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
 | Optional MCP examples | `examples/mcp` | Sandbox or controlled production access | Call the same Relay spine through protected MCP-compatible tools |
+| SDK alpha path | `examples/sdk` | Staged until npm publication | Use `@neurarelay/sdk` after alpha publication without changing the Relay decision boundary |
 
 The core path is the default Neura path:
 
@@ -30,7 +31,7 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
-Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, and Registry Agent Passport context. It is an example repo, not a packaged SDK.
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo; npm SDK availability is not claimed until `@neurarelay/sdk` is actually published.
 
 ## Get Your First Receipt In 5 Minutes
 
@@ -94,6 +95,8 @@ Read the controlled beta access operating path in [`docs/controlled-mcp-beta-acc
 For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md).
 
 For the authorization-bypass scenario proof, read [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md).
+
+For the SDK alpha path, read [`examples/sdk/README.md`](examples/sdk/README.md).
 
 ## Production Agent Identity
 
@@ -163,6 +166,18 @@ To point the example at a local Relay server:
 ```bash
 RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 ```
+
+## SDK Alpha Path
+
+The SDK path is staged for `@neurarelay/sdk@0.1.0-alpha.0`. It uses the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
+
+After npm publication is approved, run the SDK example after installing the published package:
+
+```bash
+npm run example:sdk
+```
+
+Until publication is approved, use `npm run example:relay` as the public runnable path.
 
 ## Copy The Core Examples
 

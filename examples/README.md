@@ -1,11 +1,12 @@
 # Neura Developer Examples
 
-This folder has two lanes.
+This folder has three lanes.
 
 | Lane | Folder | Use when |
 | --- | --- | --- |
 | Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
 | Optional MCP | `mcp` | Your agent runtime can call MCP tools with a Workspace sandbox token or controlled production access |
+| SDK alpha | `sdk` | You want the typed `@neurarelay/sdk` path after alpha publication |
 
 The core path is the default:
 
@@ -17,6 +18,12 @@ The MCP path is only an adapter:
 
 ```text
 MCP runtime -> protected Neura MCP tool -> same Relay decision spine
+```
+
+The SDK path packages the same mechanism; npm availability is not claimed until the package is actually published:
+
+```text
+SDK client -> Action Card -> Relay -> Decision Receipt
 ```
 
 For MCP-capable runtimes, start here when you need a protected tool-call governance example rather than a standalone SDK. The examples show how to validate or resolve an Action Card before developer-owned execution.
@@ -55,6 +62,9 @@ examples/
     microsoft-agent-framework-mcp.py
     claude-code-neura.mcp.example.json
     agent-passport-authority-standing.example.json
+  sdk/
+    README.md
+    resolve-action-card-sdk.mjs
 ```
 
 `examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
@@ -107,6 +117,14 @@ Inspect the source-aligned Google ADK and Microsoft templates:
 npm run example:google-adk-mcp
 npm run example:microsoft-mcp
 ```
+
+After SDK alpha publication is approved, run the SDK example after installing the published package:
+
+```bash
+npm run example:sdk
+```
+
+Until then, `npm run example:relay` remains the public runnable path.
 
 Neura returns governed proof before execution. Your system still owns the agent, private payloads, workflow, and final downstream action.
 
