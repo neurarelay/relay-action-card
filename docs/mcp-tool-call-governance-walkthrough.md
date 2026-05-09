@@ -209,7 +209,7 @@ This repo includes prepared provider templates:
 | --- | --- | --- |
 | Direct Neura MCP JSON-RPC | `examples/mcp/direct-mcp-client.mjs` | Production Neura MCP server verified when a controlled token is available. |
 | OpenAI Responses remote MCP | `examples/mcp/openai-responses-remote-mcp.mjs` | Template prepared; live provider-client verification requires credentials. |
-| Anthropic Claude Messages MCP connector | `examples/mcp/anthropic-messages-mcp.mjs` | Template prepared; live provider-client verification requires credentials. |
+| Anthropic Claude Messages MCP connector | `examples/mcp/anthropic-messages-mcp.mjs` | Private live provider proof passed with controlled Relay sandbox access. |
 | Claude Code HTTP MCP | `examples/mcp/claude-code-neura.mcp.example.json` | Config template prepared; client behavior should be verified in the target environment. |
 | Google ADK remote MCP | `examples/mcp/google-adk-remote-mcp.py` | Template prepared; live provider-client verification requires runtime credentials. |
 | Microsoft Agent Framework / Foundry MCP | `examples/mcp/microsoft-agent-framework-mcp.py` | Template prepared; live provider-client verification requires runtime/project access. |

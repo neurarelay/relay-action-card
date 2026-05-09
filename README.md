@@ -278,7 +278,7 @@ The MCP example pack includes:
 - 1 blocked high-risk Action Card that should not proceed automatically
 - 1 direct MCP JSON-RPC client for all five protected Neura tools
 - 1 OpenAI Responses remote MCP template
-- 1 Anthropic Claude Messages MCP connector template with a sanitized request dry run
+- 1 Anthropic Claude Messages MCP connector example with sanitized dry run and private live provider proof
 - 1 Claude Code remote HTTP MCP configuration template
 - 1 Google ADK remote MCP template
 - 1 Microsoft Agent Framework / Foundry MCP template
@@ -299,6 +299,8 @@ npm run example:anthropic-mcp-request
 ```
 
 This proves the Claude API configuration shape only. It is not an official Anthropic listing or partnership claim.
+
+Private live proof on May 9 confirmed the same example can call protected Neura Relay MCP through Claude Messages with a controlled Relay sandbox token. Claude called `resolve_action_card`, Relay returned a Decision Receipt plus trace ref, and Neura preserved no private payload return and no downstream execution. This is live Claude Messages API proof, not Anthropic listing, approval, partnership, public production token issuance, or public API-key issuance.
 
 ## Repository Map
 

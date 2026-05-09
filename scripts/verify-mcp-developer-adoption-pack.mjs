@@ -131,7 +131,7 @@ assert(
 );
 assert(
   matrix.includes("Production verified") &&
-    matrix.includes("Source-aligned template prepared") &&
+    matrix.includes("Private live provider proof passed") &&
     matrix.includes("live OpenAI client verification is pending") &&
     matrix.includes("Anthropic Claude Messages MCP") &&
     matrix.includes("mcp-client-2025-11-20") &&
@@ -147,6 +147,7 @@ assert(
   providerRuntimePaths.includes("MCP Provider Example Pack v0.4") &&
     providerRuntimePaths.includes("OpenAI Responses remote MCP") &&
     providerRuntimePaths.includes("Claude Messages MCP connector") &&
+    providerRuntimePaths.includes("private live Claude Messages API proof") &&
     providerRuntimePaths.includes("Google ADK remote MCP") &&
     providerRuntimePaths.includes("Microsoft Agent Framework / Foundry MCP") &&
     providerRuntimePaths.includes("A2A discoverability is a separate later story"),

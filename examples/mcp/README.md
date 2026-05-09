@@ -175,7 +175,7 @@ npm run example:anthropic-mcp-request
 
 This is a Claude API MCP connector example, not an official Anthropic listing or partnership claim.
 
-Live Claude client verification is pending until an `ANTHROPIC_API_KEY` is available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
+May 9 private live proof passed with a project `ANTHROPIC_API_KEY` and controlled Relay sandbox MCP token. Claude called `resolve_action_card` through protected Neura MCP and received a Decision Receipt plus trace ref while preserving no private payload return and no downstream execution. This does not create an Anthropic listing, approval, partnership, public production MCP token issuance, or public API-key issuance.
 
 ## Google ADK Template
 
@@ -219,7 +219,7 @@ Live Microsoft Agent Framework / Foundry verification is pending until the Micro
 }
 ```
 
-Live Claude client verification is pending until Claude Code or Anthropic API credentials are available in the verification environment.
+Live Claude Messages API proof exists. Claude Code HTTP MCP verification is still pending until the Claude Code client is exercised in the target environment.
 
 ## Verification
 
