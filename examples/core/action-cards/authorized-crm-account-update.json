@@ -1,0 +1,27 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "update_customer_account_record",
+    "summary": "Update a CRM account that is inside the declared authority scope before writing to the account API.",
+    "target": "crm_account_2381"
+  },
+  "affectedObject": "crm_account_2381",
+  "context": {
+    "authorityContext": {
+      "authorityScopeRef": "authority_scope:crm_account_updates_demo",
+      "allowedActionTypes": ["update_customer_account_record"],
+      "allowedTargets": ["crm_account_2381"],
+      "standingRef": "registry_passport_standing:demo_valid"
+    },
+    "evidenceRefs": ["crm_account:2381", "support_case:8421", "policy:account_status_change"],
+    "ruleRefs": ["policy:crm_write_review"],
+    "riskCategory": "account_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

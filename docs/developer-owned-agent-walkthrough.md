@@ -43,6 +43,16 @@ Each pattern follows the same spine:
 Action Card -> Relay -> Decision Receipt -> trace ref -> developer-owned execution
 ```
 
+## Authorization Bypass Scenarios
+
+Use the public scenario proof when you want to test permitted and authority-mismatch Action Cards without sending private data:
+
+```bash
+npm run verify:authorization-bypass-scenarios
+```
+
+The scenario pack includes one authorized CRM account update and two authority-mismatch scenarios that must not auto-proceed. In production, your own authorization layer should provide the authority refs and Registry-backed Agent Passport standing before Relay returns the governed Decision Receipt.
+
 ## What Your App Stores
 
 Store the Decision Receipt, trace ref, transaction ref, and the refs you used to build the Action Card. Do not send private payloads, customer content, secrets, API keys, access tokens, or proprietary policy text.

@@ -14,6 +14,9 @@ const examplePaths = {
   "data-export": "examples/core/action-cards/data-export.json",
   "payment-release": "examples/core/action-cards/payment-release.json",
   "workflow-state-change": "examples/core/action-cards/workflow-state-change.json",
+  "authorized-crm-account-update": "examples/core/action-cards/authorized-crm-account-update.json",
+  "blocked-cross-resource-crm-update": "examples/core/action-cards/blocked-cross-resource-crm-update.json",
+  "blocked-payment-without-authority": "examples/core/action-cards/blocked-payment-without-authority.json",
   "high-risk": "examples/core/action-card-high-risk.json",
 };
 

@@ -93,6 +93,8 @@ Read the controlled beta access operating path in [`docs/controlled-mcp-beta-acc
 
 For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md).
 
+For the authorization-bypass scenario proof, read [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md).
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
@@ -128,6 +130,9 @@ npm run example:relay -- --example=refund-exception
 npm run example:relay -- --example=data-export
 npm run example:relay -- --example=payment-release
 npm run example:relay -- --example=workflow-state-change
+npm run example:relay -- --example=authorized-crm-account-update
+npm run example:relay -- --example=blocked-cross-resource-crm-update
+npm run example:relay -- --example=blocked-payment-without-authority
 ```
 
 The example calls production Relay by default:
@@ -171,8 +176,13 @@ The default core example sends `examples/core/action-card.json` to Relay. The br
 | Data export | `examples/core/action-cards/data-export.json` | A workspace export before content leaves the system |
 | Payment release | `examples/core/action-cards/payment-release.json` | A partner payment before funds move |
 | Workflow state change | `examples/core/action-cards/workflow-state-change.json` | A workflow transition before state changes |
+| Authorized CRM account update | `examples/core/action-cards/authorized-crm-account-update.json` | A permitted target/action pair before an account API write |
+| Blocked cross-resource CRM update | `examples/core/action-cards/blocked-cross-resource-crm-update.json` | An authority-mismatch target that must not auto-proceed |
+| Blocked payment without authority | `examples/core/action-cards/blocked-payment-without-authority.json` | A payment action outside declared authority that must not auto-proceed |
 
 Each file is an Action Card v0.1. Copy one into your agent or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace). Relay returns the Decision Receipt, Registry status, trace ref, and integration handoff.
+
+The authorization-bypass scenario proof is intentionally refs-only. It demonstrates the public safety property without sharing private policy text, customer content, API keys, tokens, or proprietary authorization payloads.
 
 The default support-reply Action Card looks like this:
 

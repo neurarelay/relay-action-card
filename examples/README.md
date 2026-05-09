@@ -35,6 +35,9 @@ examples/
       data-export.json
       payment-release.json
       workflow-state-change.json
+      authorized-crm-account-update.json
+      blocked-cross-resource-crm-update.json
+      blocked-payment-without-authority.json
     resolve-action-card.mjs
   mcp/
     action-cards/
@@ -73,7 +76,18 @@ npm run example:relay -- --example=refund-exception
 npm run example:relay -- --example=data-export
 npm run example:relay -- --example=payment-release
 npm run example:relay -- --example=workflow-state-change
+npm run example:relay -- --example=authorized-crm-account-update
+npm run example:relay -- --example=blocked-cross-resource-crm-update
+npm run example:relay -- --example=blocked-payment-without-authority
 ```
+
+Run the authorization-bypass scenario proof:
+
+```bash
+npm run verify:authorization-bypass-scenarios
+```
+
+The proof sends one authorized Action Card and two authority-mismatch Action Cards to production Relay. The blocked scenarios must not auto-proceed, and every scenario keeps execution with the developer-owned system.
 
 Run the high-risk core example:
 
@@ -107,6 +121,8 @@ Run demo Action Card -> create Registry Agent Passport -> send production Action
 Registry is required for production identity. Relay uses the Agent Passport refs; Relay does not create or approve the Agent Passport.
 
 For the end-to-end developer-owned agent flow, see [`../docs/developer-owned-agent-walkthrough.md`](../docs/developer-owned-agent-walkthrough.md).
+
+For the authorization-bypass scenario proof, see [`../docs/authorization-bypass-scenarios.md`](../docs/authorization-bypass-scenarios.md).
 
 ## Feedback And Controlled Access
 

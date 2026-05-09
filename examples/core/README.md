@@ -46,6 +46,9 @@ The public example library mirrors the Relay Developer Workspace:
 | Data export | `npm run example:relay -- --example=data-export` | `action-cards/data-export.json` |
 | Payment release | `npm run example:relay -- --example=payment-release` | `action-cards/payment-release.json` |
 | Workflow state change | `npm run example:relay -- --example=workflow-state-change` | `action-cards/workflow-state-change.json` |
+| Authorized CRM account update | `npm run example:relay -- --example=authorized-crm-account-update` | `action-cards/authorized-crm-account-update.json` |
+| Blocked cross-resource CRM update | `npm run example:relay -- --example=blocked-cross-resource-crm-update` | `action-cards/blocked-cross-resource-crm-update.json` |
+| Blocked payment without authority | `npm run example:relay -- --example=blocked-payment-without-authority` | `action-cards/blocked-payment-without-authority.json` |
 
 You can copy any Action Card into your own agent workflow or paste it into the protected Relay Developer Workspace:
 
@@ -64,6 +67,14 @@ Create Registry Agent Passport -> put its refs in the Action Card -> send to Rel
 ```
 
 The four primary developer patterns are API write, customer notification, financial or operational commitment, and workflow state change. See [`../../docs/developer-owned-agent-walkthrough.md`](../../docs/developer-owned-agent-walkthrough.md) for the full flow.
+
+Authorization bypass scenarios are included for an authorized CRM update and two authority-mismatch attempts. The blocked scenarios must not auto-proceed:
+
+```bash
+npm run verify:authorization-bypass-scenarios
+```
+
+See [`../../docs/authorization-bypass-scenarios.md`](../../docs/authorization-bypass-scenarios.md).
 
 For machine-readable output:
 
@@ -88,6 +99,9 @@ npm run example:relay -- --example=high-risk
 - `action-card.json`: proposed agent action.
 - `action-cards/`: public Action Card examples for common developer workflows.
 - `action-card-high-risk.json`: proposed financial action with missing evidence and policy refs.
+- `action-cards/authorized-crm-account-update.json`: permitted target/action scenario.
+- `action-cards/blocked-cross-resource-crm-update.json`: authority-mismatch account target scenario.
+- `action-cards/blocked-payment-without-authority.json`: payment action outside declared authority scenario.
 - `resolve-action-card.mjs`: sends the Action Card to `POST /api/resolve`.
 - `decision-receipt.example.json`: example receipt shape your system can store.
 
