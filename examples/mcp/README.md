@@ -219,7 +219,7 @@ Live Microsoft Agent Framework / Foundry verification is pending until the Micro
 }
 ```
 
-Live Claude Messages API proof exists. Claude Code HTTP MCP verification is still pending until the Claude Code client is exercised in the target environment.
+May 9 private live proof passed with local Claude Code and a controlled Relay sandbox MCP token. Claude Code called `resolve_action_card` through protected Neura MCP and received a Decision Receipt plus trace and transaction refs while preserving no private payload return and no downstream execution. This does not create an Anthropic listing, approval, partnership, public production MCP token issuance, or public API-key issuance.
 
 ## Verification
 
