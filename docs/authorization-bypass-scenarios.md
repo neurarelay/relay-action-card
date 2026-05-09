@@ -10,11 +10,29 @@ Relay does not host the agent, hold the private policy engine, or execute the do
 
 ## Scenario Pack
 
-| Scenario | Command | Expected safety property |
-| --- | --- | --- |
-| Authorized CRM account update | `npm run example:relay -- --example=authorized-crm-account-update --json` | Target and action type are inside the declared authority scope; Relay still returns a receipt before execution |
-| Blocked cross-resource CRM update | `npm run example:relay -- --example=blocked-cross-resource-crm-update --json` | Target is outside the declared authority scope and must not auto-proceed |
-| Blocked payment without authority | `npm run example:relay -- --example=blocked-payment-without-authority --json` | Payment action is outside the declared authority scope and must not auto-proceed |
+### Authorized CRM Account Update
+
+```bash
+npm run example:relay -- --example=authorized-crm-account-update --json
+```
+
+Target and action type are inside the declared authority scope. Relay still returns a receipt before execution.
+
+### Blocked Cross-Resource CRM Update
+
+```bash
+npm run example:relay -- --example=blocked-cross-resource-crm-update --json
+```
+
+Target is outside the declared authority scope and must not auto-proceed.
+
+### Blocked Payment Without Authority
+
+```bash
+npm run example:relay -- --example=blocked-payment-without-authority --json
+```
+
+Payment action is outside the declared authority scope and must not auto-proceed.
 
 Run the live proof:
 
