@@ -32,6 +32,7 @@ export NEURA_RELAY_MCP_ACCESS_TOKEN="workspace-sandbox-or-issued-private-token"
 - signed-in Relay Workspace can issue a one-time sandbox MCP token for first proof
 - production/private MCP access uses controlled beta token handoff and review
 - Neura does not offer public production MCP token issuance
+- MCP credentials are tool-scoped by Relay, so a credential can list and call only its authorized Neura tools
 
 ## Try Sandbox MCP First
 

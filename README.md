@@ -258,6 +258,7 @@ Current MCP boundary:
 - Neura does not offer public production MCP token issuance
 - Neura does not execute downstream actions
 - sandbox tokens are limited and expire; approved production/private token handoff happens privately and can be rotated or revoked by Neura
+- MCP credentials are tool-scoped by Relay; a credential can list and call only its authorized Neura MCP tools
 
 A2A boundary: Neura can review proposed actions that originate inside agent-to-agent systems, but this repo does not provide A2A discoverability, an agent network, or downstream execution. The public proof remains `Action Card -> Relay -> Decision Receipt`.
 

@@ -120,7 +120,8 @@ assert(
 );
 assert(
   readme.includes("one-time sandbox MCP token") &&
-    readme.includes("does not offer public production MCP token issuance"),
+    readme.includes("does not offer public production MCP token issuance") &&
+    readme.includes("MCP credentials are tool-scoped by Relay"),
   "readme_must_preserve_no_public_token_boundary",
 );
 assert(

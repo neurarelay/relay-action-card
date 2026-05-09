@@ -55,6 +55,7 @@ For the current v0.1 protected MCP surface:
 - endpoint: `https://www.neurarelay.com/mcp`
 - transport: MCP Streamable HTTP
 - allowed tools: `validate_action_card`, `resolve_action_card`, `get_decision_receipt`, `get_trace_replay`, `lookup_agent_passport`
+- tool-scope rule: Relay lists and calls only the Neura MCP tools authorized for the credential
 - exposure rule: token stays in the developer's runtime environment or provider secret store
 - proof rule: share receipt refs, trace refs, and high-level status only
 - revocation rule: sandbox access can expire or be revoked; Neura can rotate controlled production/private tokens and invalidate beta access
