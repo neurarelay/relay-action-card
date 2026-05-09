@@ -167,6 +167,14 @@ Run it only after setting both tokens:
 ANTHROPIC_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:anthropic-mcp
 ```
 
+Inspect the exact Claude Messages request shape without secrets:
+
+```bash
+npm run example:anthropic-mcp-request
+```
+
+This is a Claude API MCP connector example, not an official Anthropic listing or partnership claim.
+
 Live Claude client verification is pending until an `ANTHROPIC_API_KEY` is available in the verification environment. The production Neura MCP server and the direct MCP JSON-RPC client are verified separately.
 
 ## Google ADK Template

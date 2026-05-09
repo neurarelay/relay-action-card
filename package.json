@@ -9,6 +9,7 @@
     "example:mcp-proof": "node examples/mcp/direct-mcp-client.mjs --proof",
     "example:openai-mcp": "node examples/mcp/openai-responses-remote-mcp.mjs",
     "example:anthropic-mcp": "node examples/mcp/anthropic-messages-mcp.mjs",
+    "example:anthropic-mcp-request": "node examples/mcp/anthropic-messages-mcp.mjs --print-request",
     "example:google-adk-mcp": "python3 examples/mcp/google-adk-remote-mcp.py --print-config",
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs",

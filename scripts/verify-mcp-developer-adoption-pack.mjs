@@ -202,6 +202,8 @@ assert(
   anthropicTemplate.includes("ANTHROPIC_API_KEY") &&
     anthropicTemplate.includes('"anthropic-beta"') &&
     anthropicTemplate.includes("mcp-client-2025-11-20") &&
+    anthropicTemplate.includes("--print-request") &&
+    anthropicTemplate.includes("source_aligned_claude_messages_mcp_request") &&
     anthropicTemplate.includes("mcp_servers") &&
     anthropicTemplate.includes("authorization_token") &&
     anthropicTemplate.includes('"mcp_toolset"') &&
@@ -213,6 +215,50 @@ assert(
     anthropicTemplate.includes("lookup_agent_passport"),
   "anthropic_template_must_match_messages_mcp_connector_shape",
 );
+
+const anthropicDryRun = spawnSync(
+  process.execPath,
+  ["examples/mcp/anthropic-messages-mcp.mjs", "--print-request"],
+  {
+    cwd: repoRoot,
+    env: process.env,
+    encoding: "utf8",
+  },
+);
+
+if (anthropicDryRun.status !== 0) {
+  fail(`anthropic_dry_run_failed:${anthropicDryRun.stderr || anthropicDryRun.stdout}`);
+} else {
+  const payload = JSON.parse(anthropicDryRun.stdout);
+  assert(
+    payload.status === "source_aligned_claude_messages_mcp_request",
+    "anthropic_dry_run_must_report_source_alignment",
+  );
+  assert(
+    payload.required_headers?.["anthropic-beta"] === "mcp-client-2025-11-20",
+    "anthropic_dry_run_must_use_current_beta_header",
+  );
+  assert(
+    payload.body?.mcp_servers?.[0]?.url === "https://www.neurarelay.com/mcp" &&
+      payload.body?.mcp_servers?.[0]?.authorization_token ===
+        "NEURA_RELAY_MCP_ACCESS_TOKEN" &&
+      payload.body?.tools?.[0]?.type === "mcp_toolset" &&
+      payload.body?.tools?.[0]?.default_config?.enabled === false,
+    "anthropic_dry_run_must_show_protected_neura_mcp_toolset",
+  );
+  assert(
+    expectedTools.every(
+      (tool) => payload.body?.tools?.[0]?.configs?.[tool]?.enabled === true,
+    ),
+    "anthropic_dry_run_must_enable_exact_neura_tools",
+  );
+  assert(
+    payload.boundary?.official_anthropic_listing_claimed === false &&
+      payload.boundary?.downstream_execution_performed_by_neura === false &&
+      payload.boundary?.private_payload_returned_by_neura === false,
+    "anthropic_dry_run_must_preserve_claim_and_execution_boundaries",
+  );
+}
 assert(
   googleAdkTemplate.includes("McpToolset") &&
     googleAdkTemplate.includes("StreamableHTTPConnectionParams") &&

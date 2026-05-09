@@ -278,7 +278,7 @@ The MCP example pack includes:
 - 1 blocked high-risk Action Card that should not proceed automatically
 - 1 direct MCP JSON-RPC client for all five protected Neura tools
 - 1 OpenAI Responses remote MCP template
-- 1 Anthropic Claude Messages MCP connector template
+- 1 Anthropic Claude Messages MCP connector template with a sanitized request dry run
 - 1 Claude Code remote HTTP MCP configuration template
 - 1 Google ADK remote MCP template
 - 1 Microsoft Agent Framework / Foundry MCP template
@@ -291,6 +291,14 @@ Start here:
 - `examples/mcp/README.md`
 - `examples/mcp/provider-runtime-paths.md`
 - `examples/mcp/compatibility-matrix.md`
+
+To inspect the Claude Messages MCP request shape without credentials:
+
+```bash
+npm run example:anthropic-mcp-request
+```
+
+This proves the Claude API configuration shape only. It is not an official Anthropic listing or partnership claim.
 
 ## Repository Map
 

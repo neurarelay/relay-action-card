@@ -16,10 +16,79 @@ const NEURA_RELAY_MCP_URL =
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL ?? "claude-opus-4-7";
 const ANTHROPIC_MCP_BETA =
   process.env.ANTHROPIC_MCP_BETA ?? "mcp-client-2025-11-20";
+const printRequest = process.argv.includes("--print-request");
+
+function createClaudeMcpRequest({ authorizationToken }) {
+  return {
+    model: ANTHROPIC_MODEL,
+    max_tokens: 1200,
+    messages: [
+      {
+        role: "user",
+        content:
+          "Use Neura Relay to validate this Action Card before any downstream execution. " +
+          "If the Action Card is valid, resolve it and summarize only the safe receipt, trace, and transaction refs. " +
+          JSON.stringify(actionCard),
+      },
+    ],
+    mcp_servers: [
+      {
+        type: "url",
+        url: NEURA_RELAY_MCP_URL,
+        name: "neura-relay",
+        authorization_token: authorizationToken,
+      },
+    ],
+    tools: [
+      {
+        type: "mcp_toolset",
+        mcp_server_name: "neura-relay",
+        default_config: {
+          enabled: false,
+        },
+        configs: {
+          validate_action_card: { enabled: true },
+          resolve_action_card: { enabled: true },
+          get_decision_receipt: { enabled: true },
+          get_trace_replay: { enabled: true },
+          lookup_agent_passport: { enabled: true },
+        },
+      },
+    ],
+  };
+}
+
+if (printRequest) {
+  console.log(
+    JSON.stringify(
+      {
+        status: "source_aligned_claude_messages_mcp_request",
+        endpoint: "https://api.anthropic.com/v1/messages",
+        required_headers: {
+          "x-api-key": "ANTHROPIC_API_KEY",
+          "anthropic-version": "2023-06-01",
+          "anthropic-beta": ANTHROPIC_MCP_BETA,
+        },
+        body: createClaudeMcpRequest({
+          authorizationToken: "NEURA_RELAY_MCP_ACCESS_TOKEN",
+        }),
+        boundary: {
+          neura_mcp_access: "workspace_sandbox_or_controlled_private_token",
+          official_anthropic_listing_claimed: false,
+          downstream_execution_performed_by_neura: false,
+          private_payload_returned_by_neura: false,
+        },
+      },
+      null,
+      2,
+    ),
+  );
+  process.exit(0);
+}
 
 if (!ANTHROPIC_API_KEY || !NEURA_RELAY_MCP_ACCESS_TOKEN) {
   console.error(
-    "Set ANTHROPIC_API_KEY and NEURA_RELAY_MCP_ACCESS_TOKEN to verify the Claude Messages MCP path.",
+    "Set ANTHROPIC_API_KEY and NEURA_RELAY_MCP_ACCESS_TOKEN to verify the Claude Messages MCP path, or run with --print-request to inspect the source-aligned request without secrets.",
   );
   process.exit(1);
 }
@@ -86,43 +155,11 @@ function summarizeContent(content = []) {
   return { tool_uses: toolUses, tool_results: toolResults };
 }
 
-const response = await createMessage({
-  model: ANTHROPIC_MODEL,
-  max_tokens: 1200,
-  messages: [
-    {
-      role: "user",
-      content:
-        "Use Neura Relay to validate this Action Card before any downstream execution. " +
-        "If the Action Card is valid, resolve it and summarize only the safe receipt, trace, and transaction refs. " +
-        JSON.stringify(actionCard),
-    },
-  ],
-  mcp_servers: [
-    {
-      type: "url",
-      url: NEURA_RELAY_MCP_URL,
-      name: "neura-relay",
-      authorization_token: NEURA_RELAY_MCP_ACCESS_TOKEN,
-    },
-  ],
-  tools: [
-    {
-      type: "mcp_toolset",
-      mcp_server_name: "neura-relay",
-      default_config: {
-        enabled: false,
-      },
-      configs: {
-        validate_action_card: { enabled: true },
-        resolve_action_card: { enabled: true },
-        get_decision_receipt: { enabled: true },
-        get_trace_replay: { enabled: true },
-        lookup_agent_passport: { enabled: true },
-      },
-    },
-  ],
-});
+const response = await createMessage(
+  createClaudeMcpRequest({
+    authorizationToken: NEURA_RELAY_MCP_ACCESS_TOKEN,
+  }),
+);
 
 const summary = summarizeContent(response.content);
 
