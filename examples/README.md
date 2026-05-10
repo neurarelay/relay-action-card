@@ -1,10 +1,11 @@
 # Neura Developer Examples
 
-This folder has three lanes.
+This folder has four lanes.
 
 | Lane | Folder | Use when |
 | --- | --- | --- |
 | Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
+| A2A protected proof | `a2a` | You want public Agent Card discovery plus controlled protected `message/send` proof |
 | Optional MCP | `mcp` | Your agent runtime can call MCP tools with a Workspace sandbox token or controlled production access |
 | SDK alpha | `sdk` | You want the typed `@neurarelay/sdk` public alpha path |
 
@@ -24,6 +25,12 @@ The SDK path packages the same mechanism:
 
 ```text
 SDK client -> Action Card -> Relay -> Decision Receipt
+```
+
+The A2A path keeps discovery public and execution protected:
+
+```text
+A2A client -> public Agent Card -> protected /a2a message/send -> Decision Receipt task
 ```
 
 For MCP-capable runtimes, start here when you need a protected tool-call governance example rather than a standalone SDK. The examples show how to validate or resolve an Action Card before developer-owned execution.
@@ -62,6 +69,9 @@ examples/
     microsoft-agent-framework-mcp.py
     claude-code-neura.mcp.example.json
     agent-passport-authority-standing.example.json
+  a2a/
+    README.md
+    resolve-action-card-a2a.mjs
   sdk/
     README.md
     resolve-action-card-sdk.mjs
@@ -109,6 +119,13 @@ Run the protected MCP proof sequence after copying a sandbox token from Relay Wo
 
 ```bash
 NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
+```
+
+Inspect the public A2A Agent Card and run protected A2A proof after controlled access is issued:
+
+```bash
+npm run example:a2a -- --agent-card-only
+RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
 ```
 
 Inspect the source-aligned Google ADK and Microsoft templates:

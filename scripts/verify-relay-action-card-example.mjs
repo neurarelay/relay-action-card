@@ -21,6 +21,8 @@ const coreFiles = [
   "examples/core/resolve-action-card.mjs",
   "examples/sdk/README.md",
   "examples/sdk/resolve-action-card-sdk.mjs",
+  "examples/a2a/README.md",
+  "examples/a2a/resolve-action-card-a2a.mjs",
   "docs/developer-owned-agent-walkthrough.md",
 ];
 
@@ -101,6 +103,18 @@ for (const phrase of [
 ]) {
   if (!examplesReadme.includes(phrase) && !readme.includes(phrase)) {
     failures.push(`sdk_public_docs_missing_${phrase.replaceAll(" ", "_")}`);
+  }
+}
+
+for (const phrase of [
+  "A2A Protected Client Proof",
+  "examples/a2a",
+  "npm run example:a2a -- --agent-card-only",
+  "RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json",
+  "no public A2A token issuance",
+]) {
+  if (!readme.includes(phrase)) {
+    failures.push(`a2a_public_docs_missing_${phrase.replaceAll(" ", "_")}`);
   }
 }
 

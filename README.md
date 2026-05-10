@@ -178,6 +178,24 @@ npm install
 npm run example:sdk
 ```
 
+## A2A Protected Client Proof
+
+Relay publishes public Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes a controlled client example in `examples/a2a`.
+
+Inspect the public Agent Card:
+
+```bash
+npm run example:a2a -- --agent-card-only
+```
+
+Run protected `message/send` only after controlled A2A access is issued:
+
+```bash
+RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
+```
+
+The protected proof returns a Decision Receipt task with trace and transaction refs. It preserves no public A2A token issuance, no public API keys, no downstream execution by Neura, no private payload exposure, and no A2A directory listing or ecosystem claim.
+
 ## Copy The Core Examples
 
 The default core example sends `examples/core/action-card.json` to Relay. The broader public example library lives in `examples/core/action-cards`:
@@ -284,7 +302,7 @@ Current MCP boundary:
 - sandbox tokens are limited and expire; approved production/private token handoff happens privately and can be rotated or revoked by Neura
 - MCP credentials are tool-scoped by Relay; a credential can list and call only its authorized Neura MCP tools
 
-A2A boundary: Neura can review proposed actions that originate inside agent-to-agent systems, but this repo does not provide A2A discoverability, an agent network, or downstream execution. The public proof remains `Action Card -> Relay -> Decision Receipt`.
+A2A boundary: Relay has public Agent Card discovery and protected `message/send` for controlled Relay developer or internal access. This repo does not provide an agent network, A2A directory listing, public A2A token issuance, or downstream execution. The core proof remains `Action Card -> Relay -> Decision Receipt`.
 
 Run the direct MCP client after copying a sandbox token from Workspace or after Neura has issued production/private MCP access:
 
