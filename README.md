@@ -31,7 +31,7 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
-Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0-alpha.0` is now available as the public npm alpha.
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0-alpha.1` is now available as the public npm alpha.
 
 ## Get Your First Receipt In 5 Minutes
 
@@ -169,7 +169,7 @@ RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 
 ## SDK Alpha Path
 
-The SDK path uses `@neurarelay/sdk@0.1.0-alpha.0`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
+The SDK path uses `@neurarelay/sdk@0.1.0-alpha.1`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
 
 Install dependencies and run the SDK example:
 

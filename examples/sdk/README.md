@@ -1,6 +1,6 @@
 # SDK Alpha Path
 
-Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.0`.
+Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.1`.
 
 The SDK path keeps the same core mechanism as the public example:
 
