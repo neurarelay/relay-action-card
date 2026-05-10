@@ -21,6 +21,7 @@ const coreFiles = [
   "examples/core/resolve-action-card.mjs",
   "examples/sdk/README.md",
   "examples/sdk/resolve-action-card-sdk.mjs",
+  "examples/sdk/resolve-action-card-sdk-a2a.mjs",
   "examples/a2a/README.md",
   "examples/a2a/resolve-action-card-a2a.mjs",
   "docs/developer-owned-agent-walkthrough.md",
@@ -63,6 +64,11 @@ const sdkExample = await readFile(
   join(repoRoot, "examples/sdk/resolve-action-card-sdk.mjs"),
   "utf8",
 );
+const sdkA2AExample = await readFile(
+  join(repoRoot, "examples/sdk/resolve-action-card-sdk-a2a.mjs"),
+  "utf8",
+);
+const packageJson = JSON.parse(await readFile(join(repoRoot, "package.json"), "utf8"));
 
 if (!readme.includes("examples/core")) {
   failures.push("top_level_readme_must_name_core_examples");
@@ -123,6 +129,7 @@ for (const phrase of [
   "createNeuraRelaySdk",
   "relay.mcp.resolveActionCard",
   "relay.a2a.sendActionCard",
+  "npm run example:sdk:a2a",
   "does not issue public API keys",
 ]) {
   if (!sdkReadme.includes(phrase)) {
@@ -140,6 +147,24 @@ for (const phrase of [
   if (!sdkExample.includes(phrase)) {
     failures.push(`sdk_example_missing_${phrase.replaceAll(" ", "_")}`);
   }
+}
+
+for (const phrase of [
+  'await import("@neurarelay/sdk")',
+  "RELAY_A2A_ACCESS_TOKEN",
+  "publicRelay.a2a.getAgentCard()",
+  "protectedRelay.a2a.sendActionCard",
+  "decision_receipt",
+  "downstream_execution",
+  "public_a2a_token_issuance: false",
+]) {
+  if (!sdkA2AExample.includes(phrase)) {
+    failures.push(`sdk_a2a_example_missing_${phrase.replaceAll(" ", "_")}`);
+  }
+}
+
+if (packageJson.scripts?.["example:sdk:a2a"] !== "node examples/sdk/resolve-action-card-sdk-a2a.mjs") {
+  failures.push("package_json_missing_example_sdk_a2a");
 }
 
 for (const phrase of [

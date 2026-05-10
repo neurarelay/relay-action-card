@@ -178,13 +178,20 @@ npm install
 npm run example:sdk
 ```
 
+Inspect public A2A discovery through the SDK, then run protected `message/send` only when controlled access is present:
+
+```bash
+npm run example:sdk:a2a
+RELAY_A2A_ACCESS_TOKEN=... npm run example:sdk:a2a
+```
+
 Verify the npm package from a clean outside consumer project:
 
 ```bash
 npm run verify:sdk-alpha1-consumer
 ```
 
-That verifier installs `@neurarelay/sdk@0.1.0-alpha.1` from npm in a temporary project, resolves the Action Card through production Relay, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present.
+That verifier installs `@neurarelay/sdk@0.1.0-alpha.1` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present.
 
 ## A2A Protected Client Proof
 

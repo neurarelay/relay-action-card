@@ -65,6 +65,9 @@ try {
     `
 import { readFile } from "node:fs/promises";
 import { createNeuraRelaySdk } from "${packageName}";
+import { createRelayA2AClient } from "${packageName}/a2a";
+import { createRelayMcpClient } from "${packageName}/mcp";
+import { createResolveClient } from "${packageName}/resolve";
 
 const relayBaseUrl = process.env.RELAY_BASE_URL ?? "${relayBaseUrl}";
 const a2aToken = process.env.RELAY_A2A_ACCESS_TOKEN ?? "";
@@ -74,7 +77,15 @@ const sdkPackage = JSON.parse(
 );
 
 const relay = createNeuraRelaySdk({ baseUrl: relayBaseUrl });
-const direct = await relay.resolve.resolve({ action_card: actionCard });
+const resolveClient = createResolveClient({ baseUrl: relayBaseUrl });
+const a2aClient = createRelayA2AClient({ baseUrl: relayBaseUrl });
+const mcpClient = createRelayMcpClient({ baseUrl: relayBaseUrl });
+
+if (typeof mcpClient.listTools !== "function" || typeof mcpClient.resolveActionCard !== "function") {
+  throw new Error("MCP subpath export did not create expected helper methods");
+}
+
+const direct = await resolveClient.resolve({ action_card: actionCard });
 const directSerialized = JSON.stringify(direct);
 const receipt = direct.decision_receipt;
 
@@ -94,7 +105,7 @@ if (
   throw new Error("direct SDK proof returned forbidden private payload or execution signal");
 }
 
-const agentCard = await relay.a2a.getAgentCard();
+const agentCard = await a2aClient.getAgentCard();
 if (agentCard.name !== "Neura Relay") {
   throw new Error("unexpected Agent Card name");
 }
@@ -141,6 +152,12 @@ console.log(JSON.stringify({
   package: "${packageName}",
   version: sdkPackage.version,
   relay: relayBaseUrl,
+  exports: {
+    aggregate_client: typeof relay.resolve.resolve === "function",
+    resolve_subpath: typeof resolveClient.resolve === "function",
+    a2a_subpath: typeof a2aClient.getAgentCard === "function",
+    mcp_subpath: typeof mcpClient.listTools === "function"
+  },
   direct: {
     input_model: direct.input_model,
     decision: receipt.decision,
@@ -195,6 +212,18 @@ console.log(JSON.stringify({
 
   if (proof) {
     if (proof.version !== packageVersion) fail("sdk_version", proof.version);
+    if (proof.exports?.aggregate_client !== true) {
+      fail("aggregate_export", proof.exports?.aggregate_client);
+    }
+    if (proof.exports?.resolve_subpath !== true) {
+      fail("resolve_subpath_export", proof.exports?.resolve_subpath);
+    }
+    if (proof.exports?.a2a_subpath !== true) {
+      fail("a2a_subpath_export", proof.exports?.a2a_subpath);
+    }
+    if (proof.exports?.mcp_subpath !== true) {
+      fail("mcp_subpath_export", proof.exports?.mcp_subpath);
+    }
     if (proof.direct?.input_model !== "action_card_v0_1") {
       fail("direct_input_model", proof.direct?.input_model);
     }

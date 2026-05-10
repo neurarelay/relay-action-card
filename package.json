@@ -6,6 +6,7 @@
   "scripts": {
     "example:relay": "node examples/core/resolve-action-card.mjs",
     "example:sdk": "node examples/sdk/resolve-action-card-sdk.mjs",
+    "example:sdk:a2a": "node examples/sdk/resolve-action-card-sdk-a2a.mjs",
     "example:a2a": "node examples/a2a/resolve-action-card-a2a.mjs",
     "example:mcp": "node examples/mcp/direct-mcp-client.mjs",
     "example:mcp-proof": "node examples/mcp/direct-mcp-client.mjs --proof",
