@@ -95,7 +95,7 @@ for (const phrase of [
 for (const phrase of [
   "SDK alpha",
   "@neurarelay/sdk",
-  "not claimed until the package is actually published",
+  "public npm alpha",
   "SDK client -> Action Card -> Relay -> Decision Receipt",
   "npm run example:sdk",
 ]) {
@@ -105,7 +105,7 @@ for (const phrase of [
 }
 
 for (const phrase of [
-  "npm publication is not claimed",
+  "published npm alpha",
   "createNeuraRelaySdk",
   "relay.mcp.resolveActionCard",
   "relay.a2a.sendActionCard",

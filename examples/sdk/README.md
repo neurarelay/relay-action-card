@@ -1,6 +1,6 @@
 # SDK Alpha Path
 
-Status: staged for `@neurarelay/sdk@0.1.0-alpha.0`; npm publication is not claimed until the package is actually published.
+Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.0`.
 
 The SDK path keeps the same core mechanism as the public example:
 
@@ -8,7 +8,7 @@ The SDK path keeps the same core mechanism as the public example:
 Action Card -> Relay -> Decision Receipt -> developer-owned execution
 ```
 
-Use the SDK after alpha publication when you want typed helpers around the same Relay surfaces already proven in this repo.
+Use the SDK when you want typed helpers around the same Relay surfaces already proven in this repo.
 
 ## Install
 
@@ -16,10 +16,11 @@ Use the SDK after alpha publication when you want typed helpers around the same 
 npm install @neurarelay/sdk
 ```
 
-Until publication is approved, use the direct core example:
+Or install this example repo and run the packaged SDK proof:
 
 ```bash
-npm run example:relay -- --example=support-reply --json
+npm install
+npm run example:sdk
 ```
 
 ## Resolve With SDK

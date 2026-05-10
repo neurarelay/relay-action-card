@@ -6,7 +6,7 @@ This folder has three lanes.
 | --- | --- | --- |
 | Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
 | Optional MCP | `mcp` | Your agent runtime can call MCP tools with a Workspace sandbox token or controlled production access |
-| SDK alpha | `sdk` | You want the typed `@neurarelay/sdk` path after alpha publication |
+| SDK alpha | `sdk` | You want the typed `@neurarelay/sdk` public alpha path |
 
 The core path is the default:
 
@@ -20,7 +20,7 @@ The MCP path is only an adapter:
 MCP runtime -> protected Neura MCP tool -> same Relay decision spine
 ```
 
-The SDK path packages the same mechanism; npm availability is not claimed until the package is actually published:
+The SDK path packages the same mechanism:
 
 ```text
 SDK client -> Action Card -> Relay -> Decision Receipt
@@ -118,13 +118,12 @@ npm run example:google-adk-mcp
 npm run example:microsoft-mcp
 ```
 
-After SDK alpha publication is approved, run the SDK example after installing the published package:
+Run the SDK example after installing dependencies:
 
 ```bash
+npm install
 npm run example:sdk
 ```
-
-Until then, `npm run example:relay` remains the public runnable path.
 
 Neura returns governed proof before execution. Your system still owns the agent, private payloads, workflow, and final downstream action.
 
