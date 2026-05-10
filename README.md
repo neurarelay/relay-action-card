@@ -98,6 +98,8 @@ For the authorization-bypass scenario proof, read [`docs/authorization-bypass-sc
 
 For the SDK alpha path, read [`examples/sdk/README.md`](examples/sdk/README.md).
 
+For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md).
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
@@ -195,7 +197,7 @@ That verifier installs `@neurarelay/sdk@0.1.0-alpha.2` from npm in a temporary p
 
 ## A2A Protected Client Proof
 
-Relay publishes public Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes a controlled client example in `examples/a2a`.
+Relay publishes public Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes the A2A Controlled Client Pack v0.2 in `examples/a2a` and `docs/a2a-controlled-client-pack.md`.
 
 Inspect the public Agent Card:
 
@@ -209,7 +211,7 @@ Run protected `message/send` only after controlled A2A access is issued:
 RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
 ```
 
-The protected proof returns a Decision Receipt task with trace and transaction refs. It preserves no public A2A token issuance, no public API keys, no downstream execution by Neura, no private payload exposure, and no A2A directory listing or ecosystem claim.
+The protected proof returns a Decision Receipt task with trace and transaction refs. It preserves no public A2A token issuance, no public API keys, no unprotected A2A execution, no downstream execution by Neura, no private payload exposure, no token-value return, and no A2A directory listing or ecosystem claim.
 
 ## Copy The Core Examples
 

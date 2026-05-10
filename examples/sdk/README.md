@@ -66,4 +66,4 @@ The SDK also exposes helper clients for the optional protected paths:
 
 MCP and A2A execution remain protected. The SDK does not issue public API keys, public production MCP tokens, public A2A tokens, downstream execution, private payload exposure, or Registry auto-approval.
 
-For a runnable protected A2A client shape, see `examples/a2a`. It discovers the public Agent Card first, then requires `RELAY_A2A_ACCESS_TOKEN` before calling protected `message/send`.
+For a runnable protected A2A client shape, see `examples/a2a` and `docs/a2a-controlled-client-pack.md`. It discovers the public Agent Card first, then requires `RELAY_A2A_ACCESS_TOKEN` before calling protected `message/send`.

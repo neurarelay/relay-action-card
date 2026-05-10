@@ -27,6 +27,19 @@ const accessToken =
 const exampleDir = dirname(fileURLToPath(import.meta.url));
 const actionCardPath = join(exampleDir, "..", "core", "action-card.json");
 const actionCard = JSON.parse(await readFile(actionCardPath, "utf8"));
+const repoPackage = JSON.parse(await readFile(join(exampleDir, "..", "..", "package.json"), "utf8"));
+const sdkVersion = repoPackage.dependencies?.["@neurarelay/sdk"] ?? "unknown";
+const boundary = {
+  access_model: "controlled_bearer_or_relay_developer_session",
+  public_discovery: true,
+  protected_execution: true,
+  unprotected_a2a_execution: false,
+  public_a2a_token_issuance: false,
+  public_api_key_issuance: false,
+  token_value_returned: false,
+  downstream_execution: false,
+  private_payload_returned: false,
+};
 
 function fail(message, details = {}) {
   const payload = {
@@ -67,6 +80,10 @@ if (agentCardOnly) {
   const summary = {
     ok: true,
     relay: relayBaseUrl,
+    sdk: {
+      package: "@neurarelay/sdk",
+      version: sdkVersion,
+    },
     agent_card: {
       name: agentCard.name,
       version: agentCard.version,
@@ -74,12 +91,7 @@ if (agentCardOnly) {
       skill_ids: agentCard.skills?.map((skill) => skill.id) ?? [],
       protected_execution: Boolean(agentCard.securityRequirements?.length),
     },
-    boundary: {
-      public_discovery: true,
-      protected_execution: true,
-      public_a2a_token_issuance: false,
-      downstream_execution: false,
-    },
+    boundary,
   };
 
   console.log(JSON.stringify(summary, null, 2));
@@ -89,18 +101,17 @@ if (agentCardOnly) {
 if (!accessToken) {
   fail("RELAY_A2A_ACCESS_TOKEN is required for protected A2A message/send.", {
     relay: relayBaseUrl,
+    sdk: {
+      package: "@neurarelay/sdk",
+      version: sdkVersion,
+    },
     agent_card: {
       name: agentCard.name,
       version: agentCard.version,
       interface_url: agentCard.supportedInterfaces?.[0]?.url,
       skill_ids: agentCard.skills?.map((skill) => skill.id) ?? [],
     },
-    boundary: {
-      public_discovery: true,
-      protected_execution: true,
-      public_a2a_token_issuance: false,
-      downstream_execution: false,
-    },
+    boundary,
   });
 }
 
@@ -118,12 +129,7 @@ try {
     relay: relayBaseUrl,
     status: error?.status,
     response: error?.responseBody,
-    boundary: {
-      public_discovery: true,
-      protected_execution: true,
-      public_a2a_token_issuance: false,
-      downstream_execution: false,
-    },
+    boundary,
   });
 }
 
@@ -149,6 +155,10 @@ if (!receipt?.receipt_id || !data?.trace_ref || !data?.transaction_ref) {
 const summary = {
   ok: true,
   relay: relayBaseUrl,
+  sdk: {
+    package: "@neurarelay/sdk",
+    version: sdkVersion,
+  },
   agent_card: {
     name: agentCard.name,
     version: agentCard.version,
@@ -170,11 +180,9 @@ const summary = {
     relay_boundary: data.relay_boundary,
   },
   boundary: {
+    ...boundary,
     payload_posture: data.payload_posture,
     downstream_execution: data.downstream_execution,
-    public_discovery: true,
-    protected_execution: true,
-    public_a2a_token_issuance: false,
     private_payload_returned: JSON.stringify(response).includes("PRIVATE_"),
   },
 };
@@ -193,6 +201,7 @@ if (jsonOutput) {
   console.log("Neura Relay A2A returned a protected Decision Receipt task");
   console.log("");
   console.log(`Relay: ${summary.relay}`);
+  console.log(`SDK: ${summary.sdk.package}@${summary.sdk.version}`);
   console.log(`Agent Card: ${summary.agent_card.name} ${summary.agent_card.version}`);
   console.log(`Skill: ${summary.a2a.skill_id}`);
   console.log(`Task: ${summary.a2a.task_id}`);

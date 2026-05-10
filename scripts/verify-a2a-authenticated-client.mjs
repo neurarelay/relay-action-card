@@ -22,6 +22,7 @@ function requireIncludes(label, source, phrase) {
 for (const file of [
   "examples/a2a/README.md",
   "examples/a2a/resolve-action-card-a2a.mjs",
+  "docs/a2a-controlled-client-pack.md",
   "examples/sdk/README.md",
   "examples/README.md",
   "README.md",
@@ -34,13 +35,16 @@ for (const file of [
 const readme = await read("README.md");
 const examplesReadme = await read("examples/README.md");
 const a2aReadme = await read("examples/a2a/README.md");
+const controlledPack = await read("docs/a2a-controlled-client-pack.md");
 const sdkReadme = await read("examples/sdk/README.md");
 const a2aExample = await read("examples/a2a/resolve-action-card-a2a.mjs");
 const packageJson = JSON.parse(await read("package.json"));
 
 for (const phrase of [
   "A2A Protected Client Proof",
+  "A2A Controlled Client Pack v0.2",
   "examples/a2a",
+  "docs/a2a-controlled-client-pack.md",
   "npm run example:a2a -- --agent-card-only",
   "RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json",
   "public Agent Card",
@@ -61,14 +65,35 @@ for (const phrase of [
 
 for (const phrase of [
   "A2A Protected Client Proof",
+  "controlled client pack v0.2",
   "https://www.neurarelay.com/.well-known/agent-card.json",
   "RELAY_A2A_ACCESS_TOKEN",
+  "@neurarelay/sdk",
+  "controlled access model",
   "Decision Receipt id",
   "public A2A token issuance",
+  "public API-key issuance",
+  "unprotected A2A execution",
+  "token-value return",
   "A2A directory listing",
   "downstream execution by Neura",
 ]) {
   requireIncludes("a2a_readme", a2aReadme, phrase);
+}
+
+for (const phrase of [
+  "A2A Controlled Client Pack",
+  "Status: v0.2 controlled-access proof for SDK alpha.2.",
+  "public Agent Card discovery -> controlled /a2a message/send -> Decision Receipt task",
+  "npm run verify:a2a-authenticated-client",
+  "Controlled Access Lane",
+  "Registry Agent Passport",
+  "Do not paste tokens",
+  "Output Contract",
+  "token-value return",
+  "Registry auto-approval",
+]) {
+  requireIncludes("controlled_pack", controlledPack, phrase);
 }
 
 for (const phrase of [
@@ -81,12 +106,18 @@ for (const phrase of [
 
 for (const phrase of [
   'await import("@neurarelay/sdk")',
+  'package: "@neurarelay/sdk"',
+  "version: sdkVersion",
+  "controlled_bearer_or_relay_developer_session",
   "RELAY_A2A_ACCESS_TOKEN",
   "relay.a2a.getAgentCard()",
   "relay.a2a.sendActionCard",
   "Authorization",
   "message/send",
   "private_payload_returned",
+  "unprotected_a2a_execution: false",
+  "public_api_key_issuance: false",
+  "token_value_returned: false",
   "developer_owned_not_performed_by_relay",
   "public_a2a_token_issuance: false",
 ]) {
@@ -117,6 +148,10 @@ if (discovery.status !== 0) {
   const output = JSON.parse(discovery.stdout.slice(discovery.stdout.indexOf("{")));
 
   if (output.ok !== true) failures.push("agent_card_only_not_ok");
+  if (output.sdk?.package !== "@neurarelay/sdk") failures.push("agent_card_only_missing_sdk_package");
+  if (output.sdk?.version !== packageJson.dependencies?.["@neurarelay/sdk"]) {
+    failures.push("agent_card_only_wrong_sdk_version");
+  }
   if (output.agent_card?.name !== "Neura Relay") failures.push("agent_card_wrong_name");
   if (output.agent_card?.interface_url !== "https://www.neurarelay.com/a2a") {
     failures.push("agent_card_wrong_interface_url");
@@ -129,6 +164,18 @@ if (discovery.status !== 0) {
   }
   if (output.boundary?.public_a2a_token_issuance !== false) {
     failures.push("agent_card_must_not_claim_public_a2a_token_issuance");
+  }
+  if (output.boundary?.public_api_key_issuance !== false) {
+    failures.push("agent_card_must_not_claim_public_api_key_issuance");
+  }
+  if (output.boundary?.unprotected_a2a_execution !== false) {
+    failures.push("agent_card_must_not_claim_unprotected_a2a_execution");
+  }
+  if (output.boundary?.token_value_returned !== false) {
+    failures.push("agent_card_must_not_return_token_value");
+  }
+  if (output.boundary?.access_model !== "controlled_bearer_or_relay_developer_session") {
+    failures.push("agent_card_wrong_access_model");
   }
 }
 
@@ -161,6 +208,10 @@ if (protectedProofToken) {
     };
 
     if (output.ok !== true) failures.push("protected_a2a_not_ok");
+    if (output.sdk?.package !== "@neurarelay/sdk") failures.push("protected_a2a_missing_sdk_package");
+    if (output.sdk?.version !== packageJson.dependencies?.["@neurarelay/sdk"]) {
+      failures.push("protected_a2a_wrong_sdk_version");
+    }
     if (output.a2a?.task_kind !== "task") failures.push("protected_a2a_wrong_task_kind");
     if (output.a2a?.task_state !== "completed") failures.push("protected_a2a_not_completed");
     if (!output.decision_receipt?.receipt_id) failures.push("protected_a2a_missing_receipt");
@@ -172,6 +223,15 @@ if (protectedProofToken) {
     }
     if (output.boundary?.private_payload_returned !== false) {
       failures.push("protected_a2a_private_payload_returned");
+    }
+    if (output.boundary?.public_api_key_issuance !== false) {
+      failures.push("protected_a2a_claimed_public_api_key_issuance");
+    }
+    if (output.boundary?.unprotected_a2a_execution !== false) {
+      failures.push("protected_a2a_claimed_unprotected_execution");
+    }
+    if (output.boundary?.token_value_returned !== false) {
+      failures.push("protected_a2a_returned_token_value");
     }
     if (output.boundary?.downstream_execution !== "developer_owned_not_performed_by_relay") {
       failures.push("protected_a2a_wrong_downstream_boundary");
@@ -206,8 +266,11 @@ console.log(
         "public Agent Card discovery only",
         "protected A2A message/send",
         "no public A2A token issuance",
+        "no public API-key issuance",
+        "no unprotected A2A execution",
         "no downstream execution",
         "no private payload exposure",
+        "no token-value return",
       ],
     },
     null,
