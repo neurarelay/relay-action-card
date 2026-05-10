@@ -16,7 +16,7 @@
     "example:google-adk-mcp": "python3 examples/mcp/google-adk-remote-mcp.py --print-config",
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs",
-    "verify:sdk-alpha1-consumer": "node scripts/verify-sdk-alpha1-consumer.mjs",
+    "verify:sdk-alpha2-consumer": "node scripts/verify-sdk-alpha2-consumer.mjs",
     "verify:a2a-authenticated-client": "node scripts/verify-a2a-authenticated-client.mjs",
     "verify:mcp-adoption-pack": "node scripts/verify-mcp-developer-adoption-pack.mjs",
     "verify:developer-feedback-access-path": "node scripts/verify-developer-feedback-access-path.mjs",
@@ -24,6 +24,6 @@
     "verify:authorization-bypass-scenarios": "node scripts/verify-authorization-bypass-scenarios.mjs"
   },
   "dependencies": {
-    "@neurarelay/sdk": "0.1.0-alpha.1"
+    "@neurarelay/sdk": "0.1.0-alpha.2"
   }
 }
