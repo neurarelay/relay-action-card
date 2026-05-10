@@ -73,7 +73,7 @@ https://www.neurarelay.com/developers/workspace
 
 Workspace keeps the action visible, returns a safe receipt, gives JavaScript/curl for `POST /api/resolve`, and can issue a one-time sandbox MCP token. Your app owns execution.
 
-The demo cards include a demo Agent Passport. In production, the acting agent needs a Registry Agent Passport before Relay can validate identity, capability, version, and standing. Create the production Agent Passport at [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
+Demo cards include a demo Agent Passport. For production, create a Registry Agent Passport before Relay validates identity, capability, version, and standing: [Neura Registry](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew).
 
 ## After The First Receipt
 
@@ -189,7 +189,7 @@ npm run example:sdk:authority-routing
 
 The authority-routing example uses `@neurarelay/sdk@0.1.0-alpha.4` against the delegated-authority fixtures and converts each Decision Receipt into a developer route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the developer can supply Registry-backed delegated authority. A production app should only treat a receipt as `ready_for_developer_owned_execution` when authority is Registry-backed and ready. This is still alpha SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
-Inspect public A2A discovery through the SDK, then run protected `message/send` only when controlled access is present:
+Use the SDK to read public A2A discovery. Run protected `message/send` only with controlled access:
 
 ```bash
 npm run example:sdk:a2a
@@ -247,7 +247,7 @@ Each file is an Action Card v0.1. Copy one into your agent or paste it into the 
 
 The authorization-bypass scenario proof is intentionally refs-only. It demonstrates the public safety property without sharing private policy text, customer content, API keys, tokens, or proprietary authorization payloads.
 
-The delegated authority proof is also refs-only. It demonstrates that access is not consent, consent is not authority, and delegated authority must be scoped, contextual, time-bound, revocable, and Decision Receipt-backed before execution.
+The delegated authority proof is refs-only: access is not consent, consent is not authority, and authority must be scoped, time-bound, revocable, and Decision Receipt-backed before execution.
 
 Relay Decision Receipts now expose `authority_context.source` for delegated authority:
 
