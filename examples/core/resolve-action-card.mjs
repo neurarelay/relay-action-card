@@ -111,6 +111,14 @@ if (jsonOutput) {
   }
   if (result.authority_context) {
     console.log(`Authority context: ${result.authority_context.reason}`);
+    console.log(
+      `Authority source: ${result.authority_context.source ?? "not_returned"}`,
+    );
+    console.log(
+      `Registry authority validation: ${
+        result.authority_context.registry_validation_status ?? "not_returned"
+      }`,
+    );
   }
   console.log(`Next step: ${result.next_step}`);
   console.log(`Trace: ${result.trace_ref}`);

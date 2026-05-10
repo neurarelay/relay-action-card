@@ -51,6 +51,13 @@ npm run verify:delegated-authority-scenarios
 
 Every scenario must return a Decision Receipt, trace ref, transaction ref, and `authority_context` with `refs_only: true`.
 
+Relay now also returns `authority_context.source`:
+
+- `registry_reference_packet` means the delegated authority refs matched a protected Registry Relay Reference Packet.
+- `developer_supplied_unverified` means Relay preserved developer-supplied delegated authority refs without claiming Registry-backed authority.
+
+The public demo fixtures intentionally use refs-only demo authority context, so the live examples should report `developer_supplied_unverified` unless you replace them with production Registry-backed refs.
+
 ## Action Card Shape
 
 The public fixture carries only refs and posture:

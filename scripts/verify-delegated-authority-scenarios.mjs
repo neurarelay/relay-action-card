@@ -92,6 +92,9 @@ requirePhrases("proof_doc", proofDoc, [
   "Can this agent, under this delegated authority context, perform this action on this resource now?",
   "Decision Receipt",
   "refs_only: true",
+  "authority_context.source",
+  "developer_supplied_unverified",
+  "registry_reference_packet",
   "no public API keys",
   "no downstream execution by Neura",
 ]);
@@ -161,6 +164,19 @@ for (const [key, scenario] of Object.entries(scenarios)) {
     failures.push(`${key}_reason_missing_delegated_authority_detail`);
   }
   if (authorityContext?.refs_only !== true) failures.push(`${key}_authority_not_refs_only`);
+  if (
+    !["registry_reference_packet", "developer_supplied_unverified"].includes(
+      authorityContext?.source,
+    )
+  ) {
+    failures.push(`${key}_authority_source_missing`);
+  }
+  if (authorityContext?.source !== "developer_supplied_unverified") {
+    failures.push(`${key}_demo_authority_must_remain_developer_supplied`);
+  }
+  if (!authorityContext?.registry_validation_status) {
+    failures.push(`${key}_registry_validation_status_missing`);
+  }
   if (!authorityContext?.allowed_actions?.length) {
     failures.push(`${key}_missing_receipt_allowed_actions`);
   }
@@ -184,6 +200,8 @@ for (const [key, scenario] of Object.entries(scenarios)) {
       ? {
           decision: authorityContext.decision,
           revocation_status: authorityContext.revocation_status,
+          source: authorityContext.source,
+          registry_validation_status: authorityContext.registry_validation_status,
           refs_only: authorityContext.refs_only,
         }
       : null,

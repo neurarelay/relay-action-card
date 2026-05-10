@@ -33,6 +33,9 @@ console.log(
       decision: receipt?.decision,
       trace_ref: receipt?.trace_ref,
       transaction_ref: response.transaction_ledger?.transaction_ref,
+      authority_context_source: receipt?.authority_context?.source ?? null,
+      registry_validation_status:
+        receipt?.authority_context?.registry_validation_status ?? null,
       relay_boundary: receipt?.relay_boundary,
     },
     null,

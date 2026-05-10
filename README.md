@@ -199,7 +199,7 @@ Verify the npm package from a clean outside consumer project:
 npm run verify:sdk-alpha3-consumer
 ```
 
-That verifier installs `@neurarelay/sdk@0.1.0-alpha.3` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present.
+That verifier installs `@neurarelay/sdk@0.1.0-alpha.3` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. The currently published alpha.3 package remains the npm artifact; typed source support for `DecisionReceiptAuthorityContextV01` lives in Relay source until a future approved alpha publish.
 
 ## A2A Protected Client Proof
 
@@ -244,6 +244,13 @@ Each file is an Action Card v0.1. Copy one into your agent or paste it into the 
 The authorization-bypass scenario proof is intentionally refs-only. It demonstrates the public safety property without sharing private policy text, customer content, API keys, tokens, or proprietary authorization payloads.
 
 The delegated authority proof is also refs-only. It demonstrates that access is not consent, consent is not authority, and delegated authority must be scoped, contextual, time-bound, revocable, and Decision Receipt-backed before execution.
+
+Relay Decision Receipts now expose `authority_context.source` for delegated authority:
+
+- `registry_reference_packet` means Relay matched the delegated authority refs against a protected Registry Relay Reference Packet.
+- `developer_supplied_unverified` means Relay preserved the developer-supplied refs without claiming Registry-backed authority.
+
+These public fixtures intentionally use demo delegated-authority refs, so live public examples should report `developer_supplied_unverified` while still returning refs-only Decision Receipts.
 
 The default support-reply Action Card looks like this:
 

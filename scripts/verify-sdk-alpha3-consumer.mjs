@@ -51,6 +51,12 @@ function parseJson(label, value) {
 const actionCard = JSON.parse(
   await readFile(new URL("../examples/core/action-card.json", import.meta.url), "utf8"),
 );
+const delegatedActionCard = JSON.parse(
+  await readFile(
+    new URL("../examples/core/action-cards/delegated-crm-account-update.json", import.meta.url),
+    "utf8",
+  ),
+);
 
 const consumerDir = await mkdtemp(join(tmpdir(), "neura-sdk-alpha3-consumer-"));
 
@@ -60,6 +66,10 @@ try {
     JSON.stringify({ private: true, type: "module" }, null, 2),
   );
   await writeFile(join(consumerDir, "action-card.json"), JSON.stringify(actionCard, null, 2));
+  await writeFile(
+    join(consumerDir, "delegated-action-card.json"),
+    JSON.stringify(delegatedActionCard, null, 2),
+  );
   await writeFile(
     join(consumerDir, "proof.mjs"),
     `
@@ -72,6 +82,9 @@ import { createResolveClient } from "${packageName}/resolve";
 const relayBaseUrl = process.env.RELAY_BASE_URL ?? "${relayBaseUrl}";
 const a2aToken = process.env.RELAY_A2A_ACCESS_TOKEN ?? "";
 const actionCard = JSON.parse(await readFile(new URL("./action-card.json", import.meta.url), "utf8"));
+const delegatedActionCard = JSON.parse(
+  await readFile(new URL("./delegated-action-card.json", import.meta.url), "utf8")
+);
 const sdkPackage = JSON.parse(
   await readFile(new URL("./node_modules/${packageName}/package.json", import.meta.url), "utf8"),
 );
@@ -86,8 +99,10 @@ if (typeof mcpClient.listTools !== "function" || typeof mcpClient.resolveActionC
 }
 
 const direct = await resolveClient.resolve({ action_card: actionCard });
+const delegated = await resolveClient.resolve({ action_card: delegatedActionCard });
 const directSerialized = JSON.stringify(direct);
 const receipt = direct.decision_receipt;
+const delegatedAuthorityContext = delegated.decision_receipt?.authority_context;
 
 if (sdkPackage.version !== "${packageVersion}") {
   throw new Error("wrong SDK version: " + sdkPackage.version);
@@ -95,6 +110,14 @@ if (sdkPackage.version !== "${packageVersion}") {
 
 if (!receipt?.receipt_id || !receipt?.trace_ref || !direct.transaction_ledger?.transaction_ref) {
   throw new Error("direct SDK proof missing receipt, trace, or transaction ref");
+}
+
+if (
+  delegatedAuthorityContext?.source !== "developer_supplied_unverified" ||
+  !delegatedAuthorityContext?.registry_validation_status ||
+  delegatedAuthorityContext.refs_only !== true
+) {
+  throw new Error("delegated authority source posture missing from SDK runtime response");
 }
 
 if (
@@ -168,6 +191,11 @@ console.log(JSON.stringify({
     private_payload_returned: false,
     downstream_execution_performed: false
   },
+  delegatedAuthority: {
+    source: delegatedAuthorityContext.source,
+    registry_validation_status: delegatedAuthorityContext.registry_validation_status,
+    refs_only: delegatedAuthorityContext.refs_only
+  },
   a2aDiscovery: {
     name: agentCard.name,
     version: agentCard.version,
@@ -238,6 +266,15 @@ console.log(JSON.stringify({
     }
     if (proof.direct?.downstream_execution_performed !== false) {
       fail("direct_downstream_execution", proof.direct?.downstream_execution_performed);
+    }
+    if (proof.delegatedAuthority?.source !== "developer_supplied_unverified") {
+      fail("delegated_authority_source", proof.delegatedAuthority?.source);
+    }
+    if (!proof.delegatedAuthority?.registry_validation_status) {
+      fail("delegated_authority_registry_validation_status", proof.delegatedAuthority);
+    }
+    if (proof.delegatedAuthority?.refs_only !== true) {
+      fail("delegated_authority_refs_only", proof.delegatedAuthority?.refs_only);
     }
     if (proof.protectedA2A?.skipped === false) {
       if (proof.protectedA2A.task_state !== "completed") {

@@ -2,6 +2,8 @@
 
 Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.3`.
 
+Note: Relay source now has typed `authority_context.source` support for the next SDK alpha, but the published npm artifact remains `0.1.0-alpha.3` until a future approved publish. The JavaScript examples can still read the runtime field returned by production Relay.
+
 The SDK path keeps the same core mechanism as the public example:
 
 ```text
@@ -53,7 +55,10 @@ const response = await relay.resolve.resolve({
 
 console.log(response.decision_receipt?.decision);
 console.log(response.decision_receipt?.trace_ref);
+console.log(response.decision_receipt?.authority_context?.source);
 ```
+
+For delegated-authority Action Cards, `authority_context.source` is either `registry_reference_packet` or `developer_supplied_unverified`.
 
 ## Optional Protected Adapters
 
