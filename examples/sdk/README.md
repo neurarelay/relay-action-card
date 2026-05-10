@@ -23,7 +23,16 @@ Or install this example repo and run the packaged SDK proof:
 ```bash
 npm install
 npm run example:sdk
+npm run example:sdk:authority-routing
 ```
+
+The authority-routing example runs the four delegated-authority Action Cards and turns each Decision Receipt into an application route:
+
+- `ready_for_developer_owned_execution` only when the receipt is `proceed` and delegated authority is Registry-backed as `ready`
+- `hold_for_registry_backed_authority` when the receipt can proceed but the public demo refs are only `developer_supplied_unverified`
+- `human_review`, `revise`, or `stop` when Relay says the action should not auto-proceed
+
+This keeps execution in the developer-owned system. It is no public API-key issuance, no public token issuance, no downstream execution, no Registry auto-approval, and no stable SDK status.
 
 Inspect public A2A discovery through the SDK and, when controlled access exists, run protected `message/send`:
 
@@ -36,6 +45,7 @@ For a clean outside-consumer proof that installs from npm instead of using this 
 
 ```bash
 npm run verify:sdk-alpha4-consumer
+npm run verify:sdk-authority-routing
 ```
 
 That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0-alpha.4`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
@@ -59,6 +69,19 @@ console.log(response.decision_receipt?.authority_context?.source);
 ```
 
 For delegated-authority Action Cards, `authority_context.source` is either `registry_reference_packet` or `developer_supplied_unverified`.
+
+## Authority Routing
+
+```js
+const route =
+  receipt.decision === "proceed" &&
+  receipt.authority_context?.source === "registry_reference_packet" &&
+  receipt.authority_context?.registry_validation_status === "ready"
+    ? "ready_for_developer_owned_execution"
+    : "hold_for_registry_backed_authority";
+```
+
+Public demo Action Cards should report `developer_supplied_unverified`, so the example deliberately holds before production execution. A private developer flow can use the protected Relay route and the SDK private developer helper to inspect `production_trust.delegated_authority` before choosing the same route.
 
 ## Optional Protected Adapters
 

@@ -104,6 +104,24 @@ const directSerialized = JSON.stringify(direct);
 const receipt = direct.decision_receipt;
 const delegatedAuthorityContext = delegated.decision_receipt?.authority_context;
 
+function routeReceiptForDeveloper(receipt) {
+  const authority = receipt?.authority_context;
+  if (
+    receipt?.decision === "proceed" &&
+    authority?.source === "registry_reference_packet" &&
+    authority?.registry_validation_status === "ready"
+  ) {
+    return "ready_for_developer_owned_execution";
+  }
+  if (receipt?.decision === "proceed") {
+    return "hold_for_registry_backed_authority";
+  }
+  if (receipt?.decision === "human_review") return "human_review";
+  if (receipt?.decision === "revise") return "revise";
+  if (receipt?.decision === "stop") return "stop";
+  return "hold";
+}
+
 if (sdkPackage.version !== "${packageVersion}") {
   throw new Error("wrong SDK version: " + sdkPackage.version);
 }
@@ -196,6 +214,12 @@ console.log(JSON.stringify({
     registry_validation_status: delegatedAuthorityContext.registry_validation_status,
     refs_only: delegatedAuthorityContext.refs_only
   },
+  publicAuthorityRouting: {
+    route: routeReceiptForDeveloper(delegated.decision_receipt),
+    ready_requires_registry_reference_packet: true,
+    developer_owned_execution: true,
+    relay_execution: false
+  },
   a2aDiscovery: {
     name: agentCard.name,
     version: agentCard.version,
@@ -275,6 +299,18 @@ console.log(JSON.stringify({
     }
     if (proof.delegatedAuthority?.refs_only !== true) {
       fail("delegated_authority_refs_only", proof.delegatedAuthority?.refs_only);
+    }
+    if (
+      proof.publicAuthorityRouting?.route !== "hold_for_registry_backed_authority"
+    ) {
+      fail("public_authority_routing_route", proof.publicAuthorityRouting);
+    }
+    if (
+      proof.publicAuthorityRouting?.ready_requires_registry_reference_packet !== true ||
+      proof.publicAuthorityRouting?.developer_owned_execution !== true ||
+      proof.publicAuthorityRouting?.relay_execution !== false
+    ) {
+      fail("public_authority_routing_boundary", proof.publicAuthorityRouting);
     }
     if (proof.protectedA2A?.skipped === false) {
       if (proof.protectedA2A.task_state !== "completed") {

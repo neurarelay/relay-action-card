@@ -184,7 +184,10 @@ Install dependencies and run the SDK example:
 ```bash
 npm install
 npm run example:sdk
+npm run example:sdk:authority-routing
 ```
+
+The authority-routing example uses `@neurarelay/sdk@0.1.0-alpha.4` against the delegated-authority fixtures and converts each Decision Receipt into a developer route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the developer can supply Registry-backed delegated authority. A production app should only treat a receipt as `ready_for_developer_owned_execution` when authority is Registry-backed and ready. This is still alpha SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
 Inspect public A2A discovery through the SDK, then run protected `message/send` only when controlled access is present:
 
@@ -197,6 +200,7 @@ Verify the npm package from a clean outside consumer project:
 
 ```bash
 npm run verify:sdk-alpha4-consumer
+npm run verify:sdk-authority-routing
 ```
 
 That verifier installs `@neurarelay/sdk@0.1.0-alpha.4` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. Alpha.4 is still an alpha SDK, not a stable SDK or public token program.
