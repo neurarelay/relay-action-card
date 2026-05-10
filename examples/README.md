@@ -99,6 +99,10 @@ npm run example:relay -- --example=workflow-state-change
 npm run example:relay -- --example=authorized-crm-account-update
 npm run example:relay -- --example=blocked-cross-resource-crm-update
 npm run example:relay -- --example=blocked-payment-without-authority
+npm run example:relay -- --example=delegated-crm-account-update
+npm run example:relay -- --example=delegated-wrong-resource
+npm run example:relay -- --example=delegated-wrong-action
+npm run example:relay -- --example=delegated-expired-authority
 ```
 
 Run the authorization-bypass scenario proof:
@@ -108,6 +112,14 @@ npm run verify:authorization-bypass-scenarios
 ```
 
 The proof sends one authorized Action Card and two authority-mismatch Action Cards to production Relay. The blocked scenarios must not auto-proceed, and every scenario keeps execution with the developer-owned system.
+
+Run the delegated authority proof:
+
+```bash
+npm run verify:delegated-authority-scenarios
+```
+
+The delegated authority proof sends one permitted delegated action, one wrong-resource action, one wrong-action attempt, and one expired-authority action to Relay. It keeps delegated authority refs-only and preserves developer-owned execution.
 
 Run the high-risk core example:
 

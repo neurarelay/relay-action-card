@@ -17,6 +17,10 @@ const examplePaths = {
   "authorized-crm-account-update": "examples/core/action-cards/authorized-crm-account-update.json",
   "blocked-cross-resource-crm-update": "examples/core/action-cards/blocked-cross-resource-crm-update.json",
   "blocked-payment-without-authority": "examples/core/action-cards/blocked-payment-without-authority.json",
+  "delegated-crm-account-update": "examples/core/action-cards/delegated-crm-account-update.json",
+  "delegated-wrong-resource": "examples/core/action-cards/delegated-wrong-resource.json",
+  "delegated-wrong-action": "examples/core/action-cards/delegated-wrong-action.json",
+  "delegated-expired-authority": "examples/core/action-cards/delegated-expired-authority.json",
   "high-risk": "examples/core/action-card-high-risk.json",
 };
 
@@ -86,6 +90,7 @@ const result = {
   transaction_ref: payload.transaction_ledger?.transaction_ref,
   next_step: receipt?.recommended_next_step,
   relay_boundary: receipt?.relay_boundary,
+  authority_context: receipt?.authority_context ?? null,
 };
 
 if (jsonOutput) {
@@ -103,6 +108,9 @@ if (jsonOutput) {
   console.log(`Receipt: ${result.receipt_id}`);
   if (result.transaction_ref) {
     console.log(`Transaction: ${result.transaction_ref}`);
+  }
+  if (result.authority_context) {
+    console.log(`Authority context: ${result.authority_context.reason}`);
   }
   console.log(`Next step: ${result.next_step}`);
   console.log(`Trace: ${result.trace_ref}`);

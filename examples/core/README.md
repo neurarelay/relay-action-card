@@ -49,6 +49,10 @@ The public example library mirrors the Relay Developer Workspace:
 | Authorized CRM account update | `npm run example:relay -- --example=authorized-crm-account-update` | `action-cards/authorized-crm-account-update.json` |
 | Blocked cross-resource CRM update | `npm run example:relay -- --example=blocked-cross-resource-crm-update` | `action-cards/blocked-cross-resource-crm-update.json` |
 | Blocked payment without authority | `npm run example:relay -- --example=blocked-payment-without-authority` | `action-cards/blocked-payment-without-authority.json` |
+| Delegated CRM account update | `npm run example:relay -- --example=delegated-crm-account-update` | `action-cards/delegated-crm-account-update.json` |
+| Delegated wrong resource | `npm run example:relay -- --example=delegated-wrong-resource` | `action-cards/delegated-wrong-resource.json` |
+| Delegated wrong action | `npm run example:relay -- --example=delegated-wrong-action` | `action-cards/delegated-wrong-action.json` |
+| Delegated expired authority | `npm run example:relay -- --example=delegated-expired-authority` | `action-cards/delegated-expired-authority.json` |
 
 You can copy any Action Card into your own agent workflow or paste it into the protected Relay Developer Workspace:
 
@@ -75,6 +79,14 @@ npm run verify:authorization-bypass-scenarios
 ```
 
 See [`../../docs/authorization-bypass-scenarios.md`](../../docs/authorization-bypass-scenarios.md).
+
+Delegated authority scenarios prove active, wrong-resource, wrong-action, and expired authority contexts:
+
+```bash
+npm run verify:delegated-authority-scenarios
+```
+
+See [`../../docs/agentic-consent-delegated-authority.md`](../../docs/agentic-consent-delegated-authority.md).
 
 For machine-readable output:
 

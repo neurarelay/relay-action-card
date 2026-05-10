@@ -1,6 +1,6 @@
 {
   "name": "relay-action-card",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "Run a Neura Relay Action Card and receive a Decision Receipt before execution.",
   "scripts": {
@@ -21,7 +21,8 @@
     "verify:mcp-adoption-pack": "node scripts/verify-mcp-developer-adoption-pack.mjs",
     "verify:developer-feedback-access-path": "node scripts/verify-developer-feedback-access-path.mjs",
     "verify:scenario-walkthrough-pack": "node scripts/verify-scenario-walkthrough-pack.mjs",
-    "verify:authorization-bypass-scenarios": "node scripts/verify-authorization-bypass-scenarios.mjs"
+    "verify:authorization-bypass-scenarios": "node scripts/verify-authorization-bypass-scenarios.mjs",
+    "verify:delegated-authority-scenarios": "node scripts/verify-delegated-authority-scenarios.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.0-alpha.3"

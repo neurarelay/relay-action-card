@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "crm.update_account",
+    "summary": "Attempt to update the Acme CRM account after delegated authority expired.",
+    "target": "crm.account:acme"
+  },
+  "affectedObject": "crm.account:acme",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_acme_sales_ops_owner",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "crm.account:acme",
+      "allowedActions": ["crm.update_account"],
+      "allowedResources": ["crm.account:acme"],
+      "expiresAt": "2026-05-09T23:59:59Z",
+      "revocationStatus": "expired",
+      "policyRefs": ["policy_ref_delegated_crm_update"],
+      "authorityScopeRef": "authority_scope_ref_acme_crm_update",
+      "standingRef": "registry_passport_standing_ref_active",
+      "reviewRequiredWhenMissingOrChanged": true
+    },
+    "evidenceRefs": ["crm.account:acme", "ticket_ref:8431"],
+    "ruleRefs": ["policy_ref_delegated_crm_update"],
+    "riskCategory": "account_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

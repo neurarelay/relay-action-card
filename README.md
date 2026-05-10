@@ -96,6 +96,8 @@ For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthroug
 
 For the authorization-bypass scenario proof, read [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md).
 
+For the Agentic consent / delegated authority proof, read [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md).
+
 For the SDK alpha path, read [`examples/sdk/README.md`](examples/sdk/README.md).
 
 For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md).
@@ -138,6 +140,10 @@ npm run example:relay -- --example=workflow-state-change
 npm run example:relay -- --example=authorized-crm-account-update
 npm run example:relay -- --example=blocked-cross-resource-crm-update
 npm run example:relay -- --example=blocked-payment-without-authority
+npm run example:relay -- --example=delegated-crm-account-update
+npm run example:relay -- --example=delegated-wrong-resource
+npm run example:relay -- --example=delegated-wrong-action
+npm run example:relay -- --example=delegated-expired-authority
 ```
 
 The example calls production Relay by default:
@@ -228,10 +234,16 @@ The default core example sends `examples/core/action-card.json` to Relay. The br
 | Authorized CRM account update | `examples/core/action-cards/authorized-crm-account-update.json` | A permitted target/action pair before an account API write |
 | Blocked cross-resource CRM update | `examples/core/action-cards/blocked-cross-resource-crm-update.json` | An authority-mismatch target that must not auto-proceed |
 | Blocked payment without authority | `examples/core/action-cards/blocked-payment-without-authority.json` | A payment action outside declared authority that must not auto-proceed |
+| Delegated CRM account update | `examples/core/action-cards/delegated-crm-account-update.json` | A scoped, active delegated authority context before a CRM write |
+| Delegated wrong resource | `examples/core/action-cards/delegated-wrong-resource.json` | A delegated authority context that does not cover the target resource |
+| Delegated wrong action | `examples/core/action-cards/delegated-wrong-action.json` | A delegated authority context that does not cover the proposed action |
+| Delegated expired authority | `examples/core/action-cards/delegated-expired-authority.json` | An expired delegated authority context that requires just-in-time review |
 
 Each file is an Action Card v0.1. Copy one into your agent or paste it into the protected [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace). Relay returns the Decision Receipt, Registry status, trace ref, and integration handoff.
 
 The authorization-bypass scenario proof is intentionally refs-only. It demonstrates the public safety property without sharing private policy text, customer content, API keys, tokens, or proprietary authorization payloads.
+
+The delegated authority proof is also refs-only. It demonstrates that access is not consent, consent is not authority, and delegated authority must be scoped, contextual, time-bound, revocable, and Decision Receipt-backed before execution.
 
 The default support-reply Action Card looks like this:
 
