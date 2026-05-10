@@ -197,7 +197,7 @@ That verifier installs `@neurarelay/sdk@0.1.0-alpha.2` from npm in a temporary p
 
 ## A2A Protected Client Proof
 
-Relay publishes public Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes the A2A Controlled Client Pack v0.2 in `examples/a2a` and `docs/a2a-controlled-client-pack.md`.
+Relay publishes public Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes the A2A Controlled Client Pack v0.2 in `examples/a2a` and `docs/a2a-controlled-client-pack.md`, with A2A Controlled Runtime v1 checks for runtime contract, idempotency key ref, and Registry trust summary.
 
 Inspect the public Agent Card:
 
@@ -211,7 +211,7 @@ Run protected `message/send` only after controlled A2A access is issued:
 RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
 ```
 
-The protected proof returns a Decision Receipt task with trace and transaction refs. It preserves no public A2A token issuance, no public API keys, no unprotected A2A execution, no downstream execution by Neura, no private payload exposure, no token-value return, and no A2A directory listing or ecosystem claim.
+The protected proof returns a Decision Receipt task with trace and transaction refs. It also checks A2A Controlled Runtime v1, Registry Agent Passport required for production identity validation, idempotency key ref without raw key return, and closed boundary flags. It preserves no public A2A token issuance, no public API keys, no unprotected A2A execution, no downstream execution by Neura, no private payload exposure, no token-value return, and no A2A directory listing or ecosystem claim.
 
 ## Copy The Core Examples
 

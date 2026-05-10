@@ -1,6 +1,6 @@
 # A2A Controlled Client Pack
 
-Status: v0.2 controlled-access proof for SDK alpha.2.
+Status: v0.2 controlled-access proof for SDK alpha.2 with A2A Controlled Runtime v1 response checks.
 
 This pack proves the narrow A2A surface Neura can stand behind today:
 
@@ -59,6 +59,9 @@ The JSON proof includes:
 
 - `sdk.package` and `sdk.version`
 - public Agent Card name, version, endpoint, and skill ids
+- A2A Controlled Runtime v1 version, access model, and refs-only output shape
+- idempotency key ref without raw key return
+- Registry Agent Passport required for production identity validation
 - controlled access model
 - completed A2A task state for protected runs
 - Decision Receipt id, decision, trace ref, and transaction ref

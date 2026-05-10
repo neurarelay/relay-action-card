@@ -43,6 +43,7 @@ const packageJson = JSON.parse(await read("package.json"));
 for (const phrase of [
   "A2A Protected Client Proof",
   "A2A Controlled Client Pack v0.2",
+  "A2A Controlled Runtime v1",
   "examples/a2a",
   "docs/a2a-controlled-client-pack.md",
   "npm run example:a2a -- --agent-card-only",
@@ -83,13 +84,15 @@ for (const phrase of [
 
 for (const phrase of [
   "A2A Controlled Client Pack",
-  "Status: v0.2 controlled-access proof for SDK alpha.2.",
+  "Status: v0.2 controlled-access proof for SDK alpha.2 with A2A Controlled Runtime v1 response checks.",
   "public Agent Card discovery -> controlled /a2a message/send -> Decision Receipt task",
   "npm run verify:a2a-authenticated-client",
   "Controlled Access Lane",
   "Registry Agent Passport",
   "Do not paste tokens",
   "Output Contract",
+  "idempotency key ref",
+  "Registry Agent Passport required for production identity validation",
   "token-value return",
   "Registry auto-approval",
 ]) {
@@ -113,8 +116,13 @@ for (const phrase of [
   "relay.a2a.getAgentCard()",
   "relay.a2a.sendActionCard",
   "Authorization",
+  "Idempotency-Key",
+  "runtime_contract",
+  "registry_trust",
+  "idempotency",
   "message/send",
   "private_payload_returned",
+  "idempotency_key_returned",
   "unprotected_a2a_execution: false",
   "public_api_key_issuance: false",
   "token_value_returned: false",
@@ -205,6 +213,7 @@ if (protectedProofToken) {
       trace_ref: output.decision_receipt?.trace_ref,
       transaction_ref: output.decision_receipt?.transaction_ref,
       task_state: output.a2a?.task_state,
+      runtime_contract_version: output.runtime_contract?.version,
     };
 
     if (output.ok !== true) failures.push("protected_a2a_not_ok");
@@ -214,6 +223,26 @@ if (protectedProofToken) {
     }
     if (output.a2a?.task_kind !== "task") failures.push("protected_a2a_wrong_task_kind");
     if (output.a2a?.task_state !== "completed") failures.push("protected_a2a_not_completed");
+    if (output.runtime_contract?.version !== "1.0") {
+      failures.push("protected_a2a_missing_runtime_contract_v1");
+    }
+    if (
+      output.runtime_contract?.access_model !==
+      "controlled_relay_developer_or_internal_bearer"
+    ) {
+      failures.push("protected_a2a_wrong_runtime_access_model");
+    }
+    if (
+      output.registry_trust?.required_for_production_identity_validation !== true
+    ) {
+      failures.push("protected_a2a_missing_registry_trust_requirement");
+    }
+    if (!output.idempotency?.key_ref?.startsWith("idempotency_ref_")) {
+      failures.push("protected_a2a_missing_idempotency_ref");
+    }
+    if (output.idempotency?.raw_key_returned !== false) {
+      failures.push("protected_a2a_returned_raw_idempotency_key");
+    }
     if (!output.decision_receipt?.receipt_id) failures.push("protected_a2a_missing_receipt");
     if (!output.decision_receipt?.trace_ref?.startsWith("trace_ref_")) {
       failures.push("protected_a2a_missing_trace_ref");
@@ -232,6 +261,9 @@ if (protectedProofToken) {
     }
     if (output.boundary?.token_value_returned !== false) {
       failures.push("protected_a2a_returned_token_value");
+    }
+    if (output.boundary?.idempotency_key_returned !== false) {
+      failures.push("protected_a2a_returned_idempotency_key");
     }
     if (output.boundary?.downstream_execution !== "developer_owned_not_performed_by_relay") {
       failures.push("protected_a2a_wrong_downstream_boundary");

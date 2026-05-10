@@ -1,6 +1,6 @@
 # A2A Protected Client Proof
 
-Status: controlled client pack v0.2 for SDK alpha.2.
+Status: controlled client pack v0.2 for SDK alpha.2 with A2A Controlled Runtime v1 response checks.
 
 This example uses the published SDK alpha to call Relay's A2A surface:
 
@@ -37,6 +37,9 @@ The proof returns:
 - `@neurarelay/sdk` package name and alpha.2 version
 - public Agent Card name, version, endpoint, and skill ids
 - A2A JSON-RPC task id and completed state
+- A2A Controlled Runtime v1 version, access model, and refs-only output shape
+- idempotency key ref without raw key return
+- Registry Agent Passport required for production identity validation
 - Decision Receipt id and decision
 - trace and transaction refs
 - refs-only payload posture

@@ -19,6 +19,7 @@ const args = new Set(process.argv.slice(2));
 const jsonOutput = args.has("--json");
 const agentCardOnly = args.has("--agent-card-only");
 const relayBaseUrl = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
+const idempotencyKey = "relay-action-card-a2a-v1-proof";
 const accessToken =
   process.env.RELAY_A2A_ACCESS_TOKEN ??
   process.env.NEURA_RELAY_INTERNAL_ACCESS_KEY ??
@@ -117,6 +118,7 @@ if (!accessToken) {
 
 const relay = createRelay({
   Authorization: `Bearer ${accessToken}`,
+  "Idempotency-Key": idempotencyKey,
 });
 let response;
 
@@ -168,9 +170,31 @@ const summary = {
   a2a: {
     jsonrpc: response.jsonrpc,
     task_id: response.result?.id,
+    context_id: response.result?.contextId,
     task_kind: response.result?.kind,
     task_state: response.result?.status?.state,
     skill_id: data.skill_id,
+  },
+  runtime_contract: {
+    version:
+      response.result?.metadata?.runtime_contract?.version ??
+      data.runtime_contract?.version,
+    access_model:
+      response.result?.metadata?.runtime_contract?.access_model ??
+      data.runtime_contract?.access_model,
+    output_shape:
+      response.result?.metadata?.runtime_contract?.output_shape ??
+      data.runtime_contract?.output_shape,
+  },
+  registry_trust: {
+    required_for_production_identity_validation:
+      data.registry_trust?.required_for_production_identity_validation,
+    posture: data.registry_trust?.posture ?? null,
+    registry_context_available: data.registry_trust?.registry_context_available,
+  },
+  idempotency: {
+    key_ref: response.result?.metadata?.idempotency?.key_ref ?? null,
+    raw_key_returned: response.result?.metadata?.idempotency?.raw_key_returned ?? false,
   },
   decision_receipt: {
     receipt_id: receipt.receipt_id,
@@ -184,11 +208,16 @@ const summary = {
     payload_posture: data.payload_posture,
     downstream_execution: data.downstream_execution,
     private_payload_returned: JSON.stringify(response).includes("PRIVATE_"),
+    idempotency_key_returned: JSON.stringify(response).includes(idempotencyKey),
   },
 };
 
 if (summary.boundary.private_payload_returned) {
   fail("Relay A2A response included a forbidden private payload marker.", summary);
+}
+
+if (summary.boundary.idempotency_key_returned) {
+  fail("Relay A2A response included the raw idempotency key.", summary);
 }
 
 if (summary.boundary.downstream_execution !== expectedDownstreamBoundary) {
@@ -206,6 +235,9 @@ if (jsonOutput) {
   console.log(`Skill: ${summary.a2a.skill_id}`);
   console.log(`Task: ${summary.a2a.task_id}`);
   console.log(`State: ${summary.a2a.task_state}`);
+  console.log(`Runtime: ${summary.runtime_contract.version}`);
+  console.log(`Access: ${summary.runtime_contract.access_model}`);
+  console.log(`Idempotency ref: ${summary.idempotency.key_ref}`);
   console.log(`Decision: ${summary.decision_receipt.decision}`);
   console.log(`Receipt: ${summary.decision_receipt.receipt_id}`);
   console.log(`Trace: ${summary.decision_receipt.trace_ref}`);

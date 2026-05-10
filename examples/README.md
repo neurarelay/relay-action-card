@@ -128,7 +128,7 @@ npm run example:a2a -- --agent-card-only
 RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
 ```
 
-The A2A lane is the Controlled Client Pack v0.2. It is public discovery plus controlled protected execution, not public token issuance, public API-key issuance, an A2A directory listing, or downstream execution by Neura.
+The A2A lane is the Controlled Client Pack v0.2. It checks A2A Controlled Runtime v1, idempotency key ref without raw key return, and Registry Agent Passport required for production identity validation. It is public discovery plus controlled protected execution, not public token issuance, public API-key issuance, an A2A directory listing, or downstream execution by Neura.
 
 Inspect the source-aligned Google ADK and Microsoft templates:
 
