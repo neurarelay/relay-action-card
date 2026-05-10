@@ -31,7 +31,7 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
-Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0-alpha.2` is now available as the public npm alpha.
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0-alpha.3` is now available as the public npm alpha.
 
 ## Get Your First Receipt In 5 Minutes
 
@@ -171,7 +171,7 @@ RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 
 ## SDK Alpha Path
 
-The SDK path uses `@neurarelay/sdk@0.1.0-alpha.2`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
+The SDK path uses `@neurarelay/sdk@0.1.0-alpha.3`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
 
 Install dependencies and run the SDK example:
 
@@ -190,10 +190,10 @@ RELAY_A2A_ACCESS_TOKEN=... npm run example:sdk:a2a
 Verify the npm package from a clean outside consumer project:
 
 ```bash
-npm run verify:sdk-alpha2-consumer
+npm run verify:sdk-alpha3-consumer
 ```
 
-That verifier installs `@neurarelay/sdk@0.1.0-alpha.2` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present.
+That verifier installs `@neurarelay/sdk@0.1.0-alpha.3` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present.
 
 ## A2A Protected Client Proof
 
