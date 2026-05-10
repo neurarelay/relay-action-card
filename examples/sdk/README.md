@@ -1,8 +1,8 @@
 # SDK Alpha Path
 
-Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.3`.
+Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.4`.
 
-Note: Relay source now has typed `authority_context.source` support for the next SDK alpha, but the published npm artifact remains `0.1.0-alpha.3` until a future approved publish. The JavaScript examples can still read the runtime field returned by production Relay.
+Alpha.4 includes typed `authority_context.source` support in the SDK package. The JavaScript examples also read the same runtime field returned by production Relay.
 
 The SDK path keeps the same core mechanism as the public example:
 
@@ -35,10 +35,10 @@ RELAY_A2A_ACCESS_TOKEN=... npm run example:sdk:a2a
 For a clean outside-consumer proof that installs from npm instead of using this repo's dependency tree:
 
 ```bash
-npm run verify:sdk-alpha3-consumer
+npm run verify:sdk-alpha4-consumer
 ```
 
-That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0-alpha.3`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
+That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0-alpha.4`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
 
 ## Resolve With SDK
 

@@ -84,7 +84,7 @@ for (const phrase of [
 
 for (const phrase of [
   "A2A Controlled Client Pack",
-  "Status: v0.2 controlled-access proof for SDK alpha.3 with A2A Controlled Runtime v1 response checks.",
+  "Status: v0.2 controlled-access proof for SDK alpha.4 with A2A Controlled Runtime v1 response checks.",
   "public Agent Card discovery -> controlled /a2a message/send -> Decision Receipt task",
   "npm run verify:a2a-authenticated-client",
   "Controlled Access Lane",

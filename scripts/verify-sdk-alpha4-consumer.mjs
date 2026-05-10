@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const packageName = "@neurarelay/sdk";
-const packageVersion = "0.1.0-alpha.3";
+const packageVersion = "0.1.0-alpha.4";
 const relayBaseUrl = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
 const a2aToken =
   process.env.RELAY_A2A_ACCESS_TOKEN ??
@@ -58,7 +58,7 @@ const delegatedActionCard = JSON.parse(
   ),
 );
 
-const consumerDir = await mkdtemp(join(tmpdir(), "neura-sdk-alpha3-consumer-"));
+const consumerDir = await mkdtemp(join(tmpdir(), "neura-sdk-alpha4-consumer-"));
 
 try {
   await writeFile(
@@ -140,7 +140,7 @@ if (a2aToken) {
     headers: { Authorization: \`Bearer \${a2aToken}\` },
   });
   const task = await protectedRelay.a2a.sendActionCard(actionCard, {
-    id: "sdk-alpha3-consumer-a2a-proof",
+    id: "sdk-alpha4-consumer-a2a-proof",
   });
   const artifactData = task.result?.artifacts
     ?.flatMap((artifact) => artifact.parts ?? [])
@@ -297,7 +297,7 @@ console.log(JSON.stringify({
       JSON.stringify(
         {
           ok: false,
-          verifier: "sdk-alpha3-consumer",
+          verifier: "sdk-alpha4-consumer",
           failures,
         },
         null,
@@ -311,7 +311,7 @@ console.log(JSON.stringify({
     JSON.stringify(
       {
         ok: true,
-        verifier: "sdk-alpha3-consumer",
+        verifier: "sdk-alpha4-consumer",
         consumerDir,
         proof,
       },

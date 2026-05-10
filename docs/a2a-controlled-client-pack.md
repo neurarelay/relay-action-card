@@ -1,6 +1,6 @@
 # A2A Controlled Client Pack
 
-Status: v0.2 controlled-access proof for SDK alpha.3 with A2A Controlled Runtime v1 response checks.
+Status: v0.2 controlled-access proof for SDK alpha.4 with A2A Controlled Runtime v1 response checks.
 
 This pack proves the narrow A2A surface Neura can stand behind today:
 

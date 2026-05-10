@@ -1,6 +1,6 @@
 # A2A Protected Client Proof
 
-Status: controlled client pack v0.2 for SDK alpha.3 with A2A Controlled Runtime v1 response checks.
+Status: controlled client pack v0.2 for SDK alpha.4 with A2A Controlled Runtime v1 response checks.
 
 This example uses the published SDK alpha to call Relay's A2A surface:
 
@@ -34,7 +34,7 @@ RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
 
 The proof returns:
 
-- `@neurarelay/sdk` package name and alpha.3 version
+- `@neurarelay/sdk` package name and alpha.4 version
 - public Agent Card name, version, endpoint, and skill ids
 - A2A JSON-RPC task id and completed state
 - A2A Controlled Runtime v1 version, access model, and refs-only output shape
