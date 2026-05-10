@@ -23,6 +23,14 @@ npm install
 npm run example:sdk
 ```
 
+For a clean outside-consumer proof that installs from npm instead of using this repo's dependency tree:
+
+```bash
+npm run verify:sdk-alpha1-consumer
+```
+
+That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0-alpha.1`, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
+
 ## Resolve With SDK
 
 ```js
