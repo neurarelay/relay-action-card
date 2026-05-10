@@ -6,7 +6,7 @@
   "scripts": {
     "example:relay": "node examples/core/resolve-action-card.mjs",
     "example:sdk": "node examples/sdk/resolve-action-card-sdk.mjs",
-    "example:sdk:authority-routing": "node examples/sdk/authority-routing-alpha4.mjs",
+    "example:sdk:authority-routing": "node examples/sdk/authority-routing.mjs",
     "example:sdk:a2a": "node examples/sdk/resolve-action-card-sdk-a2a.mjs",
     "example:a2a": "node examples/a2a/resolve-action-card-a2a.mjs",
     "example:mcp": "node examples/mcp/direct-mcp-client.mjs",
@@ -17,7 +17,7 @@
     "example:google-adk-mcp": "python3 examples/mcp/google-adk-remote-mcp.py --print-config",
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs",
-    "verify:sdk-alpha4-consumer": "node scripts/verify-sdk-alpha4-consumer.mjs",
+    "verify:sdk-stable-consumer": "node scripts/verify-sdk-stable-consumer.mjs",
     "verify:sdk-authority-routing": "node scripts/verify-sdk-authority-routing.mjs",
     "verify:a2a-authenticated-client": "node scripts/verify-a2a-authenticated-client.mjs",
     "verify:mcp-adoption-pack": "node scripts/verify-mcp-developer-adoption-pack.mjs",
@@ -27,6 +27,6 @@
     "verify:delegated-authority-scenarios": "node scripts/verify-delegated-authority-scenarios.mjs"
   },
   "dependencies": {
-    "@neurarelay/sdk": "0.1.0-alpha.4"
+    "@neurarelay/sdk": "0.1.0"
   }
 }

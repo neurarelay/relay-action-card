@@ -1,13 +1,15 @@
-# SDK Alpha Path
+# SDK Path
 
-Status: published npm alpha for `@neurarelay/sdk@0.1.0-alpha.4`.
+Status: published stable npm package for `@neurarelay/sdk@0.1.0`.
 
-Alpha.4 includes typed `authority_context.source` support in the SDK package. The JavaScript examples also read the same runtime field returned by production Relay.
+This is the public npm package path for the SDK examples.
+
+Version 0.1.0 includes typed `authority_context.source` support in the SDK package. The JavaScript examples also read the same runtime field returned by production Relay.
 
 The SDK path keeps the same core mechanism as the public example:
 
 ```text
-Action Card -> Relay -> Decision Receipt -> developer-owned execution
+SDK client -> Action Card -> Relay -> Decision Receipt -> developer-owned execution
 ```
 
 Use the SDK when you want typed helpers around the same Relay surfaces already proven in this repo.
@@ -32,7 +34,7 @@ The authority-routing example runs the four delegated-authority Action Cards and
 - `hold_for_registry_backed_authority` when the receipt can proceed but the public demo refs are only `developer_supplied_unverified`
 - `human_review`, `revise`, or `stop` when Relay says the action should not auto-proceed
 
-This keeps execution in the developer-owned system. It is no public API-key issuance, no public token issuance, no downstream execution, no Registry auto-approval, and no stable SDK status.
+This keeps execution in the developer-owned system. It is no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
 Inspect public A2A discovery through the SDK and, when controlled access exists, run protected `message/send`:
 
@@ -44,11 +46,11 @@ RELAY_A2A_ACCESS_TOKEN=... npm run example:sdk:a2a
 For a clean outside-consumer proof that installs from npm instead of using this repo's dependency tree:
 
 ```bash
-npm run verify:sdk-alpha4-consumer
+npm run verify:sdk-stable-consumer
 npm run verify:sdk-authority-routing
 ```
 
-That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0-alpha.4`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
+That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
 
 ## Resolve With SDK
 

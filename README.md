@@ -17,7 +17,7 @@ There are three paths in this repo:
 | --- | --- | --- | --- |
 | Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
 | Optional MCP examples | `examples/mcp` | Sandbox or controlled production access | Call the same Relay spine through protected MCP-compatible tools |
-| SDK alpha path | `examples/sdk` | Public npm alpha | Use `@neurarelay/sdk` without changing the Relay decision boundary |
+| SDK path | `examples/sdk` | Public npm package | Use `@neurarelay/sdk` without changing the Relay decision boundary |
 
 The core path is the default Neura path:
 
@@ -31,7 +31,7 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
-Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0-alpha.4` is now available as the public npm alpha.
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0` is now available as a public npm package.
 
 ## Get Your First Receipt In 5 Minutes
 
@@ -98,7 +98,7 @@ For the authorization-bypass scenario proof, read [`docs/authorization-bypass-sc
 
 For the Agentic consent / delegated authority proof, read [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md).
 
-For the SDK alpha path, read [`examples/sdk/README.md`](examples/sdk/README.md).
+For the SDK path, read [`examples/sdk/README.md`](examples/sdk/README.md).
 
 For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md).
 
@@ -175,9 +175,9 @@ To point the example at a local Relay server:
 RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 ```
 
-## SDK Alpha Path
+## SDK Path
 
-The SDK path uses `@neurarelay/sdk@0.1.0-alpha.4`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
+The SDK path uses `@neurarelay/sdk@0.1.0`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
 
 Install dependencies and run the SDK example:
 
@@ -187,7 +187,7 @@ npm run example:sdk
 npm run example:sdk:authority-routing
 ```
 
-The authority-routing example uses `@neurarelay/sdk@0.1.0-alpha.4` against the delegated-authority fixtures and converts each Decision Receipt into a developer route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the developer can supply Registry-backed delegated authority. A production app should only treat a receipt as `ready_for_developer_owned_execution` when authority is Registry-backed and ready. This is still alpha SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
+The authority-routing example uses `@neurarelay/sdk@0.1.0` against the delegated-authority fixtures and converts each Decision Receipt into a developer route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the developer can supply Registry-backed delegated authority. A production app should only treat a receipt as `ready_for_developer_owned_execution` when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
 Use the SDK to read public A2A discovery. Run protected `message/send` only with controlled access:
 
@@ -199,11 +199,11 @@ RELAY_A2A_ACCESS_TOKEN=... npm run example:sdk:a2a
 Verify the npm package from a clean outside consumer project:
 
 ```bash
-npm run verify:sdk-alpha4-consumer
+npm run verify:sdk-stable-consumer
 npm run verify:sdk-authority-routing
 ```
 
-That verifier installs `@neurarelay/sdk@0.1.0-alpha.4` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. Alpha.4 is still an alpha SDK, not a stable SDK or public token program.
+That verifier installs `@neurarelay/sdk@0.1.0` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. The SDK is stable for the receipt path, not a public token program.
 
 ## A2A Protected Client Proof
 

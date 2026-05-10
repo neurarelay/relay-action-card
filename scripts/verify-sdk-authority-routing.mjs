@@ -37,12 +37,12 @@ function parseJson(label, value) {
 const packageJson = JSON.parse(await readText("package.json"));
 const readme = await readText("README.md");
 const sdkReadme = await readText("examples/sdk/README.md");
-const script = await readText("examples/sdk/authority-routing-alpha4.mjs");
-const consumerVerifier = await readText("scripts/verify-sdk-alpha4-consumer.mjs");
+const script = await readText("examples/sdk/authority-routing.mjs");
+const consumerVerifier = await readText("scripts/verify-sdk-stable-consumer.mjs");
 
 if (
   packageJson.scripts?.["example:sdk:authority-routing"] !==
-  "node examples/sdk/authority-routing-alpha4.mjs"
+  "node examples/sdk/authority-routing.mjs"
 ) {
   fail("package_example_script", "missing example:sdk:authority-routing");
 }
@@ -61,7 +61,7 @@ for (const [label, source] of [
   requireIncludes(label, source, "npm run example:sdk:authority-routing");
   requireIncludes(label, source, "hold_for_registry_backed_authority");
   requireIncludes(label, source, "developer_owned_execution");
-  requireIncludes(label, source, "0.1.0-alpha.4");
+  requireIncludes(label, source, "0.1.0");
   requireIncludes(label, source, "no public API");
 }
 
@@ -83,7 +83,7 @@ for (const forbidden of [
 
 const run = spawnSync(
   "node",
-  ["examples/sdk/authority-routing-alpha4.mjs", "--json"],
+  ["examples/sdk/authority-routing.mjs", "--json"],
   {
     cwd: new URL("..", import.meta.url),
     encoding: "utf8",
@@ -103,7 +103,7 @@ if (run.status !== 0) {
 const proof = run.status === 0 ? parseJson("authority_routing_json", run.stdout) : null;
 
 if (proof) {
-  if (proof.version !== "0.1.0-alpha.4") fail("sdk_version", proof.version);
+  if (proof.version !== "0.1.0") fail("sdk_version", proof.version);
   if (!Array.isArray(proof.results) || proof.results.length !== 4) {
     fail("result_count", proof.results?.length);
   }

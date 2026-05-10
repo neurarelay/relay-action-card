@@ -7,7 +7,7 @@ This folder has four lanes.
 | Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
 | A2A protected proof | `a2a` | You want public Agent Card discovery plus controlled protected `message/send` proof |
 | Optional MCP | `mcp` | Your agent runtime can call MCP tools with a Workspace sandbox token or controlled production access |
-| SDK alpha | `sdk` | You want the typed `@neurarelay/sdk` public alpha path |
+| SDK | `sdk` | You want the typed `@neurarelay/sdk` public package path |
 
 The core path is the default:
 
