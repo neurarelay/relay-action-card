@@ -20,14 +20,32 @@ function readJson(file) {
 
 const fixture = readJson("examples/openclaw/preflight-adapter/fixtures/send-message.preflight.json");
 const nativeManifest = readJson("examples/openclaw/preflight-adapter/openclaw.plugin.json");
+const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
 
-test("native plugin manifest stays install-path shaped but claim-safe", () => {
+test("native plugin manifest stays schema-valid and runtime-free", () => {
   assert.equal(nativeManifest.id, "neura-relay-preflight-adapter");
-  assert.equal(nativeManifest.entry, "./index.mjs");
+  assert.equal(nativeManifest.version, "0.1.0-rc.1");
   assert.equal(nativeManifest.configSchema.type, "object");
-  assert.ok(nativeManifest.compat.pluginApi);
-  assert.ok(nativeManifest.build.openclawVersion);
-  assert.equal(nativeManifest.neura.officialOpenClawOrClawHubClaim, false);
+  assert.deepEqual(nativeManifest.contracts.tools, ["neura_relay_preflight_action"]);
+  assert.equal(Object.hasOwn(nativeManifest, "entry"), false);
+  assert.equal(Object.hasOwn(nativeManifest, "compat"), false);
+  assert.equal(Object.hasOwn(nativeManifest, "build"), false);
+  assert.equal(Object.hasOwn(nativeManifest, "neura"), false);
+});
+
+test("package metadata is publish-ready but claim-safe", () => {
+  assert.equal(adapterPackage.name, "@neurarelay/openclaw-preflight-adapter");
+  assert.equal(adapterPackage.version, "0.1.0-rc.1");
+  assert.equal(adapterPackage.private, false);
+  assert.equal(adapterPackage.engines.node, ">=22");
+  assert.deepEqual(adapterPackage.openclaw.extensions, ["./index.mjs"]);
+  assert.equal(adapterPackage.openclaw.compat.pluginApi, ">=2026.3.24-beta.2");
+  assert.equal(
+    adapterPackage.openclaw.install.npmSpec,
+    "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1",
+  );
+  assert.equal(adapterPackage.neura.officialOpenClawOrClawHubClaim, false);
+  assert.equal(adapterPackage.neura.officialSubmissionRequiresRomanApproval, true);
 });
 
 test("preflight adapter converts refs-only local actions into Action Cards", () => {
@@ -77,6 +95,7 @@ test("OpenClaw-style plugin entry registers preflight tool", async () => {
   });
 
   assert.equal(metadata.officialOpenClawOrClawHubClaim, false);
+  assert.equal(metadata.officialSubmissionRequiresRomanApproval, true);
   assert.equal(registered.length, 1);
   assert.equal(registered[0].name, "neura_relay_preflight_action");
 

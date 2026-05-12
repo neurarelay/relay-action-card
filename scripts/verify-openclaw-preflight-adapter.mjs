@@ -98,11 +98,14 @@ const packageJson = readJson("package.json");
 const expectedScripts = {
   "openclaw:preflight:dry-run": "node examples/openclaw/run-preflight-adapter.mjs --dry-run",
   "openclaw:preflight:receipt": "node examples/openclaw/run-preflight-adapter.mjs",
+  "openclaw:plugin:pack:dry-run":
+    "cd examples/openclaw/preflight-adapter && npm pack --dry-run --json",
   "test:openclaw-preflight-adapter": "node --test tests/openclaw-preflight-adapter.test.mjs",
   "test:openclaw-preflight-adapter:e2e":
     "node --test tests/openclaw-preflight-adapter.e2e.mjs",
   "verify:openclaw-preflight-adapter":
     "node scripts/verify-openclaw-preflight-adapter.mjs",
+  "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
 };
 for (const [script, command] of Object.entries(expectedScripts)) {
   if (packageJson.scripts?.[script] !== command) {
@@ -111,27 +114,47 @@ for (const [script, command] of Object.entries(expectedScripts)) {
 }
 
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
-if (adapterPackage.private !== true) failures.push("adapter_package_must_be_private");
+if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
+  failures.push("adapter_package_wrong_name");
+}
+if (adapterPackage.private !== false) failures.push("adapter_package_must_be_publish_ready");
+if (adapterPackage.engines?.node !== ">=22") failures.push("adapter_package_wrong_node_engine");
+if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.0") {
+  failures.push("adapter_package_missing_sdk_dependency");
+}
 if (!adapterPackage.openclaw?.extensions?.includes("./index.mjs")) {
   failures.push("adapter_package_missing_openclaw_extension");
 }
+if (!adapterPackage.openclaw?.compat?.pluginApi || !adapterPackage.openclaw?.build?.openclawVersion) {
+  failures.push("adapter_package_missing_openclaw_compat_or_build");
+}
+if (
+  adapterPackage.openclaw?.install?.npmSpec !==
+  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1"
+) {
+  failures.push("adapter_package_missing_install_npm_spec");
+}
 if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
   failures.push("adapter_package_claim_boundary_missing");
+}
+if (adapterPackage.neura?.officialSubmissionRequiresRomanApproval !== true) {
+  failures.push("adapter_package_approval_gate_missing");
 }
 
 const nativeManifest = readJson("examples/openclaw/preflight-adapter/openclaw.plugin.json");
 if (nativeManifest.id !== "neura-relay-preflight-adapter") {
   failures.push("native_manifest_wrong_id");
 }
-if (nativeManifest.entry !== "./index.mjs") failures.push("native_manifest_wrong_entry");
 if (!nativeManifest.configSchema || nativeManifest.configSchema.type !== "object") {
   failures.push("native_manifest_missing_config_schema");
 }
-if (!nativeManifest.compat?.pluginApi || !nativeManifest.build?.openclawVersion) {
-  failures.push("native_manifest_missing_compat_or_build");
+if (!nativeManifest.contracts?.tools?.includes("neura_relay_preflight_action")) {
+  failures.push("native_manifest_missing_tool_contract");
 }
-if (nativeManifest.neura?.officialOpenClawOrClawHubClaim !== false) {
-  failures.push("native_manifest_claim_boundary_missing");
+for (const forbiddenManifestField of ["entry", "compat", "build", "capabilities", "neura"]) {
+  if (Object.hasOwn(nativeManifest, forbiddenManifestField)) {
+    failures.push(`native_manifest_has_runtime_or_custom_field_${forbiddenManifestField}`);
+  }
 }
 
 const docs = read("docs/openclaw-preflight-adapter.md");
@@ -141,9 +164,10 @@ requireIncludes("docs", docs, [
   "beforeAction(preflightAction)",
   "register(api)",
   "openclaw.plugin.json",
-  "https://docs.openclaw.ai/tools/plugin",
-  "https://github.com/openclaw/openclaw/blob/main/docs/cli/plugins.md",
-  "https://github.com/openclaw/clawhub",
+  "https://docs.openclaw.ai/plugins/manifest",
+  "https://docs.openclaw.ai/plugins/building-plugins",
+  "https://documentation.openclaw.ai/clawhub",
+  "docs/openclaw-plugin-release-candidate.md",
   "npm run openclaw:preflight:dry-run",
   "npm run openclaw:preflight:receipt",
   "npm run verify:openclaw-preflight-adapter",
@@ -156,6 +180,7 @@ requireIncludes("adapter_readme", adapterReadme, [
   "beforeAction(preflightAction)",
   "not an official OpenClaw or ClawHub",
   "openclaw.plugin.json",
+  "npm run openclaw:plugin:pack:dry-run",
   "npm run openclaw:preflight:dry-run",
   "npm run verify:openclaw-preflight-adapter",
   "never executes downstream actions",

@@ -20,6 +20,7 @@
     "openclaw:receipts": "node examples/openclaw/run-action-receipt-kit.mjs",
     "openclaw:preflight:dry-run": "node examples/openclaw/run-preflight-adapter.mjs --dry-run",
     "openclaw:preflight:receipt": "node examples/openclaw/run-preflight-adapter.mjs",
+    "openclaw:plugin:pack:dry-run": "cd examples/openclaw/preflight-adapter && npm pack --dry-run --json",
     "test": "npm run test:openclaw-kit",
     "test:openclaw-kit": "node --test tests/openclaw-action-receipt-kit.test.mjs",
     "test:openclaw-kit:e2e": "node --test tests/openclaw-action-receipt-kit.e2e.mjs",
@@ -38,7 +39,8 @@
     "verify:skills-adoption-pack": "node scripts/verify-skills-adoption-pack.mjs",
     "verify:openclaw-action-receipt-pack": "node scripts/verify-openclaw-action-receipt-pack.mjs",
     "verify:openclaw-action-receipt-kit": "node scripts/verify-openclaw-action-receipt-kit.mjs",
-    "verify:openclaw-preflight-adapter": "node scripts/verify-openclaw-preflight-adapter.mjs"
+    "verify:openclaw-preflight-adapter": "node scripts/verify-openclaw-preflight-adapter.mjs",
+    "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.0"

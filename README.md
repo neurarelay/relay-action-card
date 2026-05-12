@@ -135,9 +135,13 @@ For plugin-ready local runtime wiring, read [`docs/openclaw-preflight-adapter.md
 ```bash
 npm run openclaw:preflight:dry-run
 npm run openclaw:preflight:receipt -- --json
+npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
+npm run verify:openclaw-plugin-rc
 npm run test:openclaw-preflight-adapter
 ```
+
+The package-ready release candidate is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md). It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but no OpenClaw / ClawHub submission, publication, listing, approval, or partnership claim exists.
 
 ## Production Agent Identity
 

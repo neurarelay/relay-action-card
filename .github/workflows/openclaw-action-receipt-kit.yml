@@ -10,11 +10,13 @@ on:
       - "package-lock.json"
       - "docs/openclaw-action-receipt-pack.md"
       - "docs/openclaw-preflight-adapter.md"
+      - "docs/openclaw-plugin-release-candidate.md"
       - "examples/core/resolve-action-card.mjs"
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
+      - "scripts/verify-openclaw-plugin-rc.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
       - "tests/openclaw-preflight-adapter*.mjs"
@@ -29,11 +31,13 @@ on:
       - "package-lock.json"
       - "docs/openclaw-action-receipt-pack.md"
       - "docs/openclaw-preflight-adapter.md"
+      - "docs/openclaw-plugin-release-candidate.md"
       - "examples/core/resolve-action-card.mjs"
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
+      - "scripts/verify-openclaw-plugin-rc.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
       - "tests/openclaw-preflight-adapter*.mjs"
@@ -58,7 +62,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -79,6 +83,9 @@ jobs:
       - name: Verify preflight adapter
         run: npm run verify:openclaw-preflight-adapter
 
+      - name: Verify plugin release candidate
+        run: npm run verify:openclaw-plugin-rc
+
       - name: Run dry-run proof
         run: npm run openclaw:dry-run -- --json
 
@@ -95,7 +102,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies

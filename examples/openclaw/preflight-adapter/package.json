@@ -1,12 +1,51 @@
 {
-  "name": "@neurarelay/openclaw-preflight-adapter-example",
-  "version": "0.1.0-rc.0",
-  "private": true,
+  "name": "@neurarelay/openclaw-preflight-adapter",
+  "version": "0.1.0-rc.1",
+  "private": false,
   "type": "module",
-  "description": "Unofficial OpenClaw-style preflight adapter example for Neura Relay Decision Receipts.",
+  "description": "Claim-safe OpenClaw preflight adapter release candidate for Neura Relay Decision Receipts.",
+  "license": "MIT",
+  "main": "./index.mjs",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "README.md",
+    "openclaw.plugin.json",
+    "index.mjs",
+    "adapter.mjs",
+    "fixtures/*.json"
+  ],
+  "keywords": [
+    "openclaw",
+    "clawhub",
+    "neura",
+    "relay",
+    "decision-receipt",
+    "action-card",
+    "agent-governance",
+    "preflight"
+  ],
+  "homepage": "https://github.com/neurarelay/relay-action-card/tree/main/examples/openclaw/preflight-adapter#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neurarelay/relay-action-card.git",
+    "directory": "examples/openclaw/preflight-adapter"
+  },
+  "bugs": {
+    "url": "https://github.com/neurarelay/relay-action-card/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "rc"
+  },
   "exports": {
     ".": "./index.mjs",
     "./adapter": "./adapter.mjs"
+  },
+  "dependencies": {
+    "@neurarelay/sdk": "0.1.0"
   },
   "openclaw": {
     "extensions": ["./index.mjs"],
@@ -17,10 +56,17 @@
     "build": {
       "openclawVersion": "2026.3.24-beta.2",
       "pluginSdkVersion": "2026.3.24-beta.2"
+    },
+    "install": {
+      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1",
+      "defaultChoice": "npm",
+      "minHostVersion": ">=2026.3.24-beta.2"
     }
   },
   "neura": {
+    "releaseCandidateOnly": true,
     "officialOpenClawOrClawHubClaim": false,
+    "officialSubmissionRequiresRomanApproval": true,
     "downstreamExecutionByNeura": false,
     "privatePayloadExposure": false,
     "publicTokenOrKeyIssuance": false

@@ -31,6 +31,7 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 | `.github/workflows/openclaw-action-receipt-kit.yml` | CI for local contract checks plus manual live receipt proof |
 | `CHANGELOG.md` | Release-candidate summary and public-safe claim boundary |
 | `docs/openclaw-preflight-adapter.md` | Plugin-ready `beforeAction` adapter contract and OpenClaw-style entry example |
+| `docs/openclaw-plugin-release-candidate.md` | Package-ready OpenClaw plugin release-candidate and submission-readiness packet |
 
 ## Action Families
 
@@ -90,7 +91,9 @@ For runtime wiring, use the preflight adapter:
 ```bash
 npm run openclaw:preflight:dry-run
 npm run openclaw:preflight:receipt -- --json
+npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
+npm run verify:openclaw-plugin-rc
 ```
 
 ## Boundaries
