@@ -27,6 +27,8 @@ const examplePaths = {
   "openclaw-browser-submit": "examples/openclaw/action-cards/browser-submit.json",
   "openclaw-shell-command": "examples/openclaw/action-cards/shell-command.json",
   "openclaw-workflow-state-change": "examples/openclaw/action-cards/workflow-state-change.json",
+  "openclaw-memory-write": "examples/openclaw/action-cards/memory-write.json",
+  "openclaw-data-export": "examples/openclaw/action-cards/data-export.json",
   "high-risk": "examples/core/action-card-high-risk.json",
 };
 

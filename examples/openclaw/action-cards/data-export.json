@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "data.export",
+    "summary": "Export workspace data only after privacy, request, and data-export policy refs are reviewed.",
+    "target": "workspace_export_ref:customer_accounts"
+  },
+  "affectedObject": "workspace_export_ref:customer_accounts",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "workspace_data_exports",
+      "allowedActions": ["data.export"],
+      "allowedResources": ["workspace_export_ref:customer_accounts"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_data_export_review"],
+      "authorityScopeRef": "authority_scope_ref_data_export",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["privacy_request_ref:customer_accounts", "export_request_ref:customer_accounts"],
+    "ruleRefs": ["policy_ref_data_export_review"],
+    "riskCategory": "customer_data_export privacy",
+    "requestedOutcome": "decision_receipt"
+  }
+}

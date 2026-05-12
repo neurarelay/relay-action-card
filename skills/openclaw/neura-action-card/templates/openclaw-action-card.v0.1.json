@@ -7,7 +7,7 @@
     "capabilityVersion": "capability_version_ref_local_computer_use"
   },
   "proposedAction": {
-    "type": "message.send | file.edit | file.delete | browser.submit_form | shell.run_command | workflow.update_state",
+    "type": "message.send | file.edit | file.delete | browser.submit_form | shell.run_command | workflow.update_state | memory.write | data.export",
     "summary": "Review this proposed local agent action before execution.",
     "target": "target_ref"
   },

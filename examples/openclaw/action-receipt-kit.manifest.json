@@ -1,0 +1,74 @@
+{
+  "name": "neura-openclaw-action-receipt-kit",
+  "version": "0.1-rc",
+  "status": "local_release_candidate",
+  "description": "OpenClaw-style Action Card and Decision Receipt kit for autonomous computer-use actions.",
+  "one_command": {
+    "dry_run": "npm run openclaw:dry-run",
+    "live_receipts": "npm run openclaw:receipts"
+  },
+  "relay_path": "Action Card -> Relay -> Decision Receipt -> developer-owned execution",
+  "official_openclaw_or_clawhub_claim": false,
+  "examples": [
+    {
+      "id": "send-message",
+      "family": "outbound_message",
+      "path": "examples/openclaw/action-cards/send-message.json",
+      "description": "Review a channel or messaging send before delivery."
+    },
+    {
+      "id": "edit-file",
+      "family": "file_edit",
+      "path": "examples/openclaw/action-cards/edit-file.json",
+      "description": "Review a local file edit before changing workspace state."
+    },
+    {
+      "id": "delete-file",
+      "family": "file_delete",
+      "path": "examples/openclaw/action-cards/delete-file.json",
+      "description": "Review destructive file deletion before local removal."
+    },
+    {
+      "id": "browser-submit",
+      "family": "browser_submit",
+      "path": "examples/openclaw/action-cards/browser-submit.json",
+      "description": "Review browser form submission before dispatch."
+    },
+    {
+      "id": "shell-command",
+      "family": "shell_command",
+      "path": "examples/openclaw/action-cards/shell-command.json",
+      "description": "Review a shell command profile before runtime execution."
+    },
+    {
+      "id": "workflow-state-change",
+      "family": "workflow_transition",
+      "path": "examples/openclaw/action-cards/workflow-state-change.json",
+      "description": "Review a workflow transition before state change."
+    },
+    {
+      "id": "memory-write",
+      "family": "memory_write",
+      "path": "examples/openclaw/action-cards/memory-write.json",
+      "description": "Review persistent memory writes before storing new agent memory."
+    },
+    {
+      "id": "data-export",
+      "family": "data_export",
+      "path": "examples/openclaw/action-cards/data-export.json",
+      "description": "Review data export before content leaves the workspace."
+    }
+  ],
+  "boundaries": {
+    "refs_only": true,
+    "public_api_key_issuance": false,
+    "public_production_mcp_token_issuance": false,
+    "public_a2a_token_issuance": false,
+    "unprotected_a2a_execution": false,
+    "downstream_execution_by_neura": false,
+    "private_payload_exposure": false,
+    "registry_auto_approval": false,
+    "official_openclaw_or_clawhub_claim": false,
+    "provider_approval_claim": false
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "memory.write",
+    "summary": "Write a bounded agent memory entry only after subject intent and memory-scope refs are reviewed.",
+    "target": "agent_memory_ref:operator_preference"
+  },
+  "affectedObject": "agent_memory_ref:operator_preference",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "local_agent_memory",
+      "allowedActions": ["memory.write"],
+      "allowedResources": ["agent_memory_ref:operator_preference"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_memory_write_review"],
+      "authorityScopeRef": "authority_scope_ref_memory_write",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["subject_intent_ref:operator_preference", "memory_scope_ref:operator_preference"],
+    "ruleRefs": ["policy_ref_memory_write_review"],
+    "riskCategory": "memory_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

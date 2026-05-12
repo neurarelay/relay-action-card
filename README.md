@@ -18,7 +18,7 @@ There are three paths in this repo:
 | Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
 | Optional MCP examples | `examples/mcp` | Sandbox or controlled production access | Call the same Relay spine through protected MCP-compatible tools |
 | SDK path | `examples/sdk` | Public npm package | Use `@neurarelay/sdk` without changing the Relay decision boundary |
-| OpenClaw-style receipt pack | `examples/openclaw` and `skills/openclaw` | Public-safe examples | Draft receipt-ready Action Cards before local agent messages, file changes, browser submits, shell commands, and workflow changes |
+| OpenClaw-style receipt kit | `examples/openclaw` and `skills/openclaw` | Public-safe examples | Draft and test receipt-ready Action Cards before local agent messages, file changes, browser submits, shell commands, workflow changes, memory writes, and data exports |
 
 The core path is the default Neura path:
 
@@ -105,7 +105,18 @@ For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](
 
 For agent-assisted development workflows, read [`docs/skills-adoption-pack.md`](docs/skills-adoption-pack.md). The first local example skills are `skills/neura-action-card`, `skills/neura-authority-review`, and `skills/neura-first-receipt`.
 
-For OpenClaw-style autonomous computer-use workflows, read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The local example pack includes `skills/openclaw/neura-action-card` plus public-safe fixtures in `examples/openclaw/action-cards`. This is an example pack, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
+For OpenClaw-style autonomous computer-use workflows, read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The Action Receipt Kit includes `skills/openclaw/neura-action-card`, specialized review skills, public-safe fixtures in `examples/openclaw/action-cards`, a one-command dry run, a live receipt runner, a verifier, unit tests, and a live E2E receipt test. This is an example kit, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
+
+Run the OpenClaw-style Action Receipt Kit:
+
+```bash
+npm install
+npm run openclaw:dry-run
+npm run openclaw:receipts -- --only=send-message --json
+npm run verify:openclaw-action-receipt-kit
+npm run test:openclaw-kit
+npm run test:openclaw-kit:e2e
+```
 
 ## Production Agent Identity
 
@@ -155,6 +166,8 @@ npm run example:relay -- --example=openclaw-delete-file
 npm run example:relay -- --example=openclaw-browser-submit
 npm run example:relay -- --example=openclaw-shell-command
 npm run example:relay -- --example=openclaw-workflow-state-change
+npm run example:relay -- --example=openclaw-memory-write
+npm run example:relay -- --example=openclaw-data-export
 ```
 
 The example calls production Relay by default:

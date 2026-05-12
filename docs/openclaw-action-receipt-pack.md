@@ -1,9 +1,9 @@
-# OpenClaw Action Receipt Pack v0.1
+# OpenClaw Action Receipt Kit
 
-Status: local example pack  
+Status: local release candidate example kit
 Date: 2026-05-12
 
-This pack shows how an OpenClaw-style autonomous computer-use agent can create a Neura Action Card before messages, file changes, browser submits, shell commands, or workflow changes execute.
+This document covers the OpenClaw Action Receipt Pack v0.1 and the runnable Action Receipt Kit that ships with it. The kit shows how an OpenClaw-style autonomous computer-use agent can create a Neura Action Card before messages, file changes, browser submits, shell commands, workflow changes, memory writes, or data exports execute.
 
 ```text
 proposed local agent action -> Action Card -> Relay Decision Receipt -> user or runtime-owned execution
@@ -20,11 +20,18 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 | `skills/openclaw/neura-file-change-review` | Review file edit and delete actions before local file changes |
 | `skills/openclaw/neura-browser-action-review` | Review browser form submits and web state changes before dispatch |
 | `skills/openclaw/neura-shell-command-review` | Review shell commands before local runtime execution |
+| `skills/openclaw/neura-memory-write-review` | Review persistent memory writes before storage |
+| `skills/openclaw/neura-data-export-review` | Review data exports before content leaves the workspace |
 | `examples/openclaw/action-cards` | Public-safe Action Card fixtures for common autonomous computer-use actions |
+| `examples/openclaw/action-receipt-kit.manifest.json` | Machine-readable kit manifest, boundaries, example list, and one-command entrypoints |
+| `examples/openclaw/run-action-receipt-kit.mjs` | Dry-run and live receipt runner |
+| `scripts/verify-openclaw-action-receipt-kit.mjs` | Public-safe verifier for docs, fixtures, skills, runner, and boundaries |
+| `tests/openclaw-action-receipt-kit.test.mjs` | Unit tests for manifest, refs-only fixtures, aliases, docs, and dry-run output |
+| `tests/openclaw-action-receipt-kit.e2e.mjs` | Live E2E test that requests Relay Decision Receipts |
 
 ## Action Families
 
-The first pack covers six action families:
+The kit covers eight action families:
 
 | Family | Example file | Receipt need |
 | --- | --- | --- |
@@ -34,6 +41,8 @@ The first pack covers six action families:
 | Browser submit | `browser-submit.json` | confirm target form, user intent, and data refs before submit |
 | Shell command | `shell-command.json` | review blast radius, environment, and command profile refs |
 | Workflow state change | `workflow-state-change.json` | confirm authority, evidence, and state transition policy |
+| memory write | `memory-write.json` | confirm subject intent, memory scope, retention posture, and authority before storage |
+| data export | `data-export.json` | confirm privacy request, export target, and data-export policy refs before transfer |
 
 ## How To Use
 
@@ -43,10 +52,32 @@ The first pack covers six action families:
 4. Relay returns a Decision Receipt with decision, trace ref, transaction ref, Registry context where available, and Authority Decision Engine explanation when present.
 5. The user, developer, or agent runtime decides whether to execute. Neura does not execute downstream actions.
 
-Run the verifier:
+Run the kit without calling Relay:
+
+```bash
+npm run openclaw:dry-run
+npm run openclaw:dry-run -- --json
+```
+
+Request live Relay Decision Receipts:
+
+```bash
+npm run openclaw:receipts
+npm run openclaw:receipts -- --only=send-message --json
+```
+
+Verify the public-safe kit contract:
 
 ```bash
 npm run verify:openclaw-action-receipt-pack
+npm run verify:openclaw-action-receipt-kit
+```
+
+Run the test framework:
+
+```bash
+npm run test:openclaw-kit
+npm run test:openclaw-kit:e2e
 ```
 
 ## Boundaries

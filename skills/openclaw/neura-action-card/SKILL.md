@@ -1,6 +1,6 @@
 ---
 name: neura-openclaw-action-card
-description: Use when an OpenClaw-style or local autonomous computer-use agent is about to send a message, touch files, submit a browser action, run a shell command, or change workflow state and should draft a Neura Action Card before execution.
+description: Use when an OpenClaw-style or local autonomous computer-use agent is about to send a message, touch files, submit a browser action, run a shell command, change workflow state, write memory, or export data and should draft a Neura Action Card before execution.
 ---
 
 # Neura OpenClaw-Style Action Card
@@ -11,7 +11,7 @@ This is an example skill, not an official OpenClaw or ClawHub integration, listi
 
 ## Workflow
 
-1. Identify the proposed action family: message, file, browser, shell, workflow, or data access.
+1. Identify the proposed action family: message, file, browser, shell, workflow, memory, or data export.
 2. Capture refs only: action ref, target ref, user intent ref, evidence refs, rule refs, authority refs, and risk category.
 3. Use `templates/openclaw-action-card.v0.1.json` as the draft shape.
 4. Do not include raw message bodies, file contents, browser form values, shell command strings, customer data, credentials, secrets, or token values.
