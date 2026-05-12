@@ -80,6 +80,8 @@ function run(command, args) {
 }
 
 const requiredFiles = [
+  ".github/workflows/openclaw-action-receipt-kit.yml",
+  "CHANGELOG.md",
   "docs/openclaw-action-receipt-pack.md",
   "examples/openclaw/README.md",
   "examples/openclaw/action-receipt-kit.manifest.json",
@@ -144,6 +146,8 @@ const docs = read("docs/openclaw-action-receipt-pack.md");
 requireIncludes("docs", docs, [
   "OpenClaw Action Receipt Kit",
   "OpenClaw Action Receipt Pack v0.1",
+  ".github/workflows/openclaw-action-receipt-kit.yml",
+  "CHANGELOG.md",
   "npm run openclaw:dry-run",
   "npm run openclaw:receipts",
   "npm run verify:openclaw-action-receipt-kit",
@@ -156,8 +160,38 @@ requireIncludes("docs", docs, [
 ]);
 rejectUnsafe("docs", docs);
 
+const changelog = read("CHANGELOG.md");
+requireIncludes("changelog", changelog, [
+  "OpenClaw Action Receipt Kit v0.1 RC",
+  "eight refs-only Action Card families",
+  "npm run openclaw:dry-run",
+  "npm run openclaw:receipts",
+  "npm run verify:openclaw-action-receipt-kit",
+  "GitHub Actions CI",
+  "no official OpenClaw or ClawHub",
+]);
+rejectUnsafe("changelog", changelog);
+
+const workflow = read(".github/workflows/openclaw-action-receipt-kit.yml");
+requireIncludes("workflow", workflow, [
+  "OpenClaw Action Receipt Kit",
+  "pull_request:",
+  "push:",
+  "workflow_dispatch:",
+  "npm run test:openclaw-kit",
+  "npm run verify:openclaw-action-receipt-kit",
+  "npm run verify:openclaw-action-receipt-pack",
+  "npm run openclaw:dry-run -- --json",
+  "npm run test:openclaw-kit:e2e",
+  "npm run openclaw:receipts -- --json",
+]);
+rejectUnsafe("workflow", workflow);
+
 const readme = read("README.md");
 requireIncludes("readme", readme, [
+  "Release-candidate snapshot",
+  "CHANGELOG.md",
+  "CI now runs the local kit contract",
   "npm run openclaw:dry-run",
   "npm run openclaw:receipts",
   "npm run verify:openclaw-action-receipt-kit",

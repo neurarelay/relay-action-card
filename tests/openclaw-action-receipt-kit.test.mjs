@@ -149,6 +149,8 @@ test("core example aliases expose every OpenClaw fixture", () => {
 test("docs and skills keep the public-safe boundary", () => {
   const docs = [
     "README.md",
+    "CHANGELOG.md",
+    ".github/workflows/openclaw-action-receipt-kit.yml",
     "docs/openclaw-action-receipt-pack.md",
     "examples/openclaw/README.md",
     "skills/openclaw/neura-action-card/SKILL.md",
@@ -168,6 +170,19 @@ test("docs and skills keep the public-safe boundary", () => {
     assert.doesNotMatch(text, /enables public API key issuance|enables public A2A token issuance/);
     assert.doesNotMatch(text, /executes downstream actions by Neura/);
   }
+});
+
+test("GitHub Actions keeps local checks automatic and live receipts manual", () => {
+  const workflow = read(".github/workflows/openclaw-action-receipt-kit.yml");
+  assert.match(workflow, /pull_request:/);
+  assert.match(workflow, /push:/);
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /npm run test:openclaw-kit/);
+  assert.match(workflow, /npm run verify:openclaw-action-receipt-kit/);
+  assert.match(workflow, /npm run verify:openclaw-action-receipt-pack/);
+  assert.match(workflow, /npm run openclaw:dry-run -- --json/);
+  assert.match(workflow, /npm run test:openclaw-kit:e2e/);
+  assert.match(workflow, /npm run openclaw:receipts -- --json/);
 });
 
 test("dry-run returns every fixture and skips Relay calls", () => {

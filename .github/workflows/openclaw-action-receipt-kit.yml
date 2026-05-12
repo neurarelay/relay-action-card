@@ -1,0 +1,97 @@
+name: OpenClaw Action Receipt Kit
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/openclaw-action-receipt-kit.yml"
+      - "CHANGELOG.md"
+      - "README.md"
+      - "package.json"
+      - "package-lock.json"
+      - "docs/openclaw-action-receipt-pack.md"
+      - "examples/core/resolve-action-card.mjs"
+      - "examples/openclaw/**"
+      - "scripts/verify-openclaw-action-receipt-kit.mjs"
+      - "scripts/verify-openclaw-action-receipt-pack.mjs"
+      - "skills/openclaw/**"
+      - "tests/openclaw-action-receipt-kit*.mjs"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/openclaw-action-receipt-kit.yml"
+      - "CHANGELOG.md"
+      - "README.md"
+      - "package.json"
+      - "package-lock.json"
+      - "docs/openclaw-action-receipt-pack.md"
+      - "examples/core/resolve-action-card.mjs"
+      - "examples/openclaw/**"
+      - "scripts/verify-openclaw-action-receipt-kit.mjs"
+      - "scripts/verify-openclaw-action-receipt-pack.mjs"
+      - "skills/openclaw/**"
+      - "tests/openclaw-action-receipt-kit*.mjs"
+  workflow_dispatch:
+    inputs:
+      relay_base_url:
+        description: Relay base URL for live receipt checks.
+        required: false
+        default: https://www.neurarelay.com
+
+permissions:
+  contents: read
+
+jobs:
+  local-contract:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run kit unit tests
+        run: npm run test:openclaw-kit
+
+      - name: Verify kit contract
+        run: npm run verify:openclaw-action-receipt-kit
+
+      - name: Verify pack boundary
+        run: npm run verify:openclaw-action-receipt-pack
+
+      - name: Run dry-run proof
+        run: npm run openclaw:dry-run -- --json
+
+  manual-live-receipts:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run live E2E receipt test
+        run: npm run test:openclaw-kit:e2e
+        env:
+          RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}
+
+      - name: Run live all-family receipt proof
+        run: npm run openclaw:receipts -- --json
+        env:
+          RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}

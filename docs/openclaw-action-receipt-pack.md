@@ -28,6 +28,8 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 | `scripts/verify-openclaw-action-receipt-kit.mjs` | Public-safe verifier for docs, fixtures, skills, runner, and boundaries |
 | `tests/openclaw-action-receipt-kit.test.mjs` | Unit tests for manifest, refs-only fixtures, aliases, docs, and dry-run output |
 | `tests/openclaw-action-receipt-kit.e2e.mjs` | Live E2E test that requests Relay Decision Receipts |
+| `.github/workflows/openclaw-action-receipt-kit.yml` | CI for local contract checks plus manual live receipt proof |
+| `CHANGELOG.md` | Release-candidate summary and public-safe claim boundary |
 
 ## Action Families
 
@@ -79,6 +81,8 @@ Run the test framework:
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 ```
+
+GitHub Actions runs the local contract checks automatically for relevant pull requests and pushes. The live production receipt proof runs only through manual workflow dispatch.
 
 ## Boundaries
 
