@@ -220,9 +220,9 @@ This repo includes prepared provider templates:
 - Neura does not expose private payloads.
 - Neura does not issue public production MCP tokens.
 - Neura does not auto-approve Registry submissions.
-- Neura does not provide public A2A discoverability in this repo.
+- A2A public Agent Card discovery is separate from this MCP path; protected A2A execution still requires controlled access.
 - Neura is not claiming an official ecosystem partnership.
-- This repo is not a packaged SDK.
+- `@neurarelay/sdk@0.1.0` is public, but the SDK does not issue public production MCP tokens or turn protected MCP into self-service access.
 
 ## Why This Matters
 

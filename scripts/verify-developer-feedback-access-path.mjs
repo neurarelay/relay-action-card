@@ -105,7 +105,7 @@ assert(
     "no raw private payload",
     "Rotate or revoke controlled production/private MCP access",
     "public production MCP token issuance",
-    "A2A discoverability",
+    "public A2A token issuance or unprotected A2A execution",
   ]),
   "controlled beta access doc must define qualification, token handoff, proof, revocation, and non-claims",
   failures,

@@ -1,18 +1,23 @@
 # Neura Developer Examples
 
-This folder has four lanes.
+This folder has five lanes.
 
-| Lane | Folder | Use when |
-| --- | --- | --- |
-| Core Relay | `core` | You want the public Neura path: send an Action Card to Relay and receive a Decision Receipt |
-| A2A protected proof | `a2a` | You want public Agent Card discovery plus controlled protected `message/send` proof |
-| Optional MCP | `mcp` | Your agent runtime can call MCP tools with a Workspace sandbox token or controlled production access |
-| SDK | `sdk` | You want the typed `@neurarelay/sdk` public package path |
+- **Core Relay** (`core`): send an Action Card to Relay and receive a Decision Receipt.
+- **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and a local preflight adapter release candidate.
+- **A2A protected proof** (`a2a`): inspect public Agent Card discovery and run controlled protected `message/send` proof when access exists.
+- **Optional MCP** (`mcp`): call Relay through protected MCP tools with a Workspace sandbox token or controlled production/private access.
+- **SDK** (`sdk`): use the typed `@neurarelay/sdk` public package path.
 
 The core path is the default:
 
 ```text
 Action Card -> Relay -> Decision Receipt -> trace
+```
+
+The OpenClaw-style path is public-safe local-action review:
+
+```text
+Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer-owned route
 ```
 
 The MCP path is only an adapter:
@@ -72,6 +77,31 @@ examples/
   a2a/
     README.md
     resolve-action-card-a2a.mjs
+  openclaw/
+    README.md
+    action-receipt-kit.manifest.json
+    run-action-receipt-kit.mjs
+    run-near-miss-workbench.mjs
+    run-preflight-adapter.mjs
+    action-cards/
+      send-message.json
+      edit-file.json
+      delete-file.json
+      browser-submit.json
+      shell-command.json
+      workflow-state-change.json
+      memory-write.json
+      data-export.json
+    near-miss-workbench/
+      scenarios.json
+    preflight-adapter/
+      README.md
+      openclaw.plugin.json
+      package.json
+      index.mjs
+      adapter.mjs
+      fixtures/
+        send-message.preflight.json
   sdk/
     README.md
     resolve-action-card-sdk.mjs
@@ -79,12 +109,22 @@ examples/
 
 `examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
 
+`examples/openclaw` contains OpenClaw-style public-safe examples only. It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
+
 ## Fast Checks
 
 Run the public core path:
 
 ```bash
 npm run example:relay
+```
+
+Run the OpenClaw-style local proof:
+
+```bash
+npm run openclaw:workbench
+npm run openclaw:dry-run
+npm run verify:openclaw-action-receipt-kit
 ```
 
 List and run the public Action Card examples:

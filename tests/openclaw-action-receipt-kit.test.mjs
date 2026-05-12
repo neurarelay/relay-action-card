@@ -204,6 +204,9 @@ test("GitHub Actions keeps local checks automatic and live receipts manual", () 
 
 test("README exposes the visual OpenClaw proof before setup", () => {
   const readme = read("README.md");
+  assert.match(readme, /Choose the lane that matches what you want to prove/);
+  assert.match(readme, /OpenClaw-style receipt kit/);
+  assert.equal(readme.includes("There are three paths in this repo"), false);
   assert.equal(
     readme.includes("docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
     true,
@@ -218,6 +221,20 @@ test("README exposes the visual OpenClaw proof before setup", () => {
   assert.match(readme, /npm run openclaw:dry-run -- --json/);
   assert.match(readme, /npm run openclaw:receipts -- --only=send-message --json/);
   assert.equal(readme.includes("artifacts/openclaw-near-miss-workbench/report.html"), true);
+});
+
+test("examples README exposes OpenClaw as a first-class lane", () => {
+  const readme = read("examples/README.md");
+  assert.match(readme, /This folder has five lanes/);
+  assert.match(readme, /OpenClaw-style receipt kit/);
+  assert.match(
+    readme,
+    /Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer-owned route/,
+  );
+  assert.equal(readme.includes("examples/openclaw"), true);
+  assert.match(readme, /npm run openclaw:workbench/);
+  assert.match(readme, /npm run verify:openclaw-action-receipt-kit/);
+  assert.match(readme, /not an official OpenClaw or ClawHub integration/);
 });
 
 test("dry-run returns every fixture and skips Relay calls", () => {

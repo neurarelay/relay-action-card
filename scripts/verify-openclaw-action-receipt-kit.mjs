@@ -209,6 +209,8 @@ rejectUnsafe("workflow", workflow);
 
 const readme = read("README.md");
 requireIncludes("readme", readme, [
+  "Choose the lane that matches what you want to prove",
+  "OpenClaw-style receipt kit",
   "Release-candidate snapshot",
   "docs/openclaw-near-miss-workbench.md",
   "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png",
@@ -235,6 +237,9 @@ requireIncludes("readme", readme, [
   "openclaw-data-export",
   "Action Receipt Kit",
 ]);
+if (readme.includes("There are three paths in this repo")) {
+  fail("readme", "README Start Here must not describe the repo as three paths");
+}
 rejectUnsafe("readme", readme);
 
 const openclawReadme = read("examples/openclaw/README.md");
@@ -252,6 +257,18 @@ requireIncludes("examples_readme", openclawReadme, [
   "data-export.json",
 ]);
 rejectUnsafe("examples_readme", openclawReadme);
+
+const examplesReadme = read("examples/README.md");
+requireIncludes("examples/README.md", examplesReadme, [
+  "This folder has five lanes.",
+  "OpenClaw-style receipt kit",
+  "Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer-owned route",
+  "examples/openclaw",
+  "npm run openclaw:workbench",
+  "npm run verify:openclaw-action-receipt-kit",
+  "not an official OpenClaw or ClawHub integration",
+]);
+rejectUnsafe("examples/README.md", examplesReadme);
 
 const runner = read("examples/openclaw/run-action-receipt-kit.mjs");
 requireIncludes("runner", runner, [

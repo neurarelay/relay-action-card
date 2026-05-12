@@ -40,10 +40,10 @@ Google ADK remote MCP uses `McpToolset` with Streamable HTTP connection params, 
 
 Microsoft Agent Framework uses `MCPStreamableHTTPTool` for remote MCP endpoints with `headers`, `allowed_tools`, and `approval_mode` set on the tool. Foundry Agent Service uses a remote MCP tool definition with `server_url`, `server_label`, `allowed_tools`, and approval posture. The template is source-aligned but not live-verified without a Microsoft agent runtime or Foundry project connection.
 
-A2A discoverability is a separate later story. It is not part of this MCP example pack.
+A2A public Agent Card discovery is live through the separate controlled client pack. Protected `message/send` remains controlled and is not part of this MCP example pack.
 
 ## Claim Boundary
 
 Do claim: Neura has a production-verified protected MCP-compatible Relay surface, private live Claude Messages API proof, private live Claude Code HTTP MCP proof, and source-aligned provider templates for OpenAI Responses, Google ADK, and Microsoft Agent Framework / Foundry.
 
-Do not claim: public MCP token issuance, packaged SDK, official Anthropic listing or provider partnership, downstream execution, broad compatibility with every MCP client, live Google ADK verification, live Microsoft Agent Framework / Foundry verification, or A2A discoverability.
+Do not claim: public MCP token issuance, SDK-based protected MCP self-service, official Anthropic listing or provider partnership, downstream execution, broad compatibility with every MCP client, live Google ADK verification, live Microsoft Agent Framework / Foundry verification, or unprotected A2A execution.

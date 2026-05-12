@@ -13,14 +13,14 @@ Neura is protocol-first. MCP is an optional adapter for MCP-capable runtimes tha
 | Claude Code remote HTTP MCP | Private live client proof passed | `examples/mcp/claude-code-neura.mcp.example.json` follows the Claude Code HTTP MCP configuration shape with bearer-token header; May 9 live proof used local Claude Code and a controlled Relay sandbox token to return a Decision Receipt plus trace and transaction refs with no private payload return and no downstream execution |
 | Google ADK MCP | Source-aligned template prepared | `examples/mcp/google-adk-remote-mcp.py` follows the Google ADK remote MCP shape with `McpToolset`, Streamable HTTP connection params, Authorization header, and a five-tool Neura allowlist; live Google ADK verification is pending until ADK runtime credentials and controlled Neura MCP access are available |
 | Microsoft Agent Framework / Foundry MCP | Source-aligned template prepared | `examples/mcp/microsoft-agent-framework-mcp.py` follows Microsoft Agent Framework remote MCP with `MCPStreamableHTTPTool` and Foundry's remote MCP tool shape with `server_url`, `server_label`, `allowed_tools`, and approval posture; live Microsoft verification is pending until the agent runtime/project connection and controlled Neura MCP access are available |
-| A2A discoverability | Separate later story | Not part of MCP Provider Example Pack v0.4 |
+| A2A public Agent Card discovery | Separate controlled client pack | Public metadata discovery is live; protected `message/send` remains controlled and is not part of MCP Provider Example Pack v0.4 |
 
 ## Claim Boundary
 
 - Do claim: Neura Relay has a production-verified protected MCP-compatible tool surface.
 - Do claim: MCP-capable runtimes can route Action Cards to Neura before downstream execution when they have controlled access.
 - Do claim: Neura returns a Decision Receipt, trace replay refs, Registry status, and safe authority-standing context without downstream execution.
-- Do not claim: public token issuance, official Anthropic listing, official ecosystem partnership, broad compatibility with every MCP client, packaged SDK, hosted agents, or downstream execution.
+- Do not claim: public token issuance, official Anthropic listing, official ecosystem partnership, broad compatibility with every MCP client, SDK-based protected MCP self-service, hosted agents, or downstream execution.
 
 ## Verification Notes
 

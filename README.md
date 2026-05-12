@@ -13,14 +13,14 @@ Distribution proof:
 
 ## Start Here
 
-There are three paths in this repo:
+Choose the lane that matches what you want to prove:
 
-| Path | Folder | Access | Purpose |
-| --- | --- | --- | --- |
-| Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
-| Optional MCP examples | `examples/mcp` | Sandbox or controlled production access | Call the same Relay spine through protected MCP-compatible tools |
-| SDK path | `examples/sdk` | Public npm package | Use `@neurarelay/sdk` without changing the Relay decision boundary |
-| OpenClaw-style receipt kit | `examples/openclaw` and `skills/openclaw` | Public-safe examples | Draft and test receipt-ready Action Cards before local agent messages, file changes, browser submits, shell commands, workflow changes, memory writes, and data exports |
+- **Core Relay example** (`examples/core`, public): send an Action Card to `POST /api/resolve` and receive a Decision Receipt.
+- **OpenClaw-style receipt kit** (`examples/openclaw` + `skills/openclaw`, public-safe examples): generate the near-miss workbench, dry-run receipt-ready Action Cards, and test local preflight review.
+- **SDK path** (`examples/sdk`, public npm package): use `@neurarelay/sdk` without changing the Relay decision boundary.
+- **Optional MCP examples** (`examples/mcp`, sandbox or controlled production/private access): call the same Relay spine through protected MCP-compatible tools.
+
+The OpenClaw-style kit covers local agent messages, file changes, browser submits, shell commands, workflow changes, memory writes, and data exports without claiming an official OpenClaw or ClawHub integration.
 
 The core path is the default Neura path:
 

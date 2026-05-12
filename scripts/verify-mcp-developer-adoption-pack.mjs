@@ -140,8 +140,8 @@ assert(
   "matrix_must_distinguish_verified_from_prepared",
 );
 assert(
-  matrix.includes("A2A discoverability") &&
-    matrix.includes("Separate later story"),
+  matrix.includes("A2A public Agent Card discovery") &&
+    matrix.includes("Separate controlled client pack"),
   "matrix_must_keep_a2a_separate",
 );
 assert(
@@ -151,7 +151,7 @@ assert(
     providerRuntimePaths.includes("private live Claude Messages API proof") &&
     providerRuntimePaths.includes("Google ADK remote MCP") &&
     providerRuntimePaths.includes("Microsoft Agent Framework / Foundry MCP") &&
-    providerRuntimePaths.includes("A2A discoverability is a separate later story"),
+    providerRuntimePaths.includes("A2A public Agent Card discovery is live"),
   "provider_runtime_paths_must_explain_provider_rollout_and_boundaries",
 );
 assert(
@@ -167,7 +167,7 @@ assert(
     governanceWalkthrough.includes("OpenAI Responses remote MCP") &&
     governanceWalkthrough.includes("Anthropic Claude Messages MCP connector") &&
     governanceWalkthrough.includes("Neura does not issue public production MCP tokens") &&
-    governanceWalkthrough.includes("Neura does not provide public A2A discoverability"),
+    governanceWalkthrough.includes("A2A public Agent Card discovery is separate from this MCP path"),
   "governance_walkthrough_must_explain_mcp_tool_call_governance_and_boundaries",
 );
 assert(

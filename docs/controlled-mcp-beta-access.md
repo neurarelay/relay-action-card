@@ -2,7 +2,7 @@
 
 This is the operating path for requesting protected Neura Relay MCP access.
 
-It is not public production token issuance. It is not a self-serve API-key system. It is not a packaged SDK. It is the production/private beta path for qualified developers who already proved the open Action Card loop and have a concrete MCP-capable runtime.
+It is not public production token issuance. It is not a self-serve API-key system. It is separate from the public SDK package. It is the production/private beta path for qualified developers who already proved the open Action Card loop and have a concrete MCP-capable runtime.
 
 For first proof, signed-in Relay Workspace can issue a one-time sandbox MCP token instantly:
 
@@ -126,6 +126,6 @@ This beta path does not claim:
 - Registry auto-approval
 - downstream execution by Neura
 - private payload storage by Neura
-- packaged SDK availability
+- SDK-based production/private MCP self-service
 - official provider partnership
-- A2A discoverability
+- public A2A token issuance or unprotected A2A execution

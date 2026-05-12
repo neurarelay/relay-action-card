@@ -51,4 +51,4 @@ The verifier sends all three Action Cards to production Relay and checks that:
 
 In production, the authority refs should come from your own authorization layer and Registry-backed Agent Passport standing. Relay can evaluate the Action Card and return a governed receipt, but your system remains responsible for final policy source of truth, private data access, downstream tool execution, and audit storage.
 
-The proof is intentionally narrow. It does not claim a public SDK, public Agent Card route, public A2A support, or open production MCP access.
+The proof is intentionally narrow. It does not claim public A2A execution, public A2A token issuance, or open production MCP access.

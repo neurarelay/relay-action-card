@@ -94,8 +94,8 @@ requirePhrases("walkthrough", walkthrough, [
 requirePhrases("proof_doc", proofDoc, [
   "Action Card -> Relay -> Decision Receipt -> developer-owned execution",
   "blocked authority-mismatch scenarios do not return `proceed`",
-  "does not claim a public SDK",
-  "public A2A support",
+  "does not claim public A2A execution",
+  "public A2A token issuance",
   "open production MCP access",
 ]);
 
