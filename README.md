@@ -89,33 +89,41 @@ Once you have a Decision Receipt, choose one next action:
 | Sandbox MCP access | You want to test protected MCP immediately with a signed-in Workspace account | [Open Workspace](https://www.neurarelay.com/developers/workspace) |
 | Production/private MCP access | You have an MCP-capable runtime and a concrete governed-action use case beyond sandbox | [Request controlled access](https://github.com/neurarelay/relay-action-card/issues/new?template=controlled-mcp-access.yml) |
 
-Read the full path in [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md).
+## Deepen The Path
 
-For the MCP tool-call governance pattern, read [`docs/mcp-tool-call-governance-walkthrough.md`](docs/mcp-tool-call-governance-walkthrough.md).
+Start with the lane that matches what you are trying to prove.
 
-Read the controlled beta access operating path in [`docs/controlled-mcp-beta-access.md`](docs/controlled-mcp-beta-access.md).
+### OpenClaw-Style Autonomous Computer Use
 
-For the developer-owned agent flow, read [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md).
+The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`.
 
-For the authorization-bypass scenario proof, read [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md).
+- [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md): one-command developer journey proof.
+- [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md): Action Receipt Kit, public-safe fixtures in `examples/openclaw/action-cards`, starter skill at `skills/openclaw/neura-action-card`, verifier, unit tests, and live E2E receipt test.
+- [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md): visual proof for customer data exfiltration, production deployment, and expired delegated authority near-misses.
+- [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md): OpenClaw OS Decision Receipt Surface for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations.
 
-For the Agentic consent / delegated authority proof, read [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md).
+The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`.
 
-For the SDK path, read [`examples/sdk/README.md`](examples/sdk/README.md).
+These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI, or ClawHub integration, listing, approval, or partnership.
 
-For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md).
+### Core Relay And Authority
 
-For agent-assisted development workflows, read [`docs/skills-adoption-pack.md`](docs/skills-adoption-pack.md). The first local example skills are `skills/neura-action-card`, `skills/neura-authority-review`, and `skills/neura-first-receipt`.
+- [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md): first-receipt feedback and controlled-access path.
+- [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md): developer-owned action flow.
+- [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md): authorization-bypass scenario proof.
+- [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md): Agentic consent and delegated authority proof.
 
-For OpenClaw-style autonomous computer-use workflows, start with the [`OpenClaw Developer Journey Proof`](docs/openclaw-developer-journey.md), then read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The Action Receipt Kit includes `skills/openclaw/neura-action-card`, specialized review skills, public-safe fixtures in `examples/openclaw/action-cards`, a one-command developer proof, a live receipt runner, a verifier, unit tests, and a live E2E receipt test. This is an example kit, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
+### SDK, MCP, A2A, And Skills
 
-For the pre-publication developer journey, read [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md). The Near-Miss Workbench generates a local visual report for three severe autonomous-agent incidents: customer data exfiltration, production deployment, and expired delegated authority. The report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step.
-
-For persistent workspace actions, read [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md). The OpenClaw OS Decision Receipt Surface generates a local workspace-style report for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations. It shows the proposed workspace action, Action Card, Authority Decision Engine posture, Decision Receipt route, readiness path, and developer-owned execution route without claiming an official OpenClaw OS, OpenUI, OpenClaw, or ClawHub integration.
+- [`examples/sdk/README.md`](examples/sdk/README.md): stable SDK path for `@neurarelay/sdk`.
+- [`docs/mcp-tool-call-governance-walkthrough.md`](docs/mcp-tool-call-governance-walkthrough.md): MCP tool-call governance pattern.
+- [`docs/controlled-mcp-beta-access.md`](docs/controlled-mcp-beta-access.md): controlled MCP beta access operating path.
+- [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md): controlled A2A client pack.
+- [`docs/skills-adoption-pack.md`](docs/skills-adoption-pack.md): agent-assisted development workflows, including `skills/neura-action-card`, `skills/neura-authority-review`, and `skills/neura-first-receipt`.
 
 ![OpenClaw Near-Miss Workbench visual proof](docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
 
-OpenClaw Developer Journey Proof:
+### OpenClaw Developer Journey Proof
 
 ```bash
 npm install
@@ -164,7 +172,9 @@ Release-candidate snapshot:
 
 CI now runs the local kit contract on pull requests and pushes that touch the OpenClaw surface. Live production receipt proof is available as a manual GitHub Actions run so normal CI stays deterministic. See [`CHANGELOG.md`](CHANGELOG.md).
 
-For plugin-ready local runtime wiring, read [`docs/openclaw-preflight-adapter.md`](docs/openclaw-preflight-adapter.md). The preflight adapter exposes `beforeAction(preflightAction)` and an OpenClaw-style `register(api)` entry example:
+### Plugin-Ready Local Runtime Wiring
+
+Read [`docs/openclaw-preflight-adapter.md`](docs/openclaw-preflight-adapter.md) for the preflight adapter with `beforeAction(preflightAction)` and an OpenClaw-style `register(api)` entry example:
 
 ```bash
 npm run openclaw:preflight:dry-run
@@ -176,7 +186,7 @@ npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The package-ready release candidate is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md). It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but no OpenClaw / ClawHub submission, publication, listing, approval, or partnership claim exists.
+The package-ready release candidate is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md). It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but no OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
 
 ## Production Agent Identity
 
