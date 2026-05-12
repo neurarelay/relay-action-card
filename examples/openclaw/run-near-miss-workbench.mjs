@@ -28,6 +28,24 @@ function routeLabel(decision) {
   return decision.replaceAll("_", " ");
 }
 
+function titleCase(value) {
+  return String(value)
+    .replaceAll("_", " ")
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+    .join(" ");
+}
+
+function keyNearMissStep(journey) {
+  return (
+    journey.steps.find((step) => step.decision === "stop") ??
+    journey.steps.find((step) => step.decision === "human_review") ??
+    journey.steps.find((step) => step.decision === "revise") ??
+    journey.steps[0]
+  );
+}
+
 function decisionCounts(journeys) {
   const counts = { proceed: 0, human_review: 0, revise: 0, stop: 0 };
   for (const journey of journeys) {
@@ -129,7 +147,7 @@ function renderMarkdown(report) {
     "",
     `Mode: ${report.mode}`,
     "",
-    "This local report visualizes three severe autonomous-agent near misses before any downstream action executes.",
+    "Receipt before execution: three severe autonomous-agent near misses visualized before any downstream action executes.",
     "",
     `Path: ${report.path}`,
     "",
@@ -143,9 +161,15 @@ function renderMarkdown(report) {
   ];
 
   for (const journey of report.journeys) {
+    const keyStep = keyNearMissStep(journey);
     lines.push(`## ${journey.title}`, "");
     lines.push(`Problem: ${journey.developer_problem}`);
     lines.push(`Impact: ${journey.impact}`, "");
+    lines.push(`- What the agent was about to do: ${journey.agent_intent}`);
+    lines.push(`- What Neura caught: ${keyStep.title}`);
+    lines.push(`- Receipt route: ${keyStep.route}`);
+    lines.push(`- Developer next step: ${keyStep.safe_next_step}`);
+    lines.push("");
     for (const step of journey.steps) {
       lines.push(`### ${step.title}`);
       lines.push(`- Proposed action: ${step.proposed_action}`);
@@ -167,6 +191,32 @@ function renderMarkdown(report) {
 }
 
 function renderHtml(report) {
+  const journeyCards = report.journeys
+    .map((journey) => {
+      const keyStep = keyNearMissStep(journey);
+      return `
+        <article class="scenario-card scenario-${escapeHtml(keyStep.decision)}">
+          <span class="severity">${escapeHtml(journey.severity)}</span>
+          <h2>${escapeHtml(journey.title)}</h2>
+          <p>${escapeHtml(journey.developer_problem)}</p>
+          <dl class="scenario-flow">
+            <div>
+              <dt>Agent intent</dt>
+              <dd>${escapeHtml(journey.agent_intent)}</dd>
+            </div>
+            <div>
+              <dt>What Neura catches</dt>
+              <dd>${escapeHtml(keyStep.title)}</dd>
+            </div>
+            <div>
+              <dt>Receipt route</dt>
+              <dd>${escapeHtml(titleCase(keyStep.route))}</dd>
+            </div>
+          </dl>
+        </article>`;
+    })
+    .join("");
+
   const decisionTiles = Object.entries(report.count.decisions)
     .map(
       ([decision, count]) => `
@@ -179,6 +229,7 @@ function renderHtml(report) {
 
   const journeySections = report.journeys
     .map((journey) => {
+      const keyStep = keyNearMissStep(journey);
       const steps = journey.steps
         .map(
           (step, index) => `
@@ -208,10 +259,30 @@ function renderHtml(report) {
       return `
         <section class="journey">
           <div class="journey-header">
-            <span class="severity">${escapeHtml(journey.severity)}</span>
-            <h2>${escapeHtml(journey.title)}</h2>
+            <div class="journey-heading">
+              <span class="severity">${escapeHtml(journey.severity)}</span>
+              <h2>${escapeHtml(journey.title)}</h2>
+            </div>
             <p>${escapeHtml(journey.developer_problem)}</p>
             <strong>${escapeHtml(journey.impact)}</strong>
+            <div class="journey-proof">
+              <div>
+                <span>What the agent was about to do</span>
+                <strong>${escapeHtml(journey.agent_intent)}</strong>
+              </div>
+              <div>
+                <span>What Neura caught</span>
+                <strong>${escapeHtml(keyStep.title)}</strong>
+              </div>
+              <div>
+                <span>Receipt route</span>
+                <strong>${escapeHtml(titleCase(keyStep.route))}</strong>
+              </div>
+              <div>
+                <span>Developer next step</span>
+                <strong>${escapeHtml(keyStep.safe_next_step)}</strong>
+              </div>
+            </div>
           </div>
           <div class="steps">${steps}</div>
         </section>`;
@@ -227,11 +298,12 @@ function renderHtml(report) {
   <style>
     :root {
       color-scheme: light;
-      --ink: #17201d;
-      --muted: #5d6964;
-      --line: #d8dfda;
-      --paper: #f7f8f5;
+      --ink: #15201c;
+      --muted: #5c6963;
+      --line: #d8dfdc;
+      --paper: #f6f8f5;
       --panel: #ffffff;
+      --soft: #eef2ec;
       --proceed: #0d7c59;
       --review: #8a5a00;
       --revise: #265fa6;
@@ -245,16 +317,35 @@ function renderHtml(report) {
       background: var(--paper);
       line-height: 1.5;
     }
-    main { max-width: 1180px; margin: 0 auto; padding: 40px 24px 56px; }
+    main { max-width: 1220px; margin: 0 auto; padding: 34px 24px 56px; }
     header {
       border-bottom: 1px solid var(--line);
-      padding-bottom: 28px;
-      margin-bottom: 28px;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
     }
-    h1 { margin: 0 0 12px; font-size: 42px; line-height: 1.05; letter-spacing: 0; }
-    h2 { margin: 6px 0 8px; font-size: 27px; line-height: 1.2; letter-spacing: 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    h1 {
+      max-width: 900px;
+      margin: 0 0 12px;
+      font-size: 46px;
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    h2 { margin: 6px 0 8px; font-size: 25px; line-height: 1.2; letter-spacing: 0; }
     h3 { margin: 8px 0 8px; font-size: 18px; letter-spacing: 0; }
-    p { margin: 0 0 12px; color: var(--muted); }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 880px; }
     .path {
       display: inline-block;
       margin-top: 8px;
@@ -263,6 +354,53 @@ function renderHtml(report) {
       background: var(--panel);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 13px;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .proof-line {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 20px;
+      max-width: 980px;
+    }
+    .proof-line span {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 10px;
+      color: var(--ink);
+      font-weight: 700;
+      min-height: 46px;
+    }
+    .scenario-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .scenario-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--muted);
+      padding: 18px;
+      min-height: 315px;
+    }
+    .scenario-card h2 { font-size: 21px; }
+    .scenario-card p { font-size: 14px; }
+    .scenario-stop { border-top-color: var(--stop); }
+    .scenario-human_review { border-top-color: var(--review); }
+    .scenario-revise { border-top-color: var(--revise); }
+    .scenario-proceed { border-top-color: var(--proceed); }
+    .scenario-flow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin: 14px 0 0;
+    }
+    .scenario-flow div {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      padding: 9px;
     }
     .metrics {
       display: grid;
@@ -289,6 +427,28 @@ function renderHtml(report) {
     }
     .journey-header { padding: 22px; border-bottom: 1px solid var(--line); }
     .journey-header strong { display: block; color: var(--ink); max-width: 840px; }
+    .journey-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .journey-proof {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .journey-proof div {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      padding: 10px;
+      min-height: 112px;
+    }
+    .journey-proof span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .journey-proof strong { font-size: 14px; line-height: 1.35; overflow-wrap: anywhere; }
     .severity {
       display: inline-block;
       border: 1px solid var(--line);
@@ -310,7 +470,7 @@ function renderHtml(report) {
       padding-top: 18px;
       text-align: center;
       color: var(--muted);
-      background: #f0f2ee;
+      background: var(--soft);
       border-right: 1px solid var(--line);
       font-weight: 700;
     }
@@ -349,7 +509,7 @@ function renderHtml(report) {
       display: block;
       margin-top: 12px;
       padding: 8px;
-      background: #f0f2ee;
+      background: var(--soft);
       overflow-wrap: anywhere;
       font-size: 12px;
     }
@@ -362,18 +522,28 @@ function renderHtml(report) {
     @media (max-width: 820px) {
       main { padding: 28px 16px 40px; }
       h1 { font-size: 34px; }
-      .metrics, .steps { grid-template-columns: 1fr; }
+      .proof-line, .scenario-cards, .metrics, .journey-proof, .steps { grid-template-columns: 1fr; }
       .step, .step:nth-child(2n) { border-right: 0; }
+      .scenario-card { min-height: auto; }
+      .journey-proof div { min-height: auto; }
     }
   </style>
 </head>
 <body>
   <main>
     <header>
+      <span class="eyebrow">Local visual proof - Safe local projection</span>
       <h1>OpenClaw Near-Miss Workbench</h1>
-      <p>Three severe autonomous-agent incidents visualized before execution: data leakage, production damage, and stale delegated authority.</p>
+      <p>Receipt before execution for three autonomous-agent failures developers understand immediately: data leakage, production damage, and stale delegated authority.</p>
       <span class="path">${escapeHtml(report.path)}</span>
+      <div class="proof-line" aria-label="Receipt path">
+        <span>Proposed action</span>
+        <span>Action Card</span>
+        <span>Decision Receipt</span>
+        <span>Developer-owned execution</span>
+      </div>
     </header>
+    <section class="scenario-cards" aria-label="Flagship near-miss scenarios">${journeyCards}</section>
     <section class="metrics">${decisionTiles}</section>
     ${journeySections}
     <footer>

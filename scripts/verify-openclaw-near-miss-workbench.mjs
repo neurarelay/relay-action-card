@@ -171,6 +171,10 @@ requireIncludes("docs", docs, [
   "Customer Data Exfiltration Near-Miss",
   "Production Deployment Near-Miss",
   "Expired Delegated Authority Near-Miss",
+  "what the agent was about to do",
+  "what Neura caught",
+  "Decision Receipt route",
+  "developer-owned next step",
   "npm run openclaw:workbench",
   "npm run verify:openclaw-workbench",
   "npm run test:openclaw-workbench",
@@ -182,6 +186,10 @@ rejectUnsafe("docs", docs);
 const readme = read("README.md");
 requireIncludes("readme", readme, [
   "docs/openclaw-near-miss-workbench.md",
+  "what the agent was about to do",
+  "what Neura caught",
+  "receipt route",
+  "developer-owned next step",
   "npm run openclaw:workbench",
   "npm run verify:openclaw-workbench",
 ]);
@@ -192,6 +200,10 @@ requireIncludes("examples_readme", examplesReadme, [
   "Near-Miss Workbench",
   "npm run openclaw:workbench",
   "artifacts/openclaw-near-miss-workbench/report.html",
+  "agent intent",
+  "what Neura catches",
+  "receipt route",
+  "developer-owned next step",
 ]);
 rejectUnsafe("examples_readme", examplesReadme);
 
@@ -218,9 +230,16 @@ if (existsSync(join(outDir, "report.html"))) {
   const html = readFileSync(join(outDir, "report.html"), "utf8");
   requireIncludes("generated_html", html, [
     "OpenClaw Near-Miss Workbench",
+    "Receipt before execution",
     "Customer Data Exfiltration Near-Miss",
     "Production Deployment Near-Miss",
     "Expired Delegated Authority Near-Miss",
+    "What the agent was about to do",
+    "What Neura caught",
+    "Receipt route",
+    "Developer next step",
+    "scenario-cards",
+    "proof-line",
     "Safe local projection",
   ]);
   rejectUnsafe("generated_html", html);

@@ -5,6 +5,8 @@ Date: 2026-05-12
 
 The Near-Miss Workbench is the pre-publication developer-journey proof for the OpenClaw-style receipt lane. It turns the abstract Action Card pattern into three severe autonomous-agent incidents that any AI agent developer can recognize immediately.
 
+The generated HTML report is a local visual proof surface. Each journey shows what the agent was about to do, what Neura caught, the Decision Receipt route, and the developer-owned next step before any real execution occurs.
+
 ```text
 proposed action -> Action Card -> Decision Receipt -> developer-owned execution
 ```
@@ -34,6 +36,8 @@ artifacts/openclaw-near-miss-workbench/report.json
 ```
 
 Open the HTML report locally to review the developer journey. The generated artifacts are ignored by git so screenshots and local reports can be regenerated without changing the repository.
+
+The first viewport is intentionally demo-oriented: it starts with the receipt path, the three flagship near misses, and the decision mix before expanding into the step-by-step receipt projections.
 
 ## Verify
 

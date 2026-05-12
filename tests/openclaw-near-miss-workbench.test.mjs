@@ -100,10 +100,18 @@ test("workbench generation creates visual, markdown, and JSON reports", () => {
   const report = JSON.parse(readFileSync(join(outDir, "report.json"), "utf8"));
 
   assert.match(html, /OpenClaw Near-Miss Workbench/);
+  assert.match(html, /Receipt before execution/);
   assert.match(html, /Customer Data Exfiltration Near-Miss/);
   assert.match(html, /Production Deployment Near-Miss/);
   assert.match(html, /Expired Delegated Authority Near-Miss/);
+  assert.match(html, /What the agent was about to do/);
+  assert.match(html, /What Neura caught/);
+  assert.match(html, /Receipt route/);
+  assert.match(html, /Developer next step/);
+  assert.match(html, /scenario-cards/);
+  assert.match(html, /proof-line/);
   assert.match(markdown, /Decision Summary/);
+  assert.match(markdown, /What the agent was about to do/);
   assert.equal(report.count.journeys, 3);
 });
 
