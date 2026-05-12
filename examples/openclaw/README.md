@@ -13,6 +13,8 @@ npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-action-receipt-pack
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
+npm run openclaw:preflight:dry-run
+npm run verify:openclaw-preflight-adapter
 ```
 
 ## Fixtures
@@ -29,3 +31,5 @@ npm run test:openclaw-kit:e2e
 | `data-export.json` | data export |
 
 The manifest at `action-receipt-kit.manifest.json` is the machine-readable contract for the local release candidate kit.
+
+The `preflight-adapter` folder adds the plugin-ready `beforeAction(preflightAction)` contract for local autonomous computer-use runtimes. It is an unofficial OpenClaw-style adapter example, not an official integration, listing, approval, or partnership.

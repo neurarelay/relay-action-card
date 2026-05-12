@@ -1,0 +1,24 @@
+{
+  "family": "outbound_message",
+  "proposedAction": {
+    "type": "message.send",
+    "summary": "Send a support follow-up only after intent, recipient, and policy refs are reviewed.",
+    "target": "channel_message_ref:support_followup_2026_05_12"
+  },
+  "affectedObject": "channel_message_ref:support_followup_2026_05_12",
+  "authority": {
+    "delegatedBy": "user_ref_local_operator",
+    "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "authorityScope": "support_channel_response",
+    "allowedActions": ["message.send"],
+    "allowedResources": ["channel_message_ref:support_followup_2026_05_12"],
+    "expiresAt": "2026-12-31T23:59:59Z",
+    "revocationStatus": "active",
+    "policyRefs": ["policy_ref_customer_reply_review"],
+    "authorityScopeRef": "authority_scope_ref_support_channel",
+    "standingRef": "registry_passport_standing_ref_demo"
+  },
+  "evidenceRefs": ["intent_ref_support_followup", "recipient_ref_support_followup"],
+  "ruleRefs": ["policy_ref_customer_reply_review"],
+  "riskCategory": "customer_communication"
+}

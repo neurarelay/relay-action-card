@@ -183,6 +183,9 @@ test("GitHub Actions keeps local checks automatic and live receipts manual", () 
   assert.match(workflow, /npm run openclaw:dry-run -- --json/);
   assert.match(workflow, /npm run test:openclaw-kit:e2e/);
   assert.match(workflow, /npm run openclaw:receipts -- --json/);
+  assert.match(workflow, /npm run test:openclaw-preflight-adapter/);
+  assert.match(workflow, /npm run verify:openclaw-preflight-adapter/);
+  assert.match(workflow, /npm run openclaw:preflight:dry-run -- --json/);
 });
 
 test("dry-run returns every fixture and skips Relay calls", () => {

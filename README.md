@@ -130,6 +130,15 @@ Release-candidate snapshot:
 
 CI now runs the local kit contract on pull requests and pushes that touch the OpenClaw surface. Live production receipt proof is available as a manual GitHub Actions run so normal CI stays deterministic. See [`CHANGELOG.md`](CHANGELOG.md).
 
+For plugin-ready local runtime wiring, read [`docs/openclaw-preflight-adapter.md`](docs/openclaw-preflight-adapter.md). The preflight adapter exposes `beforeAction(preflightAction)` and an OpenClaw-style `register(api)` entry example:
+
+```bash
+npm run openclaw:preflight:dry-run
+npm run openclaw:preflight:receipt -- --json
+npm run verify:openclaw-preflight-adapter
+npm run test:openclaw-preflight-adapter
+```
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.

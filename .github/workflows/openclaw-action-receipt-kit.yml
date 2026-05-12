@@ -9,12 +9,15 @@ on:
       - "package.json"
       - "package-lock.json"
       - "docs/openclaw-action-receipt-pack.md"
+      - "docs/openclaw-preflight-adapter.md"
       - "examples/core/resolve-action-card.mjs"
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
+      - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
+      - "tests/openclaw-preflight-adapter*.mjs"
   push:
     branches:
       - main
@@ -25,12 +28,15 @@ on:
       - "package.json"
       - "package-lock.json"
       - "docs/openclaw-action-receipt-pack.md"
+      - "docs/openclaw-preflight-adapter.md"
       - "examples/core/resolve-action-card.mjs"
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
+      - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
+      - "tests/openclaw-preflight-adapter*.mjs"
   workflow_dispatch:
     inputs:
       relay_base_url:
@@ -61,14 +67,23 @@ jobs:
       - name: Run kit unit tests
         run: npm run test:openclaw-kit
 
+      - name: Run preflight adapter unit tests
+        run: npm run test:openclaw-preflight-adapter
+
       - name: Verify kit contract
         run: npm run verify:openclaw-action-receipt-kit
 
       - name: Verify pack boundary
         run: npm run verify:openclaw-action-receipt-pack
 
+      - name: Verify preflight adapter
+        run: npm run verify:openclaw-preflight-adapter
+
       - name: Run dry-run proof
         run: npm run openclaw:dry-run -- --json
+
+      - name: Run preflight dry-run proof
+        run: npm run openclaw:preflight:dry-run -- --json
 
   manual-live-receipts:
     if: github.event_name == 'workflow_dispatch'
@@ -91,7 +106,17 @@ jobs:
         env:
           RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}
 
+      - name: Run live preflight adapter E2E test
+        run: npm run test:openclaw-preflight-adapter:e2e
+        env:
+          RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}
+
       - name: Run live all-family receipt proof
         run: npm run openclaw:receipts -- --json
+        env:
+          RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}
+
+      - name: Run live preflight receipt proof
+        run: npm run openclaw:preflight:receipt -- --json
         env:
           RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}

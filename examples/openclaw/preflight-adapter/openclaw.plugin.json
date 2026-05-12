@@ -1,0 +1,31 @@
+{
+  "id": "neura-relay-preflight-adapter",
+  "name": "Neura Relay Preflight Adapter",
+  "version": "0.1.0-rc.0",
+  "entry": "./index.mjs",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "relayBaseUrl": {
+        "type": "string",
+        "default": "https://www.neurarelay.com"
+      }
+    }
+  },
+  "compat": {
+    "pluginApi": ">=2026.3.24-beta.2",
+    "minGatewayVersion": "2026.3.24-beta.2"
+  },
+  "build": {
+    "openclawVersion": "2026.3.24-beta.2",
+    "pluginSdkVersion": "2026.3.24-beta.2"
+  },
+  "capabilities": ["tool"],
+  "neura": {
+    "officialOpenClawOrClawHubClaim": false,
+    "downstreamExecutionByNeura": false,
+    "privatePayloadExposure": false,
+    "publicTokenOrKeyIssuance": false
+  }
+}

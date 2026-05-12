@@ -30,6 +30,7 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 | `tests/openclaw-action-receipt-kit.e2e.mjs` | Live E2E test that requests Relay Decision Receipts |
 | `.github/workflows/openclaw-action-receipt-kit.yml` | CI for local contract checks plus manual live receipt proof |
 | `CHANGELOG.md` | Release-candidate summary and public-safe claim boundary |
+| `docs/openclaw-preflight-adapter.md` | Plugin-ready `beforeAction` adapter contract and OpenClaw-style entry example |
 
 ## Action Families
 
@@ -83,6 +84,14 @@ npm run test:openclaw-kit:e2e
 ```
 
 GitHub Actions runs the local contract checks automatically for relevant pull requests and pushes. The live production receipt proof runs only through manual workflow dispatch.
+
+For runtime wiring, use the preflight adapter:
+
+```bash
+npm run openclaw:preflight:dry-run
+npm run openclaw:preflight:receipt -- --json
+npm run verify:openclaw-preflight-adapter
+```
 
 ## Boundaries
 

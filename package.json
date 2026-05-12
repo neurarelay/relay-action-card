@@ -18,10 +18,14 @@
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
     "openclaw:receipts": "node examples/openclaw/run-action-receipt-kit.mjs",
+    "openclaw:preflight:dry-run": "node examples/openclaw/run-preflight-adapter.mjs --dry-run",
+    "openclaw:preflight:receipt": "node examples/openclaw/run-preflight-adapter.mjs",
     "test": "npm run test:openclaw-kit",
     "test:openclaw-kit": "node --test tests/openclaw-action-receipt-kit.test.mjs",
     "test:openclaw-kit:e2e": "node --test tests/openclaw-action-receipt-kit.e2e.mjs",
     "test:openclaw-kit:all": "npm run test:openclaw-kit && npm run test:openclaw-kit:e2e",
+    "test:openclaw-preflight-adapter": "node --test tests/openclaw-preflight-adapter.test.mjs",
+    "test:openclaw-preflight-adapter:e2e": "node --test tests/openclaw-preflight-adapter.e2e.mjs",
     "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs",
     "verify:sdk-stable-consumer": "node scripts/verify-sdk-stable-consumer.mjs",
     "verify:sdk-authority-routing": "node scripts/verify-sdk-authority-routing.mjs",
@@ -33,7 +37,8 @@
     "verify:delegated-authority-scenarios": "node scripts/verify-delegated-authority-scenarios.mjs",
     "verify:skills-adoption-pack": "node scripts/verify-skills-adoption-pack.mjs",
     "verify:openclaw-action-receipt-pack": "node scripts/verify-openclaw-action-receipt-pack.mjs",
-    "verify:openclaw-action-receipt-kit": "node scripts/verify-openclaw-action-receipt-kit.mjs"
+    "verify:openclaw-action-receipt-kit": "node scripts/verify-openclaw-action-receipt-kit.mjs",
+    "verify:openclaw-preflight-adapter": "node scripts/verify-openclaw-preflight-adapter.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.0"
