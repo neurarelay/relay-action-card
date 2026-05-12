@@ -83,9 +83,13 @@ const requiredFiles = [
   ".github/workflows/openclaw-action-receipt-kit.yml",
   "CHANGELOG.md",
   "docs/openclaw-action-receipt-pack.md",
+  "docs/openclaw-near-miss-workbench.md",
   "examples/openclaw/README.md",
   "examples/openclaw/action-receipt-kit.manifest.json",
+  "examples/openclaw/near-miss-workbench/scenarios.json",
   "examples/openclaw/run-action-receipt-kit.mjs",
+  "examples/openclaw/run-near-miss-workbench.mjs",
+  "scripts/verify-openclaw-near-miss-workbench.mjs",
   "skills/openclaw/neura-action-card/SKILL.md",
   "skills/openclaw/neura-action-card/templates/openclaw-action-card.v0.1.json",
   "skills/openclaw/neura-before-send/SKILL.md",
@@ -106,7 +110,10 @@ const expectedScripts = {
   "test:openclaw-kit:e2e": "node --test tests/openclaw-action-receipt-kit.e2e.mjs",
   "test:openclaw-kit:all":
     "npm run test:openclaw-kit && npm run test:openclaw-kit:e2e",
+  "test:openclaw-workbench": "node --test tests/openclaw-near-miss-workbench.test.mjs",
+  "openclaw:workbench": "node examples/openclaw/run-near-miss-workbench.mjs",
   "verify:openclaw-action-receipt-kit": "node scripts/verify-openclaw-action-receipt-kit.mjs",
+  "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",
 };
 for (const [script, command] of Object.entries(expectedScripts)) {
   if (packageJson.scripts?.[script] !== command) {
@@ -148,6 +155,9 @@ requireIncludes("docs", docs, [
   "OpenClaw Action Receipt Pack v0.1",
   ".github/workflows/openclaw-action-receipt-kit.yml",
   "CHANGELOG.md",
+  "docs/openclaw-near-miss-workbench.md",
+  "npm run openclaw:workbench",
+  "npm run verify:openclaw-workbench",
   "npm run openclaw:dry-run",
   "npm run openclaw:receipts",
   "npm run verify:openclaw-action-receipt-kit",
@@ -163,6 +173,8 @@ rejectUnsafe("docs", docs);
 const changelog = read("CHANGELOG.md");
 requireIncludes("changelog", changelog, [
   "OpenClaw Action Receipt Kit v0.1 RC",
+  "Near-Miss Workbench",
+  "npm run openclaw:workbench",
   "eight refs-only Action Card families",
   "npm run openclaw:dry-run",
   "npm run openclaw:receipts",
@@ -182,6 +194,9 @@ requireIncludes("workflow", workflow, [
   "npm run verify:openclaw-action-receipt-kit",
   "npm run verify:openclaw-action-receipt-pack",
   "npm run openclaw:dry-run -- --json",
+  "npm run openclaw:workbench -- --json",
+  "npm run test:openclaw-workbench",
+  "npm run verify:openclaw-workbench",
   "npm run test:openclaw-kit:e2e",
   "npm run openclaw:receipts -- --json",
 ]);
@@ -190,7 +205,10 @@ rejectUnsafe("workflow", workflow);
 const readme = read("README.md");
 requireIncludes("readme", readme, [
   "Release-candidate snapshot",
+  "docs/openclaw-near-miss-workbench.md",
   "CHANGELOG.md",
+  "npm run openclaw:workbench",
+  "npm run verify:openclaw-workbench",
   "CI now runs the local kit contract",
   "npm run openclaw:dry-run",
   "npm run openclaw:receipts",
@@ -206,7 +224,10 @@ rejectUnsafe("readme", readme);
 const openclawReadme = read("examples/openclaw/README.md");
 requireIncludes("examples_readme", openclawReadme, [
   "Action Receipt Kit",
+  "Near-Miss Workbench",
   "npm run openclaw:dry-run",
+  "npm run openclaw:workbench",
+  "npm run verify:openclaw-workbench",
   "npm run openclaw:receipts",
   "npm run test:openclaw-kit",
   "npm run test:openclaw-kit:e2e",

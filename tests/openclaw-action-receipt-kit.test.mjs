@@ -65,6 +65,14 @@ test("OpenClaw Action Receipt Kit exposes the one-command contract", () => {
     packageJson.scripts["verify:openclaw-action-receipt-kit"],
     "node scripts/verify-openclaw-action-receipt-kit.mjs",
   );
+  assert.equal(
+    packageJson.scripts["openclaw:workbench"],
+    "node examples/openclaw/run-near-miss-workbench.mjs",
+  );
+  assert.equal(
+    packageJson.scripts["verify:openclaw-workbench"],
+    "node scripts/verify-openclaw-near-miss-workbench.mjs",
+  );
 });
 
 test("manifest covers the adoption-critical action families", () => {
@@ -152,6 +160,7 @@ test("docs and skills keep the public-safe boundary", () => {
     "CHANGELOG.md",
     ".github/workflows/openclaw-action-receipt-kit.yml",
     "docs/openclaw-action-receipt-pack.md",
+    "docs/openclaw-near-miss-workbench.md",
     "examples/openclaw/README.md",
     "skills/openclaw/neura-action-card/SKILL.md",
     "skills/openclaw/neura-before-send/SKILL.md",
@@ -180,7 +189,8 @@ test("GitHub Actions keeps local checks automatic and live receipts manual", () 
   assert.match(workflow, /npm run test:openclaw-kit/);
   assert.match(workflow, /npm run verify:openclaw-action-receipt-kit/);
   assert.match(workflow, /npm run verify:openclaw-action-receipt-pack/);
-  assert.match(workflow, /npm run openclaw:dry-run -- --json/);
+    assert.match(workflow, /npm run openclaw:dry-run -- --json/);
+  assert.match(workflow, /npm run openclaw:workbench/);
   assert.match(workflow, /npm run test:openclaw-kit:e2e/);
   assert.match(workflow, /npm run openclaw:receipts -- --json/);
   assert.match(workflow, /npm run test:openclaw-preflight-adapter/);

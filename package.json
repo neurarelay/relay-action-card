@@ -24,10 +24,12 @@
     "openclaw:preflight:dry-run": "node examples/openclaw/run-preflight-adapter.mjs --dry-run",
     "openclaw:preflight:receipt": "node examples/openclaw/run-preflight-adapter.mjs",
     "openclaw:plugin:pack:dry-run": "cd examples/openclaw/preflight-adapter && npm pack --dry-run --json",
+    "openclaw:workbench": "node examples/openclaw/run-near-miss-workbench.mjs",
     "test": "npm run test:openclaw-kit",
     "test:openclaw-kit": "node --test tests/openclaw-action-receipt-kit.test.mjs",
     "test:openclaw-kit:e2e": "node --test tests/openclaw-action-receipt-kit.e2e.mjs",
     "test:openclaw-kit:all": "npm run test:openclaw-kit && npm run test:openclaw-kit:e2e",
+    "test:openclaw-workbench": "node --test tests/openclaw-near-miss-workbench.test.mjs",
     "test:openclaw-preflight-adapter": "node --test tests/openclaw-preflight-adapter.test.mjs",
     "test:openclaw-preflight-adapter:e2e": "node --test tests/openclaw-preflight-adapter.e2e.mjs",
     "verify:relay-example": "node scripts/verify-relay-action-card-example.mjs",
@@ -44,6 +46,7 @@
     "verify:openclaw-action-receipt-kit": "node scripts/verify-openclaw-action-receipt-kit.mjs",
     "verify:openclaw-preflight-adapter": "node scripts/verify-openclaw-preflight-adapter.mjs",
     "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
+    "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",
     "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs"
   },
   "dependencies": {

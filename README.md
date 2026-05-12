@@ -109,10 +109,14 @@ For agent-assisted development workflows, read [`docs/skills-adoption-pack.md`](
 
 For OpenClaw-style autonomous computer-use workflows, read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The Action Receipt Kit includes `skills/openclaw/neura-action-card`, specialized review skills, public-safe fixtures in `examples/openclaw/action-cards`, a one-command dry run, a live receipt runner, a verifier, unit tests, and a live E2E receipt test. This is an example kit, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
 
+For the pre-publication developer journey, read [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md). The Near-Miss Workbench generates a local visual report for three severe autonomous-agent incidents: customer data exfiltration, production deployment, and expired delegated authority.
+
 Run the OpenClaw-style Action Receipt Kit:
 
 ```bash
 npm install
+npm run openclaw:workbench
+npm run verify:openclaw-workbench
 npm run openclaw:dry-run
 npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
@@ -124,8 +128,10 @@ Release-candidate snapshot:
 
 | Proof | Command |
 | --- | --- |
+| Local near-miss visual journey | `npm run openclaw:workbench` |
 | Local contract and refs-only fixtures | `npm run openclaw:dry-run` |
 | Live Relay Decision Receipts | `npm run openclaw:receipts` |
+| Workbench verifier | `npm run verify:openclaw-workbench` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |
 | Unit test framework | `npm run test:openclaw-kit` |
 | Live E2E receipt test | `npm run test:openclaw-kit:e2e` |
