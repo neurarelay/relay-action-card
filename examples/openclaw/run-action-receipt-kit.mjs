@@ -19,15 +19,53 @@ function argValue(name) {
   return arg ? arg.slice(prefix.length) : null;
 }
 
+function isRegistryBackedAuthorityReady(authorityContext) {
+  return (
+    authorityContext?.source === "registry_reference_packet" &&
+    authorityContext?.registry_validation_status === "ready"
+  );
+}
+
+function developerRouteFromReceipt(receipt) {
+  if (receipt?.decision === "proceed") {
+    return isRegistryBackedAuthorityReady(receipt.authority_context)
+      ? "ready_for_developer_owned_execution"
+      : "hold_for_registry_backed_authority";
+  }
+  if (receipt?.decision === "human_review") return "route_to_human_review_before_execution";
+  if (receipt?.decision === "revise") return "revise_action_card_before_execution";
+  if (receipt?.decision === "stop" || receipt?.decision === "blocked") {
+    return "stop_before_execution";
+  }
+  return "hold_for_review_before_execution";
+}
+
+function developerRouteReason(receipt) {
+  if (receipt?.decision === "proceed") {
+    return isRegistryBackedAuthorityReady(receipt.authority_context)
+      ? "Receipt can proceed with Registry-backed delegated authority."
+      : "Receipt can proceed, but developer-owned execution should wait for Registry-backed delegated authority.";
+  }
+  if (receipt?.decision === "human_review") return "Receipt requires human review before execution.";
+  if (receipt?.decision === "revise") return "Action Card should be revised before execution.";
+  if (receipt?.decision === "stop" || receipt?.decision === "blocked") {
+    return "Action should stop before execution.";
+  }
+  return "Action should hold for review before execution.";
+}
+
 function publicReceipt(receipt, response) {
   return {
     input_model: response.input_model,
     receipt_id: receipt?.receipt_id,
     decision: receipt?.decision,
+    developer_route: developerRouteFromReceipt(receipt),
+    developer_route_reason: developerRouteReason(receipt),
     reason: receipt?.reason,
     trace_ref: receipt?.trace_ref,
     transaction_ref: response.transaction_ledger?.transaction_ref,
-    next_step: receipt?.recommended_next_step,
+    receipt_recommended_next_step: receipt?.recommended_next_step,
+    developer_next_step: developerRouteReason(receipt),
     relay_boundary: receipt?.relay_boundary,
     authority_source: receipt?.authority_context?.source ?? null,
     registry_validation_status:
@@ -102,6 +140,8 @@ for (const example of examples) {
       requested_outcome: actionCard.context.requestedOutcome,
       refs_only: true,
       relay_call_skipped: true,
+      developer_route: "relay_receipt_required_before_execution",
+      developer_route_reason: "Run a live Relay receipt before local execution.",
     });
     continue;
   }
@@ -148,6 +188,7 @@ if (jsonOutput) {
       console.log("  Relay call: skipped");
     } else {
       console.log(`  Decision: ${result.decision}`);
+      console.log(`  Developer route: ${result.developer_route}`);
       console.log(`  Receipt: ${result.receipt_id}`);
       console.log(`  Trace: ${result.trace_ref}`);
       console.log(`  Transaction: ${result.transaction_ref}`);

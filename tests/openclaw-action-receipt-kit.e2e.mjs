@@ -44,4 +44,21 @@ test("OpenClaw kit can obtain a live Relay Decision Receipt", () => {
   assert.ok(["proceed", "human_review", "blocked"].includes(receipt.decision));
   assert.equal(receipt.relay_boundary, "decision_gate_only_developer_keeps_execution");
   assert.equal(receipt.action_card_path, "examples/openclaw/action-cards/send-message.json");
+  assert.ok([
+    "ready_for_developer_owned_execution",
+    "hold_for_registry_backed_authority",
+    "route_to_human_review_before_execution",
+    "stop_before_execution",
+  ].includes(receipt.developer_route));
+  if (
+    receipt.decision === "proceed" &&
+    receipt.authority_source !== "registry_reference_packet"
+  ) {
+    assert.equal(receipt.developer_route, "hold_for_registry_backed_authority");
+    assert.equal(
+      receipt.developer_next_step,
+      "Receipt can proceed, but developer-owned execution should wait for Registry-backed delegated authority.",
+    );
+  }
+  assert.ok(receipt.receipt_recommended_next_step);
 });

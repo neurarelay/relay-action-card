@@ -104,6 +104,8 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 
 The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`.
 
+Live OpenClaw receipt output includes `developer_route` and `developer_next_step`; `proceed` only becomes `ready_for_developer_owned_execution` when delegated authority is Registry-backed and ready.
+
 These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI, or ClawHub integration, listing, approval, or partnership.
 
 ### Core Relay And Authority

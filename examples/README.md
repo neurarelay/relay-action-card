@@ -20,6 +20,8 @@ The OpenClaw-style path is public-safe local-action review:
 Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer-owned route
 ```
 
+For `proceed` receipts, the OpenClaw-style developer route is execution-ready only when delegated authority is Registry-backed and ready. Public demo refs that are only developer-supplied hold for Registry-backed authority.
+
 The MCP path is only an adapter:
 
 ```text

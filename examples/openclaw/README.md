@@ -37,6 +37,8 @@ npm run verify:openclaw-workspace-surface
 npm run test:openclaw-workspace-surface
 ```
 
+Live receipt output includes `developer_route` and `developer_next_step` alongside `receipt_recommended_next_step`. A `proceed` receipt only becomes `ready_for_developer_owned_execution` when delegated authority is Registry-backed and ready. Public demo refs that are only developer-supplied route to `hold_for_registry_backed_authority`.
+
 Inspect the preflight adapter release candidate:
 
 ```bash

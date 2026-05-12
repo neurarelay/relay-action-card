@@ -70,6 +70,8 @@ The kit covers eight action families:
 4. Relay returns a Decision Receipt with decision, trace ref, transaction ref, Registry context where available, and Authority Decision Engine explanation when present.
 5. The user, developer, or agent runtime decides whether to execute. Neura does not execute downstream actions.
 
+The live runner also prints `developer_route` and `developer_next_step` alongside `receipt_recommended_next_step`. A `proceed` receipt becomes `ready_for_developer_owned_execution` only when delegated authority is Registry-backed and ready. Public demo refs that are only developer-supplied route to `hold_for_registry_backed_authority`.
+
 Run the kit without calling Relay:
 
 ```bash

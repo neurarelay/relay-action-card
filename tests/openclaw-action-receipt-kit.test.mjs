@@ -294,6 +294,8 @@ test("dry-run returns every fixture and skips Relay calls", () => {
   for (const item of payload.results) {
     assert.equal(item.relay_call_skipped, true);
     assert.equal(item.refs_only, true);
+    assert.equal(item.developer_route, "relay_receipt_required_before_execution");
+    assert.equal(item.developer_route_reason, "Run a live Relay receipt before local execution.");
   }
 });
 

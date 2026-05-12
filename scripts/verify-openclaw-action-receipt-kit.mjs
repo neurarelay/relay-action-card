@@ -327,6 +327,9 @@ requireIncludes("runner", runner, [
   "@neurarelay/sdk",
   "--dry-run",
   "--only=",
+  "developerRouteFromReceipt",
+  "hold_for_registry_backed_authority",
+  "ready_for_developer_owned_execution",
   "decision_gate_only_developer_keeps_execution",
   "Your system keeps execution ownership",
 ]);
@@ -404,6 +407,13 @@ if (dryRun.status !== 0) {
   }
   if (!payload.results.every((result) => result.relay_call_skipped === true)) {
     failures.push("dry_run_must_skip_relay_calls");
+  }
+  if (
+    !payload.results.every(
+      (result) => result.developer_route === "relay_receipt_required_before_execution",
+    )
+  ) {
+    failures.push("dry_run_missing_developer_route");
   }
 }
 
