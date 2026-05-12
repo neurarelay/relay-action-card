@@ -11,6 +11,8 @@ proposed local agent action -> Action Card -> Relay Decision Receipt -> user or 
 
 For the local visual developer journey, see `docs/openclaw-near-miss-workbench.md`.
 
+![OpenClaw Near-Miss Workbench visual proof](assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
+
 This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP, or A2A integration, listing, approval, or partnership. It is a public-safe examples pack for developers who want a Decision Receipt before an agent changes state.
 
 ## Pack Contents

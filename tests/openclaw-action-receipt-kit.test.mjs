@@ -159,6 +159,8 @@ test("docs and skills keep the public-safe boundary", () => {
     "README.md",
     "CHANGELOG.md",
     ".github/workflows/openclaw-action-receipt-kit.yml",
+    "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png",
+    "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-mobile.png",
     "docs/openclaw-action-receipt-pack.md",
     "docs/openclaw-near-miss-workbench.md",
     "examples/openclaw/README.md",
@@ -173,6 +175,7 @@ test("docs and skills keep the public-safe boundary", () => {
 
   for (const file of docs) {
     assert.equal(existsSync(path(file)), true, `${file} missing`);
+    if (file.endsWith(".png")) continue;
     const text = read(file);
     assert.doesNotMatch(text, /approved by OpenClaw|partnered with OpenClaw|listed on ClawHub/);
     assert.doesNotMatch(text, /official OpenAI approval|official Anthropic approval/);
@@ -186,16 +189,35 @@ test("GitHub Actions keeps local checks automatic and live receipts manual", () 
   assert.match(workflow, /pull_request:/);
   assert.match(workflow, /push:/);
   assert.match(workflow, /workflow_dispatch:/);
+  assert.equal(workflow.includes("docs/assets/openclaw-near-miss-workbench/**"), true);
   assert.match(workflow, /npm run test:openclaw-kit/);
   assert.match(workflow, /npm run verify:openclaw-action-receipt-kit/);
   assert.match(workflow, /npm run verify:openclaw-action-receipt-pack/);
-    assert.match(workflow, /npm run openclaw:dry-run -- --json/);
+  assert.match(workflow, /npm run openclaw:dry-run -- --json/);
   assert.match(workflow, /npm run openclaw:workbench/);
   assert.match(workflow, /npm run test:openclaw-kit:e2e/);
   assert.match(workflow, /npm run openclaw:receipts -- --json/);
   assert.match(workflow, /npm run test:openclaw-preflight-adapter/);
   assert.match(workflow, /npm run verify:openclaw-preflight-adapter/);
   assert.match(workflow, /npm run openclaw:preflight:dry-run -- --json/);
+});
+
+test("README exposes the visual OpenClaw proof before setup", () => {
+  const readme = read("README.md");
+  assert.equal(
+    readme.includes("docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
+    true,
+  );
+  assert.match(readme, /OpenClaw 60-second local proof/);
+  assert.match(readme, /Repository Map/);
+  assert.equal(readme.includes("examples/openclaw/"), true);
+  assert.equal(readme.includes("near-miss-workbench/"), true);
+  assert.equal(readme.includes("preflight-adapter/"), true);
+  assert.equal(readme.includes("skills/openclaw/"), true);
+  assert.match(readme, /npm run openclaw:workbench/);
+  assert.match(readme, /npm run openclaw:dry-run -- --json/);
+  assert.match(readme, /npm run openclaw:receipts -- --only=send-message --json/);
+  assert.equal(readme.includes("artifacts/openclaw-near-miss-workbench/report.html"), true);
 });
 
 test("dry-run returns every fixture and skips Relay calls", () => {

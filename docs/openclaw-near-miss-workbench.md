@@ -7,6 +7,8 @@ The Near-Miss Workbench is the pre-publication developer-journey proof for the O
 
 The generated HTML report is a local visual proof surface. Each journey shows what the agent was about to do, what Neura caught, the Decision Receipt route, and the developer-owned next step before any real execution occurs.
 
+![OpenClaw Near-Miss Workbench desktop preview](assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
+
 ```text
 proposed action -> Action Card -> Decision Receipt -> developer-owned execution
 ```
@@ -38,6 +40,8 @@ artifacts/openclaw-near-miss-workbench/report.json
 Open the HTML report locally to review the developer journey. The generated artifacts are ignored by git so screenshots and local reports can be regenerated without changing the repository.
 
 The first viewport is intentionally demo-oriented: it starts with the receipt path, the three flagship near misses, and the decision mix before expanding into the step-by-step receipt projections.
+
+The committed preview assets live in `docs/assets/openclaw-near-miss-workbench/` so the GitHub README carries the visual proof before a developer runs the local workbench.
 
 ## Verify
 

@@ -81,6 +81,8 @@ function run(command, args) {
 const requiredFiles = [
   ".gitignore",
   "README.md",
+  "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png",
+  "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-mobile.png",
   "docs/openclaw-near-miss-workbench.md",
   "examples/openclaw/README.md",
   "examples/openclaw/near-miss-workbench/scenarios.json",
@@ -168,6 +170,8 @@ for (const [key, value] of Object.entries(model.boundaries ?? {})) {
 const docs = read("docs/openclaw-near-miss-workbench.md");
 requireIncludes("docs", docs, [
   "OpenClaw Near-Miss Workbench v0.1",
+  "assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png",
+  "docs/assets/openclaw-near-miss-workbench/",
   "Customer Data Exfiltration Near-Miss",
   "Production Deployment Near-Miss",
   "Expired Delegated Authority Near-Miss",
@@ -186,11 +190,20 @@ rejectUnsafe("docs", docs);
 const readme = read("README.md");
 requireIncludes("readme", readme, [
   "docs/openclaw-near-miss-workbench.md",
+  "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png",
+  "OpenClaw 60-second local proof",
+  "Repository Map",
+  "examples/openclaw/",
+  "near-miss-workbench/",
+  "docs/assets/openclaw-near-miss-workbench/",
   "what the agent was about to do",
   "what Neura caught",
   "receipt route",
   "developer-owned next step",
   "npm run openclaw:workbench",
+  "npm run openclaw:dry-run -- --json",
+  "npm run openclaw:receipts -- --only=send-message --json",
+  "artifacts/openclaw-near-miss-workbench/report.html",
   "npm run verify:openclaw-workbench",
 ]);
 rejectUnsafe("readme", readme);
@@ -200,6 +213,7 @@ requireIncludes("examples_readme", examplesReadme, [
   "Near-Miss Workbench",
   "npm run openclaw:workbench",
   "artifacts/openclaw-near-miss-workbench/report.html",
+  "docs/assets/openclaw-near-miss-workbench/",
   "agent intent",
   "what Neura catches",
   "receipt route",

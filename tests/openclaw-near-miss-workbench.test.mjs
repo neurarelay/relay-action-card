@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -113,6 +113,35 @@ test("workbench generation creates visual, markdown, and JSON reports", () => {
   assert.match(markdown, /Decision Summary/);
   assert.match(markdown, /What the agent was about to do/);
   assert.equal(report.count.journeys, 3);
+});
+
+test("GitHub adoption surface carries the visual proof", () => {
+  const readme = readFileSync(join(repoRoot, "README.md"), "utf8");
+  const docs = readFileSync(join(repoRoot, "docs/openclaw-near-miss-workbench.md"), "utf8");
+
+  assert.equal(
+    existsSync(join(repoRoot, "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png")),
+    true,
+  );
+  assert.equal(
+    existsSync(join(repoRoot, "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-mobile.png")),
+    true,
+  );
+  assert.equal(
+    readme.includes("docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
+    true,
+  );
+  assert.match(readme, /OpenClaw 60-second local proof/);
+  assert.match(readme, /Repository Map/);
+  assert.equal(readme.includes("examples/openclaw/"), true);
+  assert.equal(readme.includes("near-miss-workbench/"), true);
+  assert.equal(readme.includes("docs/assets/openclaw-near-miss-workbench/"), true);
+  assert.match(readme, /npm run openclaw:dry-run -- --json/);
+  assert.match(readme, /npm run openclaw:receipts -- --only=send-message --json/);
+  assert.equal(
+    docs.includes("assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
+    true,
+  );
 });
 
 test("workbench keeps every real execution boundary closed", () => {

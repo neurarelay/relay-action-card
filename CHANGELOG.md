@@ -6,6 +6,7 @@ This release-candidate kit gives autonomous computer-use developers a copyable w
 
 - Adds a local Near-Miss Workbench with `npm run openclaw:workbench` for customer data exfiltration, production deployment, and expired delegated authority journeys.
 - Polishes the Near-Miss Workbench visual report around agent intent, what Neura catches, receipt route, and developer-owned next step.
+- Adds committed README preview assets so the GitHub OpenClaw proof is visible before local setup.
 - Adds `npm run verify:openclaw-workbench` and `npm run test:openclaw-workbench`.
 - Adds a plugin-ready preflight adapter contract: `beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route`.
 - Adds a package-ready OpenClaw plugin release candidate packet for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, including npm pack dry-run verification and claim-safe submission readiness docs.

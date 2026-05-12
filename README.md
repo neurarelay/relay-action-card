@@ -111,14 +111,24 @@ For OpenClaw-style autonomous computer-use workflows, read [`docs/openclaw-actio
 
 For the pre-publication developer journey, read [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md). The Near-Miss Workbench generates a local visual report for three severe autonomous-agent incidents: customer data exfiltration, production deployment, and expired delegated authority. The report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step.
 
-Run the OpenClaw-style Action Receipt Kit:
+![OpenClaw Near-Miss Workbench visual proof](docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
+
+OpenClaw 60-second local proof:
 
 ```bash
 npm install
 npm run openclaw:workbench
+npm run openclaw:dry-run -- --json
+npm run openclaw:receipts -- --only=send-message --json
+```
+
+Then open `artifacts/openclaw-near-miss-workbench/report.html` locally to inspect the visual workbench.
+
+Run the full local checks:
+
+```bash
 npm run verify:openclaw-workbench
 npm run openclaw:dry-run
-npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
@@ -478,16 +488,73 @@ examples/
       deploy-change.json
       registry-ready-evidence-capture.json
       blocked-funds-transfer.json
+  openclaw/
+    README.md
+    action-receipt-kit.manifest.json
+    run-action-receipt-kit.mjs
+    run-near-miss-workbench.mjs
+    run-preflight-adapter.mjs
+    action-cards/
+      send-message.json
+      edit-file.json
+      delete-file.json
+      browser-submit.json
+      shell-command.json
+      workflow-state-change.json
+      memory-write.json
+      data-export.json
+    near-miss-workbench/
+      scenarios.json
+    preflight-adapter/
+      README.md
+      openclaw.plugin.json
+      package.json
+      index.mjs
+      adapter.mjs
+      fixtures/
+        send-message.preflight.json
+skills/
+  openclaw/
+    neura-action-card/
+    neura-before-send/
+    neura-file-change-review/
+    neura-browser-action-review/
+    neura-shell-command-review/
+    neura-memory-write-review/
+    neura-data-export-review/
 scripts/
   verify-relay-action-card-example.mjs
   verify-mcp-developer-adoption-pack.mjs
   verify-developer-feedback-access-path.mjs
+  verify-openclaw-action-receipt-pack.mjs
+  verify-openclaw-action-receipt-kit.mjs
+  verify-openclaw-near-miss-workbench.mjs
+  verify-openclaw-preflight-adapter.mjs
+  verify-openclaw-plugin-rc.mjs
+  verify-openclaw-runtime-approval.mjs
 docs/
+  assets/
+    openclaw-near-miss-workbench/
+      near-miss-workbench-desktop.png
+      near-miss-workbench-mobile.png
   controlled-mcp-beta-access.md
   developer-feedback-and-controlled-access.md
   developer-owned-agent-walkthrough.md
   mcp-tool-call-governance-walkthrough.md
+  openclaw-action-receipt-pack.md
+  openclaw-near-miss-workbench.md
+  openclaw-preflight-adapter.md
+  openclaw-plugin-release-candidate.md
+  openclaw-runtime-verification-and-publish-approval.md
+tests/
+  openclaw-action-receipt-kit.test.mjs
+  openclaw-action-receipt-kit.e2e.mjs
+  openclaw-near-miss-workbench.test.mjs
+  openclaw-preflight-adapter.test.mjs
+  openclaw-preflight-adapter.e2e.mjs
 .github/
+  workflows/
+    openclaw-action-receipt-kit.yml
   ISSUE_TEMPLATE/
     first-receipt-feedback.yml
     controlled-mcp-access.yml
