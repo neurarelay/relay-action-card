@@ -9,7 +9,7 @@ This document covers the OpenClaw Action Receipt Pack v0.1 and the runnable Acti
 proposed local agent action -> Action Card -> Relay Decision Receipt -> user or runtime-owned execution
 ```
 
-For the full local developer journey, see `docs/openclaw-developer-journey.md`. For the visual report alone, see `docs/openclaw-near-miss-workbench.md`.
+For the full local developer journey, see `docs/openclaw-developer-journey.md`. For the visual near-miss report alone, see `docs/openclaw-near-miss-workbench.md`. For the persistent workspace receipt surface, see `docs/openclaw-os-decision-receipt-surface.md`.
 
 ![OpenClaw Near-Miss Workbench visual proof](assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
 
@@ -32,11 +32,15 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 | `examples/openclaw/run-action-receipt-kit.mjs` | Dry-run and live receipt runner |
 | `examples/openclaw/run-near-miss-workbench.mjs` | Local visual report generator for severe near-miss journeys |
 | `examples/openclaw/near-miss-workbench/scenarios.json` | Three flagship near-miss journeys for data exfiltration, production deployment, and expired authority |
+| `examples/openclaw/run-workspace-decision-surface.mjs` | Local workspace-style visual report generator for persistent workspace actions |
+| `examples/openclaw/workspace-surface/scenarios.json` | Generated app, artifact, cron, workflow monitor, memory, browser direct-control, and shell/file receipt scenarios |
 | `scripts/verify-openclaw-action-receipt-kit.mjs` | Public-safe verifier for docs, fixtures, skills, runner, and boundaries |
 | `scripts/verify-openclaw-developer-journey.mjs` | Verifier for the one-command developer journey proof |
 | `scripts/verify-openclaw-near-miss-workbench.mjs` | Verifier for the local visual workbench and no-real-execution boundaries |
+| `scripts/verify-openclaw-workspace-surface.mjs` | Verifier for the workspace Decision Receipt surface and no-real-execution boundaries |
 | `tests/openclaw-action-receipt-kit.test.mjs` | Unit tests for manifest, refs-only fixtures, aliases, docs, and dry-run output |
 | `tests/openclaw-developer-journey.test.mjs` | Unit tests for the clone-to-confidence command and docs |
+| `tests/openclaw-workspace-surface.test.mjs` | Unit tests for the workspace Decision Receipt surface |
 | `tests/openclaw-action-receipt-kit.e2e.mjs` | Live E2E test that requests Relay Decision Receipts |
 | `.github/workflows/openclaw-action-receipt-kit.yml` | CI for local contract checks plus manual live receipt proof |
 | `CHANGELOG.md` | Release-candidate summary and public-safe claim boundary |
@@ -71,6 +75,7 @@ Run the kit without calling Relay:
 ```bash
 npm run openclaw:proof
 npm run openclaw:workbench
+npm run openclaw:workspace-proof
 npm run openclaw:dry-run
 npm run openclaw:dry-run -- --json
 ```
@@ -88,6 +93,7 @@ Verify the public-safe kit contract:
 ```bash
 npm run verify:openclaw-developer-journey
 npm run verify:openclaw-workbench
+npm run verify:openclaw-workspace-surface
 npm run verify:openclaw-action-receipt-pack
 npm run verify:openclaw-action-receipt-kit
 ```
@@ -98,6 +104,7 @@ Run the test framework:
 npm run test:openclaw-developer-journey
 npm run test:openclaw-kit
 npm run test:openclaw-workbench
+npm run test:openclaw-workspace-surface
 npm run test:openclaw-kit:e2e
 ```
 

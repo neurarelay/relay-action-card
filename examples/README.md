@@ -84,6 +84,7 @@ examples/
     run-developer-journey-proof.mjs
     run-near-miss-workbench.mjs
     run-preflight-adapter.mjs
+    run-workspace-decision-surface.mjs
     action-cards/
       send-message.json
       edit-file.json
@@ -94,6 +95,8 @@ examples/
       memory-write.json
       data-export.json
     near-miss-workbench/
+      scenarios.json
+    workspace-surface/
       scenarios.json
     preflight-adapter/
       README.md
@@ -125,7 +128,9 @@ Run the OpenClaw-style local proof:
 ```bash
 npm run openclaw:proof
 npm run openclaw:workbench
+npm run openclaw:workspace-proof
 npm run openclaw:dry-run
+npm run verify:openclaw-workspace-surface
 npm run verify:openclaw-action-receipt-kit
 ```
 

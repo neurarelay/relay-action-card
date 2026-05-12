@@ -8,7 +8,7 @@ This is the fastest way for an autonomous computer-use developer to understand t
 Local agent action -> Action Card -> Relay Decision Receipt -> developer-owned route
 ```
 
-It shows the problem before integration work starts: an agent is about to send data, change files, submit a browser action, run a command, change workflow state, write memory, or export data. Neura gives the developer a Decision Receipt before that action becomes real.
+It shows the problem before integration work starts: an agent is about to send data, change files, submit a browser action, run a command, change workflow state, write memory, export data, or change persistent workspace state. Neura gives the developer a Decision Receipt before that action becomes real.
 
 ## Clone To Confidence
 
@@ -22,15 +22,23 @@ npm run openclaw:proof
 The proof generates and verifies the local OpenClaw-style journey:
 
 - visual near-miss workbench
+- OpenClaw OS Decision Receipt Surface for generated apps, artifacts, crons, workflow monitors, memory, browser control, shell, and file operations
 - eight refs-only Action Card fixtures
 - preflight adapter dry run
 - claim-boundary verifiers
 - unit tests for the kit, workbench, and adapter
 
+To generate only the workspace surface:
+
+```bash
+npm run openclaw:workspace-proof
+```
+
 Open the generated visual report:
 
 ```text
 artifacts/openclaw-near-miss-workbench/report.html
+artifacts/openclaw-workspace-decision-surface/report.html
 ```
 
 The report is the developer-facing moment:
@@ -39,6 +47,14 @@ The report is the developer-facing moment:
 - what Neura caught
 - the receipt route
 - the developer-owned next step
+
+The workspace surface is the second developer-facing moment:
+
+- proposed workspace action
+- Authority Decision Engine posture
+- missing refs and readiness path
+- Decision Receipt route
+- developer-owned execution route
 
 ## Optional Live Receipt
 
@@ -67,11 +83,25 @@ The Near-Miss Workbench focuses on three severe incidents:
 | Production deployment | Run a migration and deploy without enough release authority | Production damage before command or deploy |
 | Expired delegated authority | Act on yesterday's permission after delegation expired | Stale authority silently becoming execution permission |
 
+The OpenClaw OS Decision Receipt Surface focuses on persistent workspace controls:
+
+| Surface | What the agent wants to do | What the receipt shows |
+| --- | --- | --- |
+| Generated app | Deploy generated customer portal from preview to production | Missing release, security, and rollback refs |
+| Artifact | Publish an analysis bundle externally | Human review before external publication |
+| Cron | Schedule recurring production reconciliation | Required runbook, owner, rollback, and schedule refs |
+| Workflow monitor | Move a stuck case to human review | Ready path for reversible review routing |
+| Session memory | Persist durable memory from session notes | Revision needed for user confirmation and retention refs |
+| Browser direct control | Submit a vendor account-change form | Stop before external browser submit |
+| Shell and file | Apply a generated cleanup plan | Human review before file changes |
+
 The developer then sees the reusable integration surfaces:
 
 - `examples/openclaw/action-cards`: refs-only Action Card fixtures for common local actions
 - `skills/openclaw`: example skills for drafting and reviewing receipt-ready actions
 - `examples/openclaw/preflight-adapter`: `beforeAction(preflightAction)` release candidate for local runtimes
+- `examples/openclaw/workspace-surface`: workspace-style receipt scenarios for generated apps, artifacts, crons, workflow monitors, memory, browser control, shell, and file operations
+- `docs/openclaw-os-decision-receipt-surface.md`: workspace-surface report and boundaries
 - `docs/openclaw-preflight-adapter.md`: adapter contract and packaging notes
 - `docs/openclaw-plugin-release-candidate.md`: package-ready release-candidate packet
 

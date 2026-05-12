@@ -35,12 +35,24 @@ test("package exposes one OpenClaw developer journey command", () => {
     "node examples/openclaw/run-developer-journey-proof.mjs",
   );
   assert.equal(
+    packageJson.scripts["openclaw:workspace-proof"],
+    "node examples/openclaw/run-workspace-decision-surface.mjs",
+  );
+  assert.equal(
     packageJson.scripts["verify:openclaw-developer-journey"],
     "node scripts/verify-openclaw-developer-journey.mjs",
   );
   assert.equal(
+    packageJson.scripts["verify:openclaw-workspace-surface"],
+    "node scripts/verify-openclaw-workspace-surface.mjs",
+  );
+  assert.equal(
     packageJson.scripts["test:openclaw-developer-journey"],
     "node --test tests/openclaw-developer-journey.test.mjs",
+  );
+  assert.equal(
+    packageJson.scripts["test:openclaw-workspace-surface"],
+    "node --test tests/openclaw-workspace-surface.test.mjs",
   );
 });
 
@@ -49,7 +61,9 @@ test("developer journey docs make clone to confidence explicit", () => {
   assert.match(doc, /git clone https:\/\/github\.com\/neurarelay\/relay-action-card\.git/);
   assert.match(doc, /npm run openclaw:proof/);
   assert.match(doc, /npm run openclaw:proof -- --live/);
+  assert.match(doc, /npm run openclaw:workspace-proof/);
   assert.match(doc, /artifacts\/openclaw-near-miss-workbench\/report\.html/);
+  assert.match(doc, /artifacts\/openclaw-workspace-decision-surface\/report\.html/);
   assert.match(doc, /what the agent was about to do/);
   assert.match(doc, /what Neura caught/);
   assert.match(doc, /the receipt route/);
@@ -61,9 +75,12 @@ test("developer journey docs make clone to confidence explicit", () => {
 test("README points OpenClaw developers to the one-command proof", () => {
   const readme = read("README.md");
   assert.match(readme, /OpenClaw Developer Journey Proof/);
+  assert.match(readme, /OpenClaw OS Decision Receipt Surface/);
   assert.match(readme, /docs\/openclaw-developer-journey\.md/);
+  assert.match(readme, /docs\/openclaw-os-decision-receipt-surface\.md/);
   assert.match(readme, /npm run openclaw:proof/);
   assert.match(readme, /npm run openclaw:proof -- --live/);
+  assert.match(readme, /npm run openclaw:workspace-proof/);
 });
 
 test("local journey proof runs without live Relay receipt calls", () => {
@@ -75,7 +92,12 @@ test("local journey proof runs without live Relay receipt calls", () => {
   assert.equal(payload.proof, "openclaw-developer-journey");
   assert.equal(payload.mode, "local_only");
   assert.equal(payload.artifacts.workbench_html, "artifacts/openclaw-near-miss-workbench/report.html");
+  assert.equal(
+    payload.artifacts.workspace_surface_html,
+    "artifacts/openclaw-workspace-decision-surface/report.html",
+  );
   assert.equal(payload.local_summary.journeys, 3);
+  assert.equal(payload.local_summary.workspace_actions, 7);
   assert.equal(payload.local_summary.dry_run_fixtures, 8);
   assert.equal(payload.live_summary.enabled, false);
   assert.equal(payload.boundaries.official_openclaw_or_clawhub_claim, false);
@@ -84,4 +106,5 @@ test("local journey proof runs without live Relay receipt calls", () => {
   assert.equal(payload.boundaries.developer_owned_execution, true);
   assert.equal(payload.boundaries.refs_only, true);
   assert.equal(existsSync(path(payload.artifacts.workbench_html)), true);
+  assert.equal(existsSync(path(payload.artifacts.workspace_surface_html)), true);
 });

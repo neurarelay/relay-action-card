@@ -64,10 +64,15 @@ const requiredFiles = [
   "docs/openclaw-action-receipt-pack.md",
   "docs/openclaw-developer-journey.md",
   "docs/openclaw-near-miss-workbench.md",
+  "docs/openclaw-os-decision-receipt-surface.md",
   "examples/openclaw/README.md",
   "examples/openclaw/run-developer-journey-proof.mjs",
+  "examples/openclaw/run-workspace-decision-surface.mjs",
+  "examples/openclaw/workspace-surface/scenarios.json",
   "scripts/verify-openclaw-developer-journey.mjs",
+  "scripts/verify-openclaw-workspace-surface.mjs",
   "tests/openclaw-developer-journey.test.mjs",
+  "tests/openclaw-workspace-surface.test.mjs",
 ];
 
 for (const file of requiredFiles) requireFile(file);
@@ -75,10 +80,14 @@ for (const file of requiredFiles) requireFile(file);
 const packageJson = readJson("package.json");
 const expectedScripts = {
   "openclaw:proof": "node examples/openclaw/run-developer-journey-proof.mjs",
+  "openclaw:workspace-proof": "node examples/openclaw/run-workspace-decision-surface.mjs",
   "verify:openclaw-developer-journey":
     "node scripts/verify-openclaw-developer-journey.mjs",
+  "verify:openclaw-workspace-surface":
+    "node scripts/verify-openclaw-workspace-surface.mjs",
   "test:openclaw-developer-journey":
     "node --test tests/openclaw-developer-journey.test.mjs",
+  "test:openclaw-workspace-surface": "node --test tests/openclaw-workspace-surface.test.mjs",
 };
 for (const [script, command] of Object.entries(expectedScripts)) {
   if (packageJson.scripts?.[script] !== command) {
@@ -89,9 +98,12 @@ for (const [script, command] of Object.entries(expectedScripts)) {
 const journeyDoc = read("docs/openclaw-developer-journey.md");
 requireIncludes("docs/openclaw-developer-journey.md", journeyDoc, [
   "OpenClaw Developer Journey Proof",
+  "OpenClaw OS Decision Receipt Surface",
   "npm run openclaw:proof",
   "npm run openclaw:proof -- --live",
+  "npm run openclaw:workspace-proof",
   "artifacts/openclaw-near-miss-workbench/report.html",
+  "artifacts/openclaw-workspace-decision-surface/report.html",
   "what the agent was about to do",
   "what Neura caught",
   "the receipt route",
@@ -131,9 +143,11 @@ rejectUnsafe("docs/openclaw-action-receipt-pack.md", packDoc);
 const runner = read("examples/openclaw/run-developer-journey-proof.mjs");
 requireIncludes("runner", runner, [
   "run-near-miss-workbench.mjs",
+  "run-workspace-decision-surface.mjs",
   "run-action-receipt-kit.mjs",
   "run-preflight-adapter.mjs",
   "verify-openclaw-action-receipt-kit.mjs",
+  "verify-openclaw-workspace-surface.mjs",
   "verify-openclaw-preflight-adapter.mjs",
   "openclaw-developer-journey",
   "local_plus_live_receipts",
@@ -164,8 +178,17 @@ if (proofRun.status !== 0) {
     failures.push("openclaw_proof_missing_eight_fixtures");
   }
   if (proof.local_summary?.journeys !== 3) failures.push("openclaw_proof_missing_journeys");
+  if (proof.local_summary?.workspace_actions !== 7) {
+    failures.push("openclaw_proof_missing_workspace_actions");
+  }
   if (proof.artifacts?.workbench_html !== "artifacts/openclaw-near-miss-workbench/report.html") {
     failures.push("openclaw_proof_wrong_workbench_artifact");
+  }
+  if (
+    proof.artifacts?.workspace_surface_html !==
+    "artifacts/openclaw-workspace-decision-surface/report.html"
+  ) {
+    failures.push("openclaw_proof_wrong_workspace_surface_artifact");
   }
   if (proof.boundaries?.developer_owned_execution !== true) {
     failures.push("openclaw_proof_developer_boundary_not_true");

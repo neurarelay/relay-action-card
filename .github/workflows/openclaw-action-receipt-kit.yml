@@ -12,6 +12,7 @@ on:
       - "docs/openclaw-action-receipt-pack.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-near-miss-workbench.md"
+      - "docs/openclaw-os-decision-receipt-surface.md"
       - "docs/openclaw-preflight-adapter.md"
       - "docs/openclaw-plugin-release-candidate.md"
       - "examples/core/resolve-action-card.mjs"
@@ -22,11 +23,13 @@ on:
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
+      - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
       - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
       - "tests/openclaw-preflight-adapter*.mjs"
+      - "tests/openclaw-workspace-surface*.mjs"
   push:
     branches:
       - main
@@ -40,6 +43,7 @@ on:
       - "docs/openclaw-action-receipt-pack.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-near-miss-workbench.md"
+      - "docs/openclaw-os-decision-receipt-surface.md"
       - "docs/openclaw-preflight-adapter.md"
       - "docs/openclaw-plugin-release-candidate.md"
       - "examples/core/resolve-action-card.mjs"
@@ -50,11 +54,13 @@ on:
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
+      - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
       - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
       - "tests/openclaw-preflight-adapter*.mjs"
+      - "tests/openclaw-workspace-surface*.mjs"
   workflow_dispatch:
     inputs:
       relay_base_url:
@@ -88,6 +94,9 @@ jobs:
       - name: Run near-miss workbench tests
         run: npm run test:openclaw-workbench
 
+      - name: Run workspace surface tests
+        run: npm run test:openclaw-workspace-surface
+
       - name: Run developer journey tests
         run: npm run test:openclaw-developer-journey
 
@@ -103,6 +112,9 @@ jobs:
       - name: Verify near-miss workbench
         run: npm run verify:openclaw-workbench
 
+      - name: Verify workspace receipt surface
+        run: npm run verify:openclaw-workspace-surface
+
       - name: Verify developer journey proof
         run: npm run verify:openclaw-developer-journey
 
@@ -117,6 +129,9 @@ jobs:
 
       - name: Generate near-miss workbench
         run: npm run openclaw:workbench -- --json
+
+      - name: Generate workspace receipt surface
+        run: npm run openclaw:workspace-proof -- --json
 
       - name: Run developer journey proof
         run: npm run openclaw:proof -- --json

@@ -5,10 +5,12 @@
 This release-candidate kit gives autonomous computer-use developers a copyable way to request a Neura Decision Receipt before local agent actions execute.
 
 - Adds a local Near-Miss Workbench with `npm run openclaw:workbench` for customer data exfiltration, production deployment, and expired delegated authority journeys.
+- Adds an OpenClaw OS Decision Receipt Surface with `npm run openclaw:workspace-proof` for generated app, artifact, cron, workflow monitor, session memory, browser direct-control, and shell/file workspace actions.
 - Adds `npm run openclaw:proof` as the one-command OpenClaw Developer Journey Proof, with `npm run openclaw:proof -- --live` for an explicit live receipt check.
 - Polishes the Near-Miss Workbench visual report around agent intent, what Neura catches, receipt route, and developer-owned next step.
 - Adds committed README preview assets so the GitHub OpenClaw proof is visible before local setup.
 - Adds `npm run verify:openclaw-workbench` and `npm run test:openclaw-workbench`.
+- Adds `npm run verify:openclaw-workspace-surface` and `npm run test:openclaw-workspace-surface`.
 - Adds a plugin-ready preflight adapter contract: `beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route`.
 - Adds a package-ready OpenClaw plugin release candidate packet for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, including npm pack dry-run verification and claim-safe submission readiness docs.
 - Adds eight refs-only Action Card families: outbound message, file edit, file delete, browser submit, shell command, workflow transition, memory write, and data export.

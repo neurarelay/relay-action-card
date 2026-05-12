@@ -111,6 +111,8 @@ For OpenClaw-style autonomous computer-use workflows, start with the [`OpenClaw 
 
 For the pre-publication developer journey, read [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md). The Near-Miss Workbench generates a local visual report for three severe autonomous-agent incidents: customer data exfiltration, production deployment, and expired delegated authority. The report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step.
 
+For persistent workspace actions, read [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md). The OpenClaw OS Decision Receipt Surface generates a local workspace-style report for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations. It shows the proposed workspace action, Action Card, Authority Decision Engine posture, Decision Receipt route, readiness path, and developer-owned execution route without claiming an official OpenClaw OS, OpenUI, OpenClaw, or ClawHub integration.
+
 ![OpenClaw Near-Miss Workbench visual proof](docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
 
 OpenClaw Developer Journey Proof:
@@ -121,6 +123,12 @@ npm run openclaw:proof
 ```
 
 Then open `artifacts/openclaw-near-miss-workbench/report.html` locally to inspect the visual workbench.
+
+Open the workspace-surface report at `artifacts/openclaw-workspace-decision-surface/report.html`, or generate it directly:
+
+```bash
+npm run openclaw:workspace-proof
+```
 
 Optional live receipt check:
 
@@ -144,9 +152,11 @@ Release-candidate snapshot:
 | --- | --- |
 | Full developer journey proof | `npm run openclaw:proof` |
 | Local near-miss visual journey | `npm run openclaw:workbench` |
+| Workspace Decision Receipt surface | `npm run openclaw:workspace-proof` |
 | Local contract and refs-only fixtures | `npm run openclaw:dry-run` |
 | Live Relay Decision Receipts | `npm run openclaw:receipts` |
 | Workbench verifier | `npm run verify:openclaw-workbench` |
+| Workspace surface verifier | `npm run verify:openclaw-workspace-surface` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |
 | Unit test framework | `npm run test:openclaw-kit` |
@@ -501,6 +511,7 @@ examples/
     run-developer-journey-proof.mjs
     run-near-miss-workbench.mjs
     run-preflight-adapter.mjs
+    run-workspace-decision-surface.mjs
     action-cards/
       send-message.json
       edit-file.json
@@ -511,6 +522,8 @@ examples/
       memory-write.json
       data-export.json
     near-miss-workbench/
+      scenarios.json
+    workspace-surface/
       scenarios.json
     preflight-adapter/
       README.md
@@ -540,6 +553,7 @@ scripts/
   verify-openclaw-preflight-adapter.mjs
   verify-openclaw-plugin-rc.mjs
   verify-openclaw-runtime-approval.mjs
+  verify-openclaw-workspace-surface.mjs
 docs/
   assets/
     openclaw-near-miss-workbench/
@@ -552,6 +566,7 @@ docs/
   openclaw-action-receipt-pack.md
   openclaw-developer-journey.md
   openclaw-near-miss-workbench.md
+  openclaw-os-decision-receipt-surface.md
   openclaw-preflight-adapter.md
   openclaw-plugin-release-candidate.md
   openclaw-runtime-verification-and-publish-approval.md
@@ -562,6 +577,7 @@ tests/
   openclaw-near-miss-workbench.test.mjs
   openclaw-preflight-adapter.test.mjs
   openclaw-preflight-adapter.e2e.mjs
+  openclaw-workspace-surface.test.mjs
 .github/
   workflows/
     openclaw-action-receipt-kit.yml

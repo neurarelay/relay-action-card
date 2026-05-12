@@ -62,6 +62,12 @@ const localSteps = [
     parse: true,
   },
   {
+    id: "workspace_surface",
+    label: "Generate OpenClaw OS workspace receipt surface",
+    args: ["examples/openclaw/run-workspace-decision-surface.mjs", "--json"],
+    parse: true,
+  },
+  {
     id: "dry_run",
     label: "Dry-run all refs-only Action Card fixtures",
     args: ["examples/openclaw/run-action-receipt-kit.mjs", "--dry-run", "--json"],
@@ -77,6 +83,11 @@ const localSteps = [
     id: "verify_workbench",
     label: "Verify near-miss workbench contract",
     args: ["scripts/verify-openclaw-near-miss-workbench.mjs"],
+  },
+  {
+    id: "verify_workspace_surface",
+    label: "Verify OpenClaw OS workspace receipt surface",
+    args: ["scripts/verify-openclaw-workspace-surface.mjs"],
   },
   {
     id: "verify_kit",
@@ -107,6 +118,11 @@ const localSteps = [
     id: "test_workbench",
     label: "Run near-miss workbench unit tests",
     args: ["--test", "tests/openclaw-near-miss-workbench.test.mjs"],
+  },
+  {
+    id: "test_workspace_surface",
+    label: "Run workspace receipt surface unit tests",
+    args: ["--test", "tests/openclaw-workspace-surface.test.mjs"],
   },
   {
     id: "test_preflight",
@@ -146,6 +162,7 @@ for (const definition of [...localSteps, ...liveSteps]) {
 }
 
 const workbench = steps.find((step) => step.id === "workbench")?.output;
+const workspaceSurface = steps.find((step) => step.id === "workspace_surface")?.output;
 const dryRun = steps.find((step) => step.id === "dry_run")?.output;
 const preflightDryRun = steps.find((step) => step.id === "preflight_dry_run")?.output;
 const liveReceipt = steps.find((step) => step.id === "live_receipt")?.output;
@@ -166,10 +183,15 @@ const output = {
     workbench_html: rel(workbench?.files?.html),
     workbench_markdown: rel(workbench?.files?.markdown),
     workbench_json: rel(workbench?.files?.json),
+    workspace_surface_html: rel(workspaceSurface?.files?.html),
+    workspace_surface_markdown: rel(workspaceSurface?.files?.markdown),
+    workspace_surface_json: rel(workspaceSurface?.files?.json),
   },
   local_summary: {
     journeys: workbench?.count?.journeys ?? null,
     steps: workbench?.count?.steps ?? null,
+    workspace_actions: workspaceSurface?.count?.actions ?? null,
+    workspace_decisions: workspaceSurface?.count?.decisions ?? null,
     decisions: workbench?.count?.decisions ?? null,
     dry_run_fixtures: dryRun?.count ?? null,
     preflight_route: preflightDryRun?.result?.route ?? null,
@@ -203,7 +225,9 @@ const output = {
   },
   next_steps: [
     "Open artifacts/openclaw-near-miss-workbench/report.html",
+    "Open artifacts/openclaw-workspace-decision-surface/report.html",
     "Read docs/openclaw-developer-journey.md",
+    "Read docs/openclaw-os-decision-receipt-surface.md",
     "Use examples/openclaw/preflight-adapter before local runtime execution",
   ],
 };
@@ -215,6 +239,7 @@ if (jsonOutput) {
   console.log(ok ? "OpenClaw developer journey proof passed." : "OpenClaw developer journey proof failed.");
   console.log(`Mode: ${output.mode}`);
   console.log(`Workbench: ${output.artifacts.workbench_html}`);
+  console.log(`Workspace surface: ${output.artifacts.workspace_surface_html}`);
   console.log(`Dry-run fixtures: ${output.local_summary.dry_run_fixtures}`);
   console.log(
     liveReceipts

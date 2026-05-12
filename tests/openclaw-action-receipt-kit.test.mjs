@@ -70,8 +70,16 @@ test("OpenClaw Action Receipt Kit exposes the one-command contract", () => {
     "node examples/openclaw/run-near-miss-workbench.mjs",
   );
   assert.equal(
+    packageJson.scripts["openclaw:workspace-proof"],
+    "node examples/openclaw/run-workspace-decision-surface.mjs",
+  );
+  assert.equal(
     packageJson.scripts["openclaw:proof"],
     "node examples/openclaw/run-developer-journey-proof.mjs",
+  );
+  assert.equal(
+    packageJson.scripts["verify:openclaw-workspace-surface"],
+    "node scripts/verify-openclaw-workspace-surface.mjs",
   );
   assert.equal(
     packageJson.scripts["verify:openclaw-developer-journey"],
@@ -176,6 +184,7 @@ test("docs and skills keep the public-safe boundary", () => {
     "docs/openclaw-action-receipt-pack.md",
     "docs/openclaw-developer-journey.md",
     "docs/openclaw-near-miss-workbench.md",
+    "docs/openclaw-os-decision-receipt-surface.md",
     "examples/openclaw/README.md",
     "skills/openclaw/neura-action-card/SKILL.md",
     "skills/openclaw/neura-before-send/SKILL.md",
@@ -204,12 +213,15 @@ test("GitHub Actions keeps local checks automatic and live receipts manual", () 
   assert.match(workflow, /workflow_dispatch:/);
   assert.equal(workflow.includes("docs/assets/openclaw-near-miss-workbench/**"), true);
   assert.match(workflow, /npm run test:openclaw-kit/);
+  assert.match(workflow, /npm run test:openclaw-workspace-surface/);
   assert.match(workflow, /npm run test:openclaw-developer-journey/);
   assert.match(workflow, /npm run verify:openclaw-action-receipt-kit/);
   assert.match(workflow, /npm run verify:openclaw-action-receipt-pack/);
   assert.match(workflow, /npm run verify:openclaw-developer-journey/);
+  assert.match(workflow, /npm run verify:openclaw-workspace-surface/);
   assert.match(workflow, /npm run openclaw:dry-run -- --json/);
   assert.match(workflow, /npm run openclaw:proof -- --json/);
+  assert.match(workflow, /npm run openclaw:workspace-proof -- --json/);
   assert.match(workflow, /npm run openclaw:workbench/);
   assert.match(workflow, /npm run test:openclaw-kit:e2e/);
   assert.match(workflow, /npm run openclaw:receipts -- --json/);
@@ -224,7 +236,9 @@ test("README exposes the visual OpenClaw proof before setup", () => {
   assert.match(readme, /OpenClaw-style receipt kit/);
   assert.equal(readme.includes("There are three paths in this repo"), false);
   assert.match(readme, /OpenClaw Developer Journey Proof/);
+  assert.match(readme, /OpenClaw OS Decision Receipt Surface/);
   assert.match(readme, /docs\/openclaw-developer-journey\.md/);
+  assert.match(readme, /docs\/openclaw-os-decision-receipt-surface\.md/);
   assert.equal(
     readme.includes("docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
     true,
@@ -232,13 +246,17 @@ test("README exposes the visual OpenClaw proof before setup", () => {
   assert.match(readme, /Repository Map/);
   assert.equal(readme.includes("examples/openclaw/"), true);
   assert.equal(readme.includes("run-developer-journey-proof.mjs"), true);
+  assert.equal(readme.includes("run-workspace-decision-surface.mjs"), true);
   assert.equal(readme.includes("near-miss-workbench/"), true);
+  assert.equal(readme.includes("workspace-surface/"), true);
   assert.equal(readme.includes("preflight-adapter/"), true);
   assert.equal(readme.includes("skills/openclaw/"), true);
   assert.match(readme, /npm run openclaw:proof/);
+  assert.match(readme, /npm run openclaw:workspace-proof/);
   assert.match(readme, /npm run openclaw:proof -- --live/);
   assert.match(readme, /npm run openclaw:workbench/);
   assert.equal(readme.includes("artifacts/openclaw-near-miss-workbench/report.html"), true);
+  assert.equal(readme.includes("artifacts/openclaw-workspace-decision-surface/report.html"), true);
 });
 
 test("examples README exposes OpenClaw as a first-class lane", () => {
@@ -252,6 +270,8 @@ test("examples README exposes OpenClaw as a first-class lane", () => {
   assert.equal(readme.includes("examples/openclaw"), true);
   assert.match(readme, /npm run openclaw:proof/);
   assert.match(readme, /npm run openclaw:workbench/);
+  assert.match(readme, /npm run openclaw:workspace-proof/);
+  assert.match(readme, /npm run verify:openclaw-workspace-surface/);
   assert.match(readme, /npm run verify:openclaw-action-receipt-kit/);
   assert.match(readme, /not an official OpenClaw or ClawHub integration/);
 });

@@ -9,6 +9,7 @@ This folder is not an official OpenClaw or ClawHub integration, listing, approva
 ```bash
 npm run openclaw:proof
 npm run openclaw:proof -- --live
+npm run openclaw:workspace-proof
 npm run openclaw:dry-run
 npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
@@ -19,6 +20,8 @@ npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 npm run openclaw:workbench
 npm run verify:openclaw-workbench
+npm run verify:openclaw-workspace-surface
+npm run test:openclaw-workspace-surface
 npm run openclaw:preflight:dry-run
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
@@ -45,5 +48,7 @@ The developer journey proof at `run-developer-journey-proof.mjs` is the one-comm
 The Near-Miss Workbench at `near-miss-workbench/scenarios.json` generates `artifacts/openclaw-near-miss-workbench/report.html` for three severe local developer journeys: customer data exfiltration, production deployment, and expired delegated authority. The visual report shows the agent intent, what Neura catches, the receipt route, and the developer-owned next step. It is a safe local projection; no real email, browser submit, file delete, shell command, deployment, token issuance, or downstream execution occurs.
 
 The committed GitHub preview assets live in `docs/assets/openclaw-near-miss-workbench/`; regenerate the local report with `npm run openclaw:workbench` before replacing them.
+
+The Workspace Decision Receipt Surface at `workspace-surface/scenarios.json` generates `artifacts/openclaw-workspace-decision-surface/report.html` for persistent workspace actions: generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations. It shows the proposed workspace action, Authority Decision Engine posture, receipt route, readiness path, and developer-owned next step. It is safe local projection only; no generated app, artifact, cron, workflow, memory, browser, shell, or file action is executed.
 
 The `preflight-adapter` folder adds the package-ready `beforeAction(preflightAction)` release candidate for local autonomous computer-use runtimes. It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but it is not submitted, published, listed, approved, or partnered by OpenClaw / ClawHub.
