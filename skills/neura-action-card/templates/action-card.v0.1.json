@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_replace_me",
+    "owner": "owner_ref_replace_me",
+    "capability": "capability_ref_replace_me",
+    "capabilityVersion": "capability_version_ref_replace_me"
+  },
+  "proposedAction": {
+    "type": "action.type_replace_me",
+    "summary": "Describe the proposed action before execution.",
+    "target": "resource_ref_replace_me"
+  },
+  "affectedObject": "resource_ref_replace_me",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "human_or_org_ref_replace_me",
+      "actingAgent": "agent_ref_replace_me",
+      "authorityScope": "resource_scope_ref_replace_me",
+      "allowedActions": ["action.type_replace_me"],
+      "allowedResources": ["resource_ref_replace_me"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_replace_me"],
+      "authorityScopeRef": "authority_scope_ref_replace_me",
+      "standingRef": "registry_standing_ref_replace_me"
+    },
+    "evidenceRefs": ["evidence_ref_replace_me"],
+    "ruleRefs": ["policy_ref_replace_me"],
+    "riskCategory": "risk_category_replace_me",
+    "requestedOutcome": "decision_receipt"
+  }
+}

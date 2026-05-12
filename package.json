@@ -24,7 +24,8 @@
     "verify:developer-feedback-access-path": "node scripts/verify-developer-feedback-access-path.mjs",
     "verify:scenario-walkthrough-pack": "node scripts/verify-scenario-walkthrough-pack.mjs",
     "verify:authorization-bypass-scenarios": "node scripts/verify-authorization-bypass-scenarios.mjs",
-    "verify:delegated-authority-scenarios": "node scripts/verify-delegated-authority-scenarios.mjs"
+    "verify:delegated-authority-scenarios": "node scripts/verify-delegated-authority-scenarios.mjs",
+    "verify:skills-adoption-pack": "node scripts/verify-skills-adoption-pack.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.0"

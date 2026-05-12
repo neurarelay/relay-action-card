@@ -102,6 +102,8 @@ For the SDK path, read [`examples/sdk/README.md`](examples/sdk/README.md).
 
 For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md).
 
+For agent-assisted development workflows, read [`docs/skills-adoption-pack.md`](docs/skills-adoption-pack.md). The first local example skills are `skills/neura-action-card`, `skills/neura-authority-review`, and `skills/neura-first-receipt`.
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
