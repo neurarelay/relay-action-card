@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_openclaw_style_runtime",
+    "owner": "owner_ref_local_operator",
+    "capability": "local_computer_use_governance",
+    "capabilityVersion": "capability_version_ref_local_computer_use"
+  },
+  "proposedAction": {
+    "type": "message.send | file.edit | file.delete | browser.submit_form | shell.run_command | workflow.update_state",
+    "summary": "Review this proposed local agent action before execution.",
+    "target": "target_ref"
+  },
+  "affectedObject": "affected_object_ref",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_or_owner_ref",
+      "actingAgent": "agent_ref_openclaw_style_runtime",
+      "authorityScope": "scope_ref",
+      "allowedActions": ["action_class_ref"],
+      "allowedResources": ["resource_ref"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref"],
+      "authorityScopeRef": "authority_scope_ref",
+      "standingRef": "registry_passport_standing_ref_if_available"
+    },
+    "evidenceRefs": ["evidence_ref"],
+    "ruleRefs": ["policy_ref"],
+    "riskCategory": "computer_use_action",
+    "requestedOutcome": "decision_receipt"
+  }
+}

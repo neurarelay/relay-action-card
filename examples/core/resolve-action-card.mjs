@@ -21,6 +21,12 @@ const examplePaths = {
   "delegated-wrong-resource": "examples/core/action-cards/delegated-wrong-resource.json",
   "delegated-wrong-action": "examples/core/action-cards/delegated-wrong-action.json",
   "delegated-expired-authority": "examples/core/action-cards/delegated-expired-authority.json",
+  "openclaw-send-message": "examples/openclaw/action-cards/send-message.json",
+  "openclaw-edit-file": "examples/openclaw/action-cards/edit-file.json",
+  "openclaw-delete-file": "examples/openclaw/action-cards/delete-file.json",
+  "openclaw-browser-submit": "examples/openclaw/action-cards/browser-submit.json",
+  "openclaw-shell-command": "examples/openclaw/action-cards/shell-command.json",
+  "openclaw-workflow-state-change": "examples/openclaw/action-cards/workflow-state-change.json",
   "high-risk": "examples/core/action-card-high-risk.json",
 };
 

@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "message.send",
+    "summary": "Send a prepared outbound message after recipient, intent, and policy review.",
+    "target": "channel_message_ref:support_followup_2026_05_12"
+  },
+  "affectedObject": "channel_message_ref:support_followup_2026_05_12",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "local_agent_message_drafts",
+      "allowedActions": ["message.send"],
+      "allowedResources": ["channel_message_ref:support_followup_2026_05_12"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_outbound_message_review"],
+      "authorityScopeRef": "authority_scope_ref_local_message_review",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["user_intent_ref:support_followup", "draft_ref:support_followup_2026_05_12"],
+    "ruleRefs": ["policy_ref_outbound_message_review"],
+    "riskCategory": "customer_communication",
+    "requestedOutcome": "decision_receipt"
+  }
+}

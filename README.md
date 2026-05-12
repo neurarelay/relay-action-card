@@ -18,6 +18,7 @@ There are three paths in this repo:
 | Core Relay example | `examples/core` | Public | Send an Action Card to `POST /api/resolve` and receive a Decision Receipt |
 | Optional MCP examples | `examples/mcp` | Sandbox or controlled production access | Call the same Relay spine through protected MCP-compatible tools |
 | SDK path | `examples/sdk` | Public npm package | Use `@neurarelay/sdk` without changing the Relay decision boundary |
+| OpenClaw-style receipt pack | `examples/openclaw` and `skills/openclaw` | Public-safe examples | Draft receipt-ready Action Cards before local agent messages, file changes, browser submits, shell commands, and workflow changes |
 
 The core path is the default Neura path:
 
@@ -104,6 +105,8 @@ For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](
 
 For agent-assisted development workflows, read [`docs/skills-adoption-pack.md`](docs/skills-adoption-pack.md). The first local example skills are `skills/neura-action-card`, `skills/neura-authority-review`, and `skills/neura-first-receipt`.
 
+For OpenClaw-style autonomous computer-use workflows, read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The local example pack includes `skills/openclaw/neura-action-card` plus public-safe fixtures in `examples/openclaw/action-cards`. This is an example pack, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
+
 ## Production Agent Identity
 
 Demo examples run immediately because they include a demo Agent Passport. A production agent needs its own Registry Agent Passport before Relay can treat the acting identity as valid.
@@ -146,6 +149,12 @@ npm run example:relay -- --example=delegated-crm-account-update
 npm run example:relay -- --example=delegated-wrong-resource
 npm run example:relay -- --example=delegated-wrong-action
 npm run example:relay -- --example=delegated-expired-authority
+npm run example:relay -- --example=openclaw-send-message
+npm run example:relay -- --example=openclaw-edit-file
+npm run example:relay -- --example=openclaw-delete-file
+npm run example:relay -- --example=openclaw-browser-submit
+npm run example:relay -- --example=openclaw-shell-command
+npm run example:relay -- --example=openclaw-workflow-state-change
 ```
 
 The example calls production Relay by default:

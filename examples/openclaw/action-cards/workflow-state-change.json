@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "workflow.update_state",
+    "summary": "Move a workflow item to the next state only after authority, evidence, and transition policy refs are reviewed.",
+    "target": "workflow_item_ref:approval_candidate"
+  },
+  "affectedObject": "workflow_item_ref:approval_candidate",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "workflow_state_transitions",
+      "allowedActions": ["workflow.update_state"],
+      "allowedResources": ["workflow_item_ref:approval_candidate"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_workflow_state_review"],
+      "authorityScopeRef": "authority_scope_ref_workflow_review",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["transition_request_ref:approval_candidate", "state_policy_ref:workflow_next_step"],
+    "ruleRefs": ["policy_ref_workflow_state_review"],
+    "riskCategory": "workflow_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

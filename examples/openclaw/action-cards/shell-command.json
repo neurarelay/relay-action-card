@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "shell.run_command",
+    "summary": "Run a local shell command only after command profile, workspace scope, and blast-radius refs are reviewed.",
+    "target": "runtime_command_ref:workspace_verifier"
+  },
+  "affectedObject": "runtime_command_ref:workspace_verifier",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "local_workspace_verification",
+      "allowedActions": ["shell.run_command"],
+      "allowedResources": ["runtime_command_ref:workspace_verifier"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_shell_command_review"],
+      "authorityScopeRef": "authority_scope_ref_shell_review",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["command_profile_ref:workspace_verifier", "blast_radius_ref:workspace_only"],
+    "ruleRefs": ["policy_ref_shell_command_review"],
+    "riskCategory": "local_runtime_command",
+    "requestedOutcome": "decision_receipt"
+  }
+}

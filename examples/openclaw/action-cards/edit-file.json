@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "file.edit",
+    "summary": "Edit a local runbook file after change request and backup refs are available.",
+    "target": "file_ref:workspace_runbook"
+  },
+  "affectedObject": "file_ref:workspace_runbook",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "local_workspace_docs",
+      "allowedActions": ["file.edit"],
+      "allowedResources": ["file_ref:workspace_runbook"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_file_change_review"],
+      "authorityScopeRef": "authority_scope_ref_local_file_review",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["change_request_ref:runbook_update", "backup_ref:workspace_runbook_before_edit"],
+    "ruleRefs": ["policy_ref_file_change_review"],
+    "riskCategory": "file_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "file.delete",
+    "summary": "Delete a generated local artifact only after backup, owner intent, and retention-policy refs are reviewed.",
+    "target": "file_ref:generated_report_candidate"
+  },
+  "affectedObject": "file_ref:generated_report_candidate",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "local_workspace_generated_artifacts",
+      "allowedActions": ["file.delete"],
+      "allowedResources": ["file_ref:generated_report_candidate"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_file_delete_review"],
+      "authorityScopeRef": "authority_scope_ref_local_file_delete",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["owner_intent_ref:delete_generated_report", "backup_ref:generated_report_candidate"],
+    "ruleRefs": ["policy_ref_file_delete_review", "policy_ref_retention_check"],
+    "riskCategory": "destructive_file_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    "owner": "neura_relay",
+    "capability": "decision_resolution",
+    "capabilityVersion": "4511419e-9d22-49f5-aa7e-55f6f8b949de"
+  },
+  "proposedAction": {
+    "type": "browser.submit_form",
+    "summary": "Submit a browser form only after target page, user intent, and field-value refs are reviewed.",
+    "target": "browser_form_ref:vendor_update_draft"
+  },
+  "affectedObject": "browser_form_ref:vendor_update_draft",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_local_operator",
+      "actingAgent": "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+      "authorityScope": "browser_session_drafts",
+      "allowedActions": ["browser.submit_form"],
+      "allowedResources": ["browser_form_ref:vendor_update_draft"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_browser_submit_review"],
+      "authorityScopeRef": "authority_scope_ref_browser_submit",
+      "standingRef": "registry_passport_standing_ref_demo"
+    },
+    "evidenceRefs": ["user_intent_ref:vendor_update", "form_field_refs:vendor_update_draft"],
+    "ruleRefs": ["policy_ref_browser_submit_review"],
+    "riskCategory": "browser_state_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}
