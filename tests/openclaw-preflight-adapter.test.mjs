@@ -9,6 +9,7 @@ import pluginEntry, {
 } from "../examples/openclaw/preflight-adapter/index.mjs";
 import {
   createActionCardFromPreflightAction,
+  isRegistryBackedAuthorityReady,
   routeFromDecision,
 } from "../examples/openclaw/preflight-adapter/adapter.mjs";
 
@@ -69,11 +70,32 @@ test("preflight adapter rejects raw private payload keys", () => {
 });
 
 test("route mapping keeps execution developer owned", () => {
-  assert.equal(routeFromDecision("proceed"), "ready_for_developer_owned_execution");
+  assert.equal(routeFromDecision("proceed"), "hold_for_registry_backed_authority");
+  assert.equal(
+    routeFromDecision("proceed", {
+      source: "developer_supplied_unverified",
+      registry_validation_status: "unavailable",
+    }),
+    "hold_for_registry_backed_authority",
+  );
+  assert.equal(
+    routeFromDecision("proceed", {
+      source: "registry_reference_packet",
+      registry_validation_status: "ready",
+    }),
+    "ready_for_developer_owned_execution",
+  );
   assert.equal(routeFromDecision("human_review"), "route_to_human_review_before_execution");
   assert.equal(routeFromDecision("revise"), "revise_action_card_before_execution");
   assert.equal(routeFromDecision("stop"), "stop_before_execution");
   assert.equal(routeFromDecision("blocked"), "stop_before_execution");
+  assert.equal(
+    isRegistryBackedAuthorityReady({
+      source: "registry_reference_packet",
+      registry_validation_status: "ready",
+    }),
+    true,
+  );
 });
 
 test("dry-run preflight returns Action Card without calling Relay", async () => {

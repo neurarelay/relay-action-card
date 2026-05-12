@@ -77,7 +77,7 @@ It returns:
 
 - Action Card v0.1
 - Decision Receipt summary when live
-- route such as `ready_for_developer_owned_execution`, `route_to_human_review_before_execution`, `revise_action_card_before_execution`, or `stop_before_execution`
+- route such as `hold_for_registry_backed_authority`, `ready_for_developer_owned_execution`, `route_to_human_review_before_execution`, `revise_action_card_before_execution`, or `stop_before_execution`
 - explicit developer-owned execution boundary
 
 ## Boundaries

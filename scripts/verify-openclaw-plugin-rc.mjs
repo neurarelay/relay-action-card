@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -224,6 +225,7 @@ requireIncludes("adapter_readme", adapterReadme, [
   "release candidate",
   "npm run openclaw:plugin:pack:dry-run",
   "not an official OpenClaw or ClawHub",
+  "hold_for_registry_backed_authority",
 ]);
 rejectUnsafe("adapter_readme", adapterReadme);
 
@@ -268,6 +270,97 @@ for (const expectedPackFile of [
   }
 }
 
+let cleanConsumerInstall = "not_run";
+let cleanConsumerDryRun = null;
+const consumerPackDir = mkdtempSync(join(tmpdir(), "neura-openclaw-adapter-pack-"));
+const packForConsumer = run("npm", ["pack", "--json", "--pack-destination", consumerPackDir], {
+  cwd: pluginRoot,
+});
+if (packForConsumer.status !== 0) {
+  cleanConsumerInstall = "failed_pack";
+  failures.push(`npm_pack_failed_${packForConsumer.stderr || packForConsumer.stdout}`);
+} else {
+  try {
+    const packPayload = JSON.parse(packForConsumer.stdout);
+    const tarballName = packPayload[0]?.filename;
+    const tarballPath = tarballName ? join(consumerPackDir, tarballName) : null;
+    if (!tarballPath) {
+      cleanConsumerInstall = "failed_missing_tarball";
+      failures.push("npm_pack_missing_tarball_for_consumer");
+    } else {
+      const consumerDir = mkdtempSync(join(tmpdir(), "neura-openclaw-adapter-consumer-"));
+      writeFileSync(
+        join(consumerDir, "package.json"),
+        JSON.stringify({ private: true, type: "module" }, null, 2),
+      );
+      writeFileSync(
+        join(consumerDir, "proof.mjs"),
+        `
+import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
+
+const adapter = createNeuraPreflightAdapter({ relayBaseUrl: "https://www.neurarelay.com" });
+const result = await adapter.beforeAction({
+  proposedAction: {
+    type: "message.send",
+    summary: "Send a support follow-up only after refs are checked.",
+    target: "channel_message_ref:support_followup_2026_05_12"
+  },
+  authority: {
+    delegatedBy: "user_ref_local_operator",
+    actingAgent: "11de8d9a-7e1e-42f9-86ae-5f9c26878624",
+    authorityScope: "support_channel_response",
+    allowedActions: ["message.send"],
+    allowedResources: ["channel_message_ref:support_followup_2026_05_12"],
+    expiresAt: "2026-12-31T23:59:59Z",
+    revocationStatus: "active",
+    policyRefs: ["policy_ref_customer_reply_review"],
+    authorityScopeRef: "authority_scope_ref_support_channel",
+    standingRef: "registry_passport_standing_ref_demo"
+  },
+  evidenceRefs: ["intent_ref_support_followup"],
+  ruleRefs: ["policy_ref_customer_reply_review"],
+  riskCategory: "customer_communication"
+}, { dryRun: true });
+
+if (result.mode !== "dry_run" || result.relay_call_skipped !== true) {
+  throw new Error("adapter tarball dry-run proof failed");
+}
+
+console.log(JSON.stringify({
+  ok: true,
+  mode: result.mode,
+  route: result.route,
+  execution_owner: result.execution_owner,
+  action_card_version: result.action_card.version
+}, null, 2));
+`,
+      );
+      const install = run("npm", ["install", tarballPath, "--prefer-online"], {
+        cwd: consumerDir,
+      });
+      if (install.status !== 0) {
+        cleanConsumerInstall = "failed_install";
+        failures.push(`clean_consumer_install_failed_${install.stderr || install.stdout}`);
+      } else {
+        cleanConsumerInstall = "passed";
+        const proof = run("node", ["proof.mjs"], { cwd: consumerDir });
+        if (proof.status !== 0) {
+          failures.push(`clean_consumer_dry_run_failed_${proof.stderr || proof.stdout}`);
+        } else {
+          try {
+            cleanConsumerDryRun = JSON.parse(proof.stdout);
+          } catch (error) {
+            failures.push(`clean_consumer_output_not_json_${error.message}`);
+          }
+        }
+      }
+    }
+  } catch (error) {
+    cleanConsumerInstall = "failed_exception";
+    failures.push(`clean_consumer_exception_${error.message}`);
+  }
+}
+
 const openclawCliAvailable = hasCommand("openclaw");
 const clawhubCliAvailable = hasCommand("clawhub");
 let runtimeInspect = "skipped_cli_not_installed";
@@ -308,6 +401,8 @@ console.log(
         name: pluginPackage.name,
         version: pluginPackage.version,
         npm_pack_dry_run_files: packFiles,
+        clean_consumer_install: cleanConsumerInstall,
+        clean_consumer_dry_run: cleanConsumerDryRun,
       },
       cli_verification: {
         openclaw_cli_available: openclawCliAvailable,

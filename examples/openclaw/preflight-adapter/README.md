@@ -37,3 +37,5 @@ npm run test:openclaw-preflight-adapter:e2e
 | `fixtures/send-message.preflight.json` | Refs-only preflight action fixture |
 
 The adapter never executes downstream actions. It returns a Decision Receipt and a route for the developer-owned runtime.
+
+`proceed` only routes to `ready_for_developer_owned_execution` when delegated authority is Registry-backed and ready. Public demo refs that are only developer-supplied route to `hold_for_registry_backed_authority`.

@@ -91,9 +91,21 @@ export function createActionCardFromPreflightAction(preflightAction) {
   };
 }
 
-export function routeFromDecision(decision) {
+export function isRegistryBackedAuthorityReady(authorityContext) {
+  return (
+    authorityContext?.source === "registry_reference_packet" &&
+    authorityContext?.registry_validation_status === "ready"
+  );
+}
+
+export function routeFromDecision(decision, authorityContext = null) {
+  if (decision === "proceed") {
+    return isRegistryBackedAuthorityReady(authorityContext)
+      ? "ready_for_developer_owned_execution"
+      : "hold_for_registry_backed_authority";
+  }
+
   const routes = {
-    proceed: "ready_for_developer_owned_execution",
     human_review: "route_to_human_review_before_execution",
     revise: "revise_action_card_before_execution",
     stop: "stop_before_execution",
@@ -107,7 +119,7 @@ export function publicReceipt(receipt, response) {
     input_model: response.input_model,
     receipt_id: receipt?.receipt_id,
     decision: receipt?.decision,
-    route: routeFromDecision(receipt?.decision),
+    route: routeFromDecision(receipt?.decision, receipt?.authority_context),
     reason: receipt?.reason,
     trace_ref: receipt?.trace_ref,
     transaction_ref: response.transaction_ledger?.transaction_ref,

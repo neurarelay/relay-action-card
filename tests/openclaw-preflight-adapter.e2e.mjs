@@ -26,5 +26,6 @@ test("preflight adapter obtains a live Relay Decision Receipt", async () => {
   assert.ok(["proceed", "human_review", "blocked", "stop"].includes(result.receipt.decision));
   assert.equal(result.receipt.relay_boundary, "decision_gate_only_developer_keeps_execution");
   assert.ok(result.receipt.route.endsWith("_before_execution") ||
+    result.receipt.route === "hold_for_registry_backed_authority" ||
     result.receipt.route === "ready_for_developer_owned_execution");
 });

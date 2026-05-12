@@ -189,6 +189,7 @@ requireIncludes("adapter_readme", adapterReadme, [
   "npm run openclaw:preflight:dry-run",
   "npm run verify:openclaw-preflight-adapter",
   "never executes downstream actions",
+  "hold_for_registry_backed_authority",
 ]);
 rejectUnsafe("adapter_readme", adapterReadme);
 
@@ -197,6 +198,8 @@ requireIncludes("adapter", adapter, [
   "createActionCardFromPreflightAction",
   "createNeuraPreflightAdapter",
   "beforeAction",
+  "isRegistryBackedAuthorityReady",
+  "hold_for_registry_backed_authority",
   "decision_gate_only_developer_keeps_execution",
   "developer_runtime",
   "@neurarelay/sdk",
