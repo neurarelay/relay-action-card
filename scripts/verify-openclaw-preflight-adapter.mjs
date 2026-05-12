@@ -81,6 +81,7 @@ function run(command, args) {
 
 const requiredFiles = [
   "docs/openclaw-preflight-adapter.md",
+  "docs/openclaw-runtime-verification-and-publish-approval.md",
   "examples/openclaw/preflight-adapter/README.md",
   "examples/openclaw/preflight-adapter/openclaw.plugin.json",
   "examples/openclaw/preflight-adapter/package.json",
@@ -88,6 +89,7 @@ const requiredFiles = [
   "examples/openclaw/preflight-adapter/adapter.mjs",
   "examples/openclaw/preflight-adapter/fixtures/send-message.preflight.json",
   "examples/openclaw/run-preflight-adapter.mjs",
+  "scripts/verify-openclaw-runtime-approval.mjs",
   "tests/openclaw-preflight-adapter.test.mjs",
   "tests/openclaw-preflight-adapter.e2e.mjs",
 ];
@@ -106,6 +108,7 @@ const expectedScripts = {
   "verify:openclaw-preflight-adapter":
     "node scripts/verify-openclaw-preflight-adapter.mjs",
   "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
+  "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
 };
 for (const [script, command] of Object.entries(expectedScripts)) {
   if (packageJson.scripts?.[script] !== command) {
@@ -118,7 +121,7 @@ if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
   failures.push("adapter_package_wrong_name");
 }
 if (adapterPackage.private !== false) failures.push("adapter_package_must_be_publish_ready");
-if (adapterPackage.engines?.node !== ">=22") failures.push("adapter_package_wrong_node_engine");
+if (adapterPackage.engines?.node !== ">=22.14.0") failures.push("adapter_package_wrong_node_engine");
 if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.0") {
   failures.push("adapter_package_missing_sdk_dependency");
 }
@@ -171,6 +174,8 @@ requireIncludes("docs", docs, [
   "npm run openclaw:preflight:dry-run",
   "npm run openclaw:preflight:receipt",
   "npm run verify:openclaw-preflight-adapter",
+  "docs/openclaw-runtime-verification-and-publish-approval.md",
+  "Node `24`",
   "developer-owned execution",
 ]);
 rejectUnsafe("docs", docs);

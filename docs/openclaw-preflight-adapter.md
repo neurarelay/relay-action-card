@@ -27,9 +27,11 @@ This repo now carries a package-ready release candidate shaped for that path:
 | CLI runner | `examples/openclaw/run-preflight-adapter.mjs` |
 | Verifier | `scripts/verify-openclaw-preflight-adapter.mjs` |
 | Release-candidate verifier | `scripts/verify-openclaw-plugin-rc.mjs` |
+| Runtime approval verifier | `scripts/verify-openclaw-runtime-approval.mjs` |
 | Unit test | `tests/openclaw-preflight-adapter.test.mjs` |
 | Live E2E test | `tests/openclaw-preflight-adapter.e2e.mjs` |
 | Submission-readiness packet | `docs/openclaw-plugin-release-candidate.md` |
+| Runtime verification packet | `docs/openclaw-runtime-verification-and-publish-approval.md` |
 
 Current public docs reviewed for this shape:
 
@@ -43,6 +45,8 @@ Package candidate:
 @neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
 ```
 
+Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.
+
 ## Commands
 
 ```bash
@@ -51,6 +55,7 @@ npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 npm run test:openclaw-preflight-adapter:e2e
 ```

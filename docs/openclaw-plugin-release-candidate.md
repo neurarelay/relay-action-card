@@ -21,6 +21,7 @@ The candidate turns a proposed local computer-use action into a refs-only Action
 - runtime registers one tool: `neura_relay_preflight_action`
 - package dry-run proof is available through `npm run openclaw:plugin:pack:dry-run`
 - release-candidate verifier is available through `npm run verify:openclaw-plugin-rc`
+- runtime install/inspect proof is available through `npm run verify:openclaw-runtime-approval` when running under Node 22.14+; this repo pins Node `24` in `.nvmrc`
 
 No OpenClaw / ClawHub submission or publication has been performed. No official listing, approval, partnership, endorsement, or provider claim exists. Submission or publication requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
 
@@ -49,6 +50,7 @@ npm run test:openclaw-preflight-adapter
 npm run openclaw:preflight:dry-run -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-runtime-approval
 ```
 
 Live production proof remains separate:
@@ -63,13 +65,15 @@ npm run openclaw:preflight:receipt -- --json
 Do not run these without Roman approval:
 
 ```bash
-clawhub package publish your-org/your-plugin --dry-run
-clawhub package publish your-org/your-plugin
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.1 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.1 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
 openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
 ```
 
 If OpenClaw and ClawHub CLIs are installed locally, `npm run verify:openclaw-plugin-rc` reports that they are available. It does not mutate local OpenClaw config or start registry-authenticated publishing unless explicit environment flags are supplied.
+
+For the verified local runtime and dry-run packet, see [`openclaw-runtime-verification-and-publish-approval.md`](openclaw-runtime-verification-and-publish-approval.md).
 
 ## Boundary Statement
 

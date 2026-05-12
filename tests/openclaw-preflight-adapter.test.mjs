@@ -37,7 +37,7 @@ test("package metadata is publish-ready but claim-safe", () => {
   assert.equal(adapterPackage.name, "@neurarelay/openclaw-preflight-adapter");
   assert.equal(adapterPackage.version, "0.1.0-rc.1");
   assert.equal(adapterPackage.private, false);
-  assert.equal(adapterPackage.engines.node, ">=22");
+  assert.equal(adapterPackage.engines.node, ">=22.14.0");
   assert.deepEqual(adapterPackage.openclaw.extensions, ["./index.mjs"]);
   assert.equal(adapterPackage.openclaw.compat.pluginApi, ">=2026.3.24-beta.2");
   assert.equal(

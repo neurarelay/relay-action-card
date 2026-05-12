@@ -4,6 +4,8 @@ Send an Action Card to Neura Relay. Get a governed Decision Receipt before execu
 
 This is the public developer starting point for Neura Relay: a runnable example for agent developers building AI agents, autonomous-agent workflows, or MCP-capable runtimes that need a governed checkpoint before execution. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
 
+Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
+
 Distribution proof:
 
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
@@ -138,10 +140,11 @@ npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The package-ready release candidate is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md). It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but no OpenClaw / ClawHub submission, publication, listing, approval, or partnership claim exists.
+The package-ready release candidate is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md). It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but no OpenClaw / ClawHub submission, publication, listing, approval, or partnership claim exists.
 
 ## Production Agent Identity
 

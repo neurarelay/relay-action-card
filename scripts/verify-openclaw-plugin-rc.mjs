@@ -84,6 +84,7 @@ function hasCommand(command) {
 
 const requiredFiles = [
   "docs/openclaw-plugin-release-candidate.md",
+  "docs/openclaw-runtime-verification-and-publish-approval.md",
   "docs/openclaw-preflight-adapter.md",
   "examples/openclaw/preflight-adapter/README.md",
   "examples/openclaw/preflight-adapter/openclaw.plugin.json",
@@ -94,15 +95,22 @@ const requiredFiles = [
   "examples/openclaw/run-preflight-adapter.mjs",
   "tests/openclaw-preflight-adapter.test.mjs",
   "tests/openclaw-preflight-adapter.e2e.mjs",
+  "scripts/verify-openclaw-runtime-approval.mjs",
 ];
 
 for (const file of requiredFiles) requireFile(file);
 
 const rootPackage = readJson("package.json");
+if (rootPackage.engines?.node !== ">=22.14.0") failures.push("root_package_node_engine");
+
+const nvmrc = read(".nvmrc").trim();
+if (nvmrc !== "24") failures.push("nvmrc_must_pin_node_24");
+
 const expectedRootScripts = {
   "openclaw:plugin:pack:dry-run":
     "cd examples/openclaw/preflight-adapter && npm pack --dry-run --json",
   "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
+  "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
 };
 for (const [script, command] of Object.entries(expectedRootScripts)) {
   if (rootPackage.scripts?.[script] !== command) {
@@ -118,7 +126,7 @@ if (pluginPackage.version !== "0.1.0-rc.1") failures.push("plugin_package_wrong_
 if (pluginPackage.private !== false) failures.push("plugin_package_must_be_publish_ready");
 if (pluginPackage.type !== "module") failures.push("plugin_package_must_be_esm");
 if (pluginPackage.license !== "MIT") failures.push("plugin_package_missing_license");
-if (pluginPackage.engines?.node !== ">=22") failures.push("plugin_package_wrong_node_engine");
+if (pluginPackage.engines?.node !== ">=22.14.0") failures.push("plugin_package_wrong_node_engine");
 if (pluginPackage.publishConfig?.access !== "public") failures.push("plugin_package_publish_access");
 if (pluginPackage.publishConfig?.tag !== "rc") failures.push("plugin_package_publish_tag");
 if (pluginPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.0") {
@@ -177,7 +185,9 @@ requireIncludes("release_doc", releaseDoc, [
   "0.1.0-rc.1",
   "npm run openclaw:plugin:pack:dry-run",
   "npm run verify:openclaw-plugin-rc",
-  "clawhub package publish your-org/your-plugin --dry-run",
+  "npm run verify:openclaw-runtime-approval",
+  "Node `24`",
+  "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
   "No OpenClaw / ClawHub submission or publication has been performed",
   "Roman's explicit approval",
   "https://docs.openclaw.ai/plugins/manifest",
@@ -185,6 +195,19 @@ requireIncludes("release_doc", releaseDoc, [
   "https://documentation.openclaw.ai/clawhub",
 ]);
 rejectUnsafe("release_doc", releaseDoc);
+
+const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approval.md");
+requireIncludes("approval_doc", approvalDoc, [
+  "OpenClaw Runtime Verification And Publish Approval Packet",
+  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1",
+  "Use Node `24`",
+  "openclaw --profile neura-rc plugins install -l examples/openclaw/preflight-adapter",
+  "registered tool: `neura_relay_preflight_action`",
+  "ClawHub publish dry-run succeeded",
+  "Do not run this without Roman approval",
+  "no OpenClaw / ClawHub submission or publication has been performed",
+]);
+rejectUnsafe("approval_doc", approvalDoc);
 
 const preflightDoc = read("docs/openclaw-preflight-adapter.md");
 requireIncludes("preflight_doc", preflightDoc, [
