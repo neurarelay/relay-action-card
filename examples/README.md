@@ -81,6 +81,7 @@ examples/
     README.md
     action-receipt-kit.manifest.json
     run-action-receipt-kit.mjs
+    run-developer-journey-proof.mjs
     run-near-miss-workbench.mjs
     run-preflight-adapter.mjs
     action-cards/
@@ -122,10 +123,13 @@ npm run example:relay
 Run the OpenClaw-style local proof:
 
 ```bash
+npm run openclaw:proof
 npm run openclaw:workbench
 npm run openclaw:dry-run
 npm run verify:openclaw-action-receipt-kit
 ```
+
+For the full OpenClaw-style developer path, read [`../docs/openclaw-developer-journey.md`](../docs/openclaw-developer-journey.md).
 
 List and run the public Action Card examples:
 

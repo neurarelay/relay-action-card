@@ -7,10 +7,14 @@ This folder is not an official OpenClaw or ClawHub integration, listing, approva
 ## Run
 
 ```bash
+npm run openclaw:proof
+npm run openclaw:proof -- --live
 npm run openclaw:dry-run
 npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-action-receipt-pack
+npm run verify:openclaw-developer-journey
+npm run test:openclaw-developer-journey
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 npm run openclaw:workbench
@@ -35,6 +39,8 @@ npm run verify:openclaw-plugin-rc
 | `data-export.json` | data export |
 
 The manifest at `action-receipt-kit.manifest.json` is the machine-readable contract for the local release candidate kit.
+
+The developer journey proof at `run-developer-journey-proof.mjs` is the one-command local adoption path. It generates the workbench, dry-runs all refs-only fixtures, dry-runs the preflight adapter, runs the verifiers, and runs the local test suite. Read [`docs/openclaw-developer-journey.md`](../../docs/openclaw-developer-journey.md) for the clone-to-confidence path.
 
 The Near-Miss Workbench at `near-miss-workbench/scenarios.json` generates `artifacts/openclaw-near-miss-workbench/report.html` for three severe local developer journeys: customer data exfiltration, production deployment, and expired delegated authority. The visual report shows the agent intent, what Neura catches, the receipt route, and the developer-owned next step. It is a safe local projection; no real email, browser submit, file delete, shell command, deployment, token issuance, or downstream execution occurs.
 

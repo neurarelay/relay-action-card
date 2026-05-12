@@ -131,13 +131,13 @@ test("GitHub adoption surface carries the visual proof", () => {
     readme.includes("docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
     true,
   );
-  assert.match(readme, /OpenClaw 60-second local proof/);
+  assert.match(readme, /OpenClaw Developer Journey Proof/);
   assert.match(readme, /Repository Map/);
   assert.equal(readme.includes("examples/openclaw/"), true);
   assert.equal(readme.includes("near-miss-workbench/"), true);
   assert.equal(readme.includes("docs/assets/openclaw-near-miss-workbench/"), true);
-  assert.match(readme, /npm run openclaw:dry-run -- --json/);
-  assert.match(readme, /npm run openclaw:receipts -- --only=send-message --json/);
+  assert.match(readme, /npm run openclaw:proof/);
+  assert.match(readme, /npm run openclaw:proof -- --live/);
   assert.equal(
     docs.includes("assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png"),
     true,

@@ -5,6 +5,7 @@
 This release-candidate kit gives autonomous computer-use developers a copyable way to request a Neura Decision Receipt before local agent actions execute.
 
 - Adds a local Near-Miss Workbench with `npm run openclaw:workbench` for customer data exfiltration, production deployment, and expired delegated authority journeys.
+- Adds `npm run openclaw:proof` as the one-command OpenClaw Developer Journey Proof, with `npm run openclaw:proof -- --live` for an explicit live receipt check.
 - Polishes the Near-Miss Workbench visual report around agent intent, what Neura catches, receipt route, and developer-owned next step.
 - Adds committed README preview assets so the GitHub OpenClaw proof is visible before local setup.
 - Adds `npm run verify:openclaw-workbench` and `npm run test:openclaw-workbench`.
@@ -14,5 +15,6 @@ This release-candidate kit gives autonomous computer-use developers a copyable w
 - Adds `npm run openclaw:dry-run` and `npm run openclaw:receipts` for local contract review and live Relay receipt proof.
 - Adds `npm run openclaw:preflight:dry-run`, `npm run openclaw:preflight:receipt`, `npm run openclaw:plugin:pack:dry-run`, `npm run verify:openclaw-preflight-adapter`, and `npm run verify:openclaw-plugin-rc`.
 - Adds `npm run verify:openclaw-action-receipt-kit` plus Node unit and live E2E tests for the kit.
+- Adds `npm run verify:openclaw-developer-journey` and `npm run test:openclaw-developer-journey` to keep the clone-to-confidence path locked.
 - Adds GitHub Actions CI for the local kit contract, with live production receipt proof kept manual.
 - Preserves developer-owned execution, no private payload exposure, no public token/key issuance, and no official OpenClaw or ClawHub listing, approval, or partnership claim.

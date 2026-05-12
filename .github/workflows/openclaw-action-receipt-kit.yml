@@ -10,6 +10,7 @@ on:
       - "package-lock.json"
       - "docs/assets/openclaw-near-miss-workbench/**"
       - "docs/openclaw-action-receipt-pack.md"
+      - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-near-miss-workbench.md"
       - "docs/openclaw-preflight-adapter.md"
       - "docs/openclaw-plugin-release-candidate.md"
@@ -17,11 +18,13 @@ on:
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
+      - "scripts/verify-openclaw-developer-journey.mjs"
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
+      - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
       - "tests/openclaw-preflight-adapter*.mjs"
   push:
@@ -35,6 +38,7 @@ on:
       - "package-lock.json"
       - "docs/assets/openclaw-near-miss-workbench/**"
       - "docs/openclaw-action-receipt-pack.md"
+      - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-near-miss-workbench.md"
       - "docs/openclaw-preflight-adapter.md"
       - "docs/openclaw-plugin-release-candidate.md"
@@ -42,11 +46,13 @@ on:
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
+      - "scripts/verify-openclaw-developer-journey.mjs"
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
+      - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
       - "tests/openclaw-preflight-adapter*.mjs"
   workflow_dispatch:
@@ -82,6 +88,9 @@ jobs:
       - name: Run near-miss workbench tests
         run: npm run test:openclaw-workbench
 
+      - name: Run developer journey tests
+        run: npm run test:openclaw-developer-journey
+
       - name: Run preflight adapter unit tests
         run: npm run test:openclaw-preflight-adapter
 
@@ -94,6 +103,9 @@ jobs:
       - name: Verify near-miss workbench
         run: npm run verify:openclaw-workbench
 
+      - name: Verify developer journey proof
+        run: npm run verify:openclaw-developer-journey
+
       - name: Verify preflight adapter
         run: npm run verify:openclaw-preflight-adapter
 
@@ -105,6 +117,9 @@ jobs:
 
       - name: Generate near-miss workbench
         run: npm run openclaw:workbench -- --json
+
+      - name: Run developer journey proof
+        run: npm run openclaw:proof -- --json
 
       - name: Run preflight dry-run proof
         run: npm run openclaw:preflight:dry-run -- --json
@@ -142,5 +157,10 @@ jobs:
 
       - name: Run live preflight receipt proof
         run: npm run openclaw:preflight:receipt -- --json
+        env:
+          RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}
+
+      - name: Run live developer journey proof
+        run: npm run openclaw:proof -- --live --json
         env:
           RELAY_BASE_URL: ${{ github.event.inputs.relay_base_url }}

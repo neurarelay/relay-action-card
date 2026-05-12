@@ -26,6 +26,7 @@ This is a safe local projection. It does not send email, submit browser forms, d
 ## Run
 
 ```bash
+npm run openclaw:proof
 npm run openclaw:workbench
 ```
 

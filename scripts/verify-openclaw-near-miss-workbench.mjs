@@ -179,6 +179,7 @@ requireIncludes("docs", docs, [
   "what Neura caught",
   "Decision Receipt route",
   "developer-owned next step",
+  "npm run openclaw:proof",
   "npm run openclaw:workbench",
   "npm run verify:openclaw-workbench",
   "npm run test:openclaw-workbench",
@@ -189,9 +190,10 @@ rejectUnsafe("docs", docs);
 
 const readme = read("README.md");
 requireIncludes("readme", readme, [
+  "docs/openclaw-developer-journey.md",
   "docs/openclaw-near-miss-workbench.md",
   "docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png",
-  "OpenClaw 60-second local proof",
+  "OpenClaw Developer Journey Proof",
   "Repository Map",
   "examples/openclaw/",
   "near-miss-workbench/",
@@ -200,9 +202,9 @@ requireIncludes("readme", readme, [
   "what Neura caught",
   "receipt route",
   "developer-owned next step",
+  "npm run openclaw:proof",
+  "npm run openclaw:proof -- --live",
   "npm run openclaw:workbench",
-  "npm run openclaw:dry-run -- --json",
-  "npm run openclaw:receipts -- --only=send-message --json",
   "artifacts/openclaw-near-miss-workbench/report.html",
   "npm run verify:openclaw-workbench",
 ]);

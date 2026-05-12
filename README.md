@@ -107,22 +107,26 @@ For the controlled A2A client pack, read [`docs/a2a-controlled-client-pack.md`](
 
 For agent-assisted development workflows, read [`docs/skills-adoption-pack.md`](docs/skills-adoption-pack.md). The first local example skills are `skills/neura-action-card`, `skills/neura-authority-review`, and `skills/neura-first-receipt`.
 
-For OpenClaw-style autonomous computer-use workflows, read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The Action Receipt Kit includes `skills/openclaw/neura-action-card`, specialized review skills, public-safe fixtures in `examples/openclaw/action-cards`, a one-command dry run, a live receipt runner, a verifier, unit tests, and a live E2E receipt test. This is an example kit, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
+For OpenClaw-style autonomous computer-use workflows, start with the [`OpenClaw Developer Journey Proof`](docs/openclaw-developer-journey.md), then read [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md). The Action Receipt Kit includes `skills/openclaw/neura-action-card`, specialized review skills, public-safe fixtures in `examples/openclaw/action-cards`, a one-command developer proof, a live receipt runner, a verifier, unit tests, and a live E2E receipt test. This is an example kit, not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
 
 For the pre-publication developer journey, read [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md). The Near-Miss Workbench generates a local visual report for three severe autonomous-agent incidents: customer data exfiltration, production deployment, and expired delegated authority. The report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step.
 
 ![OpenClaw Near-Miss Workbench visual proof](docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png)
 
-OpenClaw 60-second local proof:
+OpenClaw Developer Journey Proof:
 
 ```bash
 npm install
-npm run openclaw:workbench
-npm run openclaw:dry-run -- --json
-npm run openclaw:receipts -- --only=send-message --json
+npm run openclaw:proof
 ```
 
 Then open `artifacts/openclaw-near-miss-workbench/report.html` locally to inspect the visual workbench.
+
+Optional live receipt check:
+
+```bash
+npm run openclaw:proof -- --live
+```
 
 Run the full local checks:
 
@@ -138,10 +142,12 @@ Release-candidate snapshot:
 
 | Proof | Command |
 | --- | --- |
+| Full developer journey proof | `npm run openclaw:proof` |
 | Local near-miss visual journey | `npm run openclaw:workbench` |
 | Local contract and refs-only fixtures | `npm run openclaw:dry-run` |
 | Live Relay Decision Receipts | `npm run openclaw:receipts` |
 | Workbench verifier | `npm run verify:openclaw-workbench` |
+| Developer journey verifier | `npm run verify:openclaw-developer-journey` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |
 | Unit test framework | `npm run test:openclaw-kit` |
 | Live E2E receipt test | `npm run test:openclaw-kit:e2e` |
@@ -492,6 +498,7 @@ examples/
     README.md
     action-receipt-kit.manifest.json
     run-action-receipt-kit.mjs
+    run-developer-journey-proof.mjs
     run-near-miss-workbench.mjs
     run-preflight-adapter.mjs
     action-cards/
@@ -528,6 +535,7 @@ scripts/
   verify-developer-feedback-access-path.mjs
   verify-openclaw-action-receipt-pack.mjs
   verify-openclaw-action-receipt-kit.mjs
+  verify-openclaw-developer-journey.mjs
   verify-openclaw-near-miss-workbench.mjs
   verify-openclaw-preflight-adapter.mjs
   verify-openclaw-plugin-rc.mjs
@@ -542,6 +550,7 @@ docs/
   developer-owned-agent-walkthrough.md
   mcp-tool-call-governance-walkthrough.md
   openclaw-action-receipt-pack.md
+  openclaw-developer-journey.md
   openclaw-near-miss-workbench.md
   openclaw-preflight-adapter.md
   openclaw-plugin-release-candidate.md
@@ -549,6 +558,7 @@ docs/
 tests/
   openclaw-action-receipt-kit.test.mjs
   openclaw-action-receipt-kit.e2e.mjs
+  openclaw-developer-journey.test.mjs
   openclaw-near-miss-workbench.test.mjs
   openclaw-preflight-adapter.test.mjs
   openclaw-preflight-adapter.e2e.mjs
