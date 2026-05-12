@@ -3,13 +3,27 @@
 These examples are public-safe Action Card drafts for OpenClaw-style autonomous computer-use actions. They are refs-only fixtures for getting a Decision Receipt before user or runtime-owned execution.
 
 This folder is not an official OpenClaw or ClawHub integration, listing, approval, or partnership.
+The workspace surface is also not an official OpenClaw OS, OpenUI, OpenClaw, or ClawHub integration.
 
 ## Run
+
+Start with the full local proof:
 
 ```bash
 npm run openclaw:proof
 npm run openclaw:proof -- --live
+```
+
+Generate the visual surfaces:
+
+```bash
+npm run openclaw:workbench
 npm run openclaw:workspace-proof
+```
+
+Run fixture and receipt checks:
+
+```bash
 npm run openclaw:dry-run
 npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
@@ -18,10 +32,14 @@ npm run verify:openclaw-developer-journey
 npm run test:openclaw-developer-journey
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
-npm run openclaw:workbench
 npm run verify:openclaw-workbench
 npm run verify:openclaw-workspace-surface
 npm run test:openclaw-workspace-surface
+```
+
+Inspect the preflight adapter release candidate:
+
+```bash
 npm run openclaw:preflight:dry-run
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter

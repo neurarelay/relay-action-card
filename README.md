@@ -109,9 +109,9 @@ These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI
 ### Core Relay And Authority
 
 - [`docs/developer-feedback-and-controlled-access.md`](docs/developer-feedback-and-controlled-access.md): first-receipt feedback and controlled-access path.
-- [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md): developer-owned action flow.
+- [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md): developer-owned agent flow.
 - [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md): authorization-bypass scenario proof.
-- [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md): Agentic consent and delegated authority proof.
+- [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md): Agentic consent / delegated authority proof.
 
 ### SDK, MCP, A2A, And Skills
 
@@ -493,9 +493,18 @@ examples/
     decision-receipt.example.json
     action-cards/
       support-reply.json
+      account-api-write.json
       refund-exception.json
       data-export.json
       payment-release.json
+      workflow-state-change.json
+      authorized-crm-account-update.json
+      blocked-cross-resource-crm-update.json
+      blocked-payment-without-authority.json
+      delegated-crm-account-update.json
+      delegated-wrong-resource.json
+      delegated-wrong-action.json
+      delegated-expired-authority.json
   mcp/
     README.md
     compatibility-matrix.md
@@ -514,6 +523,9 @@ examples/
       deploy-change.json
       registry-ready-evidence-capture.json
       blocked-funds-transfer.json
+  a2a/
+    README.md
+    resolve-action-card-a2a.mjs
   openclaw/
     README.md
     action-receipt-kit.manifest.json
@@ -543,6 +555,11 @@ examples/
       adapter.mjs
       fixtures/
         send-message.preflight.json
+  sdk/
+    README.md
+    resolve-action-card-sdk.mjs
+    resolve-action-card-sdk-a2a.mjs
+    authority-routing.mjs
 skills/
   openclaw/
     neura-action-card/
@@ -554,8 +571,11 @@ skills/
     neura-data-export-review/
 scripts/
   verify-relay-action-card-example.mjs
+  verify-a2a-authenticated-client.mjs
   verify-mcp-developer-adoption-pack.mjs
   verify-developer-feedback-access-path.mjs
+  verify-sdk-stable-consumer.mjs
+  verify-sdk-authority-routing.mjs
   verify-openclaw-action-receipt-pack.mjs
   verify-openclaw-action-receipt-kit.mjs
   verify-openclaw-developer-journey.mjs
@@ -569,6 +589,9 @@ docs/
     openclaw-near-miss-workbench/
       near-miss-workbench-desktop.png
       near-miss-workbench-mobile.png
+  a2a-controlled-client-pack.md
+  agentic-consent-delegated-authority.md
+  authorization-bypass-scenarios.md
   controlled-mcp-beta-access.md
   developer-feedback-and-controlled-access.md
   developer-owned-agent-walkthrough.md
@@ -580,6 +603,7 @@ docs/
   openclaw-preflight-adapter.md
   openclaw-plugin-release-candidate.md
   openclaw-runtime-verification-and-publish-approval.md
+  skills-adoption-pack.md
 tests/
   openclaw-action-receipt-kit.test.mjs
   openclaw-action-receipt-kit.e2e.mjs
@@ -602,6 +626,12 @@ tests/
 npm run verify:relay-example
 npm run verify:mcp-adoption-pack
 npm run verify:developer-feedback-access-path
+npm run verify:sdk-stable-consumer
+npm run verify:sdk-authority-routing
+npm run verify:a2a-authenticated-client
+npm run verify:openclaw-action-receipt-kit
+npm run verify:openclaw-developer-journey
+npm run verify:openclaw-workspace-surface
 ```
 
 `verify:mcp-adoption-pack` performs static checks by default. When `NEURA_RELAY_MCP_ACCESS_TOKEN` is present, it also verifies live MCP auth rejection, exact tool listing, validation, resolution, receipt lookup, trace replay, Agent Passport lookup, and blocked-action routing through `/mcp`.

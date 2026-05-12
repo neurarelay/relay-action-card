@@ -57,6 +57,10 @@ examples/
       authorized-crm-account-update.json
       blocked-cross-resource-crm-update.json
       blocked-payment-without-authority.json
+      delegated-crm-account-update.json
+      delegated-wrong-resource.json
+      delegated-wrong-action.json
+      delegated-expired-authority.json
     resolve-action-card.mjs
   mcp/
     action-cards/
@@ -109,6 +113,8 @@ examples/
   sdk/
     README.md
     resolve-action-card-sdk.mjs
+    resolve-action-card-sdk-a2a.mjs
+    authority-routing.mjs
 ```
 
 `examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
