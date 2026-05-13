@@ -20,6 +20,7 @@ Generate the visual surfaces:
 npm run openclaw:workbench
 npm run openclaw:workspace-proof
 npm run openclaw:severe-proof
+npm run openclaw:severe-preflight
 ```
 
 Run fixture and receipt checks:
@@ -33,6 +34,8 @@ npm run verify:openclaw-developer-journey
 npm run test:openclaw-developer-journey
 npm run verify:openclaw-severe-proof
 npm run test:openclaw-severe-proof
+npm run verify:openclaw-severe-preflight
+npm run test:openclaw-severe-preflight
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 npm run verify:openclaw-workbench
@@ -75,5 +78,7 @@ The committed GitHub preview assets live in `docs/assets/openclaw-near-miss-work
 The Workspace Decision Receipt Surface at `workspace-surface/scenarios.json` generates `artifacts/openclaw-workspace-decision-surface/report.html` for persistent workspace actions: generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations. It shows the proposed workspace action, Authority Decision Engine posture, receipt route, readiness path, and developer-owned next step. It is safe local projection only; no generated app, artifact, cron, workflow, memory, browser, shell, or file action is executed.
 
 The Severe Scenario Proof Pack at `severe-scenario-proof/scenario.json` generates `artifacts/openclaw-severe-scenario-proof/report.html` for one five-checkpoint computer-use incident: customer data export, external browser submit, completion message, file deletion, and workflow close. It shows the agent intent, each receipt route, what Neura catches, and the developer-owned next step. It is safe local projection only; no real data export, browser submit, message send, file delete, workflow transition, credential issuance, or downstream execution occurs.
+
+The Severe Preflight Queue at `run-severe-preflight-queue.mjs` generates `artifacts/openclaw-severe-preflight-queue/transcript.html` for the same incident using the existing `adapter.beforeAction(preflightAction)` path. It shows each preflight action, generated Action Card, adapter route, projected or live receipt route, and execution attempted as `false`. It is safe local projection by default; `--live` requests Relay receipts without local computer-use execution.
 
 The `preflight-adapter` folder adds the npm-published `beforeAction(preflightAction)` release candidate for local autonomous computer-use runtimes: `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2` under the `rc` tag. It is not submitted, listed, approved, or partnered by OpenClaw / ClawHub.

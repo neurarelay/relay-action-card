@@ -7,6 +7,7 @@ This release-candidate kit gives autonomous computer-use developers a copyable w
 - Adds a local Near-Miss Workbench with `npm run openclaw:workbench` for customer data exfiltration, production deployment, and expired delegated authority journeys.
 - Adds an OpenClaw OS Decision Receipt Surface with `npm run openclaw:workspace-proof` for generated app, artifact, cron, workflow monitor, session memory, browser direct-control, and shell/file workspace actions.
 - Adds an OpenClaw Severe Scenario Proof Pack with `npm run openclaw:severe-proof` for a five-checkpoint customer data export, external browser submit, completion message, file deletion, and workflow close journey.
+- Adds an OpenClaw Severe Preflight Queue with `npm run openclaw:severe-preflight` to run that five-checkpoint journey through `adapter.beforeAction(preflightAction)` before any local execution.
 - Adds `npm run openclaw:proof` as the one-command OpenClaw Developer Journey Proof, with `npm run openclaw:proof -- --live` for an explicit live receipt check.
 - Polishes the Near-Miss Workbench visual report around agent intent, what Neura catches, receipt route, and developer-owned next step.
 - Adds committed README preview assets so the GitHub OpenClaw proof is visible before local setup.

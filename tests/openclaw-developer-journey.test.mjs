@@ -43,6 +43,10 @@ test("package exposes one OpenClaw developer journey command", () => {
     "node examples/openclaw/run-severe-scenario-proof.mjs",
   );
   assert.equal(
+    packageJson.scripts["openclaw:severe-preflight"],
+    "node examples/openclaw/run-severe-preflight-queue.mjs",
+  );
+  assert.equal(
     packageJson.scripts["verify:openclaw-developer-journey"],
     "node scripts/verify-openclaw-developer-journey.mjs",
   );
@@ -53,6 +57,10 @@ test("package exposes one OpenClaw developer journey command", () => {
   assert.equal(
     packageJson.scripts["verify:openclaw-severe-proof"],
     "node scripts/verify-openclaw-severe-scenario-proof.mjs",
+  );
+  assert.equal(
+    packageJson.scripts["verify:openclaw-severe-preflight"],
+    "node scripts/verify-openclaw-severe-preflight-queue.mjs",
   );
   assert.equal(
     packageJson.scripts["test:openclaw-developer-journey"],
@@ -66,6 +74,10 @@ test("package exposes one OpenClaw developer journey command", () => {
     packageJson.scripts["test:openclaw-severe-proof"],
     "node --test tests/openclaw-severe-scenario-proof.test.mjs",
   );
+  assert.equal(
+    packageJson.scripts["test:openclaw-severe-preflight"],
+    "node --test tests/openclaw-severe-preflight-queue.test.mjs",
+  );
 });
 
 test("developer journey docs make clone to confidence explicit", () => {
@@ -75,9 +87,11 @@ test("developer journey docs make clone to confidence explicit", () => {
   assert.match(doc, /npm run openclaw:proof -- --live/);
   assert.match(doc, /npm run openclaw:workspace-proof/);
   assert.match(doc, /npm run openclaw:severe-proof/);
+  assert.match(doc, /npm run openclaw:severe-preflight/);
   assert.match(doc, /artifacts\/openclaw-near-miss-workbench\/report\.html/);
   assert.match(doc, /artifacts\/openclaw-workspace-decision-surface\/report\.html/);
   assert.match(doc, /artifacts\/openclaw-severe-scenario-proof\/report\.html/);
+  assert.match(doc, /artifacts\/openclaw-severe-preflight-queue\/transcript\.html/);
   assert.match(doc, /what the agent was about to do/);
   assert.match(doc, /what Neura caught/);
   assert.match(doc, /the receipt route/);
@@ -91,13 +105,16 @@ test("README points OpenClaw developers to the one-command proof", () => {
   assert.match(readme, /OpenClaw Developer Journey Proof/);
   assert.match(readme, /OpenClaw OS Decision Receipt Surface/);
   assert.match(readme, /Severe Scenario Proof Pack/);
+  assert.match(readme, /Severe Preflight Queue/);
   assert.match(readme, /docs\/openclaw-developer-journey\.md/);
   assert.match(readme, /docs\/openclaw-os-decision-receipt-surface\.md/);
   assert.match(readme, /docs\/openclaw-severe-scenario-proof-pack\.md/);
+  assert.match(readme, /docs\/openclaw-severe-preflight-queue\.md/);
   assert.match(readme, /npm run openclaw:proof/);
   assert.match(readme, /npm run openclaw:proof -- --live/);
   assert.match(readme, /npm run openclaw:workspace-proof/);
   assert.match(readme, /npm run openclaw:severe-proof/);
+  assert.match(readme, /npm run openclaw:severe-preflight/);
 });
 
 test("local journey proof runs without live Relay receipt calls", () => {
@@ -117,9 +134,15 @@ test("local journey proof runs without live Relay receipt calls", () => {
     payload.artifacts.severe_scenario_html,
     "artifacts/openclaw-severe-scenario-proof/report.html",
   );
+  assert.equal(
+    payload.artifacts.severe_preflight_html,
+    "artifacts/openclaw-severe-preflight-queue/transcript.html",
+  );
   assert.equal(payload.local_summary.journeys, 3);
   assert.equal(payload.local_summary.workspace_actions, 7);
   assert.equal(payload.local_summary.severe_checkpoints, 5);
+  assert.equal(payload.local_summary.severe_preflight_actions, 5);
+  assert.equal(payload.local_summary.severe_preflight_adapter_gates, 5);
   assert.equal(payload.local_summary.dry_run_fixtures, 8);
   assert.equal(payload.live_summary.enabled, false);
   assert.equal(payload.boundaries.official_openclaw_or_clawhub_claim, false);
@@ -130,4 +153,5 @@ test("local journey proof runs without live Relay receipt calls", () => {
   assert.equal(existsSync(path(payload.artifacts.workbench_html)), true);
   assert.equal(existsSync(path(payload.artifacts.workspace_surface_html)), true);
   assert.equal(existsSync(path(payload.artifacts.severe_scenario_html)), true);
+  assert.equal(existsSync(path(payload.artifacts.severe_preflight_html)), true);
 });

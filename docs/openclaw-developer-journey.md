@@ -24,6 +24,7 @@ The proof generates and verifies the local OpenClaw-style journey:
 - visual near-miss workbench
 - OpenClaw OS Decision Receipt Surface for generated apps, artifacts, crons, workflow monitors, memory, browser control, shell, and file operations
 - Severe Scenario Proof Pack for customer account data, external vendor portal, completion update, file deletion, and workflow close
+- Severe Preflight Queue using `adapter.beforeAction(preflightAction)` before local execution
 - eight refs-only Action Card fixtures
 - preflight adapter dry run
 - claim-boundary verifiers
@@ -41,12 +42,19 @@ To generate only the severe scenario proof:
 npm run openclaw:severe-proof
 ```
 
+To generate only the severe preflight queue:
+
+```bash
+npm run openclaw:severe-preflight
+```
+
 Open the generated visual report:
 
 ```text
 artifacts/openclaw-near-miss-workbench/report.html
 artifacts/openclaw-workspace-decision-surface/report.html
 artifacts/openclaw-severe-scenario-proof/report.html
+artifacts/openclaw-severe-preflight-queue/transcript.html
 ```
 
 The report is the developer-facing moment:
@@ -70,6 +78,14 @@ The severe scenario proof is the third developer-facing moment:
 - five checkpoints converted to refs-only Action Cards
 - `human_review`, `revise`, and `stop` routes before execution
 - local HTML, Markdown, JSON, verifier, and unit test proof
+
+The severe preflight queue is the runtime-facing moment:
+
+- five OpenClaw-style preflight actions
+- existing `adapter.beforeAction(preflightAction)` path
+- generated Action Cards before execution
+- projected or live Decision Receipt route
+- execution attempted as `false`
 
 ## Optional Live Receipt
 
@@ -117,8 +133,10 @@ The developer then sees the reusable integration surfaces:
 - `examples/openclaw/preflight-adapter`: `beforeAction(preflightAction)` release candidate for local runtimes
 - `examples/openclaw/workspace-surface`: workspace-style receipt scenarios for generated apps, artifacts, crons, workflow monitors, memory, browser control, shell, and file operations
 - `examples/openclaw/severe-scenario-proof`: severe scenario proof for customer data export, external browser submit, messaging, file deletion, and workflow close
+- `examples/openclaw/run-severe-preflight-queue.mjs`: runtime-style preflight queue for the same severe scenario
 - `docs/openclaw-os-decision-receipt-surface.md`: workspace-surface report and boundaries
 - `docs/openclaw-severe-scenario-proof-pack.md`: severe end-to-end scenario proof and boundaries
+- `docs/openclaw-severe-preflight-queue.md`: adapter queue transcript and boundaries
 - `docs/openclaw-preflight-adapter.md`: adapter contract and packaging notes
 - `docs/openclaw-plugin-release-candidate.md`: package-ready release-candidate packet
 

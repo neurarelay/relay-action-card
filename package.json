@@ -27,6 +27,7 @@
     "openclaw:workbench": "node examples/openclaw/run-near-miss-workbench.mjs",
     "openclaw:workspace-proof": "node examples/openclaw/run-workspace-decision-surface.mjs",
     "openclaw:severe-proof": "node examples/openclaw/run-severe-scenario-proof.mjs",
+    "openclaw:severe-preflight": "node examples/openclaw/run-severe-preflight-queue.mjs",
     "openclaw:proof": "node examples/openclaw/run-developer-journey-proof.mjs",
     "test": "npm run test:openclaw-kit",
     "test:openclaw-kit": "node --test tests/openclaw-action-receipt-kit.test.mjs",
@@ -35,6 +36,7 @@
     "test:openclaw-workbench": "node --test tests/openclaw-near-miss-workbench.test.mjs",
     "test:openclaw-workspace-surface": "node --test tests/openclaw-workspace-surface.test.mjs",
     "test:openclaw-severe-proof": "node --test tests/openclaw-severe-scenario-proof.test.mjs",
+    "test:openclaw-severe-preflight": "node --test tests/openclaw-severe-preflight-queue.test.mjs",
     "test:openclaw-developer-journey": "node --test tests/openclaw-developer-journey.test.mjs",
     "test:openclaw-preflight-adapter": "node --test tests/openclaw-preflight-adapter.test.mjs",
     "test:openclaw-preflight-adapter:e2e": "node --test tests/openclaw-preflight-adapter.e2e.mjs",
@@ -58,6 +60,7 @@
     "verify:openclaw-developer-journey": "node scripts/verify-openclaw-developer-journey.mjs",
     "verify:openclaw-workspace-surface": "node scripts/verify-openclaw-workspace-surface.mjs",
     "verify:openclaw-severe-proof": "node scripts/verify-openclaw-severe-scenario-proof.mjs",
+    "verify:openclaw-severe-preflight": "node scripts/verify-openclaw-severe-preflight-queue.mjs",
     "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",
     "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs"
   },

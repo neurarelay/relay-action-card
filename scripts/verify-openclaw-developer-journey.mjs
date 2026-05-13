@@ -66,17 +66,21 @@ const requiredFiles = [
   "docs/openclaw-near-miss-workbench.md",
   "docs/openclaw-os-decision-receipt-surface.md",
   "docs/openclaw-severe-scenario-proof-pack.md",
+  "docs/openclaw-severe-preflight-queue.md",
   "examples/openclaw/README.md",
   "examples/openclaw/run-developer-journey-proof.mjs",
   "examples/openclaw/run-severe-scenario-proof.mjs",
+  "examples/openclaw/run-severe-preflight-queue.mjs",
   "examples/openclaw/run-workspace-decision-surface.mjs",
   "examples/openclaw/severe-scenario-proof/scenario.json",
   "examples/openclaw/workspace-surface/scenarios.json",
   "scripts/verify-openclaw-developer-journey.mjs",
   "scripts/verify-openclaw-severe-scenario-proof.mjs",
+  "scripts/verify-openclaw-severe-preflight-queue.mjs",
   "scripts/verify-openclaw-workspace-surface.mjs",
   "tests/openclaw-developer-journey.test.mjs",
   "tests/openclaw-severe-scenario-proof.test.mjs",
+  "tests/openclaw-severe-preflight-queue.test.mjs",
   "tests/openclaw-workspace-surface.test.mjs",
 ];
 
@@ -87,16 +91,20 @@ const expectedScripts = {
   "openclaw:proof": "node examples/openclaw/run-developer-journey-proof.mjs",
   "openclaw:workspace-proof": "node examples/openclaw/run-workspace-decision-surface.mjs",
   "openclaw:severe-proof": "node examples/openclaw/run-severe-scenario-proof.mjs",
+  "openclaw:severe-preflight": "node examples/openclaw/run-severe-preflight-queue.mjs",
   "verify:openclaw-developer-journey":
     "node scripts/verify-openclaw-developer-journey.mjs",
   "verify:openclaw-workspace-surface":
     "node scripts/verify-openclaw-workspace-surface.mjs",
   "verify:openclaw-severe-proof":
     "node scripts/verify-openclaw-severe-scenario-proof.mjs",
+  "verify:openclaw-severe-preflight":
+    "node scripts/verify-openclaw-severe-preflight-queue.mjs",
   "test:openclaw-developer-journey":
     "node --test tests/openclaw-developer-journey.test.mjs",
   "test:openclaw-workspace-surface": "node --test tests/openclaw-workspace-surface.test.mjs",
   "test:openclaw-severe-proof": "node --test tests/openclaw-severe-scenario-proof.test.mjs",
+  "test:openclaw-severe-preflight": "node --test tests/openclaw-severe-preflight-queue.test.mjs",
 };
 for (const [script, command] of Object.entries(expectedScripts)) {
   if (packageJson.scripts?.[script] !== command) {
@@ -109,13 +117,16 @@ requireIncludes("docs/openclaw-developer-journey.md", journeyDoc, [
   "OpenClaw Developer Journey Proof",
   "OpenClaw OS Decision Receipt Surface",
   "Severe Scenario Proof Pack",
+  "Severe Preflight Queue",
   "npm run openclaw:proof",
   "npm run openclaw:proof -- --live",
   "npm run openclaw:workspace-proof",
   "npm run openclaw:severe-proof",
+  "npm run openclaw:severe-preflight",
   "artifacts/openclaw-near-miss-workbench/report.html",
   "artifacts/openclaw-workspace-decision-surface/report.html",
   "artifacts/openclaw-severe-scenario-proof/report.html",
+  "artifacts/openclaw-severe-preflight-queue/transcript.html",
   "what the agent was about to do",
   "what Neura caught",
   "the receipt route",
@@ -134,7 +145,9 @@ requireIncludes("README.md", readme, [
   "npm run openclaw:proof",
   "npm run openclaw:proof -- --live",
   "npm run openclaw:severe-proof",
+  "npm run openclaw:severe-preflight",
   "npm run verify:openclaw-severe-proof",
+  "npm run verify:openclaw-severe-preflight",
   "OpenClaw Developer Journey Proof",
 ]);
 rejectUnsafe("README.md", readme);
@@ -144,6 +157,7 @@ requireIncludes("examples/openclaw/README.md", openclawReadme, [
   "npm run openclaw:proof",
   "npm run openclaw:proof -- --live",
   "npm run openclaw:severe-proof",
+  "npm run openclaw:severe-preflight",
   "docs/openclaw-developer-journey.md",
 ]);
 rejectUnsafe("examples/openclaw/README.md", openclawReadme);
@@ -160,11 +174,13 @@ requireIncludes("runner", runner, [
   "run-near-miss-workbench.mjs",
   "run-workspace-decision-surface.mjs",
   "run-severe-scenario-proof.mjs",
+  "run-severe-preflight-queue.mjs",
   "run-action-receipt-kit.mjs",
   "run-preflight-adapter.mjs",
   "verify-openclaw-action-receipt-kit.mjs",
   "verify-openclaw-workspace-surface.mjs",
   "verify-openclaw-severe-scenario-proof.mjs",
+  "verify-openclaw-severe-preflight-queue.mjs",
   "verify-openclaw-preflight-adapter.mjs",
   "openclaw-developer-journey",
   "local_plus_live_receipts",
@@ -201,6 +217,12 @@ if (proofRun.status !== 0) {
   if (proof.local_summary?.severe_checkpoints !== 5) {
     failures.push("openclaw_proof_missing_severe_checkpoints");
   }
+  if (proof.local_summary?.severe_preflight_actions !== 5) {
+    failures.push("openclaw_proof_missing_severe_preflight_actions");
+  }
+  if (proof.local_summary?.severe_preflight_adapter_gates !== 5) {
+    failures.push("openclaw_proof_missing_severe_preflight_gates");
+  }
   if (proof.artifacts?.workbench_html !== "artifacts/openclaw-near-miss-workbench/report.html") {
     failures.push("openclaw_proof_wrong_workbench_artifact");
   }
@@ -215,6 +237,12 @@ if (proofRun.status !== 0) {
     "artifacts/openclaw-severe-scenario-proof/report.html"
   ) {
     failures.push("openclaw_proof_wrong_severe_scenario_artifact");
+  }
+  if (
+    proof.artifacts?.severe_preflight_html !==
+    "artifacts/openclaw-severe-preflight-queue/transcript.html"
+  ) {
+    failures.push("openclaw_proof_wrong_severe_preflight_artifact");
   }
   if (proof.boundaries?.developer_owned_execution !== true) {
     failures.push("openclaw_proof_developer_boundary_not_true");
