@@ -108,6 +108,7 @@ Start with the lane that matches what you are trying to prove.
 The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`.
 
 - [`examples/openclaw/QUICKSTART.md`](examples/openclaw/QUICKSTART.md): fastest GitHub visitor path for the OpenClaw-style 5-minute receipt demo.
+- [`docs/openclaw-copy-paste-agent-integration.md`](docs/openclaw-copy-paste-agent-integration.md): copy-paste `beforeAction()` guard for agent runtimes before `message.send`, `file.delete`, and `package.publish`.
 - [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md): one-command developer journey proof.
 - [`docs/openclaw-five-minute-receipt-demo.md`](docs/openclaw-five-minute-receipt-demo.md): fastest install-to-proof path for message send, file delete, and package publish preflight.
 - [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md): Action Receipt Kit, public-safe fixtures in `examples/openclaw/action-cards`, starter skill at `skills/openclaw/neura-action-card`, verifier, unit tests, and live E2E receipt test.
@@ -146,6 +147,7 @@ These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI
 ```bash
 npm install
 npm run openclaw:five-minute-demo
+npm run openclaw:copy-paste-integration
 npm run openclaw:proof
 ```
 
@@ -180,6 +182,7 @@ Run the full local checks:
 ```bash
 npm run verify:openclaw-workbench
 npm run verify:openclaw-five-minute-demo
+npm run verify:openclaw-copy-paste-integration
 npm run openclaw:dry-run
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-severe-proof
@@ -197,6 +200,7 @@ Release-candidate snapshot:
 | Proof | Command |
 | --- | --- |
 | 5-minute receipt demo | `npm run openclaw:five-minute-demo` |
+| Copy-paste agent integration | `npm run openclaw:copy-paste-integration` |
 | Full developer journey proof | `npm run openclaw:proof` |
 | Local near-miss visual journey | `npm run openclaw:workbench` |
 | Workspace Decision Receipt surface | `npm run openclaw:workspace-proof` |
@@ -210,6 +214,7 @@ Release-candidate snapshot:
 | Severe preflight verifier | `npm run verify:openclaw-severe-preflight` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
 | 5-minute demo verifier | `npm run verify:openclaw-five-minute-demo` |
+| Copy-paste integration verifier | `npm run verify:openclaw-copy-paste-integration` |
 | Clean consumer install verifier | `npm run verify:openclaw-clean-consumer` |
 | Published npm RC verifier | `npm run verify:openclaw-npm-package` |
 | Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
@@ -596,6 +601,7 @@ examples/
     README.md
     action-receipt-kit.manifest.json
     run-action-receipt-kit.mjs
+    run-copy-paste-agent-integration.mjs
     run-developer-journey-proof.mjs
     run-five-minute-receipt-demo.mjs
     run-near-miss-workbench.mjs
@@ -651,6 +657,7 @@ scripts/
   verify-openclaw-action-receipt-kit.mjs
   verify-openclaw-clean-consumer-install.mjs
   verify-openclaw-clawhub-release-gate.mjs
+  verify-openclaw-copy-paste-integration.mjs
   verify-openclaw-developer-journey.mjs
   verify-openclaw-five-minute-demo.mjs
   verify-openclaw-near-miss-workbench.mjs
@@ -677,6 +684,7 @@ docs/
   openclaw-action-receipt-pack.md
   openclaw-clawhub-maintainer-packet.md
   openclaw-clawhub-submission-readiness.md
+  openclaw-copy-paste-agent-integration.md
   openclaw-developer-journey.md
   openclaw-five-minute-receipt-demo.md
   openclaw-near-miss-workbench.md
@@ -690,6 +698,7 @@ docs/
 tests/
   openclaw-action-receipt-kit.test.mjs
   openclaw-action-receipt-kit.e2e.mjs
+  openclaw-copy-paste-agent-integration.test.mjs
   openclaw-developer-journey.test.mjs
   openclaw-five-minute-demo.test.mjs
   openclaw-near-miss-workbench.test.mjs

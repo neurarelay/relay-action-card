@@ -12,6 +12,7 @@ on:
       - "docs/openclaw-action-receipt-pack.md"
       - "docs/openclaw-clawhub-maintainer-packet.md"
       - "docs/openclaw-clawhub-submission-readiness.md"
+      - "docs/openclaw-copy-paste-agent-integration.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-five-minute-receipt-demo.md"
       - "docs/openclaw-near-miss-workbench.md"
@@ -24,6 +25,7 @@ on:
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
       - "scripts/verify-openclaw-developer-journey.mjs"
+      - "scripts/verify-openclaw-copy-paste-integration.mjs"
       - "scripts/verify-openclaw-five-minute-demo.mjs"
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
       - "scripts/verify-openclaw-npm-package.mjs"
@@ -34,6 +36,7 @@ on:
       - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
+      - "tests/openclaw-copy-paste-agent-integration*.mjs"
       - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-five-minute-demo*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
@@ -52,6 +55,7 @@ on:
       - "docs/openclaw-action-receipt-pack.md"
       - "docs/openclaw-clawhub-maintainer-packet.md"
       - "docs/openclaw-clawhub-submission-readiness.md"
+      - "docs/openclaw-copy-paste-agent-integration.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-five-minute-receipt-demo.md"
       - "docs/openclaw-near-miss-workbench.md"
@@ -64,6 +68,7 @@ on:
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
       - "scripts/verify-openclaw-developer-journey.mjs"
+      - "scripts/verify-openclaw-copy-paste-integration.mjs"
       - "scripts/verify-openclaw-five-minute-demo.mjs"
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
       - "scripts/verify-openclaw-npm-package.mjs"
@@ -74,6 +79,7 @@ on:
       - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
+      - "tests/openclaw-copy-paste-agent-integration*.mjs"
       - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-five-minute-demo*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
@@ -118,6 +124,9 @@ jobs:
       - name: Run developer journey tests
         run: npm run test:openclaw-developer-journey
 
+      - name: Run copy-paste integration tests
+        run: npm run test:openclaw-copy-paste-integration
+
       - name: Run five-minute demo tests
         run: npm run test:openclaw-five-minute-demo
 
@@ -138,6 +147,9 @@ jobs:
 
       - name: Verify developer journey proof
         run: npm run verify:openclaw-developer-journey
+
+      - name: Verify copy-paste integration
+        run: npm run verify:openclaw-copy-paste-integration
 
       - name: Verify five-minute demo
         run: npm run verify:openclaw-five-minute-demo
@@ -162,6 +174,9 @@ jobs:
 
       - name: Run developer journey proof
         run: npm run openclaw:proof -- --json
+
+      - name: Run copy-paste integration proof
+        run: npm run openclaw:copy-paste-integration -- --json
 
       - name: Run five-minute receipt demo
         run: npm run openclaw:five-minute-demo -- --json

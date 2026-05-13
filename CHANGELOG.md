@@ -7,6 +7,7 @@
 - Adds `npm run test:openclaw-five-minute-demo` for deterministic dry-run coverage of the three severe developer scenarios.
 - Adds the five-minute demo, verifier, and test to GitHub Actions so the public proof cannot drift silently.
 - Adds `examples/openclaw/QUICKSTART.md` as the shortest GitHub visitor path to the OpenClaw-style proof.
+- Adds `npm run openclaw:copy-paste-integration`, verifier, test, and docs as the copy-paste runtime guard before message send, file delete, and package publish.
 - Adds `docs/openclaw-clawhub-maintainer-packet.md` as a concise public-safe evidence index for ClawHub publisher-access review.
 - Documents the install-to-proof path in `docs/openclaw-five-minute-receipt-demo.md` without changing the already-published npm `0.1.0` package contents.
 - Preserves developer-owned execution, refs-only payloads, no public token/key issuance, no downstream execution by Neura, and no official OpenClaw or ClawHub listing, approval, publication, or partnership claim.
