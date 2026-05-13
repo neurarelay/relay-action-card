@@ -13,6 +13,8 @@ on:
       - "docs/openclaw-clawhub-maintainer-packet.md"
       - "docs/openclaw-clawhub-issue-update-draft.md"
       - "docs/openclaw-clawhub-submission-readiness.md"
+      - "docs/openclaw-clawhub-response-checklist.md"
+      - "docs/openclaw-computer-use-agent-loop.md"
       - "docs/openclaw-copy-paste-agent-integration.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-five-minute-receipt-demo.md"
@@ -33,11 +35,14 @@ on:
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
       - "scripts/verify-openclaw-runtime-approval.mjs"
+      - "scripts/verify-openclaw-clawhub-response-checklist.mjs"
+      - "scripts/verify-openclaw-computer-use-agent-loop.mjs"
       - "scripts/verify-openclaw-submission-readiness.mjs"
       - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
       - "tests/openclaw-copy-paste-agent-integration*.mjs"
+      - "tests/openclaw-computer-use-agent-loop*.mjs"
       - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-five-minute-demo*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
@@ -57,6 +62,8 @@ on:
       - "docs/openclaw-clawhub-maintainer-packet.md"
       - "docs/openclaw-clawhub-issue-update-draft.md"
       - "docs/openclaw-clawhub-submission-readiness.md"
+      - "docs/openclaw-clawhub-response-checklist.md"
+      - "docs/openclaw-computer-use-agent-loop.md"
       - "docs/openclaw-copy-paste-agent-integration.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-five-minute-receipt-demo.md"
@@ -77,11 +84,14 @@ on:
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
       - "scripts/verify-openclaw-runtime-approval.mjs"
+      - "scripts/verify-openclaw-clawhub-response-checklist.mjs"
+      - "scripts/verify-openclaw-computer-use-agent-loop.mjs"
       - "scripts/verify-openclaw-submission-readiness.mjs"
       - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
       - "tests/openclaw-copy-paste-agent-integration*.mjs"
+      - "tests/openclaw-computer-use-agent-loop*.mjs"
       - "tests/openclaw-developer-journey*.mjs"
       - "tests/openclaw-five-minute-demo*.mjs"
       - "tests/openclaw-near-miss-workbench*.mjs"
@@ -129,6 +139,9 @@ jobs:
       - name: Run copy-paste integration tests
         run: npm run test:openclaw-copy-paste-integration
 
+      - name: Run computer-use loop tests
+        run: npm run test:openclaw-computer-use-loop
+
       - name: Run five-minute demo tests
         run: npm run test:openclaw-five-minute-demo
 
@@ -153,6 +166,9 @@ jobs:
       - name: Verify copy-paste integration
         run: npm run verify:openclaw-copy-paste-integration
 
+      - name: Verify computer-use loop
+        run: npm run verify:openclaw-computer-use-loop
+
       - name: Verify five-minute demo
         run: npm run verify:openclaw-five-minute-demo
 
@@ -164,6 +180,9 @@ jobs:
 
       - name: Verify submission readiness
         run: npm run verify:openclaw-submission-readiness
+
+      - name: Verify ClawHub response checklist
+        run: npm run verify:openclaw-clawhub-response-checklist
 
       - name: Run dry-run proof
         run: npm run openclaw:dry-run -- --json
@@ -179,6 +198,9 @@ jobs:
 
       - name: Run copy-paste integration proof
         run: npm run openclaw:copy-paste-integration -- --json
+
+      - name: Run computer-use loop proof
+        run: npm run openclaw:computer-use-loop -- --json
 
       - name: Run five-minute receipt demo
         run: npm run openclaw:five-minute-demo -- --json

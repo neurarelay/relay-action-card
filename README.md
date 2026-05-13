@@ -161,6 +161,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 
 - [`examples/openclaw/QUICKSTART.md`](examples/openclaw/QUICKSTART.md): fastest GitHub visitor path for the OpenClaw-style 5-minute receipt demo.
 - [`docs/openclaw-copy-paste-agent-integration.md`](docs/openclaw-copy-paste-agent-integration.md): copy-paste `beforeAction()` guard for agent runtimes before `message.send`, `file.delete`, and `package.publish`.
+- [`docs/openclaw-computer-use-agent-loop.md`](docs/openclaw-computer-use-agent-loop.md): generic computer-use loop that pauses before message send, file delete, and package publish execution.
 - [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md): one-command developer journey proof.
 - [`docs/openclaw-five-minute-receipt-demo.md`](docs/openclaw-five-minute-receipt-demo.md): fastest install-to-proof path for message send, file delete, and package publish preflight.
 - [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md): Action Receipt Kit, public-safe fixtures in `examples/openclaw/action-cards`, starter skill at `skills/openclaw/neura-action-card`, verifier, unit tests, and live E2E receipt test.
@@ -169,6 +170,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 - [`docs/openclaw-severe-scenario-proof-pack.md`](docs/openclaw-severe-scenario-proof-pack.md): severe end-to-end computer-use proof for customer data export, external browser submit, completion message, file deletion, and workflow close.
 - [`docs/openclaw-severe-preflight-queue.md`](docs/openclaw-severe-preflight-queue.md): runtime-style queue that sends the severe scenario through `adapter.beforeAction(preflightAction)` before local execution.
 - [`docs/openclaw-clawhub-maintainer-packet.md`](docs/openclaw-clawhub-maintainer-packet.md): concise public-safe evidence index for ClawHub publisher-access review.
+- [`docs/openclaw-clawhub-response-checklist.md`](docs/openclaw-clawhub-response-checklist.md): local response path for grant, proof request, package-change request, rejection, or deferral.
 - [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md): final approval packet for an official OpenClaw / ClawHub submission or package publication decision.
 
 The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`. The Severe Scenario Proof Pack adds a single five-checkpoint incident path in `severe-scenario-proof/` with local HTML, Markdown, JSON, verifier, and unit test coverage. The Severe Preflight Queue runs the same incident through the actual adapter shape and records execution attempted as `false`.
@@ -200,6 +202,7 @@ These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI
 npm install
 npm run openclaw:five-minute-demo
 npm run openclaw:copy-paste-integration
+npm run openclaw:computer-use-loop
 npm run openclaw:proof
 ```
 
@@ -235,6 +238,7 @@ Run the full local checks:
 npm run verify:openclaw-workbench
 npm run verify:openclaw-five-minute-demo
 npm run verify:openclaw-copy-paste-integration
+npm run verify:openclaw-computer-use-loop
 npm run openclaw:dry-run
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-severe-proof
@@ -289,6 +293,7 @@ npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
 npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-clawhub-release
+npm run verify:openclaw-clawhub-response-checklist
 npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```

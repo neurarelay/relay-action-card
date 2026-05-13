@@ -10,6 +10,8 @@
 - Adds `npm run openclaw:copy-paste-integration`, verifier, test, and docs as the copy-paste runtime guard before message send, file delete, and package publish.
 - Moves the stable adapter install and `guardToolCall()` path closer to the top of the README so developers can wire the runtime guard faster.
 - Adds a claim-safe ClawHub issue update draft for Roman approval before posting.
+- Adds a ClawHub response checklist and verifier for grant, proof request, package-change request, rejection, or deferral paths.
+- Adds a generic computer-use agent loop example, verifier, test, and docs that pause before message send, file delete, and package publish execution.
 - Adds `docs/openclaw-clawhub-maintainer-packet.md` as a concise public-safe evidence index for ClawHub publisher-access review.
 - Documents the install-to-proof path in `docs/openclaw-five-minute-receipt-demo.md` without changing the already-published npm `0.1.0` package contents.
 - Preserves developer-owned execution, refs-only payloads, no public token/key issuance, no downstream execution by Neura, and no official OpenClaw or ClawHub listing, approval, publication, or partnership claim.

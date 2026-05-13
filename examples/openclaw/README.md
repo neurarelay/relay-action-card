@@ -12,6 +12,7 @@ Fastest path:
 ```bash
 npm run openclaw:five-minute-demo
 npm run openclaw:copy-paste-integration
+npm run openclaw:computer-use-loop
 npm run verify:openclaw-five-minute-demo
 ```
 
@@ -22,6 +23,7 @@ Start with the full local proof:
 ```bash
 npm run openclaw:five-minute-demo
 npm run openclaw:copy-paste-integration
+npm run openclaw:computer-use-loop
 npm run verify:openclaw-five-minute-demo
 npm run openclaw:proof
 npm run openclaw:proof -- --live
@@ -46,9 +48,11 @@ npm run verify:openclaw-action-receipt-pack
 npm run verify:openclaw-developer-journey
 npm run verify:openclaw-five-minute-demo
 npm run verify:openclaw-copy-paste-integration
+npm run verify:openclaw-computer-use-loop
 npm run verify:openclaw-clean-consumer
 npm run test:openclaw-five-minute-demo
 npm run test:openclaw-copy-paste-integration
+npm run test:openclaw-computer-use-loop
 npm run test:openclaw-developer-journey
 npm run verify:openclaw-severe-proof
 npm run test:openclaw-severe-proof
@@ -90,6 +94,8 @@ The manifest at `action-receipt-kit.manifest.json` is the machine-readable contr
 The 5-minute receipt demo at `run-five-minute-receipt-demo.mjs` is the fastest OpenClaw-style adoption proof. It routes three high-signal local-agent moments through the preflight adapter shape: sending a customer message, deleting a local file, and publishing a package. Read [`docs/openclaw-five-minute-receipt-demo.md`](../../docs/openclaw-five-minute-receipt-demo.md) for the install-to-proof path and clean-consumer verifier.
 
 The copy-paste integration at `run-copy-paste-agent-integration.mjs` shows the exact `guardToolCall(toolCall)` pattern developers can place before local tool execution. It covers `message.send`, `file.delete`, and `package.publish`, keeps execution attempted as `false` until the route is ready, and is documented in [`docs/openclaw-copy-paste-agent-integration.md`](../../docs/openclaw-copy-paste-agent-integration.md).
+
+The generic computer-use agent loop at `integrations/computer-use-agent-loop.mjs` shows the runtime loop pausing before `message.send`, `file.delete`, and `package.publish`. It is documented in [`docs/openclaw-computer-use-agent-loop.md`](../../docs/openclaw-computer-use-agent-loop.md).
 
 The developer journey proof at `run-developer-journey-proof.mjs` is the one-command local adoption path. It generates the workbench, dry-runs all refs-only fixtures, dry-runs the preflight adapter, runs the verifiers, and runs the local test suite. Read [`docs/openclaw-developer-journey.md`](../../docs/openclaw-developer-journey.md) for the clone-to-confidence path.
 
