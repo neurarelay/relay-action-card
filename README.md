@@ -11,6 +11,34 @@ Distribution proof:
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
 - The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
 
+## OpenClaw Builders: Start Here
+
+If you are testing the OpenClaw-style pre-action receipt path, run the one-command proof first:
+
+```bash
+git clone https://github.com/neurarelay/relay-action-card.git
+cd relay-action-card
+npm install
+npm run openclaw:proof
+```
+
+What it proves:
+
+- local autonomous-agent actions can be converted into Action Cards before execution
+- `@neurarelay/openclaw-preflight-adapter@0.1.0` returns a refs-only Decision Receipt route
+- the developer or runtime still owns execution after the receipt
+- the proof covers message send, file delete, browser submit, shell command, workflow transition, memory write, data export, and package publish examples
+
+What feedback we want:
+
+- should this receipt sit before tool execution, beside guardrails, inside observability, or as a linked audit artifact?
+- which action family should be guarded first in a real autonomous-agent runtime?
+- what metadata would make the receipt more useful to plugin builders, maintainers, or security reviewers?
+
+Reply in the home-base feedback issue: [Where should pre-action Decision Receipts sit in agent runtimes?](https://github.com/neurarelay/relay-action-card/issues/2)
+
+Boundary: this is an external OpenClaw-style proof. It is not an official OpenClaw, OpenClaw OS, OpenUI, or ClawHub integration, listing, approval, endorsement, partnership, or publication claim.
+
 ## Start Here
 
 Choose the lane that matches what you want to prove:
