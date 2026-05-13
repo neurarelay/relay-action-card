@@ -64,6 +64,7 @@
     "verify:openclaw-clean-consumer": "node scripts/verify-openclaw-clean-consumer-install.mjs",
     "verify:openclaw-submission-readiness": "node scripts/verify-openclaw-submission-readiness.mjs",
     "verify:openclaw-clawhub-response-checklist": "node scripts/verify-openclaw-clawhub-response-checklist.mjs",
+    "verify:openclaw-founder-clawhub-publisher": "node scripts/verify-openclaw-founder-clawhub-publisher.mjs",
     "verify:openclaw-clawhub-release": "node scripts/verify-openclaw-clawhub-release-gate.mjs",
     "verify:openclaw-developer-journey": "node scripts/verify-openclaw-developer-journey.mjs",
     "verify:openclaw-five-minute-demo": "node scripts/verify-openclaw-five-minute-demo.mjs",

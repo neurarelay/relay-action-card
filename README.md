@@ -720,6 +720,7 @@ scripts/
   verify-openclaw-action-receipt-kit.mjs
   verify-openclaw-clean-consumer-install.mjs
   verify-openclaw-clawhub-release-gate.mjs
+  verify-openclaw-founder-clawhub-publisher.mjs
   verify-openclaw-copy-paste-integration.mjs
   verify-openclaw-developer-journey.mjs
   verify-openclaw-five-minute-demo.mjs

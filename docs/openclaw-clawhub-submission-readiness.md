@@ -13,6 +13,16 @@ Publisher access is requested in GitHub issue `openclaw/clawhub#2190`:
 
 Current truth: the package is published on npm as `@neurarelay/openclaw-preflight-adapter@0.1.0`, but it is not published/listed/approved on ClawHub. The issue only asks ClawHub/OpenClaw for publisher namespace access; it does not imply endorsement, listing, approval, or partnership.
 
+If ClawHub publisher access remains blocked, the fallback path is founder-led publication under Roman's established publisher handle while preserving Neura branding and source attribution:
+
+- ClawHub package: `@rpelevin/neura-relay-preflight-adapter`
+- Display name: `Neura Relay Preflight Adapter`
+- Source repo/path: `neurarelay/relay-action-card`, `examples/openclaw/preflight-adapter`
+- Canonical npm package remains: `@neurarelay/openclaw-preflight-adapter@0.1.0`
+- `openclaw/clawhub#2190` remains open as the request to gain/transfer the canonical `@neurarelay` publisher namespace
+
+This fallback is not an OpenClaw / ClawHub approval, listing, endorsement, partnership, or official integration claim.
+
 ## Package
 
 | Field | Value |
@@ -67,6 +77,7 @@ Run from the repository root using Node `24`:
 nvm use
 npm ci
 npm run verify:openclaw-clawhub-release
+npm run verify:openclaw-founder-clawhub-publisher
 npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-npm-package
 npm run verify:openclaw-preflight-adapter
@@ -122,6 +133,15 @@ This gate verifies package metadata, npm pack contents, clean npm consumer insta
 
 The gate may run the ClawHub dry-run command, but it does not publish the package. It should still be rerun immediately after ClawHub grants publisher access and before any real publish command.
 
+Founder-publisher fallback dry-run:
+
+```bash
+nvm use
+npm run verify:openclaw-founder-clawhub-publisher
+```
+
+This packs the exact adapter tarball and dry-runs a ClawHub package publish as `@rpelevin/neura-relay-preflight-adapter`, with the display name `Neura Relay Preflight Adapter` and source attribution to `neurarelay/relay-action-card`. It does not upload or publish.
+
 ## Submission Action
 
 Do not run either command without Roman's exact approval for the destination, metadata, and public copy.
@@ -138,10 +158,30 @@ Publish command:
 clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
+Founder-publisher fallback dry-run command shape:
+
+```bash
+npm pack examples/openclaw/preflight-adapter --pack-destination /tmp/neura-openclaw-pack --json
+clawhub package publish /tmp/neura-openclaw-pack/neurarelay-openclaw-preflight-adapter-0.1.0.tgz --family code-plugin --owner rpelevin --name @rpelevin/neura-relay-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-commit <current-commit> --source-ref main --source-path examples/openclaw/preflight-adapter --dry-run --json
+```
+
+Founder-publisher fallback publish command shape, only after Roman's exact approval:
+
+```bash
+clawhub package publish /tmp/neura-openclaw-pack/neurarelay-openclaw-preflight-adapter-0.1.0.tgz --family code-plugin --owner rpelevin --name @rpelevin/neura-relay-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-commit <current-commit> --source-ref main --source-path examples/openclaw/preflight-adapter
+```
+
 Post-publish install check:
 
 ```bash
 openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0
+openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
+```
+
+Founder-publisher fallback post-publish install check:
+
+```bash
+openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.0
 openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
 ```
 
@@ -196,6 +236,10 @@ Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.
 
 ```text
 Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub with the public-safe copy in docs/openclaw-clawhub-submission-readiness.md.
+```
+
+```text
+Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback, with source attribution to neurarelay/relay-action-card and no official OpenClaw / ClawHub claim.
 ```
 
 Any other destination, package name, version, description, tags, or provider claim requires a new approval pass.

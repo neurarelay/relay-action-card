@@ -88,6 +88,7 @@ const requiredFiles = [
   "scripts/verify-openclaw-plugin-rc.mjs",
   "scripts/verify-openclaw-runtime-approval.mjs",
   "scripts/verify-openclaw-clawhub-release-gate.mjs",
+  "scripts/verify-openclaw-founder-clawhub-publisher.mjs",
 ];
 
 for (const file of requiredFiles) requireFile(file);
@@ -104,6 +105,12 @@ if (
   "node scripts/verify-openclaw-clawhub-release-gate.mjs"
 ) {
   failures.push("root_package_missing_clawhub_release_gate_script");
+}
+if (
+  rootPackage.scripts?.["verify:openclaw-founder-clawhub-publisher"] !==
+  "node scripts/verify-openclaw-founder-clawhub-publisher.mjs"
+) {
+  failures.push("root_package_missing_founder_clawhub_publisher_script");
 }
 
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
@@ -154,8 +161,12 @@ requireIncludes("submission_packet", packet, [
   "https://documentation.openclaw.ai/clawhub",
   "npm run verify:openclaw-submission-readiness",
   "npm run verify:openclaw-clawhub-release",
+  "npm run verify:openclaw-founder-clawhub-publisher",
   "https://github.com/openclaw/clawhub/issues/2190",
   "not published/listed/approved on ClawHub",
+  "@rpelevin/neura-relay-preflight-adapter",
+  "founder-led publication under Roman's established publisher handle",
+  "canonical `@neurarelay` publisher namespace",
   "npm run verify:openclaw-npm-package",
   "npm run verify:openclaw-runtime-approval",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
@@ -166,6 +177,7 @@ requireIncludes("submission_packet", packet, [
   "Roman Approval Decision",
   "Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.1.0.",
   "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub with the public-safe copy in docs/openclaw-clawhub-submission-readiness.md.",
+  "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback",
 ]);
 rejectUnsafe("submission_packet", packet);
 
@@ -174,6 +186,7 @@ requireIncludes("readme", readme, [
   "docs/openclaw-clawhub-submission-readiness.md",
   "npm run verify:openclaw-submission-readiness",
   "npm run verify:openclaw-clawhub-release",
+  "verify-openclaw-founder-clawhub-publisher.mjs",
   "@neurarelay/openclaw-preflight-adapter@0.1.0",
   "No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.",
 ]);

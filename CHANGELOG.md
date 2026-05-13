@@ -2,6 +2,8 @@
 
 ## OpenClaw 5-minute receipt demo - 2026-05-13
 
+- Adds `npm run verify:openclaw-founder-clawhub-publisher` as the claim-safe dry-run fallback for publishing the Neura Relay adapter under Roman's established `@rpelevin` ClawHub publisher while `@neurarelay` namespace access remains pending.
+- Updates `docs/openclaw-clawhub-submission-readiness.md` with the founder-publisher fallback command shape, install check, approval text, and no-official-claim boundaries.
 - Adds `npm run openclaw:five-minute-demo` as the fastest OpenClaw-style proof loop for message send, file delete, and package publish preflight.
 - Adds `npm run verify:openclaw-five-minute-demo` to prove the local demo and a clean outside npm consumer install of `@neurarelay/openclaw-preflight-adapter`.
 - Adds `npm run test:openclaw-five-minute-demo` for deterministic dry-run coverage of the three severe developer scenarios.
