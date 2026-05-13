@@ -22,6 +22,15 @@ npm install
 npm run openclaw:proof
 ```
 
+Optional refs-only attribution for live receipts:
+
+```bash
+npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+NEURA_SOURCE=github NEURA_CAMPAIGN=first_receipt npm run example:relay -- --json
+```
+
+Relay stores only safe source, campaign, surface, and session refs with the receipt ledger. It does not store token values, private payloads, file contents, message bodies, or browser form values.
+
 What it proves:
 
 - local autonomous-agent actions can be converted into Action Cards before execution
@@ -134,6 +143,15 @@ git clone https://github.com/neurarelay/relay-action-card.git
 cd relay-action-card
 npm run example:relay -- --example=support-reply --json
 ```
+
+To keep receipt adoption measurable without collecting private payloads, pass refs-only source and campaign fields:
+
+```bash
+npm run example:relay -- --example=support-reply --source=github --campaign=first_receipt --json
+npm run example:sdk -- --source=sdk_docs --campaign=first_receipt
+```
+
+Supported refs are `--source`, `--campaign`, `--surface`, `--session-ref`, `--utm-source`, `--utm-medium`, `--utm-campaign`, `--utm-content`, or matching `NEURA_*` and `UTM_*` environment variables.
 
 For the OpenClaw-style autonomous computer-use path, run the 5-minute receipt demo:
 

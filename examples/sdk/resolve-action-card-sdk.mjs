@@ -3,6 +3,11 @@
 import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  buildRelayAttribution,
+  publicAttributionSummary,
+  withRelayAttribution,
+} from "../lib/activation-attribution.mjs";
 
 let createNeuraRelaySdk;
 
@@ -21,8 +26,15 @@ const actionCard = JSON.parse(await readFile(actionCardPath, "utf8"));
 const relay = createNeuraRelaySdk({
   baseUrl: process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com",
 });
+const activationAttribution = buildRelayAttribution({
+  defaultSource: "relay-action-card",
+  defaultCampaign: "sdk-receipt-example",
+  defaultSurface: "examples/sdk/resolve-action-card-sdk",
+});
 
-const response = await relay.resolve.resolve({ action_card: actionCard });
+const response = await relay.resolve.resolve(
+  withRelayAttribution({ action_card: actionCard }, activationAttribution),
+);
 const receipt = response.decision_receipt;
 
 console.log(
@@ -33,6 +45,8 @@ console.log(
       decision: receipt?.decision,
       trace_ref: receipt?.trace_ref,
       transaction_ref: response.transaction_ledger?.transaction_ref,
+      activation_attribution: publicAttributionSummary(activationAttribution),
+      activation_telemetry: response.activation_telemetry ?? null,
       authority_context_source: receipt?.authority_context?.source ?? null,
       registry_validation_status:
         receipt?.authority_context?.registry_validation_status ?? null,

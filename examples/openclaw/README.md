@@ -31,6 +31,15 @@ npm run openclaw:proof
 npm run openclaw:proof -- --live
 ```
 
+Add refs-only activation attribution when you want Relay receipts to show where a proof run came from:
+
+```bash
+npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+NEURA_SOURCE=github NEURA_CAMPAIGN=openclaw npm run openclaw:receipts -- --only=send-message --json
+```
+
+Attribution is limited to source, campaign, surface, session, and UTM refs. It does not include private payloads, message bodies, file contents, browser form values, token values, or downstream execution.
+
 Generate the visual surfaces:
 
 ```bash

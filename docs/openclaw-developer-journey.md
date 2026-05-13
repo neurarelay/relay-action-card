@@ -19,6 +19,14 @@ npm install
 npm run openclaw:proof
 ```
 
+Optional attribution:
+
+```bash
+npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+```
+
+The attribution path is refs-only. Relay can record source, campaign, surface, session, and UTM refs with live receipts without storing private payloads, token values, message bodies, file contents, browser form values, or downstream execution.
+
 The proof generates and verifies the local OpenClaw-style journey:
 
 - visual near-miss workbench

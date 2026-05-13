@@ -3,6 +3,11 @@
 import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  buildRelayAttribution,
+  publicAttributionSummary,
+  withRelayAttribution,
+} from "../lib/activation-attribution.mjs";
 
 let createNeuraRelaySdk;
 
@@ -70,13 +75,20 @@ function routeReceiptForDeveloper(receipt) {
 }
 
 const relay = createNeuraRelaySdk({ baseUrl: relayBaseUrl });
+const activationAttribution = buildRelayAttribution({
+  defaultSource: "relay-action-card",
+  defaultCampaign: "sdk-authority-routing",
+  defaultSurface: "examples/sdk/authority-routing",
+});
 const results = [];
 
 for (const scenario of scenarios) {
   const actionCard = JSON.parse(
     await readFile(join(actionCardDir, scenario.file), "utf8"),
   );
-  const response = await relay.resolve.resolve({ action_card: actionCard });
+  const response = await relay.resolve.resolve(
+    withRelayAttribution({ action_card: actionCard }, activationAttribution),
+  );
   const receipt = response.decision_receipt;
   const authorityContext = receipt?.authority_context ?? null;
   const developerRoute = routeReceiptForDeveloper(receipt);
@@ -89,6 +101,7 @@ for (const scenario of scenarios) {
     receipt_id: receipt?.receipt_id ?? null,
     trace_ref: receipt?.trace_ref ?? null,
     transaction_ref: response.transaction_ledger?.transaction_ref ?? null,
+    activation_telemetry: response.activation_telemetry ?? null,
     authority_context: authorityContext
       ? {
           source: authorityContext.source ?? null,
@@ -115,6 +128,7 @@ const proof = {
   relay: relayBaseUrl,
   package: "@neurarelay/sdk",
   version: "0.1.0",
+  activation_attribution: publicAttributionSummary(activationAttribution),
   routing_policy:
     `proceed requires Registry-backed delegated authority before developer-owned execution; ${publicDemoAuthoritySource} demo refs hold for Registry trust`,
   results,

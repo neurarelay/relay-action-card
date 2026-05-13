@@ -3,6 +3,11 @@
 import { readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  buildRelayAttribution,
+  publicAttributionSummary,
+  withRelayAttribution,
+} from "../lib/activation-attribution.mjs";
 
 const exampleDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(exampleDir, "../..");
@@ -12,6 +17,11 @@ const dryRun = process.argv.includes("--dry-run");
 const jsonOutput = process.argv.includes("--json");
 const listOnly = process.argv.includes("--list");
 const onlyUsage = "--only=<id>";
+const activationAttribution = buildRelayAttribution({
+  defaultSource: "relay-action-card",
+  defaultCampaign: "openclaw-action-receipt-kit",
+  defaultSurface: "examples/openclaw/run-action-receipt-kit",
+});
 
 function argValue(name) {
   const prefix = `--${name}=`;
@@ -146,7 +156,9 @@ for (const example of examples) {
     continue;
   }
 
-  const response = await relay.resolve.resolve({ action_card: actionCard });
+  const response = await relay.resolve.resolve(
+    withRelayAttribution({ action_card: actionCard }, activationAttribution),
+  );
   const receipt = response.decision_receipt;
 
   if (!receipt?.receipt_id || !receipt?.trace_ref) {
@@ -170,6 +182,7 @@ const output = {
   version: manifest.version,
   mode: dryRun ? "dry_run" : "live_receipts",
   relay: dryRun ? null : relayBaseUrl,
+  activation_attribution: publicAttributionSummary(activationAttribution),
   count: results.length,
   results,
   boundaries: manifest.boundaries,

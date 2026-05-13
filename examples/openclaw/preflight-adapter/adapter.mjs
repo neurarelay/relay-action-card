@@ -50,6 +50,17 @@ function requireRefs(value, label) {
   return value;
 }
 
+function withRelayAttribution(body, attribution) {
+  if (!attribution || Object.keys(attribution).length === 0) return body;
+  return {
+    ...body,
+    metadata: {
+      ...(body.metadata ?? {}),
+      ...attribution,
+    },
+  };
+}
+
 export function createActionCardFromPreflightAction(preflightAction) {
   assertNoPrivatePayload(preflightAction);
 
@@ -147,10 +158,13 @@ export function publicReceipt(receipt, response) {
 
 export function createNeuraPreflightAdapter(options = {}) {
   const relayBaseUrl = options.relayBaseUrl ?? process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
+  const activationAttribution = options.activationAttribution ?? null;
 
   return {
     async beforeAction(preflightAction, runOptions = {}) {
       const actionCard = createActionCardFromPreflightAction(preflightAction);
+      const requestAttribution =
+        runOptions.activationAttribution ?? activationAttribution;
 
       if (runOptions.dryRun) {
         return {
@@ -165,7 +179,9 @@ export function createNeuraPreflightAdapter(options = {}) {
 
       const { createNeuraRelaySdk } = await import("@neurarelay/sdk");
       const relay = createNeuraRelaySdk({ baseUrl: relayBaseUrl });
-      const response = await relay.resolve.resolve({ action_card: actionCard });
+      const response = await relay.resolve.resolve(
+        withRelayAttribution({ action_card: actionCard }, requestAttribution),
+      );
       const receipt = response.decision_receipt;
 
       if (!receipt?.receipt_id || !receipt?.trace_ref) {
@@ -182,6 +198,7 @@ export function createNeuraPreflightAdapter(options = {}) {
         execution_owner: "developer_runtime",
         action_card: actionCard,
         receipt: publicReceipt(receipt, response),
+        activation_telemetry: response.activation_telemetry ?? null,
       };
     },
   };

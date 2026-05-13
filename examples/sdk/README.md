@@ -28,6 +28,15 @@ npm run example:sdk
 npm run example:sdk:authority-routing
 ```
 
+Optional refs-only activation attribution:
+
+```bash
+npm run example:sdk -- --source=sdk_docs --campaign=first_receipt
+NEURA_SOURCE=github NEURA_CAMPAIGN=sdk_authority npm run example:sdk:authority-routing
+```
+
+Relay records only source, campaign, surface, session, and UTM refs with the receipt ledger. It does not record token values or private action payloads.
+
 The authority-routing example runs the four delegated-authority Action Cards and turns each Decision Receipt into an application route:
 
 - `ready_for_developer_owned_execution` only when the receipt is `proceed` and delegated authority is Registry-backed as `ready`

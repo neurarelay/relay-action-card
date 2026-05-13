@@ -4,6 +4,10 @@ import { readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createNeuraPreflightAdapter } from "./preflight-adapter/adapter.mjs";
+import {
+  buildRelayAttribution,
+  publicAttributionSummary,
+} from "../lib/activation-attribution.mjs";
 
 const exampleDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(exampleDir, "../..");
@@ -11,6 +15,11 @@ const relayBaseUrl = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
 const dryRun = process.argv.includes("--dry-run");
 const jsonOutput = process.argv.includes("--json");
 const fixtureUsage = "--fixture=<path>";
+const activationAttribution = buildRelayAttribution({
+  defaultSource: "relay-action-card",
+  defaultCampaign: "openclaw-preflight-adapter",
+  defaultSurface: "examples/openclaw/run-preflight-adapter",
+});
 
 function argValue(name) {
   const prefix = `--${name}=`;
@@ -21,14 +30,21 @@ function argValue(name) {
 const fixture = argValue("fixture") ??
   "examples/openclaw/preflight-adapter/fixtures/send-message.preflight.json";
 const preflightAction = JSON.parse(await readFile(join(repoRoot, fixture), "utf8"));
-const adapter = createNeuraPreflightAdapter({ relayBaseUrl });
-const result = await adapter.beforeAction(preflightAction, { dryRun });
+const adapter = createNeuraPreflightAdapter({
+  relayBaseUrl,
+  activationAttribution,
+});
+const result = await adapter.beforeAction(preflightAction, {
+  dryRun,
+  activationAttribution,
+});
 const output = {
   ok: true,
   adapter: "neura-relay-preflight-adapter",
   mode: result.mode,
   fixture,
   relay: dryRun ? null : relayBaseUrl,
+  activation_attribution: publicAttributionSummary(activationAttribution),
   result,
   boundaries: {
     official_openclaw_or_clawhub_claim: false,

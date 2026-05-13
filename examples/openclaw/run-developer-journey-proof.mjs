@@ -3,11 +3,22 @@
 import { spawnSync } from "node:child_process";
 import { dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  attributionArgs,
+  buildRelayAttribution,
+  publicAttributionSummary,
+} from "../lib/activation-attribution.mjs";
 
 const repoRoot = dirname(dirname(dirname(fileURLToPath(import.meta.url))));
 const jsonOutput = process.argv.includes("--json");
 const liveReceipts =
   process.argv.includes("--live") || process.env.NEURA_OPENCLAW_PROOF_LIVE === "true";
+const activationAttribution = buildRelayAttribution({
+  defaultSource: "relay-action-card",
+  defaultCampaign: "openclaw-developer-journey-proof",
+  defaultSurface: "examples/openclaw/run-developer-journey-proof",
+});
+const inheritedAttributionArgs = attributionArgs(process.argv.slice(2));
 
 function rel(path) {
   return path ? relative(repoRoot, path) : null;
@@ -52,6 +63,17 @@ function runStep({ id, label, args, parse = false }) {
   }
 
   return step;
+}
+
+function withInheritedAttribution(args) {
+  const command = args[0] ?? "";
+  if (
+    command.endsWith("run-action-receipt-kit.mjs") ||
+    command.endsWith("run-preflight-adapter.mjs")
+  ) {
+    return [...args, ...inheritedAttributionArgs];
+  }
+  return args;
 }
 
 const localSteps = [
@@ -194,7 +216,10 @@ const startedAt = new Date().toISOString();
 const steps = [];
 
 for (const definition of [...localSteps, ...liveSteps]) {
-  const step = runStep(definition);
+  const step = runStep({
+    ...definition,
+    args: withInheritedAttribution(definition.args),
+  });
   steps.push(step);
   if (!step.ok) break;
 }
@@ -220,6 +245,7 @@ const output = {
     local: "npm run openclaw:proof",
     live: "npm run openclaw:proof -- --live",
   },
+  activation_attribution: publicAttributionSummary(activationAttribution),
   artifacts: {
     workbench_html: rel(workbench?.files?.html),
     workbench_markdown: rel(workbench?.files?.markdown),

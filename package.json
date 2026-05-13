@@ -75,7 +75,8 @@
     "verify:openclaw-severe-proof": "node scripts/verify-openclaw-severe-scenario-proof.mjs",
     "verify:openclaw-severe-preflight": "node scripts/verify-openclaw-severe-preflight-queue.mjs",
     "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",
-    "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs"
+    "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
+    "verify:authority-layer-activation-attribution": "node scripts/verify-authority-layer-activation-attribution.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.0"

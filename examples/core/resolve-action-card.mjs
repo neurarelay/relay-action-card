@@ -3,6 +3,11 @@
 import { readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  buildRelayAttribution,
+  publicAttributionSummary,
+  withRelayAttribution,
+} from "../lib/activation-attribution.mjs";
 
 const exampleDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(exampleDir, "../..");
@@ -61,11 +66,18 @@ const actionCard = JSON.parse(
 
 const RELAY_BASE_URL = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
 const jsonOutput = process.argv.includes("--json");
+const activationAttribution = buildRelayAttribution({
+  defaultSource: "relay-action-card",
+  defaultCampaign: "public-receipt-example",
+  defaultSurface: "examples/core/resolve-action-card",
+});
 
 const response = await fetch(new URL("/api/resolve", RELAY_BASE_URL), {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ action_card: actionCard }),
+  body: JSON.stringify(
+    withRelayAttribution({ action_card: actionCard }, activationAttribution),
+  ),
 });
 
 const payload = await response.json();
@@ -96,6 +108,8 @@ const result = {
   decision_factors: factorSummary,
   trace_ref: receipt?.trace_ref,
   transaction_ref: payload.transaction_ledger?.transaction_ref,
+  activation_attribution: publicAttributionSummary(activationAttribution),
+  activation_telemetry: payload.activation_telemetry ?? null,
   next_step: receipt?.recommended_next_step,
   relay_boundary: receipt?.relay_boundary,
   authority_context: receipt?.authority_context ?? null,
@@ -116,6 +130,13 @@ if (jsonOutput) {
   console.log(`Receipt: ${result.receipt_id}`);
   if (result.transaction_ref) {
     console.log(`Transaction: ${result.transaction_ref}`);
+  }
+  if (result.activation_attribution.enabled) {
+    console.log(
+      `Activation: ${result.activation_attribution.neura_source ?? "unknown"} / ${
+        result.activation_attribution.neura_campaign ?? "unknown"
+      }`,
+    );
   }
   if (result.authority_context) {
     console.log(`Authority context: ${result.authority_context.reason}`);
