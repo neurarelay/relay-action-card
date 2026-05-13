@@ -10,6 +10,8 @@ The workspace surface is also not an official OpenClaw OS, OpenUI, OpenClaw, or 
 Start with the full local proof:
 
 ```bash
+npm run openclaw:five-minute-demo
+npm run verify:openclaw-five-minute-demo
 npm run openclaw:proof
 npm run openclaw:proof -- --live
 ```
@@ -31,7 +33,9 @@ npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-action-receipt-pack
 npm run verify:openclaw-developer-journey
+npm run verify:openclaw-five-minute-demo
 npm run verify:openclaw-clean-consumer
+npm run test:openclaw-five-minute-demo
 npm run test:openclaw-developer-journey
 npm run verify:openclaw-severe-proof
 npm run test:openclaw-severe-proof
@@ -69,6 +73,8 @@ npm run verify:openclaw-plugin-rc
 | `data-export.json` | data export |
 
 The manifest at `action-receipt-kit.manifest.json` is the machine-readable contract for the local release candidate kit.
+
+The 5-minute receipt demo at `run-five-minute-receipt-demo.mjs` is the fastest OpenClaw-style adoption proof. It routes three high-signal local-agent moments through the preflight adapter shape: sending a customer message, deleting a local file, and publishing a package. Read [`docs/openclaw-five-minute-receipt-demo.md`](../../docs/openclaw-five-minute-receipt-demo.md) for the install-to-proof path and clean-consumer verifier.
 
 The developer journey proof at `run-developer-journey-proof.mjs` is the one-command local adoption path. It generates the workbench, dry-runs all refs-only fixtures, dry-runs the preflight adapter, runs the verifiers, and runs the local test suite. Read [`docs/openclaw-developer-journey.md`](../../docs/openclaw-developer-journey.md) for the clone-to-confidence path.
 

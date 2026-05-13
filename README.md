@@ -55,6 +55,16 @@ cd relay-action-card
 npm run example:relay -- --example=support-reply --json
 ```
 
+For the OpenClaw-style autonomous computer-use path, run the 5-minute receipt demo:
+
+```bash
+npm install
+npm run openclaw:five-minute-demo
+npm run verify:openclaw-five-minute-demo
+```
+
+That demo covers the three moments agent developers recognize immediately: sending an external message, deleting a local file, and publishing a package. Each action is refs-only, receipt-routed before execution, and developer-owned after the receipt.
+
 Expected safe output shape:
 
 ```json
@@ -98,6 +108,7 @@ Start with the lane that matches what you are trying to prove.
 The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`.
 
 - [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md): one-command developer journey proof.
+- [`docs/openclaw-five-minute-receipt-demo.md`](docs/openclaw-five-minute-receipt-demo.md): fastest install-to-proof path for message send, file delete, and package publish preflight.
 - [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md): Action Receipt Kit, public-safe fixtures in `examples/openclaw/action-cards`, starter skill at `skills/openclaw/neura-action-card`, verifier, unit tests, and live E2E receipt test.
 - [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md): visual proof for customer data exfiltration, production deployment, and expired delegated authority near-misses.
 - [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md): OpenClaw OS Decision Receipt Surface for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations.
@@ -132,6 +143,7 @@ These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI
 
 ```bash
 npm install
+npm run openclaw:five-minute-demo
 npm run openclaw:proof
 ```
 
@@ -165,12 +177,14 @@ Run the full local checks:
 
 ```bash
 npm run verify:openclaw-workbench
+npm run verify:openclaw-five-minute-demo
 npm run openclaw:dry-run
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-severe-proof
 npm run test:openclaw-severe-proof
 npm run verify:openclaw-severe-preflight
 npm run test:openclaw-severe-preflight
+npm run test:openclaw-five-minute-demo
 npm run verify:openclaw-clean-consumer
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
@@ -180,6 +194,7 @@ Release-candidate snapshot:
 
 | Proof | Command |
 | --- | --- |
+| 5-minute receipt demo | `npm run openclaw:five-minute-demo` |
 | Full developer journey proof | `npm run openclaw:proof` |
 | Local near-miss visual journey | `npm run openclaw:workbench` |
 | Workspace Decision Receipt surface | `npm run openclaw:workspace-proof` |
@@ -192,6 +207,7 @@ Release-candidate snapshot:
 | Severe proof verifier | `npm run verify:openclaw-severe-proof` |
 | Severe preflight verifier | `npm run verify:openclaw-severe-preflight` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
+| 5-minute demo verifier | `npm run verify:openclaw-five-minute-demo` |
 | Clean consumer install verifier | `npm run verify:openclaw-clean-consumer` |
 | Published npm RC verifier | `npm run verify:openclaw-npm-package` |
 | Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
