@@ -31,6 +31,7 @@ npm run openclaw:receipts -- --only=send-message --json
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-action-receipt-pack
 npm run verify:openclaw-developer-journey
+npm run verify:openclaw-clean-consumer
 npm run test:openclaw-developer-journey
 npm run verify:openclaw-severe-proof
 npm run test:openclaw-severe-proof

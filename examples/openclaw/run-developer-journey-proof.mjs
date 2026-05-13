@@ -132,6 +132,12 @@ const localSteps = [
     args: ["scripts/verify-openclaw-plugin-rc.mjs"],
   },
   {
+    id: "verify_clean_consumer",
+    label: "Verify clean npm install leaves the consumer checkout stable",
+    args: ["scripts/verify-openclaw-clean-consumer-install.mjs"],
+    parse: true,
+  },
+  {
     id: "test_kit",
     label: "Run Action Receipt Kit unit tests",
     args: ["--test", "tests/openclaw-action-receipt-kit.test.mjs"],
@@ -199,6 +205,7 @@ const severeScenario = steps.find((step) => step.id === "severe_scenario")?.outp
 const severePreflight = steps.find((step) => step.id === "severe_preflight_queue")?.output;
 const dryRun = steps.find((step) => step.id === "dry_run")?.output;
 const preflightDryRun = steps.find((step) => step.id === "preflight_dry_run")?.output;
+const cleanConsumer = steps.find((step) => step.id === "verify_clean_consumer")?.output;
 const liveReceipt = steps.find((step) => step.id === "live_receipt")?.output;
 const livePreflight = steps.find((step) => step.id === "live_preflight_receipt")?.output;
 const ok = steps.every((step) => step.ok) && steps.length === localSteps.length + liveSteps.length;
@@ -239,6 +246,7 @@ const output = {
     decisions: workbench?.count?.decisions ?? null,
     dry_run_fixtures: dryRun?.count ?? null,
     preflight_route: preflightDryRun?.result?.route ?? null,
+    clean_npm_install_stable: cleanConsumer?.npm_install?.package_lock_unchanged ?? null,
     relay_calls_skipped_in_local_mode: true,
   },
   live_summary: liveReceipts

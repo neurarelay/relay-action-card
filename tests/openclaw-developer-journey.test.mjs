@@ -51,6 +51,10 @@ test("package exposes one OpenClaw developer journey command", () => {
     "node scripts/verify-openclaw-developer-journey.mjs",
   );
   assert.equal(
+    packageJson.scripts["verify:openclaw-clean-consumer"],
+    "node scripts/verify-openclaw-clean-consumer-install.mjs",
+  );
+  assert.equal(
     packageJson.scripts["verify:openclaw-workspace-surface"],
     "node scripts/verify-openclaw-workspace-surface.mjs",
   );
@@ -115,6 +119,7 @@ test("README points OpenClaw developers to the one-command proof", () => {
   assert.match(readme, /npm run openclaw:workspace-proof/);
   assert.match(readme, /npm run openclaw:severe-proof/);
   assert.match(readme, /npm run openclaw:severe-preflight/);
+  assert.match(readme, /npm run verify:openclaw-clean-consumer/);
 });
 
 test("local journey proof runs without live Relay receipt calls", () => {
@@ -144,6 +149,7 @@ test("local journey proof runs without live Relay receipt calls", () => {
   assert.equal(payload.local_summary.severe_preflight_actions, 5);
   assert.equal(payload.local_summary.severe_preflight_adapter_gates, 5);
   assert.equal(payload.local_summary.dry_run_fixtures, 8);
+  assert.equal(payload.local_summary.clean_npm_install_stable, true);
   assert.equal(payload.live_summary.enabled, false);
   assert.equal(payload.boundaries.official_openclaw_or_clawhub_claim, false);
   assert.equal(payload.boundaries.downstream_execution_by_neura, false);

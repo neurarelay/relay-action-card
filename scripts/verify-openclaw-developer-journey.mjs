@@ -75,6 +75,7 @@ const requiredFiles = [
   "examples/openclaw/severe-scenario-proof/scenario.json",
   "examples/openclaw/workspace-surface/scenarios.json",
   "scripts/verify-openclaw-developer-journey.mjs",
+  "scripts/verify-openclaw-clean-consumer-install.mjs",
   "scripts/verify-openclaw-severe-scenario-proof.mjs",
   "scripts/verify-openclaw-severe-preflight-queue.mjs",
   "scripts/verify-openclaw-workspace-surface.mjs",
@@ -94,6 +95,8 @@ const expectedScripts = {
   "openclaw:severe-preflight": "node examples/openclaw/run-severe-preflight-queue.mjs",
   "verify:openclaw-developer-journey":
     "node scripts/verify-openclaw-developer-journey.mjs",
+  "verify:openclaw-clean-consumer":
+    "node scripts/verify-openclaw-clean-consumer-install.mjs",
   "verify:openclaw-workspace-surface":
     "node scripts/verify-openclaw-workspace-surface.mjs",
   "verify:openclaw-severe-proof":
@@ -148,6 +151,7 @@ requireIncludes("README.md", readme, [
   "npm run openclaw:severe-preflight",
   "npm run verify:openclaw-severe-proof",
   "npm run verify:openclaw-severe-preflight",
+  "npm run verify:openclaw-clean-consumer",
   "OpenClaw Developer Journey Proof",
 ]);
 rejectUnsafe("README.md", readme);
@@ -182,6 +186,7 @@ requireIncludes("runner", runner, [
   "verify-openclaw-severe-scenario-proof.mjs",
   "verify-openclaw-severe-preflight-queue.mjs",
   "verify-openclaw-preflight-adapter.mjs",
+  "verify-openclaw-clean-consumer-install.mjs",
   "openclaw-developer-journey",
   "local_plus_live_receipts",
   "developer_owned_execution",
@@ -209,6 +214,9 @@ if (proofRun.status !== 0) {
   if (proof.live_summary?.enabled !== false) failures.push("openclaw_proof_live_not_skipped");
   if (proof.local_summary?.dry_run_fixtures !== 8) {
     failures.push("openclaw_proof_missing_eight_fixtures");
+  }
+  if (proof.local_summary?.clean_npm_install_stable !== true) {
+    failures.push("openclaw_proof_clean_install_not_stable");
   }
   if (proof.local_summary?.journeys !== 3) failures.push("openclaw_proof_missing_journeys");
   if (proof.local_summary?.workspace_actions !== 7) {

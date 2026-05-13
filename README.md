@@ -171,6 +171,7 @@ npm run verify:openclaw-severe-proof
 npm run test:openclaw-severe-proof
 npm run verify:openclaw-severe-preflight
 npm run test:openclaw-severe-preflight
+npm run verify:openclaw-clean-consumer
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 ```
@@ -191,6 +192,7 @@ Release-candidate snapshot:
 | Severe proof verifier | `npm run verify:openclaw-severe-proof` |
 | Severe preflight verifier | `npm run verify:openclaw-severe-preflight` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
+| Clean consumer install verifier | `npm run verify:openclaw-clean-consumer` |
 | Published npm RC verifier | `npm run verify:openclaw-npm-package` |
 | Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
 | ClawHub release gate | `npm run verify:openclaw-clawhub-release` |

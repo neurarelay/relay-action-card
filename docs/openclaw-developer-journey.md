@@ -27,6 +27,7 @@ The proof generates and verifies the local OpenClaw-style journey:
 - Severe Preflight Queue using `adapter.beforeAction(preflightAction)` before local execution
 - eight refs-only Action Card fixtures
 - preflight adapter dry run
+- clean consumer npm install stability check
 - claim-boundary verifiers
 - unit tests for the kit, workbench, and adapter
 

@@ -21,6 +21,7 @@ This release-candidate kit gives autonomous computer-use developers a copyable w
 - Adds `npm run openclaw:dry-run` and `npm run openclaw:receipts` for local contract review and live Relay receipt proof.
 - Adds `npm run openclaw:preflight:dry-run`, `npm run openclaw:preflight:receipt`, `npm run openclaw:plugin:pack:dry-run`, `npm run verify:openclaw-preflight-adapter`, and `npm run verify:openclaw-plugin-rc`.
 - Adds `npm run verify:openclaw-npm-package` for clean consumer install proof against the public npm release-candidate package.
+- Adds `npm run verify:openclaw-clean-consumer` to ensure a fresh npm install does not dirty the checkout or drift the root Node engine lockfile.
 - Adds `npm run verify:openclaw-action-receipt-kit` plus Node unit and live E2E tests for the kit.
 - Adds `npm run verify:openclaw-developer-journey` and `npm run test:openclaw-developer-journey` to keep the clone-to-confidence path locked.
 - Adds GitHub Actions CI for the local kit contract, with live production receipt proof kept manual.
