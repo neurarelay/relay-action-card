@@ -130,6 +130,14 @@ if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.0") {
 if (!adapterPackage.openclaw?.extensions?.includes("./index.mjs")) {
   failures.push("adapter_package_missing_openclaw_extension");
 }
+if (!adapterPackage.openclaw?.tools?.some((tool) => tool?.name === "neura_relay_preflight_action")) {
+  failures.push("adapter_package_missing_clawhub_tool_metadata");
+}
+for (const tag of ["policy-evidence", "authority-decision", "computer-use"]) {
+  if (!adapterPackage.keywords?.includes(tag)) {
+    failures.push(`adapter_package_missing_keyword_${tag}`);
+  }
+}
 if (!adapterPackage.openclaw?.compat?.pluginApi || !adapterPackage.openclaw?.build?.openclawVersion) {
   failures.push("adapter_package_missing_openclaw_compat_or_build");
 }
@@ -155,6 +163,9 @@ if (!nativeManifest.configSchema || nativeManifest.configSchema.type !== "object
 }
 if (!nativeManifest.contracts?.tools?.includes("neura_relay_preflight_action")) {
   failures.push("native_manifest_missing_tool_contract");
+}
+if (!nativeManifest.tools?.some((tool) => tool?.name === "neura_relay_preflight_action")) {
+  failures.push("native_manifest_missing_clawhub_tool_metadata");
 }
 for (const forbiddenManifestField of ["entry", "compat", "build", "capabilities", "neura"]) {
   if (Object.hasOwn(nativeManifest, forbiddenManifestField)) {
@@ -187,6 +198,9 @@ const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
   "beforeAction(preflightAction)",
   "not an official OpenClaw or ClawHub",
+  "@rpelevin/neura-relay-preflight-adapter@0.1.0",
+  "openclaw/clawhub#2190",
+  "neura_relay_preflight_action",
   "openclaw.plugin.json",
   "npm run openclaw:plugin:pack:dry-run",
   "npm run openclaw:preflight:dry-run",

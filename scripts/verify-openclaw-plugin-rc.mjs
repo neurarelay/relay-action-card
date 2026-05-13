@@ -175,6 +175,12 @@ if (!manifest.configSchema || manifest.configSchema.type !== "object") {
 if (!manifest.contracts?.tools?.includes("neura_relay_preflight_action")) {
   failures.push("manifest_missing_tool_contract");
 }
+if (!manifest.tools?.some((tool) => tool?.name === "neura_relay_preflight_action")) {
+  failures.push("manifest_missing_clawhub_tool_metadata");
+}
+if (manifest.kind !== "preflight-governance") {
+  failures.push("manifest_missing_preflight_governance_kind");
+}
 for (const forbiddenManifestField of ["entry", "compat", "build", "capabilities", "neura"]) {
   if (Object.hasOwn(manifest, forbiddenManifestField)) {
     failures.push(`manifest_has_package_or_custom_field_${forbiddenManifestField}`);
@@ -227,6 +233,8 @@ const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
   "@neurarelay/openclaw-preflight-adapter",
   "stable npm install path",
+  "@rpelevin/neura-relay-preflight-adapter@0.1.0",
+  "neura_relay_preflight_action",
   "npm run openclaw:plugin:pack:dry-run",
   "not an official OpenClaw or ClawHub",
   "hold_for_registry_backed_authority",

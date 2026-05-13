@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "type": "module",
-  "description": "Claim-safe OpenClaw preflight adapter for Neura Relay Decision Receipts.",
+  "description": "Neura Relay preflight governance adapter for refs-only Action Cards and Decision Receipts before developer-owned execution.",
   "license": "MIT",
   "main": "./index.mjs",
   "sideEffects": false,
@@ -25,7 +25,10 @@
     "decision-receipt",
     "action-card",
     "agent-governance",
-    "preflight"
+    "preflight",
+    "policy-evidence",
+    "authority-decision",
+    "computer-use"
   ],
   "homepage": "https://github.com/neurarelay/relay-action-card/tree/main/examples/openclaw/preflight-adapter#readme",
   "repository": {
@@ -61,6 +64,20 @@
       "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.3.24-beta.2"
+    },
+    "tools": [
+      {
+        "name": "neura_relay_preflight_action",
+        "description": "Convert a refs-only proposed local action into a Neura Relay Action Card and return a Decision Receipt before developer-owned execution."
+      }
+    ],
+    "environment": {
+      "externalServices": ["Neura Relay"],
+      "browser": false,
+      "desktop": false,
+      "nativeDependencies": [],
+      "osPermissions": [],
+      "binaries": []
     }
   },
   "neura": {

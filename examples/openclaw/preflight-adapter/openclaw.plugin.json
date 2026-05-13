@@ -3,6 +3,13 @@
   "name": "Neura Relay Preflight Adapter",
   "description": "Routes refs-only proposed local actions through Neura Relay before developer-owned execution.",
   "version": "0.1.0",
+  "kind": "preflight-governance",
+  "tools": [
+    {
+      "name": "neura_relay_preflight_action",
+      "description": "Convert a refs-only proposed local action into a Neura Relay Action Card and return a Decision Receipt before developer-owned execution."
+    }
+  ],
   "contracts": {
     "tools": ["neura_relay_preflight_action"]
   },

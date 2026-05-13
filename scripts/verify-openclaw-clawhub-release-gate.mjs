@@ -181,6 +181,9 @@ function verifyPackageSurface() {
       adapterPackage.engines?.node === ">=22.14.0",
     package_sdk: adapterPackage.dependencies?.["@neurarelay/sdk"] === "0.1.0",
     package_openclaw_extension: adapterPackage.openclaw?.extensions?.includes("./index.mjs"),
+    package_clawhub_tool_metadata: adapterPackage.openclaw?.tools?.some(
+      (tool) => tool?.name === "neura_relay_preflight_action",
+    ),
     package_install_spec:
       adapterPackage.openclaw?.install?.npmSpec === `${packageName}@${packageVersion}`,
     claim_boundary: adapterPackage.neura?.officialOpenClawOrClawHubClaim === false,
@@ -189,6 +192,10 @@ function verifyPackageSurface() {
     manifest_id: manifest.id === "neura-relay-preflight-adapter",
     manifest_version: manifest.version === packageVersion,
     manifest_tool: manifest.contracts?.tools?.includes("neura_relay_preflight_action"),
+    manifest_clawhub_tool_metadata: manifest.tools?.some(
+      (tool) => tool?.name === "neura_relay_preflight_action",
+    ),
+    manifest_kind: manifest.kind === "preflight-governance",
     manifest_runtime_free:
       !Object.hasOwn(manifest, "entry") &&
       !Object.hasOwn(manifest, "compat") &&

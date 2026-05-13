@@ -26,6 +26,8 @@ const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.jso
 test("native plugin manifest stays schema-valid and runtime-free", () => {
   assert.equal(nativeManifest.id, "neura-relay-preflight-adapter");
   assert.equal(nativeManifest.version, "0.1.0");
+  assert.equal(nativeManifest.kind, "preflight-governance");
+  assert.equal(nativeManifest.tools[0].name, "neura_relay_preflight_action");
   assert.equal(nativeManifest.configSchema.type, "object");
   assert.deepEqual(nativeManifest.contracts.tools, ["neura_relay_preflight_action"]);
   assert.equal(Object.hasOwn(nativeManifest, "entry"), false);
@@ -40,6 +42,8 @@ test("package metadata is publish-ready but claim-safe", () => {
   assert.equal(adapterPackage.private, false);
   assert.equal(adapterPackage.engines.node, ">=22.14.0");
   assert.deepEqual(adapterPackage.openclaw.extensions, ["./index.mjs"]);
+  assert.equal(adapterPackage.openclaw.tools[0].name, "neura_relay_preflight_action");
+  assert.equal(adapterPackage.openclaw.environment.externalServices.includes("Neura Relay"), true);
   assert.equal(adapterPackage.openclaw.compat.pluginApi, ">=2026.3.24-beta.2");
   assert.equal(
     adapterPackage.openclaw.install.npmSpec,
