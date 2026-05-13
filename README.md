@@ -15,12 +15,64 @@ Distribution proof:
 
 Choose the lane that matches what you want to prove:
 
+- **OpenClaw-style agent integration** (`@neurarelay/openclaw-preflight-adapter`, public npm package): add a `beforeAction()` receipt guard before local autonomous actions execute.
 - **Core Relay example** (`examples/core`, public): send an Action Card to `POST /api/resolve` and receive a Decision Receipt.
 - **OpenClaw-style receipt kit** (`examples/openclaw` + `skills/openclaw`, public-safe examples): generate the near-miss workbench, dry-run receipt-ready Action Cards, and test local preflight review.
 - **SDK path** (`examples/sdk`, public npm package): use `@neurarelay/sdk` without changing the Relay decision boundary.
 - **Optional MCP examples** (`examples/mcp`, sandbox or controlled production/private access): call the same Relay spine through protected MCP-compatible tools.
 
 The OpenClaw-style kit covers local agent messages, file changes, browser submits, shell commands, workflow changes, memory writes, and data exports without claiming an official OpenClaw or ClawHub integration.
+
+Fastest developer install path:
+
+```bash
+npm install @neurarelay/openclaw-preflight-adapter
+```
+
+```js
+import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
+
+const adapter = createNeuraPreflightAdapter();
+
+async function guardToolCall(toolCall) {
+  const preflightAction = {
+    proposedAction: {
+      type: toolCall.type,
+      summary: toolCall.summary,
+      target: toolCall.targetRef,
+    },
+    affectedObject: toolCall.targetRef,
+    authority: {
+      delegatedBy: "user_ref_local_operator",
+      actingAgent: "local_agent_ref:computer_use_runtime",
+      authorityScope: toolCall.authorityScope,
+      allowedActions: [toolCall.type],
+      allowedResources: [toolCall.targetRef],
+      expiresAt: "2026-12-31T23:59:59Z",
+      revocationStatus: "active",
+      policyRefs: toolCall.ruleRefs,
+      authorityScopeRef: toolCall.authorityScopeRef,
+      standingRef: "registry_passport_standing_ref_demo",
+    },
+    evidenceRefs: toolCall.evidenceRefs,
+    ruleRefs: toolCall.ruleRefs,
+    riskCategory: toolCall.riskCategory,
+  };
+
+  const result = await adapter.beforeAction(preflightAction, {
+    dryRun: toolCall.dryRun === true,
+  });
+  const route = result.mode === "dry_run" ? result.route : result.receipt.route;
+
+  return {
+    execute: route === "ready_for_developer_owned_execution",
+    route,
+    executionOwner: result.execution_owner,
+  };
+}
+```
+
+The first hooks most agent developers should guard are `message.send`, `file.delete`, and `package.publish`. See [`docs/openclaw-copy-paste-agent-integration.md`](docs/openclaw-copy-paste-agent-integration.md) for the runnable version and tests.
 
 The core path is the default Neura path:
 

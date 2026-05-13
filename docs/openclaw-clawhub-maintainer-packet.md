@@ -13,11 +13,12 @@ This packet collects the public evidence for reviewing the `@neurarelay` publish
 | Source repo | `https://github.com/neurarelay/relay-action-card` |
 | Package path | `examples/openclaw/preflight-adapter` |
 | Quickstart | [`examples/openclaw/QUICKSTART.md`](../examples/openclaw/QUICKSTART.md) |
+| Copy-paste integration | [`openclaw-copy-paste-agent-integration.md`](openclaw-copy-paste-agent-integration.md) |
 | Five-minute demo | [`openclaw-five-minute-receipt-demo.md`](openclaw-five-minute-receipt-demo.md) |
 | Adapter docs | [`openclaw-preflight-adapter.md`](openclaw-preflight-adapter.md) |
 | Submission readiness | [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md) |
 | Runtime approval packet | [`openclaw-runtime-verification-and-publish-approval.md`](openclaw-runtime-verification-and-publish-approval.md) |
-| Recent green CI run | `https://github.com/neurarelay/relay-action-card/actions/runs/25794884529` |
+| Recent green CI run | `https://github.com/neurarelay/relay-action-card/actions/runs/25795608585` |
 
 ## Package Evidence
 
@@ -27,7 +28,7 @@ This packet collects the public evidence for reviewing the `@neurarelay` publish
 | Stable version | `0.1.0` |
 | npm tags | `latest=0.1.0`; `rc=0.1.0-rc.2` |
 | Stable source commit | `c95fc5a7ce9d83f1a8995bde84f32727555bbbf7` |
-| Quickstart commit | `45d08057e372d00ebc26596ac8d6422edb726356` |
+| Current source commit | `3a7d100474667bebd8ff71bc51b3d5379e2b36b2` |
 | Package family | `code-plugin` |
 | Runtime tool | `neura_relay_preflight_action` |
 | Node floor | `>=22.14.0`; repo-pinned Node `24` |
@@ -37,8 +38,8 @@ This packet collects the public evidence for reviewing the `@neurarelay` publish
 - The stable npm package is live as `@neurarelay/openclaw-preflight-adapter@0.1.0`.
 - A clean npm consumer install verifier passes against the public package.
 - The ClawHub package dry-run passed under Node `24.15.0`.
-- GitHub Actions is green for the current OpenClaw-style quickstart commit.
-- The quickstart gives developers a three-scenario proof for message send, file delete, and package publish preflight.
+- GitHub Actions is green for the current OpenClaw-style integration commit.
+- The quickstart and copy-paste integration give developers a three-scenario proof for message send, file delete, and package publish preflight.
 - The adapter returns a Decision Receipt route before local autonomous computer-use actions execute.
 - The developer runtime keeps execution ownership; Neura does not execute the downstream action.
 
@@ -50,8 +51,10 @@ Run from the repository root using Node `24`:
 nvm use
 npm ci
 npm run verify:openclaw-npm-package
+npm run verify:openclaw-copy-paste-integration
 npm run verify:openclaw-five-minute-demo
 npm run verify:openclaw-clawhub-release
+npm run test:openclaw-copy-paste-integration
 npm run test:openclaw-preflight-adapter
 npm run test:openclaw-five-minute-demo
 ```
