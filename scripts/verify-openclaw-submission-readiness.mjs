@@ -150,7 +150,7 @@ if (Object.hasOwn(manifest, "compat")) failures.push("manifest_must_not_hold_com
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
-  "Status: approval-ready packet; no OpenClaw / ClawHub submission has been performed",
+  "Status: founder-publisher fallback published to ClawHub community channel; no official OpenClaw / ClawHub approval or listing claim",
   "@neurarelay/openclaw-preflight-adapter",
   "0.1.0",
   "npm install @neurarelay/openclaw-preflight-adapter",
@@ -163,7 +163,9 @@ requireIncludes("submission_packet", packet, [
   "npm run verify:openclaw-clawhub-release",
   "npm run verify:openclaw-founder-clawhub-publisher",
   "https://github.com/openclaw/clawhub/issues/2190",
-  "not published/listed/approved on ClawHub",
+  "founder-publisher fallback is published to ClawHub's community channel",
+  "no official OpenClaw / ClawHub approval or listing claim",
+  "ClawHub release id: `rd71v95v9mqw6xebweek19qb6x86mfps`",
   "@rpelevin/neura-relay-preflight-adapter",
   "founder-led publication under Roman's established publisher handle",
   "canonical `@neurarelay` publisher namespace",

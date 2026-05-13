@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdtempSync, readFileSync } from "node:fs";
+import { cpSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -85,14 +85,30 @@ if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
 const commit = git(["rev-parse", "HEAD"]);
 const shortCommit = git(["rev-parse", "--short=12", "HEAD"]);
 const packDir = mkdtempSync(join(tmpdir(), "neura-founder-clawhub-pack-"));
+const founderPackageRoot = mkdtempSync(join(tmpdir(), "neura-founder-clawhub-package-"));
+cpSync(pluginRoot, founderPackageRoot, { recursive: true });
+const founderPackageJsonPath = join(founderPackageRoot, "package.json");
+const founderPackageJson = JSON.parse(readFileSync(founderPackageJsonPath, "utf8"));
+founderPackageJson.name = founderClawHubPackage;
+founderPackageJson.openclaw.install.npmSpec = `${founderClawHubPackage}@${packageVersion}`;
+founderPackageJson.neura = {
+  ...founderPackageJson.neura,
+  canonicalNpmPackage: `${canonicalNpmPackage}@${packageVersion}`,
+  canonicalPublisherNamespaceRequest: "openclaw/clawhub#2190",
+};
+writeFileSync(founderPackageJsonPath, `${JSON.stringify(founderPackageJson, null, 2)}\n`);
+
 const pack = step(
-  "npm_pack_exact_adapter",
+  "npm_pack_founder_clawhub_adapter",
   "npm",
-  ["pack", pluginRoot, "--pack-destination", packDir, "--json"],
+  ["pack", founderPackageRoot, "--pack-destination", packDir, "--json"],
   { expectJson: true },
 );
 const tarballName = pack.payload?.[0]?.filename;
 const tarballPath = tarballName ? join(packDir, tarballName) : null;
+if (pack.payload?.[0]?.name !== founderClawHubPackage) {
+  failures.push(`founder_pack_name_expected_${founderClawHubPackage}_got_${pack.payload?.[0]?.name}`);
+}
 
 const runtimeRoot = mkdtempSync(join(tmpdir(), "neura-founder-clawhub-runtime-"));
 const workRoot = mkdtempSync(join(tmpdir(), "neura-founder-clawhub-work-"));
@@ -208,6 +224,7 @@ const report = {
     dry_run_only: true,
     live_publish_requires_roman_exact_approval: true,
     canonical_neurarelay_namespace_request_remains_open: true,
+    founder_tarball_package_json_name_matches_clawhub_package: true,
     official_openclaw_or_clawhub_claim: false,
     downstream_execution_by_neura: false,
     public_token_or_key_issuance: false,

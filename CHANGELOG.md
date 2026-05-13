@@ -2,6 +2,8 @@
 
 ## OpenClaw 5-minute receipt demo - 2026-05-13
 
+- Publishes the founder-publisher fallback package to ClawHub community as `@rpelevin/neura-relay-preflight-adapter@0.1.0`, release id `rd71v95v9mqw6xebweek19qb6x86mfps`, source-linked to `neurarelay/relay-action-card@5b7a87288b90e34f7023ece6188e3e23908fd078`.
+- Preserves `@neurarelay/openclaw-preflight-adapter@0.1.0` as the canonical npm package while `openclaw/clawhub#2190` remains open for canonical publisher namespace access.
 - Adds `npm run verify:openclaw-founder-clawhub-publisher` as the claim-safe dry-run fallback for publishing the Neura Relay adapter under Roman's established `@rpelevin` ClawHub publisher while `@neurarelay` namespace access remains pending.
 - Updates `docs/openclaw-clawhub-submission-readiness.md` with the founder-publisher fallback command shape, install check, approval text, and no-official-claim boundaries.
 - Adds `npm run openclaw:five-minute-demo` as the fastest OpenClaw-style proof loop for message send, file delete, and package publish preflight.
