@@ -52,6 +52,7 @@
     "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
     "verify:openclaw-npm-package": "node scripts/verify-openclaw-npm-package.mjs",
     "verify:openclaw-submission-readiness": "node scripts/verify-openclaw-submission-readiness.mjs",
+    "verify:openclaw-clawhub-release": "node scripts/verify-openclaw-clawhub-release-gate.mjs",
     "verify:openclaw-developer-journey": "node scripts/verify-openclaw-developer-journey.mjs",
     "verify:openclaw-workspace-surface": "node scripts/verify-openclaw-workspace-surface.mjs",
     "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",

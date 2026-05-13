@@ -5,6 +5,14 @@ Date: 2026-05-12
 
 This is the final Development packet Roman can review before any official OpenClaw / ClawHub submission or package publication action.
 
+## Current External Gate
+
+Publisher access is requested in GitHub issue `openclaw/clawhub#2190`:
+
+`https://github.com/openclaw/clawhub/issues/2190`
+
+Current truth: the package is published on npm as `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2`, but it is not published/listed/approved on ClawHub. The issue only asks ClawHub/OpenClaw for publisher namespace access; it does not imply endorsement, listing, approval, or partnership.
+
 ## Package
 
 | Field | Value |
@@ -58,6 +66,7 @@ Run from the repository root using Node `24`:
 ```bash
 nvm use
 npm ci
+npm run verify:openclaw-clawhub-release
 npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-npm-package
 npm run verify:openclaw-preflight-adapter
@@ -99,6 +108,19 @@ Expected result:
 - developer-owned execution is preserved
 - no private payload is returned
 - no official OpenClaw / ClawHub claim appears
+
+## One-Command Release Gate
+
+The strongest local readiness proof is:
+
+```bash
+nvm use
+npm run verify:openclaw-clawhub-release
+```
+
+This gate verifies package metadata, npm pack contents, clean npm consumer install, refs-only preflight conversion, unit coverage, live Relay Decision Receipt output, OpenClaw runtime loading, local ClawHub packaging, exact ClawHub publish dry-run metadata, and forbidden-claim boundaries.
+
+The gate may run the ClawHub dry-run command, but it does not publish the package. It should still be rerun immediately after ClawHub grants publisher access and before any real publish command.
 
 ## Submission Action
 

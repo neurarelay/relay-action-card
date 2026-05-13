@@ -14,6 +14,7 @@ This release-candidate kit gives autonomous computer-use developers a copyable w
 - Adds a plugin-ready preflight adapter contract: `beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route`.
 - Adds a package-ready OpenClaw plugin release candidate packet for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2`, including npm pack dry-run verification and claim-safe submission readiness docs.
 - Adds `docs/openclaw-clawhub-submission-readiness.md` and `npm run verify:openclaw-submission-readiness` as the final Roman approval packet before any official OpenClaw / ClawHub submission or package publication action.
+- Adds `npm run verify:openclaw-clawhub-release` as the one-command ClawHub release gate covering package metadata, npm pack contents, clean npm consumer install, unit tests, live Relay receipt output, OpenClaw runtime loading, local ClawHub pack, exact ClawHub publish dry-run metadata, and no-claim boundaries.
 - Adds eight refs-only Action Card families: outbound message, file edit, file delete, browser submit, shell command, workflow transition, memory write, and data export.
 - Adds `npm run openclaw:dry-run` and `npm run openclaw:receipts` for local contract review and live Relay receipt proof.
 - Adds `npm run openclaw:preflight:dry-run`, `npm run openclaw:preflight:receipt`, `npm run openclaw:plugin:pack:dry-run`, `npm run verify:openclaw-preflight-adapter`, and `npm run verify:openclaw-plugin-rc`.

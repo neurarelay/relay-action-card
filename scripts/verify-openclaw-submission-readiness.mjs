@@ -87,6 +87,7 @@ const requiredFiles = [
   "scripts/verify-openclaw-npm-package.mjs",
   "scripts/verify-openclaw-plugin-rc.mjs",
   "scripts/verify-openclaw-runtime-approval.mjs",
+  "scripts/verify-openclaw-clawhub-release-gate.mjs",
 ];
 
 for (const file of requiredFiles) requireFile(file);
@@ -97,6 +98,12 @@ if (
   "node scripts/verify-openclaw-submission-readiness.mjs"
 ) {
   failures.push("root_package_missing_submission_readiness_script");
+}
+if (
+  rootPackage.scripts?.["verify:openclaw-clawhub-release"] !==
+  "node scripts/verify-openclaw-clawhub-release-gate.mjs"
+) {
+  failures.push("root_package_missing_clawhub_release_gate_script");
 }
 
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
@@ -146,6 +153,9 @@ requireIncludes("submission_packet", packet, [
   "https://docs.openclaw.ai/plugins/building-plugins",
   "https://documentation.openclaw.ai/clawhub",
   "npm run verify:openclaw-submission-readiness",
+  "npm run verify:openclaw-clawhub-release",
+  "https://github.com/openclaw/clawhub/issues/2190",
+  "not published/listed/approved on ClawHub",
   "npm run verify:openclaw-npm-package",
   "npm run verify:openclaw-runtime-approval",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
@@ -163,6 +173,7 @@ const readme = read("README.md");
 requireIncludes("readme", readme, [
   "docs/openclaw-clawhub-submission-readiness.md",
   "npm run verify:openclaw-submission-readiness",
+  "npm run verify:openclaw-clawhub-release",
   "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2",
   "No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.",
 ]);
@@ -172,6 +183,7 @@ const changelog = read("CHANGELOG.md");
 requireIncludes("changelog", changelog, [
   "docs/openclaw-clawhub-submission-readiness.md",
   "npm run verify:openclaw-submission-readiness",
+  "npm run verify:openclaw-clawhub-release",
   "final Roman approval packet",
 ]);
 rejectUnsafe("changelog", changelog);

@@ -171,6 +171,7 @@ Release-candidate snapshot:
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
 | Published npm RC verifier | `npm run verify:openclaw-npm-package` |
 | Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
+| ClawHub release gate | `npm run verify:openclaw-clawhub-release` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |
 | Unit test framework | `npm run test:openclaw-kit` |
 | Live E2E receipt test | `npm run test:openclaw-kit:e2e` |
@@ -188,6 +189,7 @@ npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
 npm run verify:openclaw-submission-readiness
+npm run verify:openclaw-clawhub-release
 npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
