@@ -1,6 +1,6 @@
 # Neura Relay Preflight Adapter Release Candidate
 
-This folder contains the package-ready, claim-safe OpenClaw-style preflight adapter release candidate:
+This folder contains the claim-safe OpenClaw-style preflight adapter release candidate published to npm:
 
 ```text
 @neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
@@ -12,7 +12,20 @@ It shows how a local autonomous computer-use runtime can call:
 beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route
 ```
 
-It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. Publishing or submission requires Roman approval of the exact action.
+It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. OpenClaw / ClawHub publishing or submission requires Roman approval of the exact action.
+
+## Install From npm
+
+```bash
+npm install @neurarelay/openclaw-preflight-adapter@rc
+```
+
+Because this is the first published version of the package, npm also exposes it as `latest`. Use `@rc` explicitly until a stable package exists.
+
+```js
+import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
+import { createActionCardFromPreflightAction } from "@neurarelay/openclaw-preflight-adapter/adapter";
+```
 
 ## Run
 
@@ -22,6 +35,7 @@ npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-npm-package
 npm run test:openclaw-preflight-adapter
 npm run test:openclaw-preflight-adapter:e2e
 ```

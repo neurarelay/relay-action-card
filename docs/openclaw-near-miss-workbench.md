@@ -1,6 +1,6 @@
 # OpenClaw Near-Miss Workbench v0.1
 
-Status: local visual workbench; not submitted or published
+Status: local visual workbench; no OpenClaw / ClawHub submission or listing
 Date: 2026-05-12
 
 The Near-Miss Workbench is the pre-publication developer-journey proof for the OpenClaw-style receipt lane. It turns the abstract Action Card pattern into three severe autonomous-agent incidents that any AI agent developer can recognize immediately.

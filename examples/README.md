@@ -121,7 +121,7 @@ examples/
 
 `examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
 
-`examples/openclaw` contains OpenClaw-style public-safe examples only. It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
+`examples/openclaw` contains OpenClaw-style public-safe examples only. The npm adapter RC is public, but the lane is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
 
 ## Fast Checks
 

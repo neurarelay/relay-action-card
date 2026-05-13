@@ -1,6 +1,6 @@
 # OpenClaw Developer Journey Proof
 
-Status: local developer journey proof; not submitted, published, listed, approved, or partnered by OpenClaw or ClawHub.
+Status: local developer journey proof; not submitted, listed, approved, or partnered by OpenClaw or ClawHub.
 
 This is the fastest way for an autonomous computer-use developer to understand the Neura pattern end to end:
 

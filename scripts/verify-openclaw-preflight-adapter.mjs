@@ -89,6 +89,7 @@ const requiredFiles = [
   "examples/openclaw/preflight-adapter/adapter.mjs",
   "examples/openclaw/preflight-adapter/fixtures/send-message.preflight.json",
   "examples/openclaw/run-preflight-adapter.mjs",
+  "scripts/verify-openclaw-npm-package.mjs",
   "scripts/verify-openclaw-runtime-approval.mjs",
   "tests/openclaw-preflight-adapter.test.mjs",
   "tests/openclaw-preflight-adapter.e2e.mjs",
@@ -108,6 +109,7 @@ const expectedScripts = {
   "verify:openclaw-preflight-adapter":
     "node scripts/verify-openclaw-preflight-adapter.mjs",
   "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
+  "verify:openclaw-npm-package": "node scripts/verify-openclaw-npm-package.mjs",
   "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
 };
 for (const [script, command] of Object.entries(expectedScripts)) {
@@ -174,6 +176,7 @@ requireIncludes("docs", docs, [
   "npm run openclaw:preflight:dry-run",
   "npm run openclaw:preflight:receipt",
   "npm run verify:openclaw-preflight-adapter",
+  "npm run verify:openclaw-npm-package",
   "docs/openclaw-runtime-verification-and-publish-approval.md",
   "Node `24`",
   "developer-owned execution",

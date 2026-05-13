@@ -1,15 +1,15 @@
 # OpenClaw Runtime Verification And Publish Approval Packet
 
-Status: runtime-verified locally; publish/submission approval required
+Status: runtime-verified locally; npm RC published; OpenClaw / ClawHub publish/submission approval required
 Date: 2026-05-12
 
-This packet records the actual OpenClaw / ClawHub release gate for:
+This packet records the actual OpenClaw / ClawHub release gate for the npm release candidate:
 
 ```text
 @neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
 ```
 
-It does not publish, submit, list, approve, or partner the plugin. It exists so Roman can make a clean publish/submission decision from verified facts.
+It does not publish, submit, list, approve, or partner the plugin through OpenClaw / ClawHub. It exists so Roman can make a clean OpenClaw / ClawHub publish/submission decision from verified facts.
 
 ## Runtime Requirement
 
@@ -42,16 +42,43 @@ Runtime inspection confirmed:
 - registered tool: `neura_relay_preflight_action`
 - diagnostics: none
 
+## Verified npm Consumer Path
+
+The npm release candidate can be installed by an outside developer:
+
+```bash
+npm install @neurarelay/openclaw-preflight-adapter@rc
+```
+
+Because this is the first published version of the package, npm also exposes `0.1.0-rc.1` as `latest`. The intentional adoption path remains `@rc` until a stable package exists.
+
+The public package surface is:
+
+```js
+import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
+import { createActionCardFromPreflightAction } from "@neurarelay/openclaw-preflight-adapter/adapter";
+```
+
+Run the registry-backed clean consumer check:
+
+```bash
+npm run verify:openclaw-npm-package
+```
+
 ## Verified ClawHub Dry Run
 
-ClawHub `0.15.0` package pack produced a tarball with:
+ClawHub `0.15.0` package pack produced the expected six-file package:
 
-- file count: `6`
-- package size: `4212`
-- sha256: `879d1c873e22255210747a95350f033f7b9a3dce238f5d1494bd30fd5a4d0dc0`
-- npm integrity: `sha512-igAUHUQA1Gts99IKbLdKXhvUvoOEYwLsb+OCPVE3XKnWwmJ3VjO0Kyb38d7XqPGLXQtweSQK9uIym/N+YKUlfA==`
+- `README.md`
+- `adapter.mjs`
+- `fixtures/send-message.preflight.json`
+- `index.mjs`
+- `openclaw.plugin.json`
+- `package.json`
 
-ClawHub publish dry-run succeeded with:
+Run `npm run verify:openclaw-runtime-approval` before any OpenClaw / ClawHub publish decision to regenerate the exact local runtime, pack, and dry-run proof.
+
+ClawHub publish dry-run succeeded with this claim-safe shape:
 
 ```json
 {
@@ -60,8 +87,7 @@ ClawHub publish dry-run succeeded with:
   "displayName": "Neura Relay Preflight Adapter",
   "family": "code-plugin",
   "version": "0.1.0-rc.1",
-  "files": 6,
-  "totalBytes": 4212
+  "files": 6
 }
 ```
 

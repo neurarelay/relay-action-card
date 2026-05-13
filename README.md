@@ -168,6 +168,7 @@ Release-candidate snapshot:
 | Workbench verifier | `npm run verify:openclaw-workbench` |
 | Workspace surface verifier | `npm run verify:openclaw-workspace-surface` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
+| Published npm RC verifier | `npm run verify:openclaw-npm-package` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |
 | Unit test framework | `npm run test:openclaw-kit` |
 | Live E2E receipt test | `npm run test:openclaw-kit:e2e` |
@@ -188,7 +189,22 @@ npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The package-ready release candidate is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md). It is shaped for `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1`, but no OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
+The npm release candidate is available as `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1` under the `rc` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md). No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
+
+Because this is the first published version of the package, npm also exposes it as `latest`. Until a stable package is published, use the explicit `@rc` install path below.
+
+Install the adapter from npm:
+
+```bash
+npm install @neurarelay/openclaw-preflight-adapter@rc
+```
+
+Use the public package surface:
+
+```js
+import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
+import { createActionCardFromPreflightAction } from "@neurarelay/openclaw-preflight-adapter/adapter";
+```
 
 ## Production Agent Identity
 

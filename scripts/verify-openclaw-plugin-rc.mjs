@@ -96,6 +96,7 @@ const requiredFiles = [
   "examples/openclaw/run-preflight-adapter.mjs",
   "tests/openclaw-preflight-adapter.test.mjs",
   "tests/openclaw-preflight-adapter.e2e.mjs",
+  "scripts/verify-openclaw-npm-package.mjs",
   "scripts/verify-openclaw-runtime-approval.mjs",
 ];
 
@@ -111,6 +112,7 @@ const expectedRootScripts = {
   "openclaw:plugin:pack:dry-run":
     "cd examples/openclaw/preflight-adapter && npm pack --dry-run --json",
   "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
+  "verify:openclaw-npm-package": "node scripts/verify-openclaw-npm-package.mjs",
   "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
 };
 for (const [script, command] of Object.entries(expectedRootScripts)) {
@@ -186,6 +188,7 @@ requireIncludes("release_doc", releaseDoc, [
   "0.1.0-rc.1",
   "npm run openclaw:plugin:pack:dry-run",
   "npm run verify:openclaw-plugin-rc",
+  "npm run verify:openclaw-npm-package",
   "npm run verify:openclaw-runtime-approval",
   "Node `24`",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
@@ -201,6 +204,7 @@ const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approva
 requireIncludes("approval_doc", approvalDoc, [
   "OpenClaw Runtime Verification And Publish Approval Packet",
   "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1",
+  "npm run verify:openclaw-npm-package",
   "Use Node `24`",
   "openclaw --profile neura-rc plugins install -l examples/openclaw/preflight-adapter",
   "registered tool: `neura_relay_preflight_action`",

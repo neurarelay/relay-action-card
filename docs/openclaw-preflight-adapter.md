@@ -1,6 +1,6 @@
 # OpenClaw-Style Preflight Adapter v0.1
 
-Status: package-ready release-candidate adapter; not submitted or published
+Status: npm release candidate published; OpenClaw / ClawHub submission remains approval-gated
 Date: 2026-05-12
 
 This adapter turns the Action Receipt Kit into a plugin-ready runtime contract:
@@ -39,13 +39,28 @@ Current public docs reviewed for this shape:
 - `https://docs.openclaw.ai/plugins/building-plugins`
 - `https://documentation.openclaw.ai/clawhub`
 
-Package candidate:
+Published npm release candidate:
 
 ```text
 @neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
 ```
 
 Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.
+
+Install from npm:
+
+```bash
+npm install @neurarelay/openclaw-preflight-adapter@rc
+```
+
+Because this is the first published version of the package, npm also exposes it as `latest`. Use `@rc` explicitly until a stable package exists.
+
+Use the package surface:
+
+```js
+import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
+import { createActionCardFromPreflightAction } from "@neurarelay/openclaw-preflight-adapter/adapter";
+```
 
 ## Commands
 
@@ -55,6 +70,7 @@ npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-npm-package
 npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 npm run test:openclaw-preflight-adapter:e2e

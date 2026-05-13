@@ -1,11 +1,11 @@
 # OpenClaw Plugin Release Candidate v0.1
 
-Status: package-ready release candidate; not submitted or published
+Status: npm release candidate published; OpenClaw / ClawHub submission remains approval-gated
 Date: 2026-05-12
 
 This document is the claim-safe release-readiness packet for the Neura Relay OpenClaw preflight adapter.
 
-Package candidate:
+Published npm release candidate:
 
 ```text
 @neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
@@ -16,6 +16,9 @@ The candidate turns a proposed local computer-use action into a refs-only Action
 ## Current Status
 
 - package metadata is shaped for OpenClaw plugin discovery and npm/ClawHub packaging
+- npm release candidate `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1` is published under the `rc` tag
+- because this is the first published version of the package, npm also exposes it as `latest`; developers should use the explicit `@rc` install path until a stable package exists
+- clean consumer npm install proof is available through `npm run verify:openclaw-npm-package`
 - native manifest is present at `examples/openclaw/preflight-adapter/openclaw.plugin.json`
 - runtime entrypoint is declared through `package.json` `openclaw.extensions`
 - runtime registers one tool: `neura_relay_preflight_action`
@@ -23,7 +26,7 @@ The candidate turns a proposed local computer-use action into a refs-only Action
 - release-candidate verifier is available through `npm run verify:openclaw-plugin-rc`
 - runtime install/inspect proof is available through `npm run verify:openclaw-runtime-approval` when running under Node 22.14+; this repo pins Node `24` in `.nvmrc`
 
-No OpenClaw / ClawHub submission or publication has been performed. No official listing, approval, partnership, endorsement, or provider claim exists. Submission or publication requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
+No OpenClaw / ClawHub submission or publication has been performed. No official listing, approval, partnership, endorsement, or provider claim exists. OpenClaw / ClawHub submission or publication requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
 
 ## Official Source Alignment
 
@@ -50,6 +53,7 @@ npm run test:openclaw-preflight-adapter
 npm run openclaw:preflight:dry-run -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-npm-package
 npm run verify:openclaw-runtime-approval
 ```
 

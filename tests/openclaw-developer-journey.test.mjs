@@ -69,7 +69,7 @@ test("developer journey docs make clone to confidence explicit", () => {
   assert.match(doc, /the receipt route/);
   assert.match(doc, /developer-owned next step/);
   assert.match(doc, /beforeAction\(preflightAction\)/);
-  assert.match(doc, /not submitted, published, listed, approved, or partnered/);
+  assert.match(doc, /not submitted, listed, approved, or partnered/);
 });
 
 test("README points OpenClaw developers to the one-command proof", () => {

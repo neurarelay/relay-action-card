@@ -1,6 +1,6 @@
 # OpenClaw OS Decision Receipt Surface v0.1
 
-Status: local workspace-surface proof; not submitted, published, listed, approved, or partnered by OpenClaw OS, OpenUI, OpenClaw, or ClawHub.
+Status: local workspace-surface proof; not submitted, listed, approved, or partnered by OpenClaw OS, OpenUI, OpenClaw, or ClawHub.
 
 This is not an official OpenClaw OS, OpenUI, OpenClaw, or ClawHub integration, listing, approval, publication, partnership, or endorsement.
 
