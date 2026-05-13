@@ -6,6 +6,7 @@
 - Adds `npm run verify:openclaw-five-minute-demo` to prove the local demo and a clean outside npm consumer install of `@neurarelay/openclaw-preflight-adapter`.
 - Adds `npm run test:openclaw-five-minute-demo` for deterministic dry-run coverage of the three severe developer scenarios.
 - Adds the five-minute demo, verifier, and test to GitHub Actions so the public proof cannot drift silently.
+- Adds `examples/openclaw/QUICKSTART.md` as the shortest GitHub visitor path to the OpenClaw-style proof.
 - Documents the install-to-proof path in `docs/openclaw-five-minute-receipt-demo.md` without changing the already-published npm `0.1.0` package contents.
 - Preserves developer-owned execution, refs-only payloads, no public token/key issuance, no downstream execution by Neura, and no official OpenClaw or ClawHub listing, approval, publication, or partnership claim.
 

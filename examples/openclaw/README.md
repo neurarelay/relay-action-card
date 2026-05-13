@@ -7,6 +7,15 @@ The workspace surface is also not an official OpenClaw OS, OpenUI, OpenClaw, or 
 
 ## Run
 
+Fastest path:
+
+```bash
+npm run openclaw:five-minute-demo
+npm run verify:openclaw-five-minute-demo
+```
+
+Read [`QUICKSTART.md`](QUICKSTART.md) for the 5-minute GitHub visitor path.
+
 Start with the full local proof:
 
 ```bash
