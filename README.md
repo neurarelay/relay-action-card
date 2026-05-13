@@ -161,6 +161,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 
 - [`examples/openclaw/QUICKSTART.md`](examples/openclaw/QUICKSTART.md): fastest GitHub visitor path for the OpenClaw-style 5-minute receipt demo.
 - [`docs/openclaw-copy-paste-agent-integration.md`](docs/openclaw-copy-paste-agent-integration.md): copy-paste `beforeAction()` guard for agent runtimes before `message.send`, `file.delete`, and `package.publish`.
+- [`docs/openclaw-core-skill-pack.md`](docs/openclaw-core-skill-pack.md): single core skill pack for OpenClaw-style agents, including package/publisher action review and the current `@rpelevin` ClawHub community fallback boundary.
 - [`docs/openclaw-computer-use-agent-loop.md`](docs/openclaw-computer-use-agent-loop.md): generic computer-use loop that pauses before message send, file delete, and package publish execution.
 - [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md): one-command developer journey proof.
 - [`docs/openclaw-five-minute-receipt-demo.md`](docs/openclaw-five-minute-receipt-demo.md): fastest install-to-proof path for message send, file delete, and package publish preflight.

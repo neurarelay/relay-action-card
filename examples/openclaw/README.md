@@ -18,6 +18,8 @@ npm run verify:openclaw-five-minute-demo
 
 Read [`QUICKSTART.md`](QUICKSTART.md) for the 5-minute GitHub visitor path. For reviewer-facing evidence, use [`docs/openclaw-clawhub-maintainer-packet.md`](../../docs/openclaw-clawhub-maintainer-packet.md).
 
+For a single agent-facing entry point, use [`skills/openclaw/neura-relay-core`](../../skills/openclaw/neura-relay-core) with [`docs/openclaw-core-skill-pack.md`](../../docs/openclaw-core-skill-pack.md). It covers message, file, browser, shell, package/publisher, workflow, memory, and data-export preflight review while preserving the current community fallback boundary.
+
 Start with the full local proof:
 
 ```bash
@@ -49,6 +51,7 @@ npm run verify:openclaw-developer-journey
 npm run verify:openclaw-five-minute-demo
 npm run verify:openclaw-copy-paste-integration
 npm run verify:openclaw-computer-use-loop
+npm run verify:openclaw-core-skill-pack
 npm run verify:openclaw-clean-consumer
 npm run test:openclaw-five-minute-demo
 npm run test:openclaw-copy-paste-integration

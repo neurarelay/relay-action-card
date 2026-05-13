@@ -19,6 +19,7 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 
 | Surface | Purpose |
 | --- | --- |
+| `skills/openclaw/neura-relay-core` | Single core workflow for OpenClaw-style agents, including package/publisher actions and receipt interpretation |
 | `skills/openclaw/neura-action-card` | Draft a refs-only Action Card for an OpenClaw-style tool or channel action |
 | `skills/openclaw/neura-before-send` | Review outbound message actions before channel delivery |
 | `skills/openclaw/neura-file-change-review` | Review file edit and delete actions before local file changes |
@@ -45,6 +46,7 @@ This is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP
 | `.github/workflows/openclaw-action-receipt-kit.yml` | CI for local contract checks plus manual live receipt proof |
 | `CHANGELOG.md` | Release-candidate summary and public-safe claim boundary |
 | `docs/openclaw-preflight-adapter.md` | Plugin-ready `beforeAction` adapter contract and OpenClaw-style entry example |
+| `docs/openclaw-core-skill-pack.md` | Core skill pack, scenario corpus, package identity boundary, and current ClawHub community fallback truth |
 | `docs/openclaw-plugin-release-candidate.md` | Package-ready OpenClaw plugin release-candidate and submission-readiness packet |
 
 ## Action Families
@@ -61,6 +63,8 @@ The kit covers eight action families:
 | Workflow state change | `workflow-state-change.json` | confirm authority, evidence, and state transition policy |
 | memory write | `memory-write.json` | confirm subject intent, memory scope, retention posture, and authority before storage |
 | data export | `data-export.json` | confirm privacy request, export target, and data-export policy refs before transfer |
+
+The core skill pack also covers package and publisher actions, including package releases, package metadata updates, publisher namespace changes, and organization/public ownership changes. Those actions should include source repo, source commit, package identity, owner/publisher ref, artifact digest or pack ref, release intent, and claim-boundary refs before execution.
 
 ## How To Use
 
@@ -96,6 +100,7 @@ Verify the public-safe kit contract:
 npm run verify:openclaw-developer-journey
 npm run verify:openclaw-workbench
 npm run verify:openclaw-workspace-surface
+npm run verify:openclaw-core-skill-pack
 npm run verify:openclaw-action-receipt-pack
 npm run verify:openclaw-action-receipt-kit
 ```

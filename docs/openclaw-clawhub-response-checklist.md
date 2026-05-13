@@ -72,7 +72,7 @@ Do not paste private tokens, API keys, internal dashboards, or private payloads 
 ## If Access Is Rejected Or Deferred
 
 - Keep npm as the stable public install path.
-- Keep the repo docs as OpenClaw-style examples, not an official ClawHub listing.
+- Keep the repo docs as OpenClaw-style examples, not a ClawHub approval or endorsement claim.
 - Do not create another issue unless maintainers ask for a new route.
 - Continue developer adoption through `npm install @neurarelay/openclaw-preflight-adapter` and the copy-paste integration path.
 
@@ -86,4 +86,3 @@ Do not paste private tokens, API keys, internal dashboards, or private payloads 
 - no public A2A token issuance
 - no unprotected A2A execution
 - no Registry auto-approval
-

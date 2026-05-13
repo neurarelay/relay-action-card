@@ -58,6 +58,7 @@
     "verify:skills-adoption-pack": "node scripts/verify-skills-adoption-pack.mjs",
     "verify:openclaw-action-receipt-pack": "node scripts/verify-openclaw-action-receipt-pack.mjs",
     "verify:openclaw-action-receipt-kit": "node scripts/verify-openclaw-action-receipt-kit.mjs",
+    "verify:openclaw-core-skill-pack": "node scripts/verify-openclaw-core-skill-pack.mjs",
     "verify:openclaw-preflight-adapter": "node scripts/verify-openclaw-preflight-adapter.mjs",
     "verify:openclaw-plugin-rc": "node scripts/verify-openclaw-plugin-rc.mjs",
     "verify:openclaw-npm-package": "node scripts/verify-openclaw-npm-package.mjs",
