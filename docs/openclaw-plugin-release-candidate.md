@@ -5,6 +5,8 @@ Date: 2026-05-12
 
 This document is the claim-safe release-readiness packet for the Neura Relay OpenClaw preflight adapter.
 
+For the final Roman approval packet before any OpenClaw / ClawHub submission or package publication action, see [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md).
+
 Published npm release candidate:
 
 ```text
@@ -54,6 +56,7 @@ npm run openclaw:preflight:dry-run -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-plugin-rc
 npm run verify:openclaw-npm-package
+npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-runtime-approval
 ```
 

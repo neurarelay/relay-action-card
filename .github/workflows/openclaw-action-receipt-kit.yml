@@ -10,19 +10,24 @@ on:
       - "package-lock.json"
       - "docs/assets/openclaw-near-miss-workbench/**"
       - "docs/openclaw-action-receipt-pack.md"
+      - "docs/openclaw-clawhub-submission-readiness.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-near-miss-workbench.md"
       - "docs/openclaw-os-decision-receipt-surface.md"
       - "docs/openclaw-preflight-adapter.md"
       - "docs/openclaw-plugin-release-candidate.md"
+      - "docs/openclaw-runtime-verification-and-publish-approval.md"
       - "examples/core/resolve-action-card.mjs"
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
       - "scripts/verify-openclaw-developer-journey.mjs"
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
+      - "scripts/verify-openclaw-npm-package.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
+      - "scripts/verify-openclaw-runtime-approval.mjs"
+      - "scripts/verify-openclaw-submission-readiness.mjs"
       - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
@@ -41,19 +46,24 @@ on:
       - "package-lock.json"
       - "docs/assets/openclaw-near-miss-workbench/**"
       - "docs/openclaw-action-receipt-pack.md"
+      - "docs/openclaw-clawhub-submission-readiness.md"
       - "docs/openclaw-developer-journey.md"
       - "docs/openclaw-near-miss-workbench.md"
       - "docs/openclaw-os-decision-receipt-surface.md"
       - "docs/openclaw-preflight-adapter.md"
       - "docs/openclaw-plugin-release-candidate.md"
+      - "docs/openclaw-runtime-verification-and-publish-approval.md"
       - "examples/core/resolve-action-card.mjs"
       - "examples/openclaw/**"
       - "scripts/verify-openclaw-action-receipt-kit.mjs"
       - "scripts/verify-openclaw-action-receipt-pack.mjs"
       - "scripts/verify-openclaw-developer-journey.mjs"
       - "scripts/verify-openclaw-near-miss-workbench.mjs"
+      - "scripts/verify-openclaw-npm-package.mjs"
       - "scripts/verify-openclaw-preflight-adapter.mjs"
       - "scripts/verify-openclaw-plugin-rc.mjs"
+      - "scripts/verify-openclaw-runtime-approval.mjs"
+      - "scripts/verify-openclaw-submission-readiness.mjs"
       - "scripts/verify-openclaw-workspace-surface.mjs"
       - "skills/openclaw/**"
       - "tests/openclaw-action-receipt-kit*.mjs"
@@ -123,6 +133,9 @@ jobs:
 
       - name: Verify plugin release candidate
         run: npm run verify:openclaw-plugin-rc
+
+      - name: Verify submission readiness
+        run: npm run verify:openclaw-submission-readiness
 
       - name: Run dry-run proof
         run: npm run openclaw:dry-run -- --json

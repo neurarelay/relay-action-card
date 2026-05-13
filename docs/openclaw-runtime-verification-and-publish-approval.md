@@ -11,6 +11,8 @@ This packet records the actual OpenClaw / ClawHub release gate for the npm relea
 
 It does not publish, submit, list, approve, or partner the plugin through OpenClaw / ClawHub. It exists so Roman can make a clean OpenClaw / ClawHub publish/submission decision from verified facts.
 
+For the final Roman approval packet before any OpenClaw / ClawHub submission or package publication action, see [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md).
+
 ## Runtime Requirement
 
 Use Node `24` for this repo, pinned in `.nvmrc`. The verifier and package declare Node `>=22.14.0` because OpenClaw `2026.5.7` does not run on the local system Node `21.1.0`.
@@ -63,6 +65,7 @@ Run the registry-backed clean consumer check:
 
 ```bash
 npm run verify:openclaw-npm-package
+npm run verify:openclaw-submission-readiness
 ```
 
 ## Verified ClawHub Dry Run

@@ -101,6 +101,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 - [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md): Action Receipt Kit, public-safe fixtures in `examples/openclaw/action-cards`, starter skill at `skills/openclaw/neura-action-card`, verifier, unit tests, and live E2E receipt test.
 - [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md): visual proof for customer data exfiltration, production deployment, and expired delegated authority near-misses.
 - [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md): OpenClaw OS Decision Receipt Surface for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations.
+- [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md): final approval packet for an official OpenClaw / ClawHub submission or package publication decision.
 
 The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`.
 
@@ -169,6 +170,7 @@ Release-candidate snapshot:
 | Workspace surface verifier | `npm run verify:openclaw-workspace-surface` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
 | Published npm RC verifier | `npm run verify:openclaw-npm-package` |
+| Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |
 | Unit test framework | `npm run test:openclaw-kit` |
 | Live E2E receipt test | `npm run test:openclaw-kit:e2e` |
@@ -185,11 +187,12 @@ npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
+npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The npm release candidate is available as `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2` under the `rc` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md). No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
+The npm release candidate is available as `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2` under the `rc` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the final approval packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
 
 The intentional adoption path is the explicit `@rc` install below. Bare `npm install @neurarelay/openclaw-preflight-adapter` may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
 
@@ -600,6 +603,7 @@ scripts/
   verify-openclaw-near-miss-workbench.mjs
   verify-openclaw-preflight-adapter.mjs
   verify-openclaw-plugin-rc.mjs
+  verify-openclaw-submission-readiness.mjs
   verify-openclaw-runtime-approval.mjs
   verify-openclaw-workspace-surface.mjs
 docs/
@@ -618,6 +622,7 @@ docs/
   openclaw-developer-journey.md
   openclaw-near-miss-workbench.md
   openclaw-os-decision-receipt-surface.md
+  openclaw-clawhub-submission-readiness.md
   openclaw-preflight-adapter.md
   openclaw-plugin-release-candidate.md
   openclaw-runtime-verification-and-publish-approval.md

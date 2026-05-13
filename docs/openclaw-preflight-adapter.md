@@ -31,6 +31,7 @@ This repo now carries a package-ready release candidate shaped for that path:
 | Unit test | `tests/openclaw-preflight-adapter.test.mjs` |
 | Live E2E test | `tests/openclaw-preflight-adapter.e2e.mjs` |
 | Submission-readiness packet | `docs/openclaw-plugin-release-candidate.md` |
+| Final submission-readiness packet | `docs/openclaw-clawhub-submission-readiness.md` |
 | Runtime verification packet | `docs/openclaw-runtime-verification-and-publish-approval.md` |
 
 Current public docs reviewed for this shape:
@@ -71,6 +72,7 @@ npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-preflight-adapter
 npm run verify:openclaw-plugin-rc
 npm run verify:openclaw-npm-package
+npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 npm run test:openclaw-preflight-adapter:e2e
