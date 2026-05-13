@@ -14,7 +14,7 @@ npm run openclaw:five-minute-demo
 npm run verify:openclaw-five-minute-demo
 ```
 
-Read [`QUICKSTART.md`](QUICKSTART.md) for the 5-minute GitHub visitor path.
+Read [`QUICKSTART.md`](QUICKSTART.md) for the 5-minute GitHub visitor path. For reviewer-facing evidence, use [`docs/openclaw-clawhub-maintainer-packet.md`](../../docs/openclaw-clawhub-maintainer-packet.md).
 
 Start with the full local proof:
 
@@ -97,4 +97,4 @@ The Severe Scenario Proof Pack at `severe-scenario-proof/scenario.json` generate
 
 The Severe Preflight Queue at `run-severe-preflight-queue.mjs` generates `artifacts/openclaw-severe-preflight-queue/transcript.html` for the same incident using the existing `adapter.beforeAction(preflightAction)` path. It shows each preflight action, generated Action Card, adapter route, projected or live receipt route, and execution attempted as `false`. It is safe local projection by default; `--live` requests Relay receipts without local computer-use execution.
 
-The `preflight-adapter` folder adds the npm-published `beforeAction(preflightAction)` release candidate for local autonomous computer-use runtimes: `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2` under the `rc` tag. It is not submitted, listed, approved, or partnered by OpenClaw / ClawHub.
+The `preflight-adapter` folder adds the npm-published `beforeAction(preflightAction)` stable package for local autonomous computer-use runtimes: `@neurarelay/openclaw-preflight-adapter@0.1.0` under the `latest` tag. The old `rc` tag remains available only for release-candidate history. It is not submitted, listed, approved, or partnered by OpenClaw / ClawHub.

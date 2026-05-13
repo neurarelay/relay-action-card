@@ -115,6 +115,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 - [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md): OpenClaw OS Decision Receipt Surface for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations.
 - [`docs/openclaw-severe-scenario-proof-pack.md`](docs/openclaw-severe-scenario-proof-pack.md): severe end-to-end computer-use proof for customer data export, external browser submit, completion message, file deletion, and workflow close.
 - [`docs/openclaw-severe-preflight-queue.md`](docs/openclaw-severe-preflight-queue.md): runtime-style queue that sends the severe scenario through `adapter.beforeAction(preflightAction)` before local execution.
+- [`docs/openclaw-clawhub-maintainer-packet.md`](docs/openclaw-clawhub-maintainer-packet.md): concise public-safe evidence index for ClawHub publisher-access review.
 - [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md): final approval packet for an official OpenClaw / ClawHub submission or package publication decision.
 
 The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`. The Severe Scenario Proof Pack adds a single five-checkpoint incident path in `severe-scenario-proof/` with local HTML, Markdown, JSON, verifier, and unit test coverage. The Severe Preflight Queue runs the same incident through the actual adapter shape and records execution attempted as `false`.
@@ -591,10 +592,12 @@ examples/
     README.md
     resolve-action-card-a2a.mjs
   openclaw/
+    QUICKSTART.md
     README.md
     action-receipt-kit.manifest.json
     run-action-receipt-kit.mjs
     run-developer-journey-proof.mjs
+    run-five-minute-receipt-demo.mjs
     run-near-miss-workbench.mjs
     run-preflight-adapter.mjs
     run-severe-preflight-queue.mjs
@@ -646,8 +649,12 @@ scripts/
   verify-sdk-authority-routing.mjs
   verify-openclaw-action-receipt-pack.mjs
   verify-openclaw-action-receipt-kit.mjs
+  verify-openclaw-clean-consumer-install.mjs
+  verify-openclaw-clawhub-release-gate.mjs
   verify-openclaw-developer-journey.mjs
+  verify-openclaw-five-minute-demo.mjs
   verify-openclaw-near-miss-workbench.mjs
+  verify-openclaw-npm-package.mjs
   verify-openclaw-preflight-adapter.mjs
   verify-openclaw-plugin-rc.mjs
   verify-openclaw-submission-readiness.mjs
@@ -668,12 +675,14 @@ docs/
   developer-owned-agent-walkthrough.md
   mcp-tool-call-governance-walkthrough.md
   openclaw-action-receipt-pack.md
+  openclaw-clawhub-maintainer-packet.md
+  openclaw-clawhub-submission-readiness.md
   openclaw-developer-journey.md
+  openclaw-five-minute-receipt-demo.md
   openclaw-near-miss-workbench.md
   openclaw-os-decision-receipt-surface.md
   openclaw-severe-preflight-queue.md
   openclaw-severe-scenario-proof-pack.md
-  openclaw-clawhub-submission-readiness.md
   openclaw-preflight-adapter.md
   openclaw-plugin-release-candidate.md
   openclaw-runtime-verification-and-publish-approval.md
@@ -682,6 +691,7 @@ tests/
   openclaw-action-receipt-kit.test.mjs
   openclaw-action-receipt-kit.e2e.mjs
   openclaw-developer-journey.test.mjs
+  openclaw-five-minute-demo.test.mjs
   openclaw-near-miss-workbench.test.mjs
   openclaw-severe-preflight-queue.test.mjs
   openclaw-severe-scenario-proof.test.mjs
