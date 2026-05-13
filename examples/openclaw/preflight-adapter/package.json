@@ -1,6 +1,6 @@
 {
   "name": "@neurarelay/openclaw-preflight-adapter",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0-rc.2",
   "private": false,
   "type": "module",
   "description": "Claim-safe OpenClaw preflight adapter release candidate for Neura Relay Decision Receipts.",
@@ -58,7 +58,7 @@
       "pluginSdkVersion": "2026.3.24-beta.2"
     },
     "install": {
-      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1",
+      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.3.24-beta.2"
     }

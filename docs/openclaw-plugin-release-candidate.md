@@ -8,7 +8,7 @@ This document is the claim-safe release-readiness packet for the Neura Relay Ope
 Published npm release candidate:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
+@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
 ```
 
 The candidate turns a proposed local computer-use action into a refs-only Action Card, asks Neura Relay for a Decision Receipt, and returns a developer-owned execution route. Neura does not execute the downstream action.
@@ -16,8 +16,8 @@ The candidate turns a proposed local computer-use action into a refs-only Action
 ## Current Status
 
 - package metadata is shaped for OpenClaw plugin discovery and npm/ClawHub packaging
-- npm release candidate `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1` is published under the `rc` tag
-- because this is the first published version of the package, npm also exposes it as `latest`; developers should use the explicit `@rc` install path until a stable package exists
+- npm release candidate `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2` is published under the `rc` tag
+- developers should use the explicit `@rc` install path; bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists
 - clean consumer npm install proof is available through `npm run verify:openclaw-npm-package`
 - native manifest is present at `examples/openclaw/preflight-adapter/openclaw.plugin.json`
 - runtime entrypoint is declared through `package.json` `openclaw.extensions`
@@ -69,9 +69,9 @@ npm run openclaw:preflight:receipt -- --json
 Do not run these without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.1 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.1 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.2 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.2 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
 openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
 ```
 

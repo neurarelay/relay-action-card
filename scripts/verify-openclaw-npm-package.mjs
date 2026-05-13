@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -45,7 +45,7 @@ if (registry) {
   if (!registry.version?.includes("-rc.")) warnings.push("registry_version_is_not_rc");
   if (!registry["dist-tags"]?.rc?.includes("-rc.")) failures.push("registry_rc_tag_missing");
   if (registry["dist-tags"]?.latest?.includes("-rc.")) {
-    warnings.push("registry_latest_points_to_release_candidate_because_no_stable_version_exists");
+    warnings.push("registry_latest_points_to_release_candidate_until_stable_version_exists");
   }
 }
 
@@ -128,6 +128,43 @@ if (install.status === 0) {
   }
 }
 
+const registryPackDir = mkdtempSync(join(tmpdir(), "neura-openclaw-npm-pack-"));
+const registryExtractDir = mkdtempSync(join(tmpdir(), "neura-openclaw-npm-pack-extract-"));
+const registryPack = run("npm", ["pack", installSpec, "--pack-destination", registryPackDir, "--json"]);
+let publishedPackageReadme = null;
+if (registryPack.status !== 0) {
+  failures.push(`registry_pack_failed_${registryPack.stderr || registryPack.stdout}`);
+} else {
+  const packPayload = parseJson("registry_pack", registryPack.stdout);
+  const tarballName = packPayload?.[0]?.filename;
+  const tarballPath = tarballName ? join(registryPackDir, tarballName) : null;
+  if (!tarballPath || !existsSync(tarballPath)) {
+    failures.push("registry_pack_tarball_missing");
+  } else {
+    const extract = run("tar", ["-xzf", tarballPath, "-C", registryExtractDir]);
+    if (extract.status !== 0) {
+      failures.push(`registry_pack_extract_failed_${extract.stderr || extract.stdout}`);
+    } else {
+      const readmePath = join(registryExtractDir, "package", "README.md");
+      if (!existsSync(readmePath)) {
+        failures.push("registry_pack_readme_missing");
+      } else {
+        const readme = readFileSync(readmePath, "utf8");
+        publishedPackageReadme = {
+          has_current_version: readme.includes(localPackage.version),
+          has_install_heading: readme.includes("Install From npm"),
+          has_explicit_rc_install: readme.includes("npm install @neurarelay/openclaw-preflight-adapter@rc"),
+          has_rc_warning: readme.includes("Use `@rc` explicitly"),
+          has_claim_boundary: readme.includes("not an official OpenClaw or ClawHub"),
+        };
+        for (const [key, ok] of Object.entries(publishedPackageReadme)) {
+          if (!ok) failures.push(`registry_pack_readme_missing_${key}`);
+        }
+      }
+    }
+  }
+}
+
 if (proof?.packageVersion && registry?.["dist-tags"]?.rc) {
   if (proof.packageVersion !== registry["dist-tags"].rc) {
     failures.push("installed_version_does_not_match_registry_rc_tag");
@@ -151,6 +188,7 @@ console.log(
         install: install.status === 0 ? "passed" : "failed",
         proof,
       },
+      published_package_readme: publishedPackageReadme,
       local_package: {
         name: localPackage.name,
         version: localPackage.version,

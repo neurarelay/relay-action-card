@@ -125,7 +125,7 @@ const pluginPackage = readJson("examples/openclaw/preflight-adapter/package.json
 if (pluginPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
   failures.push("plugin_package_wrong_name");
 }
-if (pluginPackage.version !== "0.1.0-rc.1") failures.push("plugin_package_wrong_version");
+if (pluginPackage.version !== "0.1.0-rc.2") failures.push("plugin_package_wrong_version");
 if (pluginPackage.private !== false) failures.push("plugin_package_must_be_publish_ready");
 if (pluginPackage.type !== "module") failures.push("plugin_package_must_be_esm");
 if (pluginPackage.license !== "MIT") failures.push("plugin_package_missing_license");
@@ -152,7 +152,7 @@ if (pluginPackage.openclaw?.build?.openclawVersion !== "2026.3.24-beta.2") {
 }
 if (
   pluginPackage.openclaw?.install?.npmSpec !==
-  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1"
+  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2"
 ) {
   failures.push("plugin_package_wrong_install_spec");
 }
@@ -185,7 +185,7 @@ const releaseDoc = read("docs/openclaw-plugin-release-candidate.md");
 requireIncludes("release_doc", releaseDoc, [
   "OpenClaw Plugin Release Candidate v0.1",
   "@neurarelay/openclaw-preflight-adapter",
-  "0.1.0-rc.1",
+  "0.1.0-rc.2",
   "npm run openclaw:plugin:pack:dry-run",
   "npm run verify:openclaw-plugin-rc",
   "npm run verify:openclaw-npm-package",
@@ -203,7 +203,7 @@ rejectUnsafe("release_doc", releaseDoc);
 const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approval.md");
 requireIncludes("approval_doc", approvalDoc, [
   "OpenClaw Runtime Verification And Publish Approval Packet",
-  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1",
+  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2",
   "npm run verify:openclaw-npm-package",
   "Use Node `24`",
   "openclaw --profile neura-rc plugins install -l examples/openclaw/preflight-adapter",

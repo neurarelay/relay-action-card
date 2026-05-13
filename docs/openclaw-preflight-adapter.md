@@ -42,7 +42,7 @@ Current public docs reviewed for this shape:
 Published npm release candidate:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
+@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
 ```
 
 Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.
@@ -53,7 +53,7 @@ Install from npm:
 npm install @neurarelay/openclaw-preflight-adapter@rc
 ```
 
-Because this is the first published version of the package, npm also exposes it as `latest`. Use `@rc` explicitly until a stable package exists.
+Use `@rc` explicitly. Bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
 
 Use the package surface:
 

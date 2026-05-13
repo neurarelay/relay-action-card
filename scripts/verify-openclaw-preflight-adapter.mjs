@@ -135,7 +135,7 @@ if (!adapterPackage.openclaw?.compat?.pluginApi || !adapterPackage.openclaw?.bui
 }
 if (
   adapterPackage.openclaw?.install?.npmSpec !==
-  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1"
+  "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2"
 ) {
   failures.push("adapter_package_missing_install_npm_spec");
 }

@@ -6,7 +6,7 @@ Date: 2026-05-12
 This packet records the actual OpenClaw / ClawHub release gate for the npm release candidate:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
+@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
 ```
 
 It does not publish, submit, list, approve, or partner the plugin through OpenClaw / ClawHub. It exists so Roman can make a clean OpenClaw / ClawHub publish/submission decision from verified facts.
@@ -35,7 +35,7 @@ Runtime inspection confirmed:
 
 - plugin id: `neura-relay-preflight-adapter`
 - package name: `@neurarelay/openclaw-preflight-adapter`
-- version: `0.1.0-rc.1`
+- version: `0.1.0-rc.2`
 - status: `loaded`
 - enabled: `true`
 - runtime imported: `true`
@@ -50,7 +50,7 @@ The npm release candidate can be installed by an outside developer:
 npm install @neurarelay/openclaw-preflight-adapter@rc
 ```
 
-Because this is the first published version of the package, npm also exposes `0.1.0-rc.1` as `latest`. The intentional adoption path remains `@rc` until a stable package exists.
+Use `@rc` explicitly. Bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
 
 The public package surface is:
 
@@ -86,7 +86,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
   "name": "@neurarelay/openclaw-preflight-adapter",
   "displayName": "Neura Relay Preflight Adapter",
   "family": "code-plugin",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0-rc.2",
   "files": 6
 }
 ```
@@ -96,7 +96,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
 Do not run this without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.1 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.2 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
 ## Public-Safe Description

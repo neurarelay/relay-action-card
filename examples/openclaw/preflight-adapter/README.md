@@ -3,7 +3,7 @@
 This folder contains the claim-safe OpenClaw-style preflight adapter release candidate published to npm:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.1
+@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
 ```
 
 It shows how a local autonomous computer-use runtime can call:
@@ -20,7 +20,7 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 npm install @neurarelay/openclaw-preflight-adapter@rc
 ```
 
-Because this is the first published version of the package, npm also exposes it as `latest`. Use `@rc` explicitly until a stable package exists.
+Use `@rc` explicitly. Bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
 
 ```js
 import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
