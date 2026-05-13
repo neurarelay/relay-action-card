@@ -101,9 +101,9 @@ test("workbench generation creates visual, markdown, and JSON reports", () => {
 
   assert.match(html, /OpenClaw Near-Miss Workbench/);
   assert.match(html, /Receipt before execution/);
-  assert.match(html, /Customer Data Exfiltration Near-Miss/);
-  assert.match(html, /Production Deployment Near-Miss/);
-  assert.match(html, /Expired Delegated Authority Near-Miss/);
+  assert.match(html, /Customer Data Exfiltration/);
+  assert.match(html, /Production Deployment/);
+  assert.match(html, /Expired Delegated Authority/);
   assert.match(html, /What the agent was about to do/);
   assert.match(html, /What Neura caught/);
   assert.match(html, /Receipt route/);

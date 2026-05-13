@@ -266,7 +266,7 @@ function renderHtml(report) {
       --revise: #265fa6;
       --stop: #b42318;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; min-width: 0; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -287,10 +287,11 @@ function renderHtml(report) {
       font-size: 12px;
       font-weight: 700;
     }
-    h1 { max-width: 980px; margin: 0 0 12px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
+    h1 { max-width: none; margin: 0 0 12px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
     h2 { margin: 8px 0; font-size: 22px; line-height: 1.18; letter-spacing: 0; }
     h3 { margin: 8px 0; font-size: 18px; letter-spacing: 0; }
     p { margin: 0 0 12px; color: var(--muted); max-width: 920px; }
+    header p { max-width: none; }
     .path {
       display: inline-block;
       margin-top: 8px;
@@ -301,6 +302,7 @@ function renderHtml(report) {
       font-size: 13px;
       max-width: 100%;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .proof-line {
       display: grid;
@@ -316,6 +318,7 @@ function renderHtml(report) {
       color: var(--ink);
       font-weight: 700;
       min-height: 48px;
+      white-space: nowrap;
     }
     .metrics {
       display: grid;
@@ -437,10 +440,23 @@ function renderHtml(report) {
       padding-top: 18px;
     }
     @media (max-width: 920px) {
-      main { padding: 28px 16px 40px; }
-      h1 { font-size: 34px; }
+      body { padding: 0; }
+      main { width: 358px; max-width: none; margin: 0 16px; padding: 28px 0 40px; }
+      h1 { font-size: 30px; }
+      header p { max-width: 34ch; }
+      .path {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .proof-line span { white-space: normal; }
       .proof-line, .metrics, .surface-grid, .receipt-grid, .route-panel { grid-template-columns: 1fr; }
       .surface-card { min-height: auto; }
+    }
+    @media (max-width: 374px) {
+      main { width: calc(100vw - 32px); }
     }
   </style>
 </head>
@@ -448,15 +464,15 @@ function renderHtml(report) {
   <main>
     <header>
       <span class="eyebrow">Local workspace proof - Safe local projection</span>
-      <h1>OpenClaw OS Decision Receipt Surface</h1>
-      <p>Receipt posture for persistent autonomous workspace actions before generated apps, artifacts, crons, workflow monitors, memory, browser control, shell, or file operations change state.</p>
-      <span class="path">${escapeHtml(report.path)}</span>
+      <h1>Workspace Decision Surface</h1>
+      <p>Receipt posture before autonomous workspace actions change apps, artifacts, crons, memory, browser, shell, or files.</p>
+      <span class="path">Workspace action -&gt; Receipt -&gt; Developer route</span>
       <div class="proof-line" aria-label="Workspace receipt path">
-        <span>Proposed workspace action</span>
+        <span>Workspace action</span>
         <span>Action Card</span>
         <span>Authority Engine posture</span>
         <span>Decision Receipt</span>
-        <span>Developer-owned execution</span>
+        <span>Developer route</span>
       </div>
     </header>
     <section class="metrics">${decisionTiles}</section>

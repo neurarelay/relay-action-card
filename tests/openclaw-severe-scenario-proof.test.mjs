@@ -131,7 +131,7 @@ test("severe proof generation creates visual, markdown, and JSON reports", () =>
   assert.match(html, /OpenClaw Severe Scenario Proof Pack/);
   assert.match(html, /What Neura catches/);
   assert.match(html, /Developer-owned next step/);
-  assert.match(html, /No downstream execution/);
+  assert.match(html, /No execution/);
   assert.match(markdown, /Export customer account dataset/);
   assert.match(markdown, /Submit exported data to external vendor portal/);
   assert.equal(report.checkpoints.length, 5);

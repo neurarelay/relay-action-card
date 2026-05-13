@@ -309,7 +309,7 @@ function renderHtml(report) {
       --revise: #265fa6;
       --stop: #b42318;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; min-width: 0; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -337,7 +337,7 @@ function renderHtml(report) {
       font-weight: 700;
     }
     h1 {
-      max-width: 900px;
+      max-width: none;
       margin: 0 0 12px;
       font-size: 46px;
       line-height: 1.04;
@@ -346,6 +346,7 @@ function renderHtml(report) {
     h2 { margin: 6px 0 8px; font-size: 25px; line-height: 1.2; letter-spacing: 0; }
     h3 { margin: 8px 0 8px; font-size: 18px; letter-spacing: 0; }
     p { margin: 0 0 12px; color: var(--muted); max-width: 880px; }
+    header p { max-width: none; }
     .path {
       display: inline-block;
       margin-top: 8px;
@@ -356,6 +357,7 @@ function renderHtml(report) {
       font-size: 13px;
       max-width: 100%;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .proof-line {
       display: grid;
@@ -371,6 +373,7 @@ function renderHtml(report) {
       color: var(--ink);
       font-weight: 700;
       min-height: 46px;
+      white-space: nowrap;
     }
     .scenario-cards {
       display: grid;
@@ -386,7 +389,11 @@ function renderHtml(report) {
       min-height: 315px;
     }
     .scenario-card h2 { font-size: 21px; }
-    .scenario-card p { font-size: 14px; }
+    .scenario-card p {
+      min-height: 42px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
     .scenario-stop { border-top-color: var(--stop); }
     .scenario-human_review { border-top-color: var(--review); }
     .scenario-revise { border-top-color: var(--revise); }
@@ -520,27 +527,40 @@ function renderHtml(report) {
       padding-top: 18px;
     }
     @media (max-width: 820px) {
-      main { padding: 28px 16px 40px; }
-      h1 { font-size: 34px; }
+      body { padding: 0; }
+      main { width: 358px; max-width: none; margin: 0 16px; padding: 28px 0 40px; }
+      h1 { font-size: 30px; }
+      header p { max-width: 34ch; }
+      .path {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .proof-line span { white-space: normal; }
       .proof-line, .scenario-cards, .metrics, .journey-proof, .steps { grid-template-columns: 1fr; }
       .step, .step:nth-child(2n) { border-right: 0; }
       .scenario-card { min-height: auto; }
       .journey-proof div { min-height: auto; }
+    }
+    @media (max-width: 374px) {
+      main { width: calc(100vw - 32px); }
     }
   </style>
 </head>
 <body>
   <main>
     <header>
-      <span class="eyebrow">Local visual proof - Safe local projection</span>
-      <h1>OpenClaw Near-Miss Workbench</h1>
-      <p>Receipt before execution for three autonomous-agent failures developers understand immediately: data leakage, production damage, and stale delegated authority.</p>
-      <span class="path">${escapeHtml(report.path)}</span>
+      <span class="eyebrow">Local visual proof</span>
+      <h1>Near-Miss Workbench</h1>
+      <p>Receipt before execution for data leakage, production damage, and stale delegated authority.</p>
+      <span class="path">Action -&gt; Receipt -&gt; Developer route</span>
       <div class="proof-line" aria-label="Receipt path">
         <span>Proposed action</span>
         <span>Action Card</span>
         <span>Decision Receipt</span>
-        <span>Developer-owned execution</span>
+        <span>Developer route</span>
       </div>
     </header>
     <section class="scenario-cards" aria-label="Flagship near-miss scenarios">${journeyCards}</section>

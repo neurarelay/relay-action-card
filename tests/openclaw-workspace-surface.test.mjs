@@ -124,10 +124,10 @@ test("workspace proof generation creates visual, markdown, and JSON reports", ()
   const report = JSON.parse(readFileSync(join(outDir, "report.json"), "utf8"));
 
   assert.match(html, /OpenClaw OS Decision Receipt Surface/);
-  assert.match(html, /Proposed workspace action/);
+  assert.match(html, /Workspace action/);
   assert.match(html, /Authority Engine posture/);
   assert.match(html, /Decision Receipt/);
-  assert.match(html, /Developer-owned execution/);
+  assert.match(html, /Developer route/);
   assert.match(html, /Generated App Deploy/);
   assert.match(html, /Artifact Publish/);
   assert.match(html, /Scheduled Cron Action/);

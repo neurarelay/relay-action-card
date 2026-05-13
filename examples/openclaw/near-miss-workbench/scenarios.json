@@ -9,10 +9,10 @@
   "journeys": [
     {
       "id": "customer-data-exfiltration",
-      "title": "Customer Data Exfiltration Near-Miss",
+      "title": "Customer Data Exfiltration",
       "severity": "critical",
-      "developer_problem": "A support agent prepares a helpful reply, then tries to export account data and submit it to an external destination.",
-      "agent_intent": "Resolve a customer support ticket quickly.",
+      "developer_problem": "A support agent drafts a reply, then tries to export account data externally.",
+      "agent_intent": "Resolve support ticket quickly.",
       "impact": "Prevents accidental customer-data leakage before the browser submit or outbound send happens.",
       "steps": [
         {
@@ -83,9 +83,9 @@
     },
     {
       "id": "production-deployment",
-      "title": "Production Deployment Near-Miss",
+      "title": "Production Deployment",
       "severity": "high",
-      "developer_problem": "A coding agent prepares a config change, then tries to run a migration and deploy to production without enough release authority.",
+      "developer_problem": "A coding agent prepares a config change, then tries to migrate and deploy without release authority.",
       "agent_intent": "Ship a fix before the incident window closes.",
       "impact": "Separates safe preparation from production-impacting execution before an agent changes live state.",
       "steps": [
@@ -157,10 +157,10 @@
     },
     {
       "id": "expired-delegated-authority",
-      "title": "Expired Delegated Authority Near-Miss",
+      "title": "Expired Delegated Authority",
       "severity": "high",
-      "developer_problem": "An agent that had permission yesterday tries to take a costly customer action after its delegated authority expired.",
-      "agent_intent": "Continue a previously approved customer operation.",
+      "developer_problem": "An agent uses yesterday's permission to take a costly customer action after authority expired.",
+      "agent_intent": "Continue approved account work.",
       "impact": "Prevents stale authority from silently becoming present-day execution permission.",
       "steps": [
         {
@@ -181,7 +181,7 @@
         },
         {
           "id": "apply-customer-credit",
-          "title": "Apply customer credit using yesterday's delegation",
+          "title": "Apply credit with stale delegation",
           "family": "workflow_transition",
           "proposed_action": "workflow.transition",
           "target_ref": "billing_action_ref:apply_credit_customer_912",

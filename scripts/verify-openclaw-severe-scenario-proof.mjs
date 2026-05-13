@@ -254,7 +254,7 @@ if (proofRun.status !== 0) {
     "OpenClaw Severe Scenario Proof Pack",
     "What Neura catches",
     "Developer-owned next step",
-    "No downstream execution",
+    "No execution",
     "local_severe_receipt_ref:2:submit_external_portal",
   ]);
   rejectUnsafe("generated_html", generated);

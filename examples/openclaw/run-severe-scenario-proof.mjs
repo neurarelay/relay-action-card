@@ -333,7 +333,7 @@ function renderHtml(report) {
       --proceed: #0d7c59;
       --critical: #7f1d1d;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; min-width: 0; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -354,19 +354,21 @@ function renderHtml(report) {
       font-size: 12px;
       font-weight: 700;
     }
-    h1 { max-width: 1040px; margin: 0 0 12px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
+    h1 { max-width: none; margin: 0 0 12px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
     h2 { margin: 7px 0 8px; font-size: 23px; line-height: 1.18; letter-spacing: 0; }
     p { margin: 0 0 12px; color: var(--muted); max-width: 950px; }
+    header p { max-width: none; }
     .path {
-      display: inline-block;
+      display: block;
       margin-top: 8px;
       padding: 8px 10px;
       border: 1px solid var(--line);
       background: var(--panel);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 13px;
-      max-width: 100%;
+      width: 100%;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .proof-line {
       display: grid;
@@ -382,6 +384,7 @@ function renderHtml(report) {
       color: var(--ink);
       font-weight: 700;
       min-height: 48px;
+      white-space: nowrap;
     }
     .summary-band {
       display: grid;
@@ -518,8 +521,17 @@ function renderHtml(report) {
       padding-top: 18px;
     }
     @media (max-width: 860px) {
-      main { padding: 28px 16px 40px; }
-      h1 { font-size: 34px; }
+      body { padding: 0; }
+      main { width: 358px; max-width: none; margin: 0 16px; padding: 28px 0 40px; }
+      h1 { font-size: 30px; }
+      header p, .proof-line span { white-space: normal; }
+      .path {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-all;
+      }
       .proof-line, .summary-band, .metrics, .receipt-grid, .catch-panel, .live-row {
         grid-template-columns: 1fr;
       }
@@ -527,21 +539,24 @@ function renderHtml(report) {
       .checkpoint-body { padding: 16px; }
       .checkpoint-topline { align-items: flex-start; flex-direction: column; }
     }
+    @media (max-width: 374px) {
+      main { width: calc(100vw - 32px); }
+    }
   </style>
 </head>
 <body>
   <main>
     <header>
       <span class="eyebrow">Severe local proof - Receipt before execution</span>
-      <h1>OpenClaw Severe Scenario Proof Pack</h1>
-      <p>${escapeHtml(report.scenario.developer_problem)}</p>
-      <span class="path">${escapeHtml(report.path)}</span>
+      <h1>Severe Scenario Proof</h1>
+      <p>A five-checkpoint computer-use incident: export data, upload externally, notify a channel, delete the copy, and close the workflow.</p>
+      <span class="path">Preflight -&gt; Receipt -&gt; Developer route</span>
       <div class="proof-line" aria-label="Receipt path">
         <span>Agent intent</span>
         <span>Action Card</span>
         <span>Decision Receipt</span>
         <span>Developer route</span>
-        <span>No downstream execution</span>
+        <span>No execution</span>
       </div>
     </header>
     <section class="summary-band" aria-label="Scenario summary">

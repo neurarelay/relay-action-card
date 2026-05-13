@@ -307,7 +307,7 @@ function renderHtml(report) {
       --stop: #b42318;
       --proceed: #0d7c59;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; min-width: 0; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -328,9 +328,10 @@ function renderHtml(report) {
       font-size: 12px;
       font-weight: 700;
     }
-    h1 { max-width: 1040px; margin: 0 0 12px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
+    h1 { max-width: none; margin: 0 0 12px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
     h2 { margin: 7px 0 8px; font-size: 23px; line-height: 1.18; letter-spacing: 0; }
     p { margin: 0 0 12px; color: var(--muted); max-width: 960px; }
+    header p { max-width: none; }
     .path, code {
       display: block;
       padding: 8px 10px;
@@ -341,7 +342,7 @@ function renderHtml(report) {
       max-width: 100%;
       overflow-wrap: anywhere;
     }
-    .path { display: inline-block; margin-top: 8px; background: var(--panel); }
+    .path { display: block; width: 100%; margin-top: 8px; background: var(--panel); word-break: break-word; }
     .proof-line {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -355,6 +356,7 @@ function renderHtml(report) {
       color: var(--ink);
       font-weight: 700;
       min-height: 48px;
+      white-space: nowrap;
     }
     .summary {
       display: grid;
@@ -423,12 +425,24 @@ function renderHtml(report) {
     .flow strong, .receipt strong { display: block; overflow-wrap: anywhere; }
     footer { margin-top: 28px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
     @media (max-width: 860px) {
-      main { padding: 28px 16px 40px; }
-      h1 { font-size: 34px; }
+      body { padding: 0; }
+      main { width: 358px; max-width: none; margin: 0 16px; padding: 28px 0 40px; }
+      h1 { font-size: 30px; }
+      header p, .proof-line span { white-space: normal; }
+      .path {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-all;
+      }
       .proof-line, .summary, .metrics, .flow, .receipt { grid-template-columns: 1fr; }
       .queue-row { grid-template-columns: 42px 1fr; }
       .row-body { padding: 16px; }
       .row-topline { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 374px) {
+      main { width: calc(100vw - 32px); }
     }
   </style>
 </head>
@@ -436,15 +450,15 @@ function renderHtml(report) {
   <main>
     <header>
       <span class="eyebrow">Runtime-style preflight queue - no local execution</span>
-      <h1>OpenClaw Severe Preflight Queue</h1>
-      <p>${escapeHtml(report.scenario.developer_problem)}</p>
-      <span class="path">${escapeHtml(report.path)}</span>
+      <h1>Severe Preflight Queue</h1>
+      <p>The same five-checkpoint incident routed through adapter preflight before any local computer-use execution.</p>
+      <span class="path">Adapter preflight -&gt; Receipt -&gt; Developer route</span>
       <div class="proof-line" aria-label="Queue path">
-        <span>Agent proposes action</span>
+        <span>Agent action</span>
         <span>Adapter preflight</span>
         <span>Action Card</span>
         <span>Receipt route</span>
-        <span>Developer-owned decision</span>
+        <span>Developer route</span>
       </div>
     </header>
     <section class="summary" aria-label="Queue summary">

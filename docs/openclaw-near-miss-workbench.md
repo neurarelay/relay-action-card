@@ -19,9 +19,9 @@ This is a safe local projection. It does not send email, submit browser forms, d
 
 | Journey | Severe problem | What the receipt prevents |
 | --- | --- | --- |
-| Customer Data Exfiltration Near-Miss | An agent tries to export customer data and submit it externally while resolving support. | Customer-data leakage before export or browser submit. |
-| Production Deployment Near-Miss | A coding agent tries to migrate and deploy production without enough release authority. | Production damage before migration or deploy. |
-| Expired Delegated Authority Near-Miss | An agent acts on yesterday's authority after delegation expired. | Stale authority silently becoming execution permission. |
+| Customer Data Exfiltration | An agent tries to export customer data and submit it externally while resolving support. | Customer-data leakage before export or browser submit. |
+| Production Deployment | A coding agent tries to migrate and deploy production without enough release authority. | Production damage before migration or deploy. |
+| Expired Delegated Authority | An agent acts on yesterday's authority after delegation expired. | Stale authority silently becoming execution permission. |
 
 ## Run
 
