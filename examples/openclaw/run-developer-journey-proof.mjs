@@ -68,6 +68,12 @@ const localSteps = [
     parse: true,
   },
   {
+    id: "severe_scenario",
+    label: "Generate severe end-to-end scenario proof",
+    args: ["examples/openclaw/run-severe-scenario-proof.mjs", "--json"],
+    parse: true,
+  },
+  {
     id: "dry_run",
     label: "Dry-run all refs-only Action Card fixtures",
     args: ["examples/openclaw/run-action-receipt-kit.mjs", "--dry-run", "--json"],
@@ -88,6 +94,11 @@ const localSteps = [
     id: "verify_workspace_surface",
     label: "Verify OpenClaw OS workspace receipt surface",
     args: ["scripts/verify-openclaw-workspace-surface.mjs"],
+  },
+  {
+    id: "verify_severe_scenario",
+    label: "Verify severe scenario proof contract",
+    args: ["scripts/verify-openclaw-severe-scenario-proof.mjs"],
   },
   {
     id: "verify_kit",
@@ -123,6 +134,11 @@ const localSteps = [
     id: "test_workspace_surface",
     label: "Run workspace receipt surface unit tests",
     args: ["--test", "tests/openclaw-workspace-surface.test.mjs"],
+  },
+  {
+    id: "test_severe_scenario",
+    label: "Run severe scenario proof unit tests",
+    args: ["--test", "tests/openclaw-severe-scenario-proof.test.mjs"],
   },
   {
     id: "test_preflight",
@@ -163,6 +179,7 @@ for (const definition of [...localSteps, ...liveSteps]) {
 
 const workbench = steps.find((step) => step.id === "workbench")?.output;
 const workspaceSurface = steps.find((step) => step.id === "workspace_surface")?.output;
+const severeScenario = steps.find((step) => step.id === "severe_scenario")?.output;
 const dryRun = steps.find((step) => step.id === "dry_run")?.output;
 const preflightDryRun = steps.find((step) => step.id === "preflight_dry_run")?.output;
 const liveReceipt = steps.find((step) => step.id === "live_receipt")?.output;
@@ -186,12 +203,17 @@ const output = {
     workspace_surface_html: rel(workspaceSurface?.files?.html),
     workspace_surface_markdown: rel(workspaceSurface?.files?.markdown),
     workspace_surface_json: rel(workspaceSurface?.files?.json),
+    severe_scenario_html: rel(severeScenario?.files?.html),
+    severe_scenario_markdown: rel(severeScenario?.files?.markdown),
+    severe_scenario_json: rel(severeScenario?.files?.json),
   },
   local_summary: {
     journeys: workbench?.count?.journeys ?? null,
     steps: workbench?.count?.steps ?? null,
     workspace_actions: workspaceSurface?.count?.actions ?? null,
     workspace_decisions: workspaceSurface?.count?.decisions ?? null,
+    severe_checkpoints: severeScenario?.count?.checkpoints ?? null,
+    severe_decisions: severeScenario?.count?.decisions ?? null,
     decisions: workbench?.count?.decisions ?? null,
     dry_run_fixtures: dryRun?.count ?? null,
     preflight_route: preflightDryRun?.result?.route ?? null,
@@ -226,8 +248,10 @@ const output = {
   next_steps: [
     "Open artifacts/openclaw-near-miss-workbench/report.html",
     "Open artifacts/openclaw-workspace-decision-surface/report.html",
+    "Open artifacts/openclaw-severe-scenario-proof/report.html",
     "Read docs/openclaw-developer-journey.md",
     "Read docs/openclaw-os-decision-receipt-surface.md",
+    "Read docs/openclaw-severe-scenario-proof-pack.md",
     "Use examples/openclaw/preflight-adapter before local runtime execution",
   ],
 };
@@ -240,6 +264,7 @@ if (jsonOutput) {
   console.log(`Mode: ${output.mode}`);
   console.log(`Workbench: ${output.artifacts.workbench_html}`);
   console.log(`Workspace surface: ${output.artifacts.workspace_surface_html}`);
+  console.log(`Severe scenario: ${output.artifacts.severe_scenario_html}`);
   console.log(`Dry-run fixtures: ${output.local_summary.dry_run_fixtures}`);
   console.log(
     liveReceipts

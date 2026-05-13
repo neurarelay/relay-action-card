@@ -101,9 +101,10 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 - [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md): Action Receipt Kit, public-safe fixtures in `examples/openclaw/action-cards`, starter skill at `skills/openclaw/neura-action-card`, verifier, unit tests, and live E2E receipt test.
 - [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md): visual proof for customer data exfiltration, production deployment, and expired delegated authority near-misses.
 - [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md): OpenClaw OS Decision Receipt Surface for generated app deploys, artifact publishing, scheduled crons, workflow monitor interventions, session memory writes, browser direct-control submits, and shell/file operations.
+- [`docs/openclaw-severe-scenario-proof-pack.md`](docs/openclaw-severe-scenario-proof-pack.md): severe end-to-end computer-use proof for customer data export, external browser submit, completion message, file deletion, and workflow close.
 - [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md): final approval packet for an official OpenClaw / ClawHub submission or package publication decision.
 
-The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`.
+The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`. The Severe Scenario Proof Pack adds a single five-checkpoint incident path in `severe-scenario-proof/` with local HTML, Markdown, JSON, verifier, and unit test coverage.
 
 Live OpenClaw receipt output includes `developer_route` and `developer_next_step`; `proceed` only becomes `ready_for_developer_owned_execution` when delegated authority is Registry-backed and ready.
 
@@ -141,6 +142,12 @@ Open the workspace-surface report at `artifacts/openclaw-workspace-decision-surf
 npm run openclaw:workspace-proof
 ```
 
+Open the severe scenario report at `artifacts/openclaw-severe-scenario-proof/report.html`, or generate it directly:
+
+```bash
+npm run openclaw:severe-proof
+```
+
 Optional live receipt check:
 
 ```bash
@@ -153,6 +160,8 @@ Run the full local checks:
 npm run verify:openclaw-workbench
 npm run openclaw:dry-run
 npm run verify:openclaw-action-receipt-kit
+npm run verify:openclaw-severe-proof
+npm run test:openclaw-severe-proof
 npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 ```
@@ -164,10 +173,12 @@ Release-candidate snapshot:
 | Full developer journey proof | `npm run openclaw:proof` |
 | Local near-miss visual journey | `npm run openclaw:workbench` |
 | Workspace Decision Receipt surface | `npm run openclaw:workspace-proof` |
+| Severe scenario proof pack | `npm run openclaw:severe-proof` |
 | Local contract and refs-only fixtures | `npm run openclaw:dry-run` |
 | Live Relay Decision Receipts | `npm run openclaw:receipts` |
 | Workbench verifier | `npm run verify:openclaw-workbench` |
 | Workspace surface verifier | `npm run verify:openclaw-workspace-surface` |
+| Severe proof verifier | `npm run verify:openclaw-severe-proof` |
 | Developer journey verifier | `npm run verify:openclaw-developer-journey` |
 | Published npm RC verifier | `npm run verify:openclaw-npm-package` |
 | Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
@@ -556,6 +567,7 @@ examples/
     run-developer-journey-proof.mjs
     run-near-miss-workbench.mjs
     run-preflight-adapter.mjs
+    run-severe-scenario-proof.mjs
     run-workspace-decision-surface.mjs
     action-cards/
       send-message.json
@@ -568,6 +580,8 @@ examples/
       data-export.json
     near-miss-workbench/
       scenarios.json
+    severe-scenario-proof/
+      scenario.json
     workspace-surface/
       scenarios.json
     preflight-adapter/
@@ -607,6 +621,7 @@ scripts/
   verify-openclaw-plugin-rc.mjs
   verify-openclaw-submission-readiness.mjs
   verify-openclaw-runtime-approval.mjs
+  verify-openclaw-severe-scenario-proof.mjs
   verify-openclaw-workspace-surface.mjs
 docs/
   assets/
@@ -624,6 +639,7 @@ docs/
   openclaw-developer-journey.md
   openclaw-near-miss-workbench.md
   openclaw-os-decision-receipt-surface.md
+  openclaw-severe-scenario-proof-pack.md
   openclaw-clawhub-submission-readiness.md
   openclaw-preflight-adapter.md
   openclaw-plugin-release-candidate.md
@@ -634,6 +650,7 @@ tests/
   openclaw-action-receipt-kit.e2e.mjs
   openclaw-developer-journey.test.mjs
   openclaw-near-miss-workbench.test.mjs
+  openclaw-severe-scenario-proof.test.mjs
   openclaw-preflight-adapter.test.mjs
   openclaw-preflight-adapter.e2e.mjs
   openclaw-workspace-surface.test.mjs
@@ -656,6 +673,7 @@ npm run verify:sdk-authority-routing
 npm run verify:a2a-authenticated-client
 npm run verify:openclaw-action-receipt-kit
 npm run verify:openclaw-developer-journey
+npm run verify:openclaw-severe-proof
 npm run verify:openclaw-workspace-surface
 ```
 
