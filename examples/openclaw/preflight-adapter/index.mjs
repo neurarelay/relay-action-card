@@ -5,9 +5,10 @@ export { createNeuraPreflightAdapter } from "./adapter.mjs";
 export const metadata = {
   id: "neura-relay-preflight-adapter",
   name: "Neura Relay Preflight Adapter",
-  version: "0.1.0-rc.2",
+  version: "0.1.0",
   packageName: "@neurarelay/openclaw-preflight-adapter",
-  releaseCandidateOnly: true,
+  releaseCandidateOnly: false,
+  stableRelease: true,
   officialOpenClawOrClawHubClaim: false,
   officialSubmissionRequiresRomanApproval: true,
   executionOwner: "developer_runtime",

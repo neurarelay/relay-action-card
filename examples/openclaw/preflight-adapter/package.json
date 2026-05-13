@@ -1,9 +1,9 @@
 {
   "name": "@neurarelay/openclaw-preflight-adapter",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
-  "description": "Claim-safe OpenClaw preflight adapter release candidate for Neura Relay Decision Receipts.",
+  "description": "Claim-safe OpenClaw preflight adapter for Neura Relay Decision Receipts.",
   "license": "MIT",
   "main": "./index.mjs",
   "sideEffects": false,
@@ -38,7 +38,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "tag": "rc"
+    "tag": "latest"
   },
   "exports": {
     ".": "./index.mjs",
@@ -58,13 +58,14 @@
       "pluginSdkVersion": "2026.3.24-beta.2"
     },
     "install": {
-      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2",
+      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.3.24-beta.2"
     }
   },
   "neura": {
-    "releaseCandidateOnly": true,
+    "releaseCandidateOnly": false,
+    "stableRelease": true,
     "officialOpenClawOrClawHubClaim": false,
     "officialSubmissionRequiresRomanApproval": true,
     "downstreamExecutionByNeura": false,

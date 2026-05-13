@@ -1,12 +1,12 @@
 # OpenClaw Runtime Verification And Publish Approval Packet
 
-Status: runtime-verified locally; npm RC published; OpenClaw / ClawHub publish/submission approval required
+Status: runtime-verified locally; stable npm package published; OpenClaw / ClawHub publish/submission approval required
 Date: 2026-05-12
 
-This packet records the actual OpenClaw / ClawHub release gate for the npm release candidate:
+This packet records the actual OpenClaw / ClawHub release gate for the stable npm package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
+@neurarelay/openclaw-preflight-adapter@0.1.0
 ```
 
 It does not publish, submit, list, approve, or partner the plugin through OpenClaw / ClawHub. It exists so Roman can make a clean OpenClaw / ClawHub publish/submission decision from verified facts.
@@ -37,7 +37,7 @@ Runtime inspection confirmed:
 
 - plugin id: `neura-relay-preflight-adapter`
 - package name: `@neurarelay/openclaw-preflight-adapter`
-- version: `0.1.0-rc.2`
+- version: `0.1.0`
 - status: `loaded`
 - enabled: `true`
 - runtime imported: `true`
@@ -46,13 +46,13 @@ Runtime inspection confirmed:
 
 ## Verified npm Consumer Path
 
-The npm release candidate can be installed by an outside developer:
+The stable npm package can be installed by an outside developer:
 
 ```bash
-npm install @neurarelay/openclaw-preflight-adapter@rc
+npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-Use `@rc` explicitly. Bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
+This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
 
 The public package surface is:
 
@@ -89,7 +89,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
   "name": "@neurarelay/openclaw-preflight-adapter",
   "displayName": "Neura Relay Preflight Adapter",
   "family": "code-plugin",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.0",
   "files": 6
 }
 ```
@@ -99,12 +99,12 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
 Do not run this without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0-rc.2 --tags rc --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
 ## Public-Safe Description
 
-Neura Relay Preflight Adapter is a release-candidate OpenClaw plugin surface for developers who want a Decision Receipt before local autonomous computer-use actions execute. It converts refs-only preflight actions into Action Cards, calls Neura Relay, and returns a route such as proceed, revise, human review, or stop. The developer runtime keeps execution ownership.
+Neura Relay Preflight Adapter is an OpenClaw-style plugin surface for developers who want a Decision Receipt before local autonomous computer-use actions execute. It converts refs-only preflight actions into Action Cards, calls Neura Relay, and returns a route such as proceed, revise, human review, or stop. The developer runtime keeps execution ownership.
 
 ## Boundaries
 

@@ -218,14 +218,14 @@ npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The npm release candidate is available as `@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2` under the `rc` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the final approval packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
+The stable npm package is available as `@neurarelay/openclaw-preflight-adapter@0.1.0` under the `latest` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the final approval packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
 
-The intentional adoption path is the explicit `@rc` install below. Bare `npm install @neurarelay/openclaw-preflight-adapter` may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
+The intentional adoption path is the stable install below. The old `@rc` tag remains available only for release-candidate history.
 
 Install the adapter from npm:
 
 ```bash
-npm install @neurarelay/openclaw-preflight-adapter@rc
+npm install @neurarelay/openclaw-preflight-adapter
 ```
 
 Use the public package surface:

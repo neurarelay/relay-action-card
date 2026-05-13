@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const installSpec = process.env.NEURA_OPENCLAW_NPM_SPEC ?? `${packageName}@rc`;
+const installSpec = process.env.NEURA_OPENCLAW_NPM_SPEC ?? packageName;
 const failures = [];
 const warnings = [];
 
@@ -42,11 +42,11 @@ if (view.status !== 0) failures.push(`npm_view_failed_${view.stderr || view.stdo
 
 if (registry) {
   if (registry.name !== packageName) failures.push("registry_wrong_package_name");
-  if (!registry.version?.includes("-rc.")) warnings.push("registry_version_is_not_rc");
-  if (!registry["dist-tags"]?.rc?.includes("-rc.")) failures.push("registry_rc_tag_missing");
-  if (registry["dist-tags"]?.latest?.includes("-rc.")) {
-    warnings.push("registry_latest_points_to_release_candidate_until_stable_version_exists");
+  if (registry.version !== localPackage.version) failures.push("registry_version_not_stable_local_version");
+  if (registry["dist-tags"]?.latest !== localPackage.version) {
+    failures.push("registry_latest_tag_not_stable_local_version");
   }
+  if (!registry["dist-tags"]?.rc?.includes("-rc.")) warnings.push("registry_rc_tag_missing_or_not_rc");
 }
 
 const consumerDir = mkdtempSync(join(tmpdir(), "neura-openclaw-npm-consumer-"));
@@ -153,8 +153,8 @@ if (registryPack.status !== 0) {
         publishedPackageReadme = {
           has_current_version: readme.includes(localPackage.version),
           has_install_heading: readme.includes("Install From npm"),
-          has_explicit_rc_install: readme.includes("npm install @neurarelay/openclaw-preflight-adapter@rc"),
-          has_rc_warning: readme.includes("Use `@rc` explicitly"),
+          has_stable_install: readme.includes("npm install @neurarelay/openclaw-preflight-adapter"),
+          has_stable_release_note: readme.includes("stable npm install path"),
           has_claim_boundary: readme.includes("not an official OpenClaw or ClawHub"),
         };
         for (const [key, ok] of Object.entries(publishedPackageReadme)) {
@@ -165,9 +165,9 @@ if (registryPack.status !== 0) {
   }
 }
 
-if (proof?.packageVersion && registry?.["dist-tags"]?.rc) {
-  if (proof.packageVersion !== registry["dist-tags"].rc) {
-    failures.push("installed_version_does_not_match_registry_rc_tag");
+if (proof?.packageVersion && registry?.["dist-tags"]?.latest) {
+  if (proof.packageVersion !== registry["dist-tags"].latest) {
+    failures.push("installed_version_does_not_match_registry_latest_tag");
   }
 }
 

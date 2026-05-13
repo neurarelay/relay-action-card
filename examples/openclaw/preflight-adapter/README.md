@@ -1,9 +1,9 @@
-# Neura Relay Preflight Adapter Release Candidate
+# Neura Relay Preflight Adapter
 
-This folder contains the claim-safe OpenClaw-style preflight adapter release candidate published to npm:
+This folder contains the claim-safe OpenClaw-style preflight adapter published to npm:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
+@neurarelay/openclaw-preflight-adapter@0.1.0
 ```
 
 It shows how a local autonomous computer-use runtime can call:
@@ -17,10 +17,10 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 ## Install From npm
 
 ```bash
-npm install @neurarelay/openclaw-preflight-adapter@rc
+npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-Use `@rc` explicitly. Bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
+This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
 
 ```js
 import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";

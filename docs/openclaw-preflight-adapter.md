@@ -1,6 +1,6 @@
 # OpenClaw-Style Preflight Adapter v0.1
 
-Status: npm release candidate published; OpenClaw / ClawHub submission remains approval-gated
+Status: stable npm package published; OpenClaw / ClawHub submission remains approval-gated
 Date: 2026-05-12
 
 This adapter turns the Action Receipt Kit into a plugin-ready runtime contract:
@@ -9,13 +9,13 @@ This adapter turns the Action Receipt Kit into a plugin-ready runtime contract:
 beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route
 ```
 
-It is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP, or A2A integration, listing, approval, or partnership. It is an OpenClaw-style release candidate for developers who want to route proposed local actions through Neura before execution.
+It is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP, or A2A integration, listing, approval, or partnership. It is an OpenClaw-style package for developers who want to route proposed local actions through Neura before execution.
 
 ## Official Path Readiness
 
 OpenClaw's current public docs describe native plugins as package-scoped extensions with a native plugin manifest, package `openclaw.extensions`, an entry object that exposes `register(api)`, and CLI install/publish flows for ClawHub packages.
 
-This repo now carries a package-ready release candidate shaped for that path:
+This repo now carries a package-ready stable adapter shaped for that path:
 
 | Surface | File |
 | --- | --- |
@@ -26,7 +26,7 @@ This repo now carries a package-ready release candidate shaped for that path:
 | Refs-only fixture | `examples/openclaw/preflight-adapter/fixtures/send-message.preflight.json` |
 | CLI runner | `examples/openclaw/run-preflight-adapter.mjs` |
 | Verifier | `scripts/verify-openclaw-preflight-adapter.mjs` |
-| Release-candidate verifier | `scripts/verify-openclaw-plugin-rc.mjs` |
+| Stable package verifier | `scripts/verify-openclaw-plugin-rc.mjs` |
 | Runtime approval verifier | `scripts/verify-openclaw-runtime-approval.mjs` |
 | Unit test | `tests/openclaw-preflight-adapter.test.mjs` |
 | Live E2E test | `tests/openclaw-preflight-adapter.e2e.mjs` |
@@ -40,10 +40,10 @@ Current public docs reviewed for this shape:
 - `https://docs.openclaw.ai/plugins/building-plugins`
 - `https://documentation.openclaw.ai/clawhub`
 
-Published npm release candidate:
+Published stable npm package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0-rc.2
+@neurarelay/openclaw-preflight-adapter@0.1.0
 ```
 
 Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.
@@ -51,10 +51,10 @@ Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.
 Install from npm:
 
 ```bash
-npm install @neurarelay/openclaw-preflight-adapter@rc
+npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-Use `@rc` explicitly. Bare npm installs may resolve npm's default `latest` tag, which is not the stable path until a stable package exists.
+This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
 
 Use the package surface:
 

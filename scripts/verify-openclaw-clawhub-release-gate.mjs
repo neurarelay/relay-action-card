@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.0-rc.2";
+const packageVersion = "0.1.0";
 const issueUrl = "https://github.com/openclaw/clawhub/issues/2190";
 const failures = [];
 const steps = [];
@@ -175,8 +175,8 @@ function verifyPackageSurface() {
     package_name: adapterPackage.name === packageName,
     package_version: adapterPackage.version === packageVersion,
     package_publishable: adapterPackage.private === false,
-    package_public_rc: adapterPackage.publishConfig?.access === "public" &&
-      adapterPackage.publishConfig?.tag === "rc",
+    package_public_stable: adapterPackage.publishConfig?.access === "public" &&
+      adapterPackage.publishConfig?.tag === "latest",
     package_runtime: adapterPackage.type === "module" &&
       adapterPackage.engines?.node === ">=22.14.0",
     package_sdk: adapterPackage.dependencies?.["@neurarelay/sdk"] === "0.1.0",
@@ -253,7 +253,7 @@ function runExactClawHubDryRun() {
     "--version",
     packageVersion,
     "--tags",
-    "rc",
+    "stable",
     "--source-repo",
     "neurarelay/relay-action-card",
     "--source-path",
@@ -308,7 +308,7 @@ const npmPackage = npmRun("verify:openclaw-npm-package", [], {
   expectJson: true,
   summarize: (payload) => ({
     installSpec: payload?.install_spec,
-    registryRc: payload?.registry?.["dist-tags"]?.rc,
+    registryLatest: payload?.registry?.["dist-tags"]?.latest,
     cleanConsumerInstall: payload?.clean_consumer?.install,
   }),
 });
@@ -381,7 +381,7 @@ const report = {
     family: "code-plugin",
     display_name: "Neura Relay Preflight Adapter",
     runtime_tool: "neura_relay_preflight_action",
-    npm_install: `${packageName}@rc`,
+    npm_install: packageName,
     openclaw_install: `clawhub:${packageName}@${packageVersion}`,
   },
   proof_summary: {
@@ -439,7 +439,7 @@ const report = {
     "--version",
     packageVersion,
     "--tags",
-    "rc",
+    "stable",
     "--source-repo",
     "neurarelay/relay-action-card",
     "--source-path",

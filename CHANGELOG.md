@@ -1,5 +1,12 @@
 # Changelog
 
+## OpenClaw Preflight Adapter stable npm package - 2026-05-13
+
+- Publishes `@neurarelay/openclaw-preflight-adapter@0.1.0` as the stable npm package under the `latest` tag.
+- Keeps npm `rc` on `0.1.0-rc.2` for release-candidate history.
+- Updates the adapter package metadata, README, verification gates, and ClawHub dry-run packet to use the stable npm install path.
+- Preserves developer-owned execution, no private payload exposure, no public token/key issuance, and no official OpenClaw or ClawHub listing, approval, or partnership claim.
+
 ## OpenClaw Action Receipt Kit v0.1 RC - 2026-05-12
 
 This release-candidate kit gives autonomous computer-use developers a copyable way to request a Neura Decision Receipt before local agent actions execute.
