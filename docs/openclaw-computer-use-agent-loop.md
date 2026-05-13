@@ -25,6 +25,14 @@ npm run verify:openclaw-computer-use-loop
 npm run test:openclaw-computer-use-loop
 ```
 
+The command writes a local transcript for visual review:
+
+```text
+artifacts/openclaw-computer-use-agent-loop/transcript.html
+artifacts/openclaw-computer-use-agent-loop/transcript.md
+artifacts/openclaw-computer-use-agent-loop/transcript.json
+```
+
 Live mode requests Relay Decision Receipts but still does not execute the local actions:
 
 ```bash
@@ -41,4 +49,3 @@ The example records `execution_attempted: false` for every checkpoint. The devel
 - no public token or key issuance
 - no Registry auto-approval
 - developer-owned execution only
-

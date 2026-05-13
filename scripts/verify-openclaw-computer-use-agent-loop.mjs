@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import { spawnSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -16,7 +17,12 @@ function run(command, args) {
   });
 }
 
-const result = run("node", ["examples/openclaw/integrations/computer-use-agent-loop.mjs", "--json"]);
+const outDir = mkdtempSync(join(tmpdir(), "neura-openclaw-computer-use-loop-"));
+const result = run("node", [
+  "examples/openclaw/integrations/computer-use-agent-loop.mjs",
+  `--out=${outDir}`,
+  "--json",
+]);
 let payload = null;
 
 if (result.status !== 0) {
@@ -34,6 +40,9 @@ if (payload) {
   if (payload.mode !== "dry_run") failures.push("payload_not_dry_run");
   if (payload.loop?.planned_actions !== 3) failures.push("wrong_planned_action_count");
   if (payload.loop?.execution_attempted !== false) failures.push("loop_attempted_execution");
+  if (!payload.artifacts?.html?.endsWith("transcript.html")) failures.push("missing_html_artifact_ref");
+  if (!payload.artifacts?.markdown?.endsWith("transcript.md")) failures.push("missing_markdown_artifact_ref");
+  if (!payload.artifacts?.json?.endsWith("transcript.json")) failures.push("missing_json_artifact_ref");
   if (payload.boundaries?.official_openclaw_or_clawhub_claim !== false) {
     failures.push("claim_boundary_changed");
   }
@@ -51,6 +60,39 @@ if (payload) {
     if (checkpoint.execution_owner !== "developer_runtime") failures.push(`${checkpoint.action_id}_owner`);
     if (checkpoint.loop_state !== "paused_before_execution") failures.push(`${checkpoint.action_id}_state`);
     if (!checkpoint.route?.includes("before_execution")) failures.push(`${checkpoint.action_id}_route`);
+  }
+}
+
+for (const file of ["transcript.html", "transcript.md", "transcript.json"]) {
+  if (!existsSync(join(outDir, file))) failures.push(`missing_artifact_${file}`);
+}
+
+if (existsSync(join(outDir, "transcript.html"))) {
+  const html = readFileSync(join(outDir, "transcript.html"), "utf8");
+  for (const required of [
+    "OpenClaw-Style Agent Loop Transcript",
+    "Planned actions",
+    "Execution attempted",
+    "draft support reply",
+    "remove generated export",
+    "publish agent plugin",
+    "paused_before_execution",
+    "not an official OpenClaw or ClawHub integration",
+    "Neura does not execute downstream actions",
+  ]) {
+    if (!html.includes(required)) failures.push(`html_missing_${required}`);
+  }
+}
+
+if (existsSync(join(outDir, "transcript.md"))) {
+  const markdown = readFileSync(join(outDir, "transcript.md"), "utf8");
+  for (const required of [
+    "OpenClaw-Style Agent Loop Transcript",
+    "Receipt route",
+    "Execution attempted: false",
+    "Developer next step",
+  ]) {
+    if (!markdown.includes(required)) failures.push(`markdown_missing_${required}`);
   }
 }
 
@@ -80,6 +122,7 @@ console.log(
         execution_attempted: checkpoint.execution_attempted,
         loop_state: checkpoint.loop_state,
       })),
+      artifacts: payload?.artifacts,
       boundaries: {
         official_openclaw_or_clawhub_claim: false,
         downstream_execution_by_neura: false,
@@ -93,4 +136,3 @@ console.log(
 );
 
 if (failures.length > 0) process.exit(1);
-

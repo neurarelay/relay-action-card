@@ -1,6 +1,9 @@
 import { spawnSync } from "node:child_process";
 import assert from "node:assert/strict";
 import test from "node:test";
+import { existsSync, mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 function runLoop(...args) {
   return spawnSync("node", ["examples/openclaw/integrations/computer-use-agent-loop.mjs", ...args], {
@@ -10,7 +13,8 @@ function runLoop(...args) {
 }
 
 test("generic computer-use agent loop pauses before severe local execution", () => {
-  const result = runLoop("--json");
+  const outDir = mkdtempSync(join(tmpdir(), "neura-loop-test-"));
+  const result = runLoop(`--out=${outDir}`, "--json");
   assert.equal(result.status, 0, result.stderr || result.stdout);
 
   const payload = JSON.parse(result.stdout);
@@ -33,5 +37,9 @@ test("generic computer-use agent loop pauses before severe local execution", () 
     assert.equal(checkpoint.route, "relay_receipt_required_before_execution");
     assert.equal(checkpoint.receipt_id, null);
   }
-});
 
+  assert.ok(payload.artifacts.html.endsWith("transcript.html"));
+  assert.ok(existsSync(join(outDir, "transcript.html")));
+  assert.ok(existsSync(join(outDir, "transcript.md")));
+  assert.ok(existsSync(join(outDir, "transcript.json")));
+});

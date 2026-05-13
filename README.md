@@ -226,6 +226,12 @@ Open the severe preflight queue at `artifacts/openclaw-severe-preflight-queue/tr
 npm run openclaw:severe-preflight
 ```
 
+Open the generic computer-use loop transcript at `artifacts/openclaw-computer-use-agent-loop/transcript.html`, or generate it directly:
+
+```bash
+npm run openclaw:computer-use-loop
+```
+
 Optional live receipt check:
 
 ```bash
