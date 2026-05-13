@@ -12,9 +12,9 @@ The demo runs three severe local-agent moments through the Neura preflight adapt
 
 | Scenario | Proposed action | What it prevents |
 | --- | --- | --- |
-| Send customer message | `message.send` | External customer communication leaving the runtime without receipt review |
-| Delete local file | `file.delete` | Source or user data being removed before authority and retention refs are checked |
-| Publish package | `package.publish` | Public distribution without version, provenance, approval, and claim-boundary evidence |
+| Customer message | `message.send` | Unreviewed external customer communication |
+| File deletion | `file.delete` | Unauthorized source or user-data removal |
+| Package publish | `package.publish` | Public release without approval, provenance, or claim checks |
 
 By default this is a dry run. It converts each refs-only preflight action into an Action Card and returns the route:
 
