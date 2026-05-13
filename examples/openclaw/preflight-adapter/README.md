@@ -6,10 +6,10 @@ This folder contains the claim-safe OpenClaw-style preflight adapter published t
 @neurarelay/openclaw-preflight-adapter@0.1.0
 ```
 
-The same artifact is currently mirrored to ClawHub's community channel as:
+The ClawHub community metadata/readme correction is published as:
 
 ```text
-@rpelevin/neura-relay-preflight-adapter@0.1.0
+@rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
 That founder-publisher package is a temporary community fallback while
@@ -35,7 +35,7 @@ This is the stable npm install path. The old `@rc` tag remains available only fo
 When installing the current ClawHub community fallback, pin the published version:
 
 ```bash
-openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.0
+openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
 ```js

@@ -305,7 +305,7 @@ npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The stable npm package is available as `@neurarelay/openclaw-preflight-adapter@0.1.0` under the `latest` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the final approval packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.
+The stable npm package is available as `@neurarelay/openclaw-preflight-adapter@0.1.0` under the `latest` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the current ClawHub truth packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). The ClawHub community fallback is published as `@rpelevin/neura-relay-preflight-adapter@0.1.1` while `openclaw/clawhub#2190` remains the canonical namespace request. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or canonical namespace claim exists.
 
 The intentional adoption path is the stable install below. The old `@rc` tag remains available only for release-candidate history.
 

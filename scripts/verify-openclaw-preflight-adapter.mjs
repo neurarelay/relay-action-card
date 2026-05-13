@@ -198,7 +198,7 @@ const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
   "beforeAction(preflightAction)",
   "not an official OpenClaw or ClawHub",
-  "@rpelevin/neura-relay-preflight-adapter@0.1.0",
+  "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
   "neura_relay_preflight_action",
   "openclaw.plugin.json",

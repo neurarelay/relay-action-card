@@ -233,7 +233,7 @@ const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
   "@neurarelay/openclaw-preflight-adapter",
   "stable npm install path",
-  "@rpelevin/neura-relay-preflight-adapter@0.1.0",
+  "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "neura_relay_preflight_action",
   "npm run openclaw:plugin:pack:dry-run",
   "not an official OpenClaw or ClawHub",

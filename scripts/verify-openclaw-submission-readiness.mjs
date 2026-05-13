@@ -165,7 +165,11 @@ requireIncludes("submission_packet", packet, [
   "https://github.com/openclaw/clawhub/issues/2190",
   "founder-publisher fallback is published to ClawHub's community channel",
   "no official OpenClaw / ClawHub approval or listing claim",
-  "ClawHub release id: `rd71v95v9mqw6xebweek19qb6x86mfps`",
+  "Current ClawHub fallback version: `0.1.1`",
+  "Current ClawHub source commit: `794f1d8c5088312b99806fe61b5ae2eddb724723`",
+  "Current ClawHub release id: `rd75hckdpqz0bxee3g8e18g18s86ncm2`",
+  "Current ClawHub artifact SHA-256: `f6b9e10753110b303d0ef4d69dc99671f1b2556020cf07b8a2ac9bab7d9fb9ea`",
+  "toolNames=[\"neura_relay_preflight_action\"]",
   "@rpelevin/neura-relay-preflight-adapter",
   "founder-led publication under Roman's established publisher handle",
   "canonical `@neurarelay` publisher namespace",
@@ -180,6 +184,7 @@ requireIncludes("submission_packet", packet, [
   "Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.1.0.",
   "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub with the public-safe copy in docs/openclaw-clawhub-submission-readiness.md.",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback",
+  "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.1 to ClawHub as a community founder-publisher metadata/readme correction",
 ]);
 rejectUnsafe("submission_packet", packet);
 
@@ -190,7 +195,8 @@ requireIncludes("readme", readme, [
   "npm run verify:openclaw-clawhub-release",
   "verify-openclaw-founder-clawhub-publisher.mjs",
   "@neurarelay/openclaw-preflight-adapter@0.1.0",
-  "No OpenClaw or ClawHub submission, publication, listing, approval, or partnership claim exists.",
+  "@rpelevin/neura-relay-preflight-adapter@0.1.1",
+  "No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or canonical namespace claim exists.",
 ]);
 rejectUnsafe("readme", readme);
 

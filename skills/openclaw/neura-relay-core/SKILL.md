@@ -16,11 +16,11 @@ This is a community example skill pack. It is not an official OpenClaw or ClawHu
 ## Current Package Truth
 
 - Canonical npm package: `@neurarelay/openclaw-preflight-adapter@0.1.0`
-- Current ClawHub community fallback: `@rpelevin/neura-relay-preflight-adapter@0.1.0`
+- Current ClawHub community fallback: `@rpelevin/neura-relay-preflight-adapter@0.1.1`
 - Canonical publisher namespace request: `openclaw/clawhub#2190`
 - Execution owner: developer or local runtime, not Neura
 
-Prefer the canonical npm package for JavaScript imports. Treat the ClawHub fallback as a community publication while the `@neurarelay` publisher namespace is pending.
+Prefer the canonical npm package for JavaScript imports. Treat the ClawHub fallback as a community publication while the `@neurarelay` publisher namespace is pending. The `0.1.1` ClawHub fallback is a metadata/readme correction, not a canonical npm replacement.
 
 ## Workflow
 

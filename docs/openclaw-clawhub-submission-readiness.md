@@ -11,17 +11,20 @@ Publisher access is requested in GitHub issue `openclaw/clawhub#2190`:
 
 `https://github.com/openclaw/clawhub/issues/2190`
 
-Current truth: the package is published on npm as `@neurarelay/openclaw-preflight-adapter@0.1.0`, and the founder-publisher fallback is published to ClawHub's community channel as `@rpelevin/neura-relay-preflight-adapter@0.1.0`. The issue only asks ClawHub/OpenClaw for canonical publisher namespace access; it does not imply endorsement, official listing, official approval, or partnership.
+Current truth: the package is published on npm as `@neurarelay/openclaw-preflight-adapter@0.1.0`, and the founder-publisher fallback is published to ClawHub's community channel as `@rpelevin/neura-relay-preflight-adapter@0.1.1`. The issue only asks ClawHub/OpenClaw for canonical publisher namespace access; it does not imply endorsement, official listing, official approval, or partnership.
 
 Because ClawHub publisher access remains blocked, the fallback path is founder-led publication under Roman's established publisher handle while preserving Neura branding and source attribution:
 
 - ClawHub package: `@rpelevin/neura-relay-preflight-adapter`
 - Display name: `Neura Relay Preflight Adapter`
 - Source repo/path: `neurarelay/relay-action-card`, `examples/openclaw/preflight-adapter`
-- Source commit: `5b7a87288b90e34f7023ece6188e3e23908fd078`
-- ClawHub release id: `rd71v95v9mqw6xebweek19qb6x86mfps`
+- Current ClawHub fallback version: `0.1.1`
+- Current ClawHub source commit: `794f1d8c5088312b99806fe61b5ae2eddb724723`
+- Current ClawHub release id: `rd75hckdpqz0bxee3g8e18g18s86ncm2`
+- Current ClawHub artifact SHA-256: `f6b9e10753110b303d0ef4d69dc99671f1b2556020cf07b8a2ac9bab7d9fb9ea`
 - Canonical npm package remains: `@neurarelay/openclaw-preflight-adapter@0.1.0`
 - `openclaw/clawhub#2190` remains open as the request to gain/transfer the canonical `@neurarelay` publisher namespace
+- Package-level ClawHub indexing still reports `scanStatus=pending` and `latestVersion=null`; version `0.1.1` itself is source-linked, README-fetchable, static/LLM/VirusTotal clean, and exposes `toolNames=["neura_relay_preflight_action"]`.
 
 This fallback is a community publication only. It is not an OpenClaw / ClawHub official approval, official listing, endorsement, partnership, or official integration claim.
 
@@ -70,7 +73,7 @@ The current public OpenClaw / ClawHub docs support this release shape:
 | GitHub release `v0.1.6-openclaw-action-receipt-kit` | Describes `0.1.0` and states the no-official-claim boundary |
 | npm registry | `version=0.1.0`, `latest=0.1.0`, `rc=0.1.0-rc.2` |
 | npm package README | Contains current version, `Install From npm`, stable npm install, and no official OpenClaw / ClawHub claim |
-| ClawHub community package | `@rpelevin/neura-relay-preflight-adapter@0.1.0`; community channel; `isOfficial=false`; source-linked to `neurarelay/relay-action-card@5b7a87288b90e34f7023ece6188e3e23908fd078`; static scan clean; broader scan pending |
+| ClawHub community package | `@rpelevin/neura-relay-preflight-adapter@0.1.1`; community channel; `isOfficial=false`; source-linked to `neurarelay/relay-action-card@794f1d8c5088312b99806fe61b5ae2eddb724723`; README fetchable; `toolNames=["neura_relay_preflight_action"]`; static/LLM/VirusTotal clean; package-level `scanStatus=pending`; `latestVersion=null` |
 
 ## Verification Commands
 
@@ -161,7 +164,7 @@ Publish command:
 clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
-Founder-publisher fallback dry-run command shape:
+Historical founder-publisher fallback `0.1.0` dry-run command shape:
 
 ```bash
 tmpdir="$(mktemp -d)"
@@ -171,7 +174,7 @@ npm pack "$tmpdir/founder-preflight-adapter" --pack-destination "$tmpdir" --json
 clawhub package publish "$tmpdir/rpelevin-neura-relay-preflight-adapter-0.1.0.tgz" --family code-plugin --owner rpelevin --name @rpelevin/neura-relay-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-commit <current-commit> --source-ref main --source-path examples/openclaw/preflight-adapter --dry-run --json
 ```
 
-Founder-publisher fallback publish command shape. This was run after Roman's exact approval on May 13, 2026:
+Historical founder-publisher fallback `0.1.0` publish command shape. This was run after Roman's exact approval on May 13, 2026:
 
 ```bash
 clawhub package publish <founder-tarball> --family code-plugin --owner rpelevin --name @rpelevin/neura-relay-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-commit 5b7a87288b90e34f7023ece6188e3e23908fd078 --source-ref main --source-path examples/openclaw/preflight-adapter --json
@@ -192,7 +195,7 @@ Publish result:
 }
 ```
 
-Post-publish install check:
+Canonical namespace post-publish install check, for future `@neurarelay` publication only:
 
 ```bash
 openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0
@@ -202,9 +205,46 @@ openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
 Founder-publisher fallback post-publish install check:
 
 ```bash
-openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.0
+openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.1
 openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
 ```
+
+## Founder-Publisher Metadata Correction
+
+Roman approved the `0.1.1` community fallback metadata/readme correction on May 13, 2026:
+
+```text
+Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.1 to ClawHub as a community founder-publisher metadata/readme correction, source-linked to relay-action-card commit 794f1d8, with no official OpenClaw or ClawHub claim.
+```
+
+Publish result:
+
+```json
+{
+  "name": "@rpelevin/neura-relay-preflight-adapter",
+  "displayName": "Neura Relay Preflight Adapter",
+  "family": "code-plugin",
+  "version": "0.1.1",
+  "commit": "794f1d8c5088312b99806fe61b5ae2eddb724723",
+  "files": 6,
+  "totalBytes": 5253,
+  "releaseId": "rd75hckdpqz0bxee3g8e18g18s86ncm2"
+}
+```
+
+Version `0.1.1` verification currently shows:
+
+- channel `community`
+- `isOfficial=false`
+- source repo `neurarelay/relay-action-card`
+- source commit `794f1d8c5088312b99806fe61b5ae2eddb724723`
+- artifact SHA-256 `f6b9e10753110b303d0ef4d69dc99671f1b2556020cf07b8a2ac9bab7d9fb9ea`
+- README fetchable through ClawHub file inspection
+- `pluginKind=preflight-governance`
+- `toolNames=["neura_relay_preflight_action"]`
+- static scan clean, LLM analysis clean, VirusTotal clean
+- package-level `scanStatus=pending` and `latestVersion=null`
+- package-level summary/source metadata may still reflect the older `0.1.0` package until ClawHub promotes/indexes the package record
 
 ## Public-Safe Copy
 
@@ -225,7 +265,7 @@ Neura Relay Preflight Adapter is an OpenClaw-style plugin surface for developers
 Allowed:
 
 - stable npm package is published
-- ClawHub community fallback package `@rpelevin/neura-relay-preflight-adapter@0.1.0` is published
+- ClawHub community fallback package `@rpelevin/neura-relay-preflight-adapter@0.1.1` is published
 - public GitHub examples are available
 - package is shaped for OpenClaw / ClawHub plugin publication
 - local runtime proof passed with OpenClaw `2026.5.7`
@@ -262,6 +302,10 @@ Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub with t
 
 ```text
 Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback, with source attribution to neurarelay/relay-action-card and no official OpenClaw / ClawHub claim.
+```
+
+```text
+Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.1 to ClawHub as a community founder-publisher metadata/readme correction, source-linked to relay-action-card commit 794f1d8, with no official OpenClaw or ClawHub claim.
 ```
 
 Any other destination, package name, version, description, tags, or provider claim requires a new approval pass.

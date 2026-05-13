@@ -16,12 +16,12 @@ This is not an official OpenClaw or ClawHub integration, approval, endorsement, 
 | Surface | Current truth |
 | --- | --- |
 | Canonical npm package | `@neurarelay/openclaw-preflight-adapter@0.1.0` |
-| Current ClawHub community fallback | `@rpelevin/neura-relay-preflight-adapter@0.1.0` |
+| Current ClawHub community fallback | `@rpelevin/neura-relay-preflight-adapter@0.1.1` |
 | Canonical publisher request | `openclaw/clawhub#2190` |
 | Source repo | `neurarelay/relay-action-card` |
 | Claim boundary | no official OpenClaw / ClawHub approval, endorsement, partnership, or canonical namespace claim |
 
-Use the canonical npm package for JavaScript imports. Treat the ClawHub fallback as a community publication while the `@neurarelay` publisher namespace is pending.
+Use the canonical npm package for JavaScript imports. Treat the ClawHub fallback as a community publication while the `@neurarelay` publisher namespace is pending. The current `0.1.1` fallback is a metadata/readme correction for ClawHub; it does not replace the canonical npm package and does not create an official OpenClaw / ClawHub claim.
 
 ## Contents
 
