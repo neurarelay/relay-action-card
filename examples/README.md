@@ -4,7 +4,7 @@ This folder has five lanes.
 
 - **Core Relay** (`core`): send an Action Card to Relay and receive a Decision Receipt.
 - **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and a local preflight adapter release candidate.
-- **CrewAI-style guardrail metadata** (`crewai`): attach a Neura pre-action receipt ref beside a guardrail verdict as provider-owned metadata.
+- **CrewAI-style guardrail receipt refs** (`crewai`): attach a Neura pre-action receipt ref beside a guardrail verdict as provider-owned metadata or an optional top-level pointer.
 - **A2A protected proof** (`a2a`): inspect public Agent Card discovery and run controlled protected `message/send` proof when access exists.
 - **Optional MCP** (`mcp`): call Relay through protected MCP tools with a Workspace sandbox token or controlled production/private access.
 - **SDK** (`sdk`): use the typed `@neurarelay/sdk` public package path.
@@ -26,7 +26,7 @@ For `proceed` receipts, the OpenClaw-style developer route is execution-ready on
 The CrewAI-style guardrail path keeps the guardrail verdict separate from the receipt reference:
 
 ```text
-GuardrailDecision verdict -> metadata["receipt_ref"] -> pre-action Decision Receipt ref
+GuardrailDecision verdict -> metadata["receipt_ref"] or receipt_ref -> pre-action Decision Receipt ref
 ```
 
 It is external proof alignment only, not a CrewAI integration, approval, listing, endorsement, or partnership claim.

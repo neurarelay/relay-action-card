@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CrewAI-style guardrail metadata example for Neura receipt refs.
+"""CrewAI-style guardrail receipt-ref placement examples for Neura receipts.
 
 Derived from public architecture feedback on crewAIInc/crewAI#4877.
 This is external proof alignment only, not a CrewAI integration or endorsement claim.
@@ -20,6 +20,7 @@ class GuardrailDecision:
     allow: bool
     reason: str | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
+    receipt_ref: str | None = None
 
 
 ATTEMPTED_ACTION = {
@@ -65,18 +66,27 @@ def build_example() -> dict[str, Any]:
         },
     }
 
-    decision = GuardrailDecision(
+    metadata_decision = GuardrailDecision(
         allow=False,
         reason="suspend for human review before sending customer email",
     )
-    decision.metadata["guardrail_result"] = "suspend"
-    decision.metadata["receipt_ref"] = pre_action_receipt["receipt_ref"]
-    decision.metadata["receipt_scope"] = pre_action_receipt["receipt_scope"]
-    decision.metadata["action_hash"] = attempted_action["action_hash"]
+    metadata_decision.metadata["guardrail_result"] = "suspend"
+    metadata_decision.metadata["receipt_ref"] = pre_action_receipt["receipt_ref"]
+    metadata_decision.metadata["receipt_scope"] = pre_action_receipt["receipt_scope"]
+    metadata_decision.metadata["action_hash"] = attempted_action["action_hash"]
+
+    top_level_decision = GuardrailDecision(
+        allow=False,
+        reason="suspend for human review before sending customer email",
+        receipt_ref=pre_action_receipt["receipt_ref"],
+    )
+    top_level_decision.metadata["guardrail_result"] = "suspend"
+    top_level_decision.metadata["receipt_scope"] = pre_action_receipt["receipt_scope"]
+    top_level_decision.metadata["action_hash"] = attempted_action["action_hash"]
 
     return {
         "ok": True,
-        "example": "crewai_guardrail_receipt_ref",
+        "example": "crewai_guardrail_receipt_ref_dual_shape",
         "source_context": (
             "Derived from public architecture feedback on crewAIInc/crewAI#4877. "
             "This is external proof alignment only, not a CrewAI integration or endorsement claim."
@@ -86,8 +96,18 @@ def build_example() -> dict[str, Any]:
             "pre_action_receipt": "decision recorded against specific inputs before execution",
             "post_action_artifact": "action execution evidence, if emitted later by the developer runtime",
         },
+        "runtime_preservation": (
+            "If receipt_ref exists, a framework/runtime should preserve it through traces/callbacks "
+            "so downstream audit tools can correlate pre-action decision, execution, and any "
+            "post-action artifact."
+        ),
         "attempted_action": attempted_action,
-        "guardrail_decision": asdict(decision),
+        "guardrail_decision": asdict(metadata_decision),
+        "guardrail_decision_top_level": asdict(top_level_decision),
+        "example_shapes": {
+            "metadata_receipt_ref": 'GuardrailDecision.metadata["receipt_ref"]',
+            "top_level_receipt_ref": "GuardrailDecision.receipt_ref",
+        },
         "pre_action_receipt": pre_action_receipt,
         "boundaries": {
             "crewai_approval_or_integration_claim": False,
@@ -111,6 +131,7 @@ def main() -> None:
 
     print("CrewAI-style guardrail receipt metadata example")
     print(f'GuardrailDecision.metadata["receipt_ref"] = "{payload["pre_action_receipt"]["receipt_ref"]}"')
+    print(f'GuardrailDecision.receipt_ref = "{payload["pre_action_receipt"]["receipt_ref"]}"')
     print("No downstream execution is attempted.")
 
 

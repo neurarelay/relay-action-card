@@ -2,10 +2,11 @@
 
 This is a narrow CrewAI-style placement example for Neura pre-action Decision Receipt refs.
 
-It models the receipt as provider-owned metadata beside the guardrail verdict:
+It models two receipt-ref placements beside the guardrail verdict:
 
 ```text
 GuardrailDecision.metadata["receipt_ref"]
+GuardrailDecision.receipt_ref
 ```
 
 ```python
@@ -14,9 +15,13 @@ class GuardrailDecision:
     allow: bool
     reason: str | None = None
     metadata: dict = field(default_factory=dict)
+    receipt_ref: str | None = None
 
 decision.metadata["receipt_ref"] = "decision_receipt_ref:crewai_guardrail_email_send_001"
+decision.receipt_ref = "decision_receipt_ref:crewai_guardrail_email_send_001"
 ```
+
+The optional top-level `receipt_ref` shape is an opaque audit-correlation pointer, not a required CrewAI standard or a provider-specific receipt parser.
 
 Conceptual split:
 
@@ -35,6 +40,8 @@ The example binds the receipt ref to the same attempted action the guardrail eva
 - `policy_refs`
 - `evidence_refs`
 - `authority_refs`
+
+If `receipt_ref` exists, a framework/runtime should preserve it through traces/callbacks so downstream audit tools can correlate pre-action decision, execution, and any post-action artifact.
 
 Run it:
 
