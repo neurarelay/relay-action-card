@@ -22,6 +22,11 @@ npm install
 npm run openclaw:proof
 ```
 
+Want a guided walkthrough in ChatGPT?
+Use the public GPT Store helper: [Neura Action Card Proof Runner](https://chatgpt.com/g/g-6a05f1dd38f881918a423e62cddee88e-neura-action-card-proof-runner).
+
+It explains the Action Card -> Relay -> Decision Receipt path and routes back to this public proof. It does not represent OpenAI approval or execute actions.
+
 Optional refs-only attribution for live receipts:
 
 ```bash
