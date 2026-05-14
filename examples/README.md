@@ -4,6 +4,7 @@ This folder has five lanes.
 
 - **Core Relay** (`core`): send an Action Card to Relay and receive a Decision Receipt.
 - **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and a local preflight adapter release candidate.
+- **CrewAI-style guardrail metadata** (`crewai`): attach a Neura pre-action receipt ref beside a guardrail verdict as provider-owned metadata.
 - **A2A protected proof** (`a2a`): inspect public Agent Card discovery and run controlled protected `message/send` proof when access exists.
 - **Optional MCP** (`mcp`): call Relay through protected MCP tools with a Workspace sandbox token or controlled production/private access.
 - **SDK** (`sdk`): use the typed `@neurarelay/sdk` public package path.
@@ -21,6 +22,14 @@ Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer
 ```
 
 For `proceed` receipts, the OpenClaw-style developer route is execution-ready only when delegated authority is Registry-backed and ready. Public demo refs that are only developer-supplied hold for Registry-backed authority.
+
+The CrewAI-style guardrail path keeps the guardrail verdict separate from the receipt reference:
+
+```text
+GuardrailDecision verdict -> metadata["receipt_ref"] -> pre-action Decision Receipt ref
+```
+
+It is external proof alignment only, not a CrewAI integration, approval, listing, endorsement, or partnership claim.
 
 The MCP path is only an adapter:
 
@@ -83,6 +92,9 @@ examples/
   a2a/
     README.md
     resolve-action-card-a2a.mjs
+  crewai/
+    README.md
+    guardrail_receipt_ref.py
   openclaw/
     README.md
     action-receipt-kit.manifest.json
@@ -140,6 +152,7 @@ npm run openclaw:workspace-proof
 npm run openclaw:dry-run
 npm run verify:openclaw-workspace-surface
 npm run verify:openclaw-action-receipt-kit
+npm run verify:crewai-guardrail-receipt-ref
 ```
 
 For the full OpenClaw-style developer path, read [`../docs/openclaw-developer-journey.md`](../docs/openclaw-developer-journey.md).

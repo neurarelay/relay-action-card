@@ -52,6 +52,7 @@
     "verify:a2a-authenticated-client": "node scripts/verify-a2a-authenticated-client.mjs",
     "verify:mcp-adoption-pack": "node scripts/verify-mcp-developer-adoption-pack.mjs",
     "verify:developer-feedback-access-path": "node scripts/verify-developer-feedback-access-path.mjs",
+    "verify:crewai-guardrail-receipt-ref": "node scripts/verify-crewai-guardrail-receipt-ref.mjs",
     "verify:scenario-walkthrough-pack": "node scripts/verify-scenario-walkthrough-pack.mjs",
     "verify:authorization-bypass-scenarios": "node scripts/verify-authorization-bypass-scenarios.mjs",
     "verify:delegated-authority-scenarios": "node scripts/verify-delegated-authority-scenarios.mjs",
