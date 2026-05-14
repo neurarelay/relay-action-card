@@ -65,6 +65,18 @@ function createRelay(headers = undefined) {
   });
 }
 
+function agentCardEndpoint(card) {
+  return card?.url ?? card?.supportedInterfaces?.[0]?.url ?? null;
+}
+
+function agentCardTransport(card) {
+  return card?.preferredTransport ?? card?.supportedInterfaces?.[0]?.protocolBinding ?? null;
+}
+
+function agentCardRequiresProtectedExecution(card) {
+  return Boolean(card?.security?.length ?? card?.securityRequirements?.length);
+}
+
 function extractArtifactData(response) {
   const artifact = response?.result?.artifacts?.find((item) =>
     item?.parts?.some((part) => part?.kind === "data" && part?.data),
@@ -86,11 +98,13 @@ if (agentCardOnly) {
       version: sdkVersion,
     },
     agent_card: {
+      protocol_version: agentCard.protocolVersion,
       name: agentCard.name,
       version: agentCard.version,
-      interface_url: agentCard.supportedInterfaces?.[0]?.url,
+      interface_url: agentCardEndpoint(agentCard),
+      preferred_transport: agentCardTransport(agentCard),
       skill_ids: agentCard.skills?.map((skill) => skill.id) ?? [],
-      protected_execution: Boolean(agentCard.securityRequirements?.length),
+      protected_execution: agentCardRequiresProtectedExecution(agentCard),
     },
     boundary,
   };
@@ -107,9 +121,11 @@ if (!accessToken) {
       version: sdkVersion,
     },
     agent_card: {
+      protocol_version: agentCard.protocolVersion,
       name: agentCard.name,
       version: agentCard.version,
-      interface_url: agentCard.supportedInterfaces?.[0]?.url,
+      interface_url: agentCardEndpoint(agentCard),
+      preferred_transport: agentCardTransport(agentCard),
       skill_ids: agentCard.skills?.map((skill) => skill.id) ?? [],
     },
     boundary,
@@ -162,9 +178,11 @@ const summary = {
     version: sdkVersion,
   },
   agent_card: {
+    protocol_version: agentCard.protocolVersion,
     name: agentCard.name,
     version: agentCard.version,
-    interface_url: agentCard.supportedInterfaces?.[0]?.url,
+    interface_url: agentCardEndpoint(agentCard),
+    preferred_transport: agentCardTransport(agentCard),
     skill_ids: agentCard.skills?.map((skill) => skill.id) ?? [],
   },
   a2a: {

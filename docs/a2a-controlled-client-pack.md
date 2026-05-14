@@ -1,6 +1,6 @@
 # A2A Controlled Client Pack
 
-Status: v0.2 controlled-access proof for SDK 0.1.0 with A2A Controlled Runtime v1 response checks.
+Status: v0.3 Agent Card discovery shape with v0.2 controlled-access proof for SDK 0.1.0 and A2A Controlled Runtime v1 response checks.
 
 This pack proves the narrow A2A surface Neura can stand behind today:
 
@@ -27,6 +27,8 @@ Inspect public A2A discovery:
 ```bash
 npm run example:a2a -- --agent-card-only
 ```
+
+The public discovery summary expects the current A2A v0.3 Agent Card shape: root `protocolVersion`, root `url`, `preferredTransport`, `additionalInterfaces`, root `security`, skill-level `security`, and `capabilities.stateTransitionHistory`.
 
 Run protected execution only after controlled access is issued:
 
@@ -58,7 +60,7 @@ Do not paste tokens into GitHub issues, docs, terminal transcripts, screenshots,
 The JSON proof includes:
 
 - `sdk.package` and `sdk.version`
-- public Agent Card name, version, endpoint, and skill ids
+- public Agent Card protocol version, name, version, endpoint, preferred transport, and skill ids
 - A2A Controlled Runtime v1 version, access model, and refs-only output shape
 - idempotency key ref without raw key return
 - Registry Agent Passport required for production identity validation

@@ -481,7 +481,7 @@ That verifier installs `@neurarelay/sdk@0.1.0` from npm in a temporary project, 
 
 ## A2A Protected Client Proof
 
-Relay publishes public Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes the A2A Controlled Client Pack v0.2 in `examples/a2a` and `docs/a2a-controlled-client-pack.md`, with A2A Controlled Runtime v1 checks for runtime contract, idempotency key ref, and Registry trust summary.
+Relay publishes public A2A v0.3 Agent Card metadata at `/.well-known/agent-card.json` and keeps protected `/a2a` execution controlled. This repo includes the A2A Controlled Client Pack v0.2 in `examples/a2a` and `docs/a2a-controlled-client-pack.md`, with A2A Controlled Runtime v1 checks for runtime contract, idempotency key ref, and Registry trust summary.
 
 Inspect the public Agent Card:
 

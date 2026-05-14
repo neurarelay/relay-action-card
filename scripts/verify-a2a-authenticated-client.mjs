@@ -84,8 +84,9 @@ for (const phrase of [
 
 for (const phrase of [
   "A2A Controlled Client Pack",
-  "Status: v0.2 controlled-access proof for SDK 0.1.0 with A2A Controlled Runtime v1 response checks.",
+  "Status: v0.3 Agent Card discovery shape with v0.2 controlled-access proof for SDK 0.1.0 and A2A Controlled Runtime v1 response checks.",
   "public Agent Card discovery -> controlled /a2a message/send -> Decision Receipt task",
+  "current A2A v0.3 Agent Card shape",
   "npm run verify:a2a-authenticated-client",
   "Controlled Access Lane",
   "Registry Agent Passport",
@@ -112,6 +113,11 @@ for (const phrase of [
   'package: "@neurarelay/sdk"',
   "version: sdkVersion",
   "controlled_bearer_or_relay_developer_session",
+  "agentCardEndpoint",
+  "agentCardTransport",
+  "agentCardRequiresProtectedExecution",
+  "protocol_version: agentCard.protocolVersion",
+  "preferred_transport: agentCardTransport(agentCard)",
   "RELAY_A2A_ACCESS_TOKEN",
   "relay.a2a.getAgentCard()",
   "relay.a2a.sendActionCard",
@@ -161,8 +167,14 @@ if (discovery.status !== 0) {
     failures.push("agent_card_only_wrong_sdk_version");
   }
   if (output.agent_card?.name !== "Neura Relay") failures.push("agent_card_wrong_name");
+  if (output.agent_card?.protocol_version !== "0.3.0") {
+    failures.push("agent_card_wrong_protocol_version");
+  }
   if (output.agent_card?.interface_url !== "https://www.neurarelay.com/a2a") {
     failures.push("agent_card_wrong_interface_url");
+  }
+  if (output.agent_card?.preferred_transport !== "JSONRPC") {
+    failures.push("agent_card_wrong_preferred_transport");
   }
   if (!output.agent_card?.skill_ids?.includes("resolve_action_card")) {
     failures.push("agent_card_missing_resolve_action_card");
