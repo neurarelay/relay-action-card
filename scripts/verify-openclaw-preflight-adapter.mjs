@@ -124,7 +124,7 @@ if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
 }
 if (adapterPackage.private !== false) failures.push("adapter_package_must_be_publish_ready");
 if (adapterPackage.engines?.node !== ">=22.14.0") failures.push("adapter_package_wrong_node_engine");
-if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.0") {
+if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.1") {
   failures.push("adapter_package_missing_sdk_dependency");
 }
 if (!adapterPackage.openclaw?.extensions?.includes("./index.mjs")) {
@@ -143,7 +143,7 @@ if (!adapterPackage.openclaw?.compat?.pluginApi || !adapterPackage.openclaw?.bui
 }
 if (
   adapterPackage.openclaw?.install?.npmSpec !==
-  "@neurarelay/openclaw-preflight-adapter@0.1.0"
+  "@neurarelay/openclaw-preflight-adapter@0.1.1"
 ) {
   failures.push("adapter_package_missing_install_npm_spec");
 }

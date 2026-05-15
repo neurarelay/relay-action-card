@@ -1,25 +1,26 @@
 # Neura Relay Preflight Adapter
 
-This folder contains the claim-safe OpenClaw-style preflight adapter published to npm:
+Claim-safe OpenClaw-style preflight adapter package for Neura Relay:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0
+@neurarelay/openclaw-preflight-adapter@0.1.1
 ```
 
-The ClawHub community metadata/readme correction is published as:
+The ClawHub community fallback package remains:
 
 ```text
 @rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
-That founder-publisher package is a temporary community fallback while
-`openclaw/clawhub#2190` remains open for canonical `@neurarelay` namespace access.
-The canonical npm package remains `@neurarelay/openclaw-preflight-adapter@0.1.0`.
+That founder-publisher package is a temporary community fallback while `openclaw/clawhub#2190` remains open for canonical `@neurarelay` namespace access. The canonical npm package is `@neurarelay/openclaw-preflight-adapter@0.1.1`.
 
 It shows how a local autonomous computer-use runtime can call:
 
 ```text
-beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route
+beforeAction(preflightAction)
+  -> Action Card
+  -> Relay Decision Receipt
+  -> developer-owned route
 ```
 
 It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. OpenClaw / ClawHub publishing or submission requires Roman approval of the exact action.
@@ -30,7 +31,7 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
+This is the stable npm install path.
 
 When installing the current ClawHub community fallback, pin the published version:
 
@@ -73,8 +74,12 @@ or `stop_before_execution`.
 npm run openclaw:preflight:dry-run
 npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
+```
+
+## Verify From Source
+
+```bash
 npm run verify:openclaw-preflight-adapter
-npm run verify:openclaw-plugin-rc
 npm run verify:openclaw-npm-package
 npm run test:openclaw-preflight-adapter
 npm run test:openclaw-preflight-adapter:e2e

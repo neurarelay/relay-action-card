@@ -1,6 +1,6 @@
 {
   "name": "@neurarelay/openclaw-preflight-adapter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
   "description": "Neura Relay preflight governance adapter for refs-only Action Cards and Decision Receipts before developer-owned execution.",
@@ -48,7 +48,7 @@
     "./adapter": "./adapter.mjs"
   },
   "dependencies": {
-    "@neurarelay/sdk": "0.1.0"
+    "@neurarelay/sdk": "0.1.1"
   },
   "openclaw": {
     "extensions": ["./index.mjs"],
@@ -61,7 +61,7 @@
       "pluginSdkVersion": "2026.3.24-beta.2"
     },
     "install": {
-      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.0",
+      "npmSpec": "@neurarelay/openclaw-preflight-adapter@0.1.1",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.3.24-beta.2"
     },

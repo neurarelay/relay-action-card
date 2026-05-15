@@ -62,7 +62,7 @@ Relay stores only safe source, campaign, surface, and session refs with the rece
 What it proves:
 
 - local autonomous-agent actions can be converted into Action Cards before execution
-- `@neurarelay/openclaw-preflight-adapter@0.1.0` returns a refs-only Decision Receipt route
+- `@neurarelay/openclaw-preflight-adapter@0.1.1` returns a refs-only Decision Receipt route
 - the developer or runtime still owns execution after the receipt
 - the proof covers message send, file delete, browser submit, shell command, workflow transition, memory write, data export, and package publish examples
 
@@ -382,9 +382,9 @@ npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The stable npm package is available as `@neurarelay/openclaw-preflight-adapter@0.1.0` under the `latest` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the current ClawHub truth packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). The ClawHub community fallback is published as `@rpelevin/neura-relay-preflight-adapter@0.1.1` while `openclaw/clawhub#2190` remains the canonical namespace request. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or canonical namespace claim exists.
+The stable npm package is prepared as `@neurarelay/openclaw-preflight-adapter@0.1.1` for the `latest` tag. It is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the current ClawHub truth packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). The ClawHub community fallback is published as `@rpelevin/neura-relay-preflight-adapter@0.1.1` while `openclaw/clawhub#2190` remains the canonical namespace request. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or canonical namespace claim exists.
 
-The intentional adoption path is the stable install below. The old `@rc` tag remains available only for release-candidate history.
+The intentional adoption path is the stable install below.
 
 Install the adapter from npm:
 

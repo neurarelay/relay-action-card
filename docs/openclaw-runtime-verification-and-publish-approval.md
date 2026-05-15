@@ -6,7 +6,7 @@ Date: 2026-05-12
 This packet records the actual OpenClaw / ClawHub release gate for the stable npm package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0
+@neurarelay/openclaw-preflight-adapter@0.1.1
 ```
 
 It does not publish, submit, list, approve, or partner the plugin through OpenClaw / ClawHub. It exists so Roman can make a clean OpenClaw / ClawHub publish/submission decision from verified facts.
@@ -37,7 +37,7 @@ Runtime inspection confirmed:
 
 - plugin id: `neura-relay-preflight-adapter`
 - package name: `@neurarelay/openclaw-preflight-adapter`
-- version: `0.1.0`
+- version: `0.1.1`
 - status: `loaded`
 - enabled: `true`
 - runtime imported: `true`
@@ -52,7 +52,7 @@ The stable npm package can be installed by an outside developer:
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
+This is the stable npm install path.
 
 The public package surface is:
 
@@ -89,7 +89,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
   "name": "@neurarelay/openclaw-preflight-adapter",
   "displayName": "Neura Relay Preflight Adapter",
   "family": "code-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": 6
 }
 ```
@@ -99,7 +99,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
 Do not run this without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.1 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
 ## Public-Safe Description
