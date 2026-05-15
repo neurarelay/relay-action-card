@@ -1,0 +1,83 @@
+name: OpenClaw preflight adapter publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Adapter package version to publish.
+        required: true
+        default: "0.1.1"
+      npm_tag:
+        description: npm dist-tag to publish under.
+        required: true
+        default: latest
+      confirm_publish:
+        description: Type exactly publish @neurarelay/openclaw-preflight-adapter@0.1.1
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish OpenClaw preflight adapter
+    runs-on: ubuntu-latest
+    if: ${{ inputs.version == '0.1.1' && inputs.npm_tag == 'latest' && inputs.confirm_publish == 'publish @neurarelay/openclaw-preflight-adapter@0.1.1' }}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify OpenClaw preflight adapter
+        run: npm run verify:openclaw-preflight-adapter
+
+      - name: Verify OpenClaw stable package
+        run: npm run verify:openclaw-plugin-rc
+
+      - name: Verify submission gate
+        run: npm run verify:openclaw-submission-readiness
+
+      - name: Verify version lock
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const pkg = JSON.parse(fs.readFileSync('examples/openclaw/preflight-adapter/package.json', 'utf8'));
+          if (pkg.name !== '@neurarelay/openclaw-preflight-adapter') {
+            throw new Error(`Unexpected package name ${pkg.name}`);
+          }
+          if (pkg.version !== '0.1.1') {
+            throw new Error(`Unexpected package version ${pkg.version}`);
+          }
+          if (pkg.openclaw?.install?.npmSpec !== '@neurarelay/openclaw-preflight-adapter@0.1.1') {
+            throw new Error('OpenClaw npmSpec does not match 0.1.1');
+          }
+          if (pkg.neura?.officialOpenClawOrClawHubClaim !== false) {
+            throw new Error('Official OpenClaw/ClawHub claim boundary missing');
+          }
+          if (pkg.neura?.downstreamExecutionByNeura !== false) {
+            throw new Error('Downstream execution boundary missing');
+          }
+          NODE
+
+      - name: Ensure version is not already published
+        run: |
+          if npm view @neurarelay/openclaw-preflight-adapter@0.1.1 version >/tmp/openclaw-version.txt 2>/tmp/openclaw-version.err; then
+            echo "@neurarelay/openclaw-preflight-adapter@0.1.1 is already published"
+            cat /tmp/openclaw-version.txt
+            exit 1
+          fi
+
+      - name: Publish package
+        working-directory: examples/openclaw/preflight-adapter
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --tag latest
