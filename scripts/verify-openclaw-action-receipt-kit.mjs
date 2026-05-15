@@ -243,7 +243,7 @@ const readme = read("README.md");
 requireIncludes("readme", readme, [
   "Choose the lane that matches what you want to prove",
   "OpenClaw-style receipt kit",
-  "Release-candidate snapshot",
+  "Stable proof snapshot",
   "docs/openclaw-developer-journey.md",
   "docs/openclaw-os-decision-receipt-surface.md",
   "docs/openclaw-near-miss-workbench.md",
