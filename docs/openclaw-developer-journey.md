@@ -23,6 +23,7 @@ Optional attribution:
 
 ```bash
 npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+npm run openclaw:proof -- --live --source=chatgpt_gpt_store --campaign=action_card_proof_runner --surface=gpt_store_helper
 ```
 
 The attribution path is refs-only. Relay can record source, campaign, surface, session, and UTM refs with live receipts without storing private payloads, token values, message bodies, file contents, browser form values, or downstream execution.

@@ -35,6 +35,7 @@ Add refs-only activation attribution when you want Relay receipts to show where 
 
 ```bash
 npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+npm run openclaw:proof -- --live --source=chatgpt_gpt_store --campaign=action_card_proof_runner --surface=gpt_store_helper
 NEURA_SOURCE=github NEURA_CAMPAIGN=openclaw npm run openclaw:receipts -- --only=send-message --json
 ```
 

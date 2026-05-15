@@ -144,6 +144,19 @@ for (const file of docs) {
   ]);
 }
 
+for (const file of [
+  "README.md",
+  "examples/openclaw/README.md",
+  "docs/openclaw-developer-journey.md",
+]) {
+  const text = read(file);
+  requireIncludes(file, text, [
+    "chatgpt_gpt_store",
+    "action_card_proof_runner",
+    "gpt_store_helper",
+  ]);
+}
+
 const forbiddenClaimPhrases = [
   "official OpenAI approval",
   "official Anthropic approval",
