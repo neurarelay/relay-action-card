@@ -11,6 +11,25 @@ Distribution proof:
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
 - The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
 
+## Relay Developers: Start Here
+
+If you are testing the core Action Card path, run the public receipt example first:
+
+```bash
+git clone https://github.com/neurarelay/relay-action-card.git
+cd relay-action-card
+npm install
+npm run example:relay -- --example=support-reply --json
+```
+
+This proves the default Neura path before any adapter-specific lane:
+
+```text
+Action Card -> Relay -> Decision Receipt -> trace
+```
+
+Then open [Relay Developer Workspace](https://www.neurarelay.com/developers/workspace) to inspect the same receipt and trace pattern. Create a [Registry Agent Passport](https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew) before production Relay review.
+
 ## OpenClaw Builders: Start Here
 
 If you are testing the OpenClaw-style pre-action receipt path, run the one-command proof first:
@@ -25,7 +44,11 @@ npm run openclaw:proof
 Want a guided walkthrough in ChatGPT?
 Use the public GPT Store helper: [Neura Action Card Proof Runner](https://chatgpt.com/g/g-6a05f1dd38f881918a423e62cddee88e-neura-action-card-proof-runner).
 
-It explains the Action Card -> Relay -> Decision Receipt path and routes back to this public proof. It does not represent OpenAI approval or execute actions.
+It explains the Action Card -> Relay -> Decision Receipt path and routes back to this public proof. It does not represent OpenAI approval or execute actions. To make the GPT-assisted path measurable, use the tracked live proof command:
+
+```bash
+npm run openclaw:proof -- --live --source=chatgpt_gpt_store --campaign=action_card_proof_runner --surface=gpt_store_helper
+```
 
 Optional refs-only attribution for live receipts:
 
@@ -57,15 +80,15 @@ Boundary: this is an external OpenClaw-style proof. It is not an official OpenCl
 
 Choose the lane that matches what you want to prove:
 
-- **OpenClaw-style agent integration** (`@neurarelay/openclaw-preflight-adapter`, public npm package): add a `beforeAction()` receipt guard before local autonomous actions execute.
 - **Core Relay example** (`examples/core`, public): send an Action Card to `POST /api/resolve` and receive a Decision Receipt.
-- **OpenClaw-style receipt kit** (`examples/openclaw` + `skills/openclaw`, public-safe examples): generate the near-miss workbench, dry-run receipt-ready Action Cards, and test local preflight review.
 - **SDK path** (`examples/sdk`, public npm package): use `@neurarelay/sdk` without changing the Relay decision boundary.
+- **OpenClaw-style agent integration** (`@neurarelay/openclaw-preflight-adapter`, public npm package): add a `beforeAction()` receipt guard before local autonomous actions execute.
+- **OpenClaw-style receipt kit** (`examples/openclaw` + `skills/openclaw`, public-safe examples): generate the near-miss workbench, dry-run receipt-ready Action Cards, and test local preflight review.
 - **Optional MCP examples** (`examples/mcp`, sandbox or controlled production/private access): call the same Relay spine through protected MCP-compatible tools.
 
 The OpenClaw-style kit covers local agent messages, file changes, browser submits, shell commands, workflow changes, memory writes, and data exports without claiming an official OpenClaw or ClawHub integration.
 
-Fastest developer install path:
+Fastest OpenClaw-style adapter install path:
 
 ```bash
 npm install @neurarelay/openclaw-preflight-adapter
@@ -130,6 +153,8 @@ MCP-capable runtime -> protected /mcp -> same Relay decision spine
 
 Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.0` is now available as a public npm package.
 
+Package note: Neura packages are published to npm, not GitHub Packages, so GitHub may show no repository packages even while npm packages are live.
+
 ## Get Your First Receipt In 5 Minutes
 
 Use this repo to prove the agent governance adoption loop before wiring Neura into your own AI agent or autonomous-agent workflow:
@@ -146,6 +171,7 @@ Use this repo to prove the agent governance adoption loop before wiring Neura in
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
 cd relay-action-card
+npm install
 npm run example:relay -- --example=support-reply --json
 ```
 
@@ -309,7 +335,7 @@ npm run test:openclaw-kit
 npm run test:openclaw-kit:e2e
 ```
 
-Release-candidate snapshot:
+Stable proof snapshot:
 
 | Proof | Command |
 | --- | --- |
@@ -330,7 +356,7 @@ Release-candidate snapshot:
 | 5-minute demo verifier | `npm run verify:openclaw-five-minute-demo` |
 | Copy-paste integration verifier | `npm run verify:openclaw-copy-paste-integration` |
 | Clean consumer install verifier | `npm run verify:openclaw-clean-consumer` |
-| Published npm RC verifier | `npm run verify:openclaw-npm-package` |
+| Published npm package verifier | `npm run verify:openclaw-npm-package` |
 | Submission-readiness verifier | `npm run verify:openclaw-submission-readiness` |
 | ClawHub release gate | `npm run verify:openclaw-clawhub-release` |
 | Claim-boundary verifier | `npm run verify:openclaw-action-receipt-kit` |

@@ -3,7 +3,7 @@
 This folder has five lanes.
 
 - **Core Relay** (`core`): send an Action Card to Relay and receive a Decision Receipt.
-- **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and a local preflight adapter release candidate.
+- **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and the stable local preflight adapter.
 - **CrewAI-style guardrail receipt refs** (`crewai`): attach a Neura pre-action receipt ref beside a guardrail verdict as provider-owned metadata or an optional top-level pointer.
 - **A2A protected proof** (`a2a`): inspect public Agent Card discovery and run controlled protected `message/send` proof when access exists.
 - **Optional MCP** (`mcp`): call Relay through protected MCP tools with a Workspace sandbox token or controlled production/private access.
@@ -133,7 +133,7 @@ examples/
 
 `examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
 
-`examples/openclaw` contains OpenClaw-style public-safe examples only. The npm adapter RC is public, but the lane is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
+`examples/openclaw` contains OpenClaw-style public-safe examples only. The npm adapter is stable and public, but the lane is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
 
 ## Fast Checks
 

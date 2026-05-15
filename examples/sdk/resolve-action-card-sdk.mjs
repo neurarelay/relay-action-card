@@ -15,7 +15,7 @@ try {
   ({ createNeuraRelaySdk } = await import("@neurarelay/sdk"));
 } catch {
   console.error(
-    "Install @neurarelay/sdk after alpha publication, or run npm run example:relay for the public direct path.",
+    "Install @neurarelay/sdk@0.1.0, or run npm run example:relay for the public direct path.",
   );
   process.exit(1);
 }

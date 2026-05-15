@@ -10,7 +10,7 @@ try {
   ({ createNeuraRelaySdk } = await import("@neurarelay/sdk"));
 } catch {
   console.error(
-    "Install @neurarelay/sdk after alpha publication, or run npm run example:a2a for the no-SDK protected A2A shape.",
+    "Install @neurarelay/sdk@0.1.0, or run npm run example:a2a for the no-SDK protected A2A shape.",
   );
   process.exit(1);
 }
