@@ -117,7 +117,7 @@ const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.jso
 if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
   failures.push("adapter_package_wrong_name");
 }
-if (adapterPackage.version !== "0.1.0") failures.push("adapter_package_wrong_version");
+if (adapterPackage.version !== "0.1.1") failures.push("adapter_package_wrong_version");
 if (adapterPackage.openclaw?.install?.npmSpec !== `${adapterPackage.name}@${adapterPackage.version}`) {
   failures.push("adapter_package_npm_spec_mismatch");
 }
@@ -152,7 +152,7 @@ requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
   "Status: founder-publisher fallback published to ClawHub community channel; no official OpenClaw / ClawHub approval or listing claim",
   "@neurarelay/openclaw-preflight-adapter",
-  "0.1.0",
+  "0.1.1",
   "npm install @neurarelay/openclaw-preflight-adapter",
   "beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route",
   "Neura does not execute the downstream action",
@@ -177,12 +177,12 @@ requireIncludes("submission_packet", packet, [
   "npm run verify:openclaw-runtime-approval",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
   "--dry-run --json",
-  "openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.1",
   "Public-Safe Copy",
   "Claim Boundaries",
   "Roman Approval Decision",
-  "Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.1.0.",
-  "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub with the public-safe copy in docs/openclaw-clawhub-submission-readiness.md.",
+  "Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.1.1.",
+  "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.1 to ClawHub with the public-safe copy in docs/openclaw-clawhub-submission-readiness.md.",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.1 to ClawHub as a community founder-publisher metadata/readme correction",
 ]);
@@ -194,7 +194,7 @@ requireIncludes("readme", readme, [
   "npm run verify:openclaw-submission-readiness",
   "npm run verify:openclaw-clawhub-release",
   "verify-openclaw-founder-clawhub-publisher.mjs",
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or canonical namespace claim exists.",
 ]);
@@ -220,7 +220,7 @@ const runtimeDoc = read("docs/openclaw-runtime-verification-and-publish-approval
 requireIncludes("runtime_doc", runtimeDoc, [
   "openclaw-clawhub-submission-readiness.md",
   "npm run verify:openclaw-submission-readiness",
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
 ]);
 rejectUnsafe("runtime_doc", runtimeDoc);
 
@@ -233,7 +233,7 @@ rejectUnsafe("preflight_doc", preflightDoc);
 
 const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "not an official OpenClaw or ClawHub",
   "npm run verify:openclaw-npm-package",
 ]);
