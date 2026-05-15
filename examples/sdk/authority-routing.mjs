@@ -15,7 +15,7 @@ try {
   ({ createNeuraRelaySdk } = await import("@neurarelay/sdk"));
 } catch {
   console.error(
-    "Install @neurarelay/sdk@0.1.0, or run npm run example:relay for the direct public path.",
+    "Install @neurarelay/sdk@0.1.1, or run npm run example:relay for the direct public path.",
   );
   process.exit(1);
 }
@@ -127,7 +127,7 @@ const proof = {
   ok: true,
   relay: relayBaseUrl,
   package: "@neurarelay/sdk",
-  version: "0.1.0",
+  version: "0.1.1",
   activation_attribution: publicAttributionSummary(activationAttribution),
   routing_policy:
     `proceed requires Registry-backed delegated authority before developer-owned execution; ${publicDemoAuthoritySource} demo refs hold for Registry trust`,

@@ -80,6 +80,6 @@
     "verify:authority-layer-activation-attribution": "node scripts/verify-authority-layer-activation-attribution.mjs"
   },
   "dependencies": {
-    "@neurarelay/sdk": "0.1.0"
+    "@neurarelay/sdk": "0.1.1"
   }
 }

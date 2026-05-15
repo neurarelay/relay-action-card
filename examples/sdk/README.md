@@ -1,10 +1,10 @@
 # SDK Path
 
-Status: published stable npm package for `@neurarelay/sdk@0.1.0`.
+Status: published stable npm package for `@neurarelay/sdk@0.1.1`.
 
 This is the public npm package path for the SDK examples.
 
-Version 0.1.0 includes typed `authority_context.source` support in the SDK package. The JavaScript examples also read the same runtime field returned by production Relay.
+Version 0.1.1 includes typed `authority_context.source` support in the SDK package. The JavaScript examples also read the same runtime field returned by production Relay.
 
 The SDK path keeps the same core mechanism as the public example:
 
@@ -59,7 +59,7 @@ npm run verify:sdk-stable-consumer
 npm run verify:sdk-authority-routing
 ```
 
-That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.0`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
+That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.1`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
 
 ## Resolve With SDK
 

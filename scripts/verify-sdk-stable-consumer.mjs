@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const packageName = "@neurarelay/sdk";
-const packageVersion = "0.1.0";
+const packageVersion = "0.1.1";
 const relayBaseUrl = process.env.RELAY_BASE_URL ?? "https://www.neurarelay.com";
 const a2aToken =
   process.env.RELAY_A2A_ACCESS_TOKEN ??

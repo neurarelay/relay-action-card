@@ -61,7 +61,7 @@ for (const [label, source] of [
   requireIncludes(label, source, "npm run example:sdk:authority-routing");
   requireIncludes(label, source, "hold_for_registry_backed_authority");
   requireIncludes(label, source, "developer_owned_execution");
-  requireIncludes(label, source, "0.1.0");
+  requireIncludes(label, source, "0.1.1");
   requireIncludes(label, source, "no public API");
 }
 
@@ -103,7 +103,7 @@ if (run.status !== 0) {
 const proof = run.status === 0 ? parseJson("authority_routing_json", run.stdout) : null;
 
 if (proof) {
-  if (proof.version !== "0.1.0") fail("sdk_version", proof.version);
+  if (proof.version !== "0.1.1") fail("sdk_version", proof.version);
   if (!Array.isArray(proof.results) || proof.results.length !== 4) {
     fail("result_count", proof.results?.length);
   }
