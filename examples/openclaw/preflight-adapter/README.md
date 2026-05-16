@@ -71,10 +71,13 @@ or `stop_before_execution`.
 ## Run
 
 ```bash
+npm run first-proof -- --source=openclaw_npm --campaign=package_reality_first_proof
 npm run openclaw:preflight:dry-run
 npm run openclaw:preflight:receipt -- --json
 npm run openclaw:plugin:pack:dry-run
 ```
+
+Use `npm run first-proof` when you need the package-reality signal: it distinguishes package downloads from actual proof execution and preserves source/campaign attribution in the receipt path.
 
 ## Verify From Source
 

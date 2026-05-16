@@ -24,9 +24,12 @@ Or install this example repo and run the packaged SDK proof:
 
 ```bash
 npm install
+npm run first-proof -- --source=sdk_docs --campaign=package_reality_first_proof
 npm run example:sdk
 npm run example:sdk:authority-routing
 ```
+
+`npm run first-proof` is the preferred package-reality check because it separates downloads from actual execution and preserves source/campaign attribution in the receipt path.
 
 Optional refs-only activation attribution:
 

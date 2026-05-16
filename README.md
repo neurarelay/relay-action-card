@@ -11,6 +11,46 @@ Distribution proof:
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
 - The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
 
+## Package Reality: Start Here
+
+npm downloads and GitHub clones are discovery signals, not adoption proof. To prove real usage, run the package proof that creates source/campaign-tagged receipt refs:
+
+```bash
+git clone https://github.com/neurarelay/relay-action-card.git
+cd relay-action-card
+npm install
+npm run first-proof
+```
+
+This runs the two live package tracks that currently have market signal:
+
+- SDK receipt path: `@neurarelay/sdk`
+- OpenClaw-style preflight path: `@neurarelay/openclaw-preflight-adapter`
+
+Default attribution:
+
+```text
+source=npm_github
+campaign=package_reality_first_proof
+surface=scripts/run-first-proof
+```
+
+If you are coming from a specific surface, keep it measurable:
+
+```bash
+npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme
+npm run first-proof -- --source=npm --campaign=package_reality_first_proof --surface=package_page
+```
+
+For local verification without creating production receipts:
+
+```bash
+npm run first-proof -- --dry-run --json
+npm run verify:first-proof
+```
+
+Use `receipt_id` and `trace_ref` from this command as the real adoption signal. Do not infer execution from downloads or clones alone.
+
 ## Relay Developers: Start Here
 
 If you are testing the core Action Card path, run the public receipt example first:
