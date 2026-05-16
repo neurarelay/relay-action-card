@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_agentic_execution_demo",
+    "owner": "owner_ref_neura_demo_operator",
+    "capability": "agentic_execution_governance_demo",
+    "capabilityVersion": "capability_version_ref_agentic_execution_demo_v0_1"
+  },
+  "proposedAction": {
+    "type": "agentic_cli.shell_command",
+    "summary": "Run a production database mutation outside the agent's declared authority scope.",
+    "target": "production_database_ref:customer_accounts"
+  },
+  "affectedObject": "production_database_ref:customer_accounts",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_agentic_execution_demo",
+      "authorityScope": "repo_file_ref:settings",
+      "allowedActions": ["agentic_cli.file_edit"],
+      "allowedResources": ["repo_file_ref:settings"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_reviewed_file_change"],
+      "authorityScopeRef": "authority_scope_ref_settings_file_edit",
+      "standingRef": "registry_passport_standing_ref_active"
+    },
+    "evidenceRefs": ["change_request_ref_database_safety_review_missing"],
+    "ruleRefs": ["policy_ref_database_mutation_forbidden_for_demo_agent"],
+    "riskCategory": "production_state_change critical",
+    "requestedOutcome": "decision_receipt"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "agentic-execution-governance-demo",
+  "version": "0.1",
+  "status": "local_demo",
+  "thesis": "When agents move from chat into execution, every consequential action needs a governed pre-action decision.",
+  "examples": [
+    {
+      "id": "permitted-file-edit",
+      "family": "agentic_cli.file_edit",
+      "path": "examples/agentic-execution-governance/action-cards/permitted-file-edit.json",
+      "expectedDecision": "proceed",
+      "expectedRoute": "allow"
+    },
+    {
+      "id": "blocked-shell-command",
+      "family": "agentic_cli.shell_command",
+      "path": "examples/agentic-execution-governance/action-cards/blocked-shell-command.json",
+      "expectedDecision": "stop",
+      "expectedRoute": "block"
+    },
+    {
+      "id": "challenged-browser-submit",
+      "family": "agentic_cli.browser_submit",
+      "path": "examples/agentic-execution-governance/action-cards/challenged-browser-submit.json",
+      "expectedDecision": "revise",
+      "expectedRoute": "challenge"
+    },
+    {
+      "id": "human-review-data-export",
+      "family": "agentic_cli.data_export",
+      "path": "examples/agentic-execution-governance/action-cards/human-review-data-export.json",
+      "expectedDecision": "human_review",
+      "expectedRoute": "human_review"
+    }
+  ],
+  "boundaries": {
+    "refs_only": true,
+    "downstream_execution_by_neura": false,
+    "private_payloads": false,
+    "tokens_or_secrets": false,
+    "raw_customer_data": false,
+    "raw_policy_docs": false,
+    "provider_integration": false,
+    "provider_approval_claim": false,
+    "authority_layer_v1_completion_claim": false
+  }
+}

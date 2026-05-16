@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_agentic_execution_demo",
+    "owner": "owner_ref_neura_demo_operator",
+    "capability": "agentic_execution_governance_demo",
+    "capabilityVersion": "capability_version_ref_agentic_execution_demo_v0_1"
+  },
+  "proposedAction": {
+    "type": "agentic_cli.data_export",
+    "summary": "Export customer-account records after authority changed and operator approval is required.",
+    "target": "workspace_export_ref:customer_accounts"
+  },
+  "affectedObject": "workspace_export_ref:customer_accounts",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_agentic_execution_demo",
+      "authorityScope": "workspace_data_exports",
+      "allowedActions": ["agentic_cli.data_export"],
+      "allowedResources": ["workspace_export_ref:customer_accounts"],
+      "expiresAt": "2026-05-15T23:59:59Z",
+      "revocationStatus": "changed",
+      "policyRefs": ["policy_ref_data_export_review"],
+      "authorityScopeRef": "authority_scope_ref_data_export",
+      "standingRef": "registry_passport_standing_ref_review_required",
+      "reviewRequiredWhenMissingOrChanged": true
+    },
+    "evidenceRefs": ["privacy_request_ref_customer_accounts", "export_request_ref_customer_accounts"],
+    "ruleRefs": ["policy_ref_data_export_review"],
+    "riskCategory": "customer_data_export",
+    "requestedOutcome": "decision_receipt"
+  }
+}

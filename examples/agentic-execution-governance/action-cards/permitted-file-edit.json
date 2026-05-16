@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_agentic_execution_demo",
+    "owner": "owner_ref_neura_demo_operator",
+    "capability": "agentic_execution_governance_demo",
+    "capabilityVersion": "capability_version_ref_agentic_execution_demo_v0_1"
+  },
+  "proposedAction": {
+    "type": "agentic_cli.file_edit",
+    "summary": "Apply a reviewed settings-file edit after authority, policy, and evidence refs are present.",
+    "target": "repo_file_ref:settings"
+  },
+  "affectedObject": "repo_file_ref:settings",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_agentic_execution_demo",
+      "authorityScope": "repo_file_ref:settings",
+      "allowedActions": ["agentic_cli.file_edit"],
+      "allowedResources": ["repo_file_ref:settings"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_reviewed_file_change"],
+      "authorityScopeRef": "authority_scope_ref_settings_file_edit",
+      "standingRef": "registry_passport_standing_ref_active"
+    },
+    "evidenceRefs": ["diff_ref_reviewed_settings_change", "backup_ref_settings_snapshot"],
+    "ruleRefs": ["policy_ref_reviewed_file_change"],
+    "riskCategory": "repo_file_change",
+    "requestedOutcome": "decision_receipt"
+  }
+}

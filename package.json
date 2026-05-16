@@ -19,6 +19,7 @@
     "example:anthropic-mcp-request": "node examples/mcp/anthropic-messages-mcp.mjs --print-request",
     "example:google-adk-mcp": "python3 examples/mcp/google-adk-remote-mcp.py --print-config",
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
+    "agentic-execution:demo": "node examples/agentic-execution-governance/run-demo.mjs",
     "first-proof": "node scripts/run-first-proof.mjs",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
     "openclaw:receipts": "node examples/openclaw/run-action-receipt-kit.mjs",
@@ -79,7 +80,8 @@
     "verify:openclaw-severe-preflight": "node scripts/verify-openclaw-severe-preflight-queue.mjs",
     "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",
     "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
-    "verify:authority-layer-activation-attribution": "node scripts/verify-authority-layer-activation-attribution.mjs"
+    "verify:authority-layer-activation-attribution": "node scripts/verify-authority-layer-activation-attribution.mjs",
+    "verify:agentic-execution-governance-demo": "node scripts/verify-agentic-execution-governance-demo.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.1"

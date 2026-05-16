@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_agentic_execution_demo",
+    "owner": "owner_ref_neura_demo_operator",
+    "capability": "agentic_execution_governance_demo",
+    "capabilityVersion": "capability_version_ref_agentic_execution_demo_v0_1"
+  },
+  "proposedAction": {
+    "type": "agentic_cli.browser_submit",
+    "summary": "Submit an external account-change form with weak evidence and incomplete policy refs.",
+    "target": "external_form_ref:account_change"
+  },
+  "affectedObject": "external_form_ref:account_change",
+  "context": {
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_agentic_execution_demo",
+      "authorityScope": "external_form_ref:account_change",
+      "allowedActions": ["agentic_cli.browser_submit"],
+      "allowedResources": ["external_form_ref:account_change"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_external_form_review"],
+      "authorityScopeRef": "authority_scope_ref_external_form_submit",
+      "standingRef": "registry_passport_standing_ref_active"
+    },
+    "evidenceRefs": ["intent_ref_account_change"],
+    "ruleRefs": ["policy_ref_external_form_review"],
+    "riskCategory": "external_account_change elevated",
+    "requestedOutcome": "decision_receipt",
+    "missingRefs": ["reviewed_form_payload_ref", "account_owner_confirmation_ref"]
+  }
+}
