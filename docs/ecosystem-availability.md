@@ -26,6 +26,7 @@ npm run proof:claude -- --dry-run --json
 npm run proof:a2a -- --agent-card-only --json
 npm run proof:openclaw -- --dry-run --json
 npm run proof:swarm-authority -- --dry-run --json
+npm run proof:swarm-authority-placement -- --dry-run --json
 ```
 
 Then lock the pack:
@@ -211,15 +212,20 @@ Use when a multi-agent runtime proposes work before dispatching workers or tools
 
 ```bash
 npm run proof:swarm-authority -- --dry-run --json
+npm run proof:swarm-authority-placement -- --dry-run --json
 ```
 
 Placement pattern:
 
-- before plan-to-execution transition
+- before consensus proposal
+- as proposal/result metadata
+- before broadcast / dispatch
 - before worker dispatch
 - before MCP/tool invocation
-- before memory write
-- at federation trust boundaries
+- before worker tool execution
+- before memory write / federation message
+
+The dedicated placement proof is local and deterministic. It derives Action Cards from refs-only swarm runtime envelopes and returns `receipt_ref` / `trace_ref` records while the swarm runtime owns proceed, revise, stop, or human-review routing.
 
 Boundary:
 
