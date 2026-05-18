@@ -35,12 +35,25 @@ npm run verify:mcp-adk-authority-proof
 
 ## Scenarios
 
-| Scenario | Proposed tool | Decision | Runtime route |
-| --- | --- | --- | --- |
-| `repo-search-proceed` | `repo.search` | `proceed` | authorized for runtime-owned execution |
-| `issue-comment-revise` | `github.issue_comment.create` | `revise` | revision required before runtime tool call |
-| `deployment-stop` | `deployment.promote` | `stop` | blocked before runtime tool call |
-| `package-publish-human-review` | `npm.publish` | `human_review` | held for operator before runtime tool call |
+`repo-search-proceed`
+Proposed tool: `repo.search`
+Decision: `proceed`
+Runtime route: authorized for runtime-owned execution
+
+`issue-comment-revise`
+Proposed tool: `github.issue_comment.create`
+Decision: `revise`
+Runtime route: revision required before runtime tool call
+
+`deployment-stop`
+Proposed tool: `deployment.promote`
+Decision: `stop`
+Runtime route: blocked before runtime tool call
+
+`package-publish-human-review`
+Proposed tool: `npm.publish`
+Decision: `human_review`
+Runtime route: held for operator before runtime tool call
 
 ## Output Shape
 
