@@ -7,6 +7,10 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
+const packageName = "@neurarelay/openclaw-preflight-adapter";
+const canonicalClawHubVersion = "0.1.2";
+const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
+const fallbackClawHubPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
 function path(file) {
   return join(repoRoot, file);
@@ -119,8 +123,11 @@ for (const [script, command] of Object.entries(expectedScripts)) {
 }
 
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
-if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
+if (adapterPackage.name !== packageName) {
   failures.push("adapter_package_wrong_name");
+}
+if (adapterPackage.version !== canonicalClawHubVersion) {
+  failures.push("adapter_package_wrong_version");
 }
 if (adapterPackage.private !== false) failures.push("adapter_package_must_be_publish_ready");
 if (adapterPackage.engines?.node !== ">=22.14.0") failures.push("adapter_package_wrong_node_engine");
@@ -141,10 +148,7 @@ for (const tag of ["policy-evidence", "authority-decision", "computer-use"]) {
 if (!adapterPackage.openclaw?.compat?.pluginApi || !adapterPackage.openclaw?.build?.openclawVersion) {
   failures.push("adapter_package_missing_openclaw_compat_or_build");
 }
-if (
-  adapterPackage.openclaw?.install?.npmSpec !==
-  "@neurarelay/openclaw-preflight-adapter@0.1.1"
-) {
+if (adapterPackage.openclaw?.install?.npmSpec !== `${packageName}@${canonicalClawHubVersion}`) {
   failures.push("adapter_package_missing_install_npm_spec");
 }
 if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
@@ -155,8 +159,11 @@ if (adapterPackage.neura?.officialSubmissionRequiresRomanApproval !== true) {
 }
 
 const nativeManifest = readJson("examples/openclaw/preflight-adapter/openclaw.plugin.json");
-if (nativeManifest.id !== "neura-relay-preflight-adapter") {
+if (nativeManifest.id !== canonicalPluginId) {
   failures.push("native_manifest_wrong_id");
+}
+if (nativeManifest.version !== canonicalClawHubVersion) {
+  failures.push("native_manifest_wrong_version");
 }
 if (!nativeManifest.configSchema || nativeManifest.configSchema.type !== "object") {
   failures.push("native_manifest_missing_config_schema");
@@ -187,7 +194,6 @@ requireIncludes("docs", docs, [
   "npm run openclaw:preflight:dry-run",
   "npm run openclaw:preflight:receipt",
   "npm run verify:openclaw-preflight-adapter",
-  "npm run verify:openclaw-npm-package",
   "docs/openclaw-runtime-verification-and-publish-approval.md",
   "Node `24`",
   "developer-owned execution",
@@ -198,8 +204,8 @@ const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
   "beforeAction(preflightAction)",
   "not an official OpenClaw or ClawHub",
-  "@rpelevin/neura-relay-preflight-adapter@0.1.1",
-  "openclaw/clawhub#2190",
+  fallbackClawHubPackage,
+  "neurarelay-openclaw-preflight-adapter",
   "neura_relay_preflight_action",
   "openclaw.plugin.json",
   "npm run openclaw:plugin:pack:dry-run",

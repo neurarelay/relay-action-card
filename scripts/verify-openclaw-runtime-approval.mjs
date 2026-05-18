@@ -9,6 +9,9 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
+const packageName = "@neurarelay/openclaw-preflight-adapter";
+const packageVersion = "0.1.2";
+const pluginId = "neurarelay-openclaw-preflight-adapter";
 
 const requiredNode = [22, 14, 0];
 const currentNode = process.versions.node.split(".").map((part) => Number(part));
@@ -80,19 +83,19 @@ if (rootPackage.engines?.node !== ">=22.14.0") failures.push("root_package_node_
 if (nvmrc !== "24") failures.push("nvmrc_must_pin_node_24");
 
 const pluginPackage = readJson("examples/openclaw/preflight-adapter/package.json");
-if (pluginPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
+if (pluginPackage.name !== packageName) {
   failures.push("plugin_package_wrong_name");
 }
-if (pluginPackage.version !== "0.1.1") failures.push("plugin_package_wrong_version");
+if (pluginPackage.version !== packageVersion) failures.push("plugin_package_wrong_version");
 if (pluginPackage.engines?.node !== ">=22.14.0") failures.push("plugin_package_node_engine");
 
 const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approval.md");
 for (const phrase of [
-  "@neurarelay/openclaw-preflight-adapter@0.1.1",
+  `${packageName}@${packageVersion}`,
   "Use Node `24`",
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
-  "no OpenClaw / ClawHub submission or publication has been performed",
+  "no canonical `@neurarelay` ClawHub publication has been performed",
   "Do not run this without Roman approval",
 ]) {
   if (!approvalDoc.includes(phrase)) failures.push(`approval_doc_missing_${phrase}`);
@@ -153,7 +156,7 @@ if (failures.length === 0) {
       "warn",
       "plugins",
       "inspect",
-      "neura-relay-preflight-adapter",
+      pluginId,
       "--json",
     ],
     { env },
@@ -173,7 +176,7 @@ if (failures.length === 0) {
       "warn",
       "plugins",
       "inspect",
-      "neura-relay-preflight-adapter",
+      pluginId,
       "--runtime",
       "--json",
     ],
@@ -213,11 +216,11 @@ if (failures.length === 0) {
       "--owner",
       "neurarelay",
       "--name",
-      "@neurarelay/openclaw-preflight-adapter",
+      packageName,
       "--display-name",
       "Neura Relay Preflight Adapter",
       "--version",
-      "0.1.1",
+      packageVersion,
       "--tags",
       "stable",
       "--source-repo",

@@ -22,10 +22,12 @@ function readJson(file) {
 const fixture = readJson("examples/openclaw/preflight-adapter/fixtures/send-message.preflight.json");
 const nativeManifest = readJson("examples/openclaw/preflight-adapter/openclaw.plugin.json");
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
+const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
+const canonicalPackageVersion = "0.1.2";
 
 test("native plugin manifest stays schema-valid and runtime-free", () => {
-  assert.equal(nativeManifest.id, "neura-relay-preflight-adapter");
-  assert.equal(nativeManifest.version, "0.1.1");
+  assert.equal(nativeManifest.id, canonicalPluginId);
+  assert.equal(nativeManifest.version, canonicalPackageVersion);
   assert.equal(nativeManifest.kind, "preflight-governance");
   assert.equal(nativeManifest.tools[0].name, "neura_relay_preflight_action");
   assert.equal(nativeManifest.configSchema.type, "object");
@@ -38,7 +40,7 @@ test("native plugin manifest stays schema-valid and runtime-free", () => {
 
 test("package metadata is publish-ready but claim-safe", () => {
   assert.equal(adapterPackage.name, "@neurarelay/openclaw-preflight-adapter");
-  assert.equal(adapterPackage.version, "0.1.1");
+  assert.equal(adapterPackage.version, canonicalPackageVersion);
   assert.equal(adapterPackage.private, false);
   assert.equal(adapterPackage.engines.node, ">=22.14.0");
   assert.deepEqual(adapterPackage.openclaw.extensions, ["./index.mjs"]);
@@ -47,7 +49,7 @@ test("package metadata is publish-ready but claim-safe", () => {
   assert.equal(adapterPackage.openclaw.compat.pluginApi, ">=2026.3.24-beta.2");
   assert.equal(
     adapterPackage.openclaw.install.npmSpec,
-    "@neurarelay/openclaw-preflight-adapter@0.1.1",
+    `@neurarelay/openclaw-preflight-adapter@${canonicalPackageVersion}`,
   );
   assert.equal(adapterPackage.neura.officialOpenClawOrClawHubClaim, false);
   assert.equal(adapterPackage.neura.officialSubmissionRequiresRomanApproval, true);

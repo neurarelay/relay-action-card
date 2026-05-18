@@ -1,8 +1,8 @@
 {
-  "id": "neura-relay-preflight-adapter",
+  "id": "neurarelay-openclaw-preflight-adapter",
   "name": "Neura Relay Preflight Adapter",
   "description": "Routes refs-only proposed local actions through Neura Relay before developer-owned execution.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "kind": "preflight-governance",
   "tools": [
     {

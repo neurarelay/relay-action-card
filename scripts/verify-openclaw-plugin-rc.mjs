@@ -9,6 +9,10 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
+const packageName = "@neurarelay/openclaw-preflight-adapter";
+const canonicalClawHubVersion = "0.1.2";
+const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
+const fallbackClawHubPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
 function path(file) {
   return join(repoRoot, file);
@@ -122,10 +126,10 @@ for (const [script, command] of Object.entries(expectedRootScripts)) {
 }
 
 const pluginPackage = readJson("examples/openclaw/preflight-adapter/package.json");
-if (pluginPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
+if (pluginPackage.name !== packageName) {
   failures.push("plugin_package_wrong_name");
 }
-if (pluginPackage.version !== "0.1.1") failures.push("plugin_package_wrong_version");
+if (pluginPackage.version !== canonicalClawHubVersion) failures.push("plugin_package_wrong_version");
 if (pluginPackage.private !== false) failures.push("plugin_package_must_be_publish_ready");
 if (pluginPackage.type !== "module") failures.push("plugin_package_must_be_esm");
 if (pluginPackage.license !== "MIT") failures.push("plugin_package_missing_license");
@@ -150,10 +154,7 @@ if (pluginPackage.openclaw?.compat?.pluginApi !== ">=2026.3.24-beta.2") {
 if (pluginPackage.openclaw?.build?.openclawVersion !== "2026.3.24-beta.2") {
   failures.push("plugin_package_wrong_build_version");
 }
-if (
-  pluginPackage.openclaw?.install?.npmSpec !==
-  "@neurarelay/openclaw-preflight-adapter@0.1.1"
-) {
+if (pluginPackage.openclaw?.install?.npmSpec !== `${packageName}@${canonicalClawHubVersion}`) {
   failures.push("plugin_package_wrong_install_spec");
 }
 if (pluginPackage.neura?.releaseCandidateOnly !== false || pluginPackage.neura?.stableRelease !== true) {
@@ -167,7 +168,7 @@ if (pluginPackage.neura?.officialSubmissionRequiresRomanApproval !== true) {
 }
 
 const manifest = readJson("examples/openclaw/preflight-adapter/openclaw.plugin.json");
-if (manifest.id !== "neura-relay-preflight-adapter") failures.push("manifest_wrong_id");
+if (manifest.id !== canonicalPluginId) failures.push("manifest_wrong_id");
 if (manifest.version !== pluginPackage.version) failures.push("manifest_version_mismatch");
 if (!manifest.configSchema || manifest.configSchema.type !== "object") {
   failures.push("manifest_missing_config_schema");
@@ -190,15 +191,14 @@ for (const forbiddenManifestField of ["entry", "compat", "build", "capabilities"
 const releaseDoc = read("docs/openclaw-plugin-release-candidate.md");
 requireIncludes("release_doc", releaseDoc, [
   "OpenClaw Plugin Stable Package v0.1",
-  "@neurarelay/openclaw-preflight-adapter",
-  "0.1.1",
+  packageName,
+  canonicalClawHubVersion,
   "npm run openclaw:plugin:pack:dry-run",
   "npm run verify:openclaw-plugin-rc",
-  "npm run verify:openclaw-npm-package",
   "npm run verify:openclaw-runtime-approval",
   "Node `24`",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
-  "No OpenClaw / ClawHub submission or publication has been performed",
+  "No canonical `@neurarelay` ClawHub publication has been performed",
   "Roman's explicit approval",
   "https://docs.openclaw.ai/plugins/manifest",
   "https://docs.openclaw.ai/plugins/building-plugins",
@@ -209,14 +209,15 @@ rejectUnsafe("release_doc", releaseDoc);
 const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approval.md");
 requireIncludes("approval_doc", approvalDoc, [
   "OpenClaw Runtime Verification And Publish Approval Packet",
-  "@neurarelay/openclaw-preflight-adapter@0.1.1",
+  `${packageName}@${canonicalClawHubVersion}`,
+  canonicalPluginId,
   "npm run verify:openclaw-npm-package",
   "Use Node `24`",
   "openclaw --profile neura-rc plugins install -l examples/openclaw/preflight-adapter",
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
   "Do not run this without Roman approval",
-  "no OpenClaw / ClawHub submission or publication has been performed",
+  "no canonical `@neurarelay` ClawHub publication has been performed",
 ]);
 rejectUnsafe("approval_doc", approvalDoc);
 
@@ -233,7 +234,8 @@ const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 requireIncludes("adapter_readme", adapterReadme, [
   "@neurarelay/openclaw-preflight-adapter",
   "stable npm install path",
-  "@rpelevin/neura-relay-preflight-adapter@0.1.1",
+  fallbackClawHubPackage,
+  canonicalPluginId,
   "neura_relay_preflight_action",
   "npm run openclaw:plugin:pack:dry-run",
   "not an official OpenClaw or ClawHub",
@@ -385,7 +387,7 @@ if (openclawCliAvailable) {
     const inspect = run("openclaw", [
       "plugins",
       "inspect",
-      "neura-relay-preflight-adapter",
+      canonicalPluginId,
       "--runtime",
       "--json",
     ]);

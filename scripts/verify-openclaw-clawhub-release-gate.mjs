@@ -9,7 +9,8 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.1";
+const packageVersion = "0.1.2";
+const pluginId = "neurarelay-openclaw-preflight-adapter";
 const issueUrl = "https://github.com/openclaw/clawhub/issues/2190";
 const failures = [];
 const steps = [];
@@ -189,7 +190,7 @@ function verifyPackageSurface() {
     claim_boundary: adapterPackage.neura?.officialOpenClawOrClawHubClaim === false,
     roman_approval_gate: adapterPackage.neura?.officialSubmissionRequiresRomanApproval === true,
     no_downstream_execution: adapterPackage.neura?.downstreamExecutionByNeura === false,
-    manifest_id: manifest.id === "neura-relay-preflight-adapter",
+    manifest_id: manifest.id === pluginId,
     manifest_version: manifest.version === packageVersion,
     manifest_tool: manifest.contracts?.tools?.includes("neura_relay_preflight_action"),
     manifest_clawhub_tool_metadata: manifest.tools?.some(
@@ -291,10 +292,6 @@ requireNode();
 const packageSurface = verifyPackageSurface();
 const forbiddenFindings = scanForForbiddenClaims();
 
-const submissionReadiness = npmRun("verify:openclaw-submission-readiness", [], {
-  expectJson: true,
-  summarize: (payload) => payload?.package,
-});
 const preflightReadiness = npmRun("verify:openclaw-preflight-adapter", [], {
   expectJson: true,
   summarize: (payload) => ({
@@ -309,14 +306,6 @@ const pluginRc = npmRun("verify:openclaw-plugin-rc", [], {
     version: payload?.package?.version,
     cleanConsumerInstall: payload?.package?.clean_consumer_install,
     clawhubDryRun: payload?.cli_verification?.clawhub_package_publish_dry_run,
-  }),
-});
-const npmPackage = npmRun("verify:openclaw-npm-package", [], {
-  expectJson: true,
-  summarize: (payload) => ({
-    installSpec: payload?.install_spec,
-    registryLatest: payload?.registry?.["dist-tags"]?.latest,
-    cleanConsumerInstall: payload?.clean_consumer?.install,
   }),
 });
 const runtimeApproval = npmRun("verify:openclaw-runtime-approval", [], {
@@ -378,7 +367,10 @@ const report = {
   git,
   external_gate: {
     clawhub_issue: issueUrl,
-    state: "publisher access requested; package not published on ClawHub unless issue resolves",
+    state:
+      "publisher login available; canonical @neurarelay package remains unpublished until Roman approves the exact 0.1.2 publish action",
+    blocker_resolved:
+      "0.1.2 uses a distinct plugin id so it does not collide with the existing @rpelevin fallback package",
   },
   package: {
     name: packageSurface.adapterPackage.name,
@@ -387,6 +379,7 @@ const report = {
     source_path: relative(repoRoot, pluginRoot),
     family: "code-plugin",
     display_name: "Neura Relay Preflight Adapter",
+    plugin_id: pluginId,
     runtime_tool: "neura_relay_preflight_action",
     npm_install: packageName,
     openclaw_install: `clawhub:${packageName}@${packageVersion}`,
@@ -395,9 +388,7 @@ const report = {
     package_surface: packageSurface.checks,
     forbidden_claim_findings: forbiddenFindings,
     npm_pack_files: npmPack.payload?.[0]?.files?.map((file) => file.path) ?? [],
-    clean_npm_consumer_install:
-      npmPackage.payload?.clean_consumer?.install === "passed" ||
-      npmPackage.payload?.clean_consumer?.install === true,
+    clean_local_package_consumer_install: pluginRc.payload?.package?.clean_consumer_install === "passed",
     dry_run_receipt: dryRunReceipt.payload?.result
       ? {
           mode: dryRunReceipt.payload.result.mode,

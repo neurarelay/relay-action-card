@@ -1,26 +1,28 @@
 # OpenClaw Plugin Stable Package v0.1
 
-Status: stable npm package published; OpenClaw / ClawHub submission remains approval-gated
-Date: 2026-05-12
+Status: canonical ClawHub `0.1.2` package staged; OpenClaw / ClawHub publication remains approval-gated
+Date: 2026-05-18
 
 This document is the claim-safe release-readiness packet for the Neura Relay OpenClaw preflight adapter.
 
 For the final Roman approval packet before any OpenClaw / ClawHub submission or package publication action, see [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md).
 
-Published stable npm package:
+Staged canonical ClawHub package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.1
+@neurarelay/openclaw-preflight-adapter@0.1.2
 ```
+
+This ClawHub package uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback.
 
 The package turns a proposed local computer-use action into a refs-only Action Card, asks Neura Relay for a Decision Receipt, and returns a developer-owned execution route. Neura does not execute the downstream action.
 
 ## Current Status
 
 - package metadata is shaped for OpenClaw plugin discovery and npm/ClawHub packaging
-- stable npm package `@neurarelay/openclaw-preflight-adapter@0.1.1` is prepared for the `latest` tag
-- developers should use `npm install @neurarelay/openclaw-preflight-adapter`
-- clean consumer npm install proof is available through `npm run verify:openclaw-npm-package`
+- canonical ClawHub package `@neurarelay/openclaw-preflight-adapter@0.1.2` is staged for the `stable` tag
+- developers can still use `npm install @neurarelay/openclaw-preflight-adapter`; npm `0.1.2` requires separate Roman approval before publication
+- clean local package consumer proof is available through `npm run verify:openclaw-plugin-rc`
 - native manifest is present at `examples/openclaw/preflight-adapter/openclaw.plugin.json`
 - runtime entrypoint is declared through `package.json` `openclaw.extensions`
 - runtime registers one tool: `neura_relay_preflight_action`
@@ -28,7 +30,7 @@ The package turns a proposed local computer-use action into a refs-only Action C
 - stable package verifier is available through `npm run verify:openclaw-plugin-rc`
 - runtime install/inspect proof is available through `npm run verify:openclaw-runtime-approval` when running under Node 22.14+; this repo pins Node `24` in `.nvmrc`
 
-No OpenClaw / ClawHub submission or publication has been performed. No official listing, approval, partnership, endorsement, or provider claim exists. OpenClaw / ClawHub submission or publication requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
+No canonical `@neurarelay` ClawHub publication has been performed. The existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` package remains a community fallback only. No official listing, approval, partnership, endorsement, or provider claim exists. OpenClaw / ClawHub submission or canonical publication requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
 
 ## Official Source Alignment
 
@@ -55,7 +57,6 @@ npm run test:openclaw-preflight-adapter
 npm run openclaw:preflight:dry-run -- --json
 npm run openclaw:plugin:pack:dry-run
 npm run verify:openclaw-plugin-rc
-npm run verify:openclaw-npm-package
 npm run verify:openclaw-submission-readiness
 npm run verify:openclaw-runtime-approval
 ```
@@ -72,10 +73,10 @@ npm run openclaw:preflight:receipt -- --json
 Do not run these without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.1 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.1 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.1
-openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.2 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.2 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.2
+openclaw plugins inspect neurarelay-openclaw-preflight-adapter --runtime --json
 ```
 
 If OpenClaw and ClawHub CLIs are installed locally, `npm run verify:openclaw-plugin-rc` reports that they are available. It does not mutate local OpenClaw config or start registry-authenticated publishing unless explicit environment flags are supplied.
