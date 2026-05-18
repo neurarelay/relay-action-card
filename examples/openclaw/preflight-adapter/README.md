@@ -3,7 +3,7 @@
 Claim-safe OpenClaw-style preflight adapter package for Neura Relay:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.2
+@neurarelay/openclaw-preflight-adapter@0.1.3
 ```
 
 The ClawHub community fallback package remains:
@@ -12,7 +12,7 @@ The ClawHub community fallback package remains:
 @rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
-That founder-publisher package remains a temporary community fallback. The canonical `@neurarelay` ClawHub release is staged at `0.1.2` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. The latest public npm package remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until Roman separately approves a npm `0.1.2` publish.
+That founder-publisher package remains a temporary community fallback. The canonical `@neurarelay` ClawHub release is staged at `0.1.3` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. The latest public npm package remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until Roman separately approves a npm `0.1.3` publish.
 
 It shows how a local autonomous computer-use runtime can call:
 
@@ -31,7 +31,7 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm `0.1.2` publish is approved.
+This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm `0.1.3` publish is approved.
 
 When installing the current ClawHub community fallback, pin the published version:
 
@@ -42,7 +42,7 @@ openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.1
 When Roman approves the canonical ClawHub publish, the intended install command is:
 
 ```bash
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.2
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.3
 ```
 
 ```js

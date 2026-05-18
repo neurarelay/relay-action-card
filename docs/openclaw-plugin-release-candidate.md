@@ -1,6 +1,6 @@
 # OpenClaw Plugin Stable Package v0.1
 
-Status: canonical ClawHub `0.1.2` package staged; OpenClaw / ClawHub publication remains approval-gated
+Status: canonical ClawHub `0.1.3` package staged; OpenClaw / ClawHub publication remains approval-gated
 Date: 2026-05-18
 
 This document is the claim-safe release-readiness packet for the Neura Relay OpenClaw preflight adapter.
@@ -10,7 +10,7 @@ For the final Roman approval packet before any OpenClaw / ClawHub submission or 
 Staged canonical ClawHub package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.2
+@neurarelay/openclaw-preflight-adapter@0.1.3
 ```
 
 This ClawHub package uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback.
@@ -20,8 +20,8 @@ The package turns a proposed local computer-use action into a refs-only Action C
 ## Current Status
 
 - package metadata is shaped for OpenClaw plugin discovery and npm/ClawHub packaging
-- canonical ClawHub package `@neurarelay/openclaw-preflight-adapter@0.1.2` is staged for the `stable` tag
-- developers can still use `npm install @neurarelay/openclaw-preflight-adapter`; npm `0.1.2` requires separate Roman approval before publication
+- canonical ClawHub package `@neurarelay/openclaw-preflight-adapter@0.1.3` is staged for the `latest,stable` tags
+- developers can still use `npm install @neurarelay/openclaw-preflight-adapter`; npm `0.1.3` requires separate Roman approval before publication
 - clean local package consumer proof is available through `npm run verify:openclaw-plugin-rc`
 - native manifest is present at `examples/openclaw/preflight-adapter/openclaw.plugin.json`
 - runtime entrypoint is declared through `package.json` `openclaw.extensions`
@@ -73,9 +73,9 @@ npm run openclaw:preflight:receipt -- --json
 Do not run these without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.2 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.2 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.2
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.3 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.3 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.3
 openclaw plugins inspect neurarelay-openclaw-preflight-adapter --runtime --json
 ```
 

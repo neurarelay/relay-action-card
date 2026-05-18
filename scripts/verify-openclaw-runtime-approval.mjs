@@ -10,7 +10,7 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.2";
+const packageVersion = "0.1.3";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 
 const requiredNode = [22, 14, 0];
@@ -222,7 +222,7 @@ if (failures.length === 0) {
       "--version",
       packageVersion,
       "--tags",
-      "stable",
+      "latest,stable",
       "--source-repo",
       "neurarelay/relay-action-card",
       "--source-path",

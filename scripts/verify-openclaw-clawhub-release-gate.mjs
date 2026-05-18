@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.2";
+const packageVersion = "0.1.3";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 const issueUrl = "https://github.com/openclaw/clawhub/issues/2190";
 const failures = [];
@@ -261,7 +261,7 @@ function runExactClawHubDryRun() {
     "--version",
     packageVersion,
     "--tags",
-    "stable",
+    "latest,stable",
     "--source-repo",
     "neurarelay/relay-action-card",
     "--source-path",
@@ -368,9 +368,9 @@ const report = {
   external_gate: {
     clawhub_issue: issueUrl,
     state:
-      "publisher login available; canonical @neurarelay package remains unpublished until Roman approves the exact 0.1.2 publish action",
+      "publisher login available; canonical @neurarelay package remains unpublished until Roman approves the exact 0.1.3 publish action",
     blocker_resolved:
-      "0.1.2 uses a distinct plugin id so it does not collide with the existing @rpelevin fallback package",
+      "0.1.3 is a metadata repair release that preserves the distinct plugin id and adds latest,stable tags",
   },
   package: {
     name: packageSurface.adapterPackage.name,
@@ -437,7 +437,7 @@ const report = {
     "--version",
     packageVersion,
     "--tags",
-    "stable",
+    "latest,stable",
     "--source-repo",
     "neurarelay/relay-action-card",
     "--source-path",

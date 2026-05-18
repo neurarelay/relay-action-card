@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.2";
+const packageVersion = "0.1.3";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -154,7 +154,7 @@ if (Object.hasOwn(manifest, "compat")) failures.push("manifest_must_not_hold_com
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
-  "canonical `@neurarelay` ClawHub `0.1.2` package staged",
+  "canonical `@neurarelay` ClawHub `0.1.3` package staged",
   packageName,
   packageVersion,
   pluginId,

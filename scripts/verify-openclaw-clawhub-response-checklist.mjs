@@ -9,7 +9,7 @@ const docPath = join(repoRoot, "docs/openclaw-clawhub-response-checklist.md");
 const doc = readFileSync(docPath, "utf8");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.2";
+const packageVersion = "0.1.3";
 
 for (const required of [
   "If Publisher Access Is Granted",

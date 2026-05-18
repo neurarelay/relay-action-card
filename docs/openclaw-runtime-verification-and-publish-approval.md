@@ -1,15 +1,15 @@
 # OpenClaw Runtime Verification And Publish Approval Packet
 
-Status: runtime-verified locally; canonical ClawHub `0.1.2` package staged; OpenClaw / ClawHub publish approval required
+Status: runtime-verified locally; canonical ClawHub `0.1.3` package staged; OpenClaw / ClawHub publish approval required
 Date: 2026-05-18
 
 This packet records the actual OpenClaw / ClawHub release gate for the canonical ClawHub package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.2
+@neurarelay/openclaw-preflight-adapter@0.1.3
 ```
 
-The canonical `0.1.2` ClawHub package uses plugin id `neurarelay-openclaw-preflight-adapter` so it does not collide with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback, whose plugin id is already claimed in ClawHub.
+The canonical `0.1.3` ClawHub package uses plugin id `neurarelay-openclaw-preflight-adapter` so it does not collide with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback, whose plugin id is already claimed in ClawHub.
 
 It does not publish, submit, list, approve, or partner the plugin through OpenClaw / ClawHub. It exists so Roman can make a clean OpenClaw / ClawHub publish/submission decision from verified facts.
 
@@ -39,7 +39,7 @@ Runtime inspection confirmed:
 
 - plugin id: `neurarelay-openclaw-preflight-adapter`
 - package name: `@neurarelay/openclaw-preflight-adapter`
-- version: `0.1.2`
+- version: `0.1.3`
 - status: `loaded`
 - enabled: `true`
 - runtime imported: `true`
@@ -54,7 +54,7 @@ The stable npm package can be installed by an outside developer:
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm `0.1.2` publish is approved.
+This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm `0.1.3` publish is approved.
 
 The public package surface is:
 
@@ -91,7 +91,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
   "name": "@neurarelay/openclaw-preflight-adapter",
   "displayName": "Neura Relay Preflight Adapter",
   "family": "code-plugin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "files": 6
 }
 ```
@@ -101,7 +101,7 @@ ClawHub publish dry-run succeeded with this claim-safe shape:
 Do not run this without Roman approval:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.2 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.3 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
 ## Public-Safe Description

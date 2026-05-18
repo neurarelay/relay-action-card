@@ -23,7 +23,7 @@ const fixture = readJson("examples/openclaw/preflight-adapter/fixtures/send-mess
 const nativeManifest = readJson("examples/openclaw/preflight-adapter/openclaw.plugin.json");
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
 const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
-const canonicalPackageVersion = "0.1.2";
+const canonicalPackageVersion = "0.1.3";
 
 test("native plugin manifest stays schema-valid and runtime-free", () => {
   assert.equal(nativeManifest.id, canonicalPluginId);
