@@ -1,0 +1,189 @@
+# Ecosystem Availability
+
+Status: public developer proof map; no provider approval or listing claim  
+Last updated: 2026-05-18
+
+## Use Neura Today
+
+Neura is the pre-action authority layer:
+
+```text
+proposed agent action -> Action Card -> Neura Relay -> Decision Receipt -> developer-owned execution
+```
+
+The ecosystem paths below make the same spine usable from different runtimes. Each path has a credential-free dry run and a controlled live route when access exists.
+
+No provider approval, listing, endorsement, integration, or partnership is claimed by this document. Production MCP, A2A, and private Relay access remain controlled.
+
+## Commands
+
+Run the dry-run matrix first:
+
+```bash
+npm run proof:mcp -- --dry-run --json
+npm run proof:openai -- --dry-run --json
+npm run proof:claude -- --dry-run --json
+npm run proof:a2a -- --agent-card-only --json
+npm run proof:openclaw -- --dry-run --json
+npm run proof:swarm-authority -- --dry-run --json
+```
+
+Then lock the pack:
+
+```bash
+npm run verify:ecosystem-availability-pack
+```
+
+Every proof path carries safe `source/campaign/surface` attribution and keeps private payloads, tokens, file contents, browser form values, and downstream execution outside Neura.
+
+## MCP Registry / Generic MCP Clients
+
+Use when the host already speaks remote MCP.
+
+```bash
+npm run proof:mcp -- --dry-run --json
+NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json
+```
+
+Usable today:
+
+- remote MCP server URL: `https://www.neurarelay.com/mcp`
+- transport: Streamable HTTP
+- access: bearer token from Workspace sandbox or controlled private access
+- tools: `validate_action_card`, `resolve_action_card`, `get_decision_receipt`, `get_trace_replay`, `lookup_agent_passport`
+
+Boundary:
+
+- public discovery and docs are allowed
+- production/private MCP tokens are controlled
+- no public production MCP token issuance
+
+## OpenAI
+
+Use when a developer wants Neura inside OpenAI Responses API or ChatGPT Developer Mode remote MCP.
+
+```bash
+npm run proof:openai -- --dry-run --json
+OPENAI_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:openai-mcp
+```
+
+Usable today:
+
+- OpenAI Responses API can call remote MCP servers with `server_url`
+- ChatGPT Developer Mode can create an app from a remote MCP server when available to the workspace
+- Neura requires controlled MCP access
+
+Boundary:
+
+- OpenAI review status is not approval
+- no OpenAI listing, endorsement, integration, or partnership claim
+- no downstream action is performed by Neura
+
+## Anthropic / Claude
+
+Use when a developer wants Neura through Claude Messages API MCP connector.
+
+```bash
+npm run proof:claude -- --dry-run --json
+npm run example:anthropic-mcp-request
+ANTHROPIC_API_KEY=... NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:anthropic-mcp
+```
+
+Usable today:
+
+- Claude Messages API can describe a remote MCP server with `mcp_servers`
+- the Neura request uses `authorization_token`
+- enabled tools are scoped through the Claude MCP toolset
+
+Boundary:
+
+- Anthropic review status is not approval
+- no Anthropic or Claude listing, endorsement, integration, or partnership claim
+- no private payload is returned by Neura
+
+## A2A
+
+Use when a developer wants public agent discovery before controlled execution.
+
+```bash
+npm run proof:a2a -- --agent-card-only --json
+RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json
+```
+
+Usable today:
+
+- public Agent Card: `https://www.neurarelay.com/.well-known/agent-card.json`
+- protected endpoint: `https://www.neurarelay.com/a2a`
+- skill: `resolve_action_card`
+
+Boundary:
+
+- public Agent Card discovery only
+- protected `/a2a` execution only
+- no public A2A token issuance
+- no A2A directory, catalog, approval, or partnership claim
+
+## OpenClaw / ClawHub
+
+Use when a local autonomous-agent runtime needs a pre-action receipt before execution.
+
+```bash
+npm run proof:openclaw -- --dry-run --json
+npm run openclaw:proof
+npm run openclaw:proof -- --live --source=openclaw_clawhub --campaign=ecosystem_availability_openclaw
+```
+
+Usable today:
+
+- `@neurarelay/openclaw-preflight-adapter` is the canonical npm package path
+- local proof surfaces cover messages, files, browser submits, shell commands, workflow transitions, memory writes, data exports, and package publishing
+- ClawHub canonical activation remains an admin/plugin-id transfer question, not a product-quality gap
+
+Boundary:
+
+- OpenClaw-style proof only
+- no official OpenClaw or ClawHub listing, approval, endorsement, integration, or partnership claim
+- developer/runtime owns execution
+
+## SDK / GitHub
+
+Use when a developer wants the direct Action Card path first.
+
+```bash
+npm run first-proof -- --dry-run --json
+npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=ecosystem_availability
+```
+
+Usable today:
+
+- public direct Relay example
+- stable `@neurarelay/sdk` receipt helper path
+- first-proof command for package reality conversion
+
+Boundary:
+
+- downloads and clones are discovery signals, not adoption proof
+- receipt refs and trace refs are the proof
+
+## Swarm Runtimes
+
+Use when a multi-agent runtime proposes work before dispatching workers or tools.
+
+```bash
+npm run proof:swarm-authority -- --dry-run --json
+```
+
+Placement pattern:
+
+- before plan-to-execution transition
+- before worker dispatch
+- before MCP/tool invocation
+- before memory write
+- at federation trust boundaries
+
+Boundary:
+
+- local architecture proof only
+- no Ruflo, Claude Flow, or other swarm-runtime integration, endorsement, validation, listing, or partnership claim
+- no downstream action by Neura
+

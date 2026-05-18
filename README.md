@@ -11,6 +11,21 @@ Distribution proof:
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
 - The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
 
+## Ecosystem Availability: Use Neura Today
+
+Choose the ecosystem path you are testing and run the matching dry-run proof:
+
+```bash
+npm run proof:mcp -- --dry-run --json
+npm run proof:openai -- --dry-run --json
+npm run proof:claude -- --dry-run --json
+npm run proof:a2a -- --agent-card-only --json
+npm run proof:openclaw -- --dry-run --json
+npm run proof:swarm-authority -- --dry-run --json
+```
+
+See [`docs/ecosystem-availability.md`](docs/ecosystem-availability.md) for the MCP, OpenAI, Claude, A2A, OpenClaw, SDK/GitHub, and swarm-runtime paths. These are developer proof paths only. They do not claim OpenAI, Anthropic, OpenClaw, ClawHub, A2A, provider, directory, listing, endorsement, approval, integration, or partnership status.
+
 ## Package Reality: Start Here
 
 npm downloads and GitHub clones are discovery signals, not adoption proof. To prove real usage, run the package proof that creates source/campaign-tagged receipt refs:

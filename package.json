@@ -21,6 +21,12 @@
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "agentic-execution:demo": "node examples/agentic-execution-governance/run-demo.mjs",
     "first-proof": "node scripts/run-first-proof.mjs",
+    "proof:mcp": "node scripts/run-ecosystem-proof.mjs --ecosystem=mcp",
+    "proof:openai": "node scripts/run-ecosystem-proof.mjs --ecosystem=openai",
+    "proof:claude": "node scripts/run-ecosystem-proof.mjs --ecosystem=claude",
+    "proof:a2a": "node scripts/run-ecosystem-proof.mjs --ecosystem=a2a",
+    "proof:openclaw": "node scripts/run-ecosystem-proof.mjs --ecosystem=openclaw",
+    "proof:swarm-authority": "node scripts/run-ecosystem-proof.mjs --ecosystem=swarm-authority",
     "proof:mcp-adk-authority": "node examples/mcp-adk-authority/run-proof.mjs",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
     "openclaw:receipts": "node examples/openclaw/run-action-receipt-kit.mjs",
@@ -83,6 +89,7 @@
     "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
     "verify:authority-layer-activation-attribution": "node scripts/verify-authority-layer-activation-attribution.mjs",
     "verify:agentic-execution-governance-demo": "node scripts/verify-agentic-execution-governance-demo.mjs",
+    "verify:ecosystem-availability-pack": "node scripts/verify-ecosystem-availability-pack.mjs",
     "verify:mcp-adk-authority-proof": "node scripts/verify-mcp-adk-authority-proof.mjs"
   },
   "dependencies": {
