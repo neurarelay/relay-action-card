@@ -34,7 +34,7 @@ npm downloads and GitHub clones are discovery signals, not adoption proof. To pr
 git clone https://github.com/neurarelay/relay-action-card.git
 cd relay-action-card
 npm install
-npm run first-proof
+npm run first-proof -- --json
 ```
 
 This runs the two live package tracks that currently have market signal:
@@ -53,6 +53,7 @@ surface=scripts/run-first-proof
 If you are coming from a specific surface, keep it measurable:
 
 ```bash
+npm run first-proof -- --json
 npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme
 npm run first-proof -- --source=npm --campaign=package_reality_first_proof --surface=package_page
 ```

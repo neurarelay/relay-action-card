@@ -133,12 +133,40 @@ const tracks = [
 
 const ok = tracks.every((track) => track.ok);
 const liveTracks = tracks.filter((track) => !track.skipped && !dryRun);
+const staticFirstProofPreview = {
+  preview: "static_no_signup_first_proof_preview",
+  creates_production_receipt: false,
+  sample_proposed_agent_action:
+    "Send a customer follow-up after checking the support thread refs.",
+  derived_action_card_summary: {
+    action_type: "message.send",
+    target_ref: "channel_message_ref:support_followup_2026_05_12",
+    evidence_refs: ["intent_ref_support_followup", "recipient_ref_support_followup"],
+    policy_refs: ["policy_ref_customer_reply_review"],
+  },
+  decision_receipt_preview: {
+    receipt_ref: "receipt_ref_preview_first_proof_support_reply_001",
+    trace_ref: "trace_ref_preview_first_proof_support_reply_001",
+    route: "human_review",
+    posture: "receipt required before execution",
+    developer_owned_next_step:
+      "Run npm run first-proof -- --json to create live receipt and trace refs before your runtime decides whether to proceed.",
+  },
+  boundaries: {
+    no_signup_required_for_preview: true,
+    private_payload_collected: false,
+    private_payload_stored: false,
+    downstream_execution_by_neura: false,
+    provider_listing_or_partnership_claim: false,
+  },
+};
 
 const output = {
   ok,
   proof: "package-reality-first-proof",
   mode: dryRun ? "dry_run_no_production_receipts" : "live_public_relay_receipts",
-  command: dryRun ? "npm run first-proof -- --dry-run --json" : "npm run first-proof",
+  command: dryRun ? "npm run first-proof -- --dry-run --json" : "npm run first-proof -- --json",
+  static_no_signup_preview: staticFirstProofPreview,
   activation_attribution: publicAttributionSummary(defaultAttribution),
   session_ref_present: true,
   proof_execution_metric: {

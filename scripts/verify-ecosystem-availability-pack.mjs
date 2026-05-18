@@ -76,6 +76,13 @@ for (const phrase of [
   "npm run proof:a2a -- --agent-card-only --json",
   "npm run proof:openclaw -- --dry-run --json",
   "npm run proof:swarm-authority -- --dry-run --json",
+  "No-signup first-proof preview",
+  "static_no_signup_first_proof_preview",
+  "npm run first-proof -- --dry-run --json",
+  "npm run first-proof -- --json",
+  "source=npm_github",
+  "campaign=package_reality_first_proof",
+  "surface=scripts/run-first-proof",
   "source/campaign/surface",
   "No provider approval, listing, endorsement, integration, or partnership is claimed",
 ]) {

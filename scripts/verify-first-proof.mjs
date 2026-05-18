@@ -36,6 +36,7 @@ function parseJson(stdout) {
 
 const packageJson = readJson("package.json");
 const readme = read("README.md");
+const ecosystemDocs = read("docs/ecosystem-availability.md");
 const sdkReadme = read("examples/sdk/README.md");
 const adapterReadme = read("examples/openclaw/preflight-adapter/README.md");
 const firstProofScript = read("scripts/run-first-proof.mjs");
@@ -50,6 +51,7 @@ if (packageJson.scripts?.["verify:first-proof"] !== "node scripts/verify-first-p
 
 for (const [label, text] of [
   ["readme", readme],
+  ["ecosystem_docs", ecosystemDocs],
   ["sdk_readme", sdkReadme],
   ["adapter_readme", adapterReadme],
   ["first_proof_script", firstProofScript],
@@ -70,6 +72,42 @@ for (const [label, text] of [
     "public A2A tokens are available",
   ]);
 }
+
+requireIncludes("readme", readme, [
+  "npm run first-proof -- --json",
+  "npm run first-proof -- --dry-run --json",
+]);
+
+requireIncludes("ecosystem_docs", ecosystemDocs, [
+  "No-signup first-proof preview",
+  "static_no_signup_first_proof_preview",
+  "creates_production_receipt",
+  "sample_proposed_agent_action",
+  "derived_action_card_summary",
+  "decision_receipt_preview",
+  "receipt_ref_preview_first_proof_support_reply_001",
+  "trace_ref_preview_first_proof_support_reply_001",
+  '"route": "human_review"',
+  "developer_owned_next_step",
+  "npm run first-proof -- --json",
+  "npm run first-proof -- --dry-run --json",
+  "source=npm_github",
+  "campaign=package_reality_first_proof",
+  "surface=scripts/run-first-proof",
+  '"private_payload_collected": false',
+  '"private_payload_stored": false',
+  '"downstream_execution_by_neura": false',
+  '"provider_listing_or_partnership_claim": false',
+]);
+
+requireIncludes("first_proof_script", firstProofScript, [
+  "static_no_signup_first_proof_preview",
+  "receipt_ref_preview_first_proof_support_reply_001",
+  "trace_ref_preview_first_proof_support_reply_001",
+  "npm run first-proof -- --json",
+  "private_payload_stored: false",
+  "provider_listing_or_partnership_claim: false",
+]);
 
 const dryRun = spawnSync(
   process.execPath,
@@ -93,6 +131,34 @@ if (dryRun.status !== 0) {
   const proof = parseJson(dryRun.stdout);
   if (proof.ok !== true) failures.push("dry_run_not_ok");
   if (proof.mode !== "dry_run_no_production_receipts") failures.push("dry_run_wrong_mode");
+  if (proof.command !== "npm run first-proof -- --dry-run --json") {
+    failures.push("dry_run_command_not_canonical");
+  }
+  if (proof.static_no_signup_preview?.creates_production_receipt !== false) {
+    failures.push("static_preview_must_not_create_production_receipt");
+  }
+  if (
+    proof.static_no_signup_preview?.decision_receipt_preview?.receipt_ref !==
+    "receipt_ref_preview_first_proof_support_reply_001"
+  ) {
+    failures.push("static_preview_missing_receipt_ref");
+  }
+  if (
+    proof.static_no_signup_preview?.decision_receipt_preview?.trace_ref !==
+    "trace_ref_preview_first_proof_support_reply_001"
+  ) {
+    failures.push("static_preview_missing_trace_ref");
+  }
+  if (proof.static_no_signup_preview?.decision_receipt_preview?.route !== "human_review") {
+    failures.push("static_preview_missing_route");
+  }
+  if (
+    proof.static_no_signup_preview?.boundaries?.private_payload_stored !== false ||
+    proof.static_no_signup_preview?.boundaries?.downstream_execution_by_neura !== false ||
+    proof.static_no_signup_preview?.boundaries?.provider_listing_or_partnership_claim !== false
+  ) {
+    failures.push("static_preview_boundary_changed");
+  }
   if (proof.proof_execution_metric?.executed !== 0) {
     failures.push("dry_run_created_execution_metric");
   }

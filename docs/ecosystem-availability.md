@@ -149,9 +149,49 @@ Boundary:
 
 Use when a developer wants the direct Action Card path first.
 
+No-signup first-proof preview:
+
+```json
+{
+  "preview": "static_no_signup_first_proof_preview",
+  "creates_production_receipt": false,
+  "sample_proposed_agent_action": "Send a customer follow-up after checking the support thread refs.",
+  "derived_action_card_summary": {
+    "action_type": "message.send",
+    "target_ref": "channel_message_ref:support_followup_2026_05_12",
+    "evidence_refs": ["intent_ref_support_followup", "recipient_ref_support_followup"],
+    "policy_refs": ["policy_ref_customer_reply_review"]
+  },
+  "decision_receipt_preview": {
+    "receipt_ref": "receipt_ref_preview_first_proof_support_reply_001",
+    "trace_ref": "trace_ref_preview_first_proof_support_reply_001",
+    "route": "human_review",
+    "posture": "receipt required before execution",
+    "developer_owned_next_step": "Run npm run first-proof -- --json to create live receipt and trace refs before your runtime decides whether to proceed."
+  },
+  "boundaries": {
+    "no_signup_required_for_preview": true,
+    "private_payload_collected": false,
+    "private_payload_stored": false,
+    "downstream_execution_by_neura": false,
+    "provider_listing_or_partnership_claim": false
+  }
+}
+```
+
+The preview is static and does not create a production receipt. The live command below returns receipt and trace refs and creates the measurable first-proof signal.
+
 ```bash
 npm run first-proof -- --dry-run --json
-npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=ecosystem_availability
+npm run first-proof -- --json
+```
+
+Canonical live attribution:
+
+```text
+source=npm_github
+campaign=package_reality_first_proof
+surface=scripts/run-first-proof
 ```
 
 Usable today:
@@ -186,4 +226,3 @@ Boundary:
 - local architecture proof only
 - no Ruflo, Claude Flow, or other swarm-runtime integration, endorsement, validation, listing, or partnership claim
 - no downstream action by Neura
-
