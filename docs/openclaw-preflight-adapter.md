@@ -43,7 +43,7 @@ Current public docs reviewed for this shape:
 Published stable npm package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.0
+@neurarelay/openclaw-preflight-adapter@0.1.1
 ```
 
 Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.

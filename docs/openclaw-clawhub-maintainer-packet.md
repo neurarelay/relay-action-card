@@ -25,17 +25,17 @@ This packet collects the public evidence for reviewing the `@neurarelay` publish
 | Field | Value |
 | --- | --- |
 | npm package | `@neurarelay/openclaw-preflight-adapter` |
-| Stable version | `0.1.0` |
-| npm tags | `latest=0.1.0`; `rc=0.1.0-rc.2` |
-| Stable source commit | `c95fc5a7ce9d83f1a8995bde84f32727555bbbf7` |
-| Current source commit | `3a7d100474667bebd8ff71bc51b3d5379e2b36b2` |
+| Stable version | `0.1.1` |
+| npm tags | `latest=0.1.1`; `rc=0.1.0-rc.2` |
+| Stable source commit | `fd349da8612e8523faf982d6ec47a69ab3d5d87c` |
+| Current source commit | `6bd9216402ee2778e3e592c9bef69ad7e841df9c` |
 | Package family | `code-plugin` |
 | Runtime tool | `neura_relay_preflight_action` |
 | Node floor | `>=22.14.0`; repo-pinned Node `24` |
 
 ## What Reviewers Can Verify
 
-- The stable npm package is live as `@neurarelay/openclaw-preflight-adapter@0.1.0`.
+- The stable npm package is live as `@neurarelay/openclaw-preflight-adapter@0.1.1`.
 - A clean npm consumer install verifier passes against the public package.
 - The ClawHub package dry-run passed under Node `24.15.0`.
 - GitHub Actions is green for the current OpenClaw-style integration commit.

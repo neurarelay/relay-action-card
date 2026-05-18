@@ -88,7 +88,7 @@ requireIncludes("skill", skill, [
   "---",
   "name: neura-openclaw-core",
   "Decision Receipt",
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
   "package/publisher",
@@ -115,7 +115,7 @@ const docs = read("docs/openclaw-core-skill-pack.md");
 requireIncludes("docs", docs, [
   "OpenClaw Core Skill Pack",
   "ClawHub publication requires separate Roman approval",
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
   "npm run verify:openclaw-core-skill-pack",
@@ -128,7 +128,7 @@ const adapterPackage = JSON.parse(read("examples/openclaw/preflight-adapter/pack
 if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
   failures.push("adapter_package_wrong_canonical_name");
 }
-if (adapterPackage.version !== "0.1.0") failures.push("adapter_package_wrong_version");
+if (adapterPackage.version !== "0.1.1") failures.push("adapter_package_wrong_version");
 if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
   failures.push("adapter_package_claim_boundary_not_false");
 }
@@ -136,7 +136,7 @@ if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
 const submission = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission", submission, [
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "community publication only",
 ]);
 rejectUnsafe("submission", submission);
@@ -147,7 +147,7 @@ console.log(
       ok: failures.length === 0,
       verifier: "openclaw-core-skill-pack",
       skill: "skills/openclaw/neura-relay-core",
-      canonicalNpmPackage: "@neurarelay/openclaw-preflight-adapter@0.1.0",
+      canonicalNpmPackage: "@neurarelay/openclaw-preflight-adapter@0.1.1",
       currentClawHubCommunityFallback: "@rpelevin/neura-relay-preflight-adapter@0.1.1",
       canonicalNamespaceRequest: "openclaw/clawhub#2190",
       boundaries: {

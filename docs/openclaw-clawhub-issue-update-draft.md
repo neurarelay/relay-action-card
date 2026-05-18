@@ -8,7 +8,7 @@ Use this as the next claim-safe update for `openclaw/clawhub#2190` after Roman a
 ```markdown
 Quick update from the `@neurarelay` side:
 
-- Stable npm package: `@neurarelay/openclaw-preflight-adapter@0.1.0`
+- Stable npm package: `@neurarelay/openclaw-preflight-adapter@0.1.1`
 - Source path: `neurarelay/relay-action-card`, `examples/openclaw/preflight-adapter`
 - Green CI for the current OpenClaw-style integration commit: https://github.com/neurarelay/relay-action-card/actions/runs/25795608585
 - Maintainer evidence packet: https://github.com/neurarelay/relay-action-card/blob/main/docs/openclaw-clawhub-maintainer-packet.md
@@ -19,4 +19,3 @@ The adapter gives local autonomous computer-use runtimes a `beforeAction(preflig
 
 Boundary: this is not an official OpenClaw / ClawHub integration, listing, approval, publication, endorsement, or partnership claim. The request is still for maintainer/admin review of publisher namespace access.
 ```
-

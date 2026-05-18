@@ -10,7 +10,7 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const canonicalNpmPackage = "@neurarelay/openclaw-preflight-adapter";
 const founderClawHubPackage = "@rpelevin/neura-relay-preflight-adapter";
-const packageVersion = "0.1.0";
+const packageVersion = "0.1.1";
 const failures = [];
 const steps = [];
 

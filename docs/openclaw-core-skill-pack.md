@@ -15,7 +15,7 @@ This is not an official OpenClaw or ClawHub integration, approval, endorsement, 
 
 | Surface | Current truth |
 | --- | --- |
-| Canonical npm package | `@neurarelay/openclaw-preflight-adapter@0.1.0` |
+| Canonical npm package | `@neurarelay/openclaw-preflight-adapter@0.1.1` |
 | Current ClawHub community fallback | `@rpelevin/neura-relay-preflight-adapter@0.1.1` |
 | Canonical publisher request | `openclaw/clawhub#2190` |
 | Source repo | `neurarelay/relay-action-card` |

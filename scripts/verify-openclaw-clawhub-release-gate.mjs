@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.0";
+const packageVersion = "0.1.1";
 const issueUrl = "https://github.com/openclaw/clawhub/issues/2190";
 const failures = [];
 const steps = [];
@@ -179,7 +179,7 @@ function verifyPackageSurface() {
       adapterPackage.publishConfig?.tag === "latest",
     package_runtime: adapterPackage.type === "module" &&
       adapterPackage.engines?.node === ">=22.14.0",
-    package_sdk: adapterPackage.dependencies?.["@neurarelay/sdk"] === "0.1.0",
+    package_sdk: adapterPackage.dependencies?.["@neurarelay/sdk"] === "0.1.1",
     package_openclaw_extension: adapterPackage.openclaw?.extensions?.includes("./index.mjs"),
     package_clawhub_tool_metadata: adapterPackage.openclaw?.tools?.some(
       (tool) => tool?.name === "neura_relay_preflight_action",

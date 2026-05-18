@@ -17,8 +17,8 @@ for (const required of [
   "npm run verify:openclaw-clawhub-release",
   "clawhub package publish examples/openclaw/preflight-adapter",
   "--dry-run --json",
-  "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub.",
-  "openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.1 to ClawHub.",
+  "openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.1",
   "no official OpenClaw / ClawHub integration",
   "no downstream execution by Neura",
   "no private payload exposure",
@@ -48,11 +48,11 @@ console.log(
       doc: "docs/openclaw-clawhub-response-checklist.md",
       gates: {
         roman_approval_required_before_publish: doc.includes(
-          "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub.",
+          "Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.1 to ClawHub.",
         ),
         dry_run_before_publish: doc.includes("--dry-run --json"),
         post_publish_install_check: doc.includes(
-          "openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0",
+          "openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.1",
         ),
       },
       boundaries: {
@@ -68,4 +68,3 @@ console.log(
 );
 
 if (failures.length > 0) process.exit(1);
-

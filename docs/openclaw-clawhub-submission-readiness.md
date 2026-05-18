@@ -246,6 +246,23 @@ Version `0.1.1` verification currently shows:
 - package-level `scanStatus=pending` and `latestVersion=null`
 - package-level summary/source metadata may still reflect the older `0.1.0` package until ClawHub promotes/indexes the package record
 
+May 18, 2026 clean OpenClaw install verification:
+
+```bash
+openclaw --profile neura-clawhub-fallback plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.1 --force
+openclaw --profile neura-clawhub-fallback plugins inspect neura-relay-preflight-adapter --runtime --json
+```
+
+Result:
+
+- install succeeded from ClawHub as a community/source-linked code-plugin
+- plugin status `loaded`
+- plugin enabled and activated
+- runtime import succeeded
+- tool registered as `neura_relay_preflight_action`
+- diagnostics empty
+- install source `clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.1`
+
 ## Public-Safe Copy
 
 Short description:

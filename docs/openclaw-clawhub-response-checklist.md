@@ -18,25 +18,25 @@ Use this when `openclaw/clawhub#2190` receives maintainer/admin feedback.
 3. Run the exact dry-run command one more time:
 
    ```bash
-   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
+   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.1 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
    ```
 
 4. Stop for Roman approval before the real publish command:
 
    ```text
-   Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.0 to ClawHub.
+   Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.1 to ClawHub.
    ```
 
 5. Only after that exact approval, run:
 
    ```bash
-   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.0 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.1 --tags stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
    ```
 
 6. Verify install and runtime inspection:
 
    ```bash
-   openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.0
+   openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.1
    openclaw plugins inspect neura-relay-preflight-adapter --runtime --json
    npm run verify:openclaw-runtime-approval
    ```

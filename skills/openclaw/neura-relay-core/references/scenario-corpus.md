@@ -8,7 +8,7 @@ Action family: `package_publish`
 
 Required refs:
 
-- package identity ref, for example `package_ref:@neurarelay/openclaw-preflight-adapter@0.1.0`
+- package identity ref, for example `package_ref:@neurarelay/openclaw-preflight-adapter@0.1.1`
 - source repo ref and source commit ref
 - pack or artifact digest ref
 - publisher authority ref

@@ -83,12 +83,12 @@ const pluginPackage = readJson("examples/openclaw/preflight-adapter/package.json
 if (pluginPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
   failures.push("plugin_package_wrong_name");
 }
-if (pluginPackage.version !== "0.1.0") failures.push("plugin_package_wrong_version");
+if (pluginPackage.version !== "0.1.1") failures.push("plugin_package_wrong_version");
 if (pluginPackage.engines?.node !== ">=22.14.0") failures.push("plugin_package_node_engine");
 
 const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approval.md");
 for (const phrase of [
-  "@neurarelay/openclaw-preflight-adapter@0.1.0",
+  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "Use Node `24`",
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
@@ -217,7 +217,7 @@ if (failures.length === 0) {
       "--display-name",
       "Neura Relay Preflight Adapter",
       "--version",
-      "0.1.0",
+      "0.1.1",
       "--tags",
       "stable",
       "--source-repo",
