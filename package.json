@@ -21,6 +21,7 @@
     "example:microsoft-mcp": "python3 examples/mcp/microsoft-agent-framework-mcp.py --print-config",
     "agentic-execution:demo": "node examples/agentic-execution-governance/run-demo.mjs",
     "first-proof": "node scripts/run-first-proof.mjs",
+    "proof:mcp-adk-authority": "node examples/mcp-adk-authority/run-proof.mjs",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
     "openclaw:receipts": "node examples/openclaw/run-action-receipt-kit.mjs",
     "openclaw:preflight:dry-run": "node examples/openclaw/run-preflight-adapter.mjs --dry-run",
@@ -81,7 +82,8 @@
     "verify:openclaw-workbench": "node scripts/verify-openclaw-near-miss-workbench.mjs",
     "verify:openclaw-runtime-approval": "node scripts/verify-openclaw-runtime-approval.mjs",
     "verify:authority-layer-activation-attribution": "node scripts/verify-authority-layer-activation-attribution.mjs",
-    "verify:agentic-execution-governance-demo": "node scripts/verify-agentic-execution-governance-demo.mjs"
+    "verify:agentic-execution-governance-demo": "node scripts/verify-agentic-execution-governance-demo.mjs",
+    "verify:mcp-adk-authority-proof": "node scripts/verify-mcp-adk-authority-proof.mjs"
   },
   "dependencies": {
     "@neurarelay/sdk": "0.1.1"

@@ -1,0 +1,44 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_mcp_adk_authority_demo",
+    "owner": "owner_ref_demo_engineering_workspace",
+    "capability": "mcp_adk_authority_layer_proof",
+    "capabilityVersion": "capability_version_ref_mcp_adk_authority_v0_1"
+  },
+  "proposedAction": {
+    "type": "mcp_adk.deployment",
+    "summary": "Promote a production deployment even though the runner only has read and preview authority.",
+    "target": "production_deployment_ref:relay_main"
+  },
+  "affectedObject": "production_deployment_ref:relay_main",
+  "context": {
+    "adkStyleRunner": {
+      "runnerRef": "adk_style_runner_ref:release_manager_loop",
+      "eventRef": "runner_event_ref:production_deploy_proposed",
+      "orchestrationPosture": "proposed_tool_call_before_execution"
+    },
+    "mcpTool": {
+      "serverRef": "mcp_server_ref:deployment_tools",
+      "toolName": "deployment.promote",
+      "toolCallRef": "mcp_tool_call_ref:production_deploy_promote",
+      "runtimeOwner": "developer_runtime"
+    },
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_mcp_adk_authority_demo",
+      "authorityScope": "preview_deployment_ref:relay_preview",
+      "allowedActions": ["mcp_adk.repo_search", "mcp_adk.preview_check"],
+      "allowedResources": ["preview_deployment_ref:relay_preview"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_production_deploy_requires_operator"],
+      "authorityScopeRef": "authority_scope_ref_preview_only_release_runner",
+      "standingRef": "registry_passport_standing_ref_active"
+    },
+    "evidenceRefs": ["deployment_plan_ref_missing_operator_approval"],
+    "ruleRefs": ["policy_ref_production_deploy_requires_operator"],
+    "riskCategory": "production_deployment critical",
+    "requestedOutcome": "decision_receipt"
+  }
+}

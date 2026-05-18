@@ -1,0 +1,45 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_mcp_adk_authority_demo",
+    "owner": "owner_ref_demo_engineering_workspace",
+    "capability": "mcp_adk_authority_layer_proof",
+    "capabilityVersion": "capability_version_ref_mcp_adk_authority_v0_1"
+  },
+  "proposedAction": {
+    "type": "mcp_adk.package_publish",
+    "summary": "Publish a package release from an orchestrated runner after publisher authority changed.",
+    "target": "package_ref:authority_adapter_release"
+  },
+  "affectedObject": "package_ref:authority_adapter_release",
+  "context": {
+    "adkStyleRunner": {
+      "runnerRef": "adk_style_runner_ref:package_release_loop",
+      "eventRef": "runner_event_ref:package_publish_proposed",
+      "orchestrationPosture": "proposed_tool_call_before_execution"
+    },
+    "mcpTool": {
+      "serverRef": "mcp_server_ref:package_registry_tools",
+      "toolName": "npm.publish",
+      "toolCallRef": "mcp_tool_call_ref:package_publish",
+      "runtimeOwner": "developer_runtime"
+    },
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_mcp_adk_authority_demo",
+      "authorityScope": "package_ref:authority_adapter_release",
+      "allowedActions": ["mcp_adk.package_publish"],
+      "allowedResources": ["package_ref:authority_adapter_release"],
+      "expiresAt": "2026-05-15T23:59:59Z",
+      "revocationStatus": "changed",
+      "policyRefs": ["policy_ref_package_publish_requires_human_review"],
+      "authorityScopeRef": "authority_scope_ref_package_publish",
+      "standingRef": "registry_passport_standing_ref_review_required",
+      "reviewRequiredWhenMissingOrChanged": true
+    },
+    "evidenceRefs": ["release_notes_ref_package_candidate", "build_result_ref_local_passed"],
+    "ruleRefs": ["policy_ref_package_publish_requires_human_review"],
+    "riskCategory": "package_publish high",
+    "requestedOutcome": "decision_receipt"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "version": "0.1",
+  "agent": {
+    "id": "agent_ref_mcp_adk_authority_demo",
+    "owner": "owner_ref_demo_engineering_workspace",
+    "capability": "mcp_adk_authority_layer_proof",
+    "capabilityVersion": "capability_version_ref_mcp_adk_authority_v0_1"
+  },
+  "proposedAction": {
+    "type": "mcp_adk.repo_search",
+    "summary": "Search repository documentation for an existing safe integration path before changing code.",
+    "target": "repo_search_ref:docs_examples"
+  },
+  "affectedObject": "repo_search_ref:docs_examples",
+  "context": {
+    "adkStyleRunner": {
+      "runnerRef": "adk_style_runner_ref:docs_research_loop",
+      "eventRef": "runner_event_ref:repo_search_proposed",
+      "orchestrationPosture": "proposed_tool_call_before_execution"
+    },
+    "mcpTool": {
+      "serverRef": "mcp_server_ref:developer_tools",
+      "toolName": "repo.search",
+      "toolCallRef": "mcp_tool_call_ref:repo_search_docs_examples",
+      "runtimeOwner": "developer_runtime"
+    },
+    "authorityContext": {
+      "delegatedBy": "user_ref_workspace_owner",
+      "actingAgent": "agent_ref_mcp_adk_authority_demo",
+      "authorityScope": "repo_search_ref:docs_examples",
+      "allowedActions": ["mcp_adk.repo_search"],
+      "allowedResources": ["repo_search_ref:docs_examples"],
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "revocationStatus": "active",
+      "policyRefs": ["policy_ref_read_only_repo_research"],
+      "authorityScopeRef": "authority_scope_ref_read_only_repo_research",
+      "standingRef": "registry_passport_standing_ref_active"
+    },
+    "evidenceRefs": ["task_ref_docs_integration_lookup", "repo_ref_public_examples"],
+    "ruleRefs": ["policy_ref_read_only_repo_research"],
+    "riskCategory": "read_only_research",
+    "requestedOutcome": "decision_receipt"
+  }
+}

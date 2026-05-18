@@ -1,0 +1,60 @@
+{
+  "name": "mcp-adk-authority-layer-proof",
+  "version": "0.1",
+  "status": "local_dry_run_proof",
+  "thesis": "MCP-style connectivity exposes tools, ADK-style orchestration proposes actions, and Neura returns the pre-action Decision Receipt before runtime-owned execution.",
+  "pattern": [
+    "ADK-style runner proposes a tool action",
+    "Neura Action Card captures actor, action, target, authority, policy, and evidence refs",
+    "Relay returns a Decision Receipt with receipt_ref and trace_ref",
+    "MCP/tool/runtime-owned execution route is attached after the receipt",
+    "Neura does not execute the downstream action"
+  ],
+  "examples": [
+    {
+      "id": "repo-search-proceed",
+      "family": "mcp_adk.repo_search",
+      "tool": "repo.search",
+      "path": "examples/mcp-adk-authority/action-cards/repo-search-proceed.json",
+      "expectedDecision": "proceed",
+      "expectedRoute": "proceed"
+    },
+    {
+      "id": "issue-comment-revise",
+      "family": "mcp_adk.issue_comment",
+      "tool": "github.issue_comment.create",
+      "path": "examples/mcp-adk-authority/action-cards/issue-comment-revise.json",
+      "expectedDecision": "revise",
+      "expectedRoute": "revise"
+    },
+    {
+      "id": "deployment-stop",
+      "family": "mcp_adk.deployment",
+      "tool": "deployment.promote",
+      "path": "examples/mcp-adk-authority/action-cards/deployment-stop.json",
+      "expectedDecision": "stop",
+      "expectedRoute": "stop"
+    },
+    {
+      "id": "package-publish-human-review",
+      "family": "mcp_adk.package_publish",
+      "tool": "npm.publish",
+      "path": "examples/mcp-adk-authority/action-cards/package-publish-human-review.json",
+      "expectedDecision": "human_review",
+      "expectedRoute": "human_review"
+    }
+  ],
+  "boundaries": {
+    "refs_only": true,
+    "local_dry_run": true,
+    "downstream_execution_by_neura": false,
+    "runtime_owned_execution": true,
+    "private_payload_persistence": false,
+    "tokens_or_secrets": false,
+    "provider_integration": false,
+    "provider_approval_claim": false,
+    "directory_listing_claim": false,
+    "endorsement_or_partnership_claim": false,
+    "public_surface_change": false
+  }
+}
