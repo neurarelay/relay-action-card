@@ -115,19 +115,22 @@ rejectUnsafe("scenarios", scenarios);
 const docs = read("docs/openclaw-core-skill-pack.md");
 requireIncludes("docs", docs, [
   "OpenClaw Core Skill Pack",
-  "ClawHub skill publication requires separate Roman approval",
+  "community skill pack published on ClawHub",
   "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@neurarelay/openclaw-preflight-adapter@0.1.4",
+  "neura-openclaw-core@0.1.0",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
-  "ClawHub Skill Candidate",
+  "ClawHub Skill",
   "Skill name",
   "neura-openclaw-core",
   "Current status",
-  "local candidate only; no ClawHub skill publication has been performed",
+  "published as `neura-openclaw-core@0.1.0` under owner `neurarelay`",
+  "https://clawhub.ai/neurarelay/neura-openclaw-core",
+  "moderation `CLEAN`; security `PENDING`",
   "npm run verify:openclaw-core-skill-pack",
   "does not publish to ClawHub",
-  "no official OpenClaw / ClawHub approval, listing, endorsement, partnership, integration, or skill publication claim",
+  "no official OpenClaw / ClawHub approval, listing, endorsement, partnership, or integration claim",
 ]);
 rejectUnsafe("docs", docs);
 
