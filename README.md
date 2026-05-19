@@ -22,9 +22,25 @@ npm run proof:claude -- --dry-run --json
 npm run proof:a2a -- --agent-card-only --json
 npm run proof:openclaw -- --dry-run --json
 npm run proof:swarm-authority -- --dry-run --json
+npm run proof:flow-aware-authority -- --dry-run --json
 ```
 
 See [`docs/ecosystem-availability.md`](docs/ecosystem-availability.md) for the MCP, OpenAI, Claude, A2A, OpenClaw, SDK/GitHub, and swarm-runtime paths. These are developer proof paths only. They do not claim OpenAI, Anthropic, OpenClaw, ClawHub, A2A, provider, directory, listing, endorsement, approval, integration, or partnership status.
+
+## Flow-Aware Authority Gate: Security Depth Proof
+
+Use this proof when the hard question is not just whether a tool is allowed, but whether an agent has authority to move source-derived data through a transformation into a sink.
+
+```bash
+npm run proof:flow-aware-authority -- --dry-run --json
+npm run verify:flow-aware-authority-gate
+```
+
+The proof binds source refs, transformation refs, sink/destination refs, purpose refs, authority freshness/scope refs, tool side-effect refs, policy/evidence refs, data labels, and exact-call `params_hash` before developer-owned execution.
+
+It covers 20 deterministic dry-run scenarios, including SQL/base64/public-sink movement, indirect prompt injection, tool poisoning, excessive agency, secret leakage, memory poisoning, cross-tenant leaks, browser submits, package publishes, permission changes, workflow state changes, deployment changes, multi-agent handoff loss, stale authority, hidden tool side effects, and allowed tool / forbidden data movement cases.
+
+See [`docs/flow-aware-authority-gate-proof.md`](docs/flow-aware-authority-gate-proof.md). Boundary: this is a public dry-run proof with no downstream execution by Neura, no private payload persistence, no provider/listing/partnership claim, no full runtime taint-tracking claim, and no claim that all possible scenarios are covered.
 
 ## Package Reality: Start Here
 
@@ -332,6 +348,7 @@ These are OpenClaw-style examples, not an official OpenClaw, OpenClaw OS, OpenUI
 - [`docs/developer-owned-agent-walkthrough.md`](docs/developer-owned-agent-walkthrough.md): developer-owned agent flow.
 - [`docs/authorization-bypass-scenarios.md`](docs/authorization-bypass-scenarios.md): authorization-bypass scenario proof.
 - [`docs/agentic-consent-delegated-authority.md`](docs/agentic-consent-delegated-authority.md): Agentic consent / delegated authority proof.
+- [`docs/flow-aware-authority-gate-proof.md`](docs/flow-aware-authority-gate-proof.md): Flow-Aware Authority Gate dry-run proof for source -> transformation -> sink authority checks.
 
 ### SDK, MCP, A2A, And Skills
 

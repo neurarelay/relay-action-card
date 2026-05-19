@@ -20,6 +20,13 @@ function readJson(file) {
   return JSON.parse(read(file));
 }
 
+function readSection(text, startHeading, nextHeading) {
+  const startIndex = text.indexOf(startHeading);
+  if (startIndex === -1) return "";
+  const endIndex = text.indexOf(nextHeading, startIndex + startHeading.length);
+  return endIndex === -1 ? text.slice(startIndex) : text.slice(startIndex, endIndex);
+}
+
 function requireFile(file) {
   if (!existsSync(path(file))) failures.push(`missing_${file}`);
 }
@@ -85,6 +92,7 @@ function expectEqual(label, actual, expected) {
 }
 
 const requiredFiles = [
+  "README.md",
   "docs/flow-aware-authority-gate-proof.md",
   "examples/flow-aware-authority/run-proof.mjs",
   "scripts/verify-flow-aware-authority-gate.mjs",
@@ -102,6 +110,44 @@ expectEqual(
   "package_script_verify_flow_gate",
   packageJson.scripts?.["verify:flow-aware-authority-gate"],
   "node scripts/verify-flow-aware-authority-gate.mjs",
+);
+
+const readme = read("README.md");
+requireIncludes("readme", readme, [
+  "Flow-Aware Authority Gate: Security Depth Proof",
+  "npm run proof:flow-aware-authority -- --dry-run --json",
+  "npm run verify:flow-aware-authority-gate",
+  "docs/flow-aware-authority-gate-proof.md",
+  "source refs, transformation refs, sink/destination refs",
+  "authority freshness/scope refs",
+  "tool side-effect refs",
+  "exact-call `params_hash`",
+  "20 deterministic dry-run scenarios",
+  "SQL/base64/public-sink",
+  "indirect prompt injection",
+  "tool poisoning",
+  "excessive agency",
+  "secret leakage",
+  "memory poisoning",
+  "cross-tenant leaks",
+  "browser submits",
+  "package publishes",
+  "permission changes",
+  "workflow state changes",
+  "deployment changes",
+  "multi-agent handoff loss",
+  "stale authority",
+  "hidden tool side effects",
+  "allowed tool / forbidden data movement",
+  "no downstream execution by Neura",
+  "no private payload persistence",
+  "no provider/listing/partnership claim",
+  "no full runtime taint-tracking claim",
+  "no claim that all possible scenarios are covered",
+]);
+rejectUnsafeClaims(
+  "readme_flow_section",
+  readSection(readme, "## Flow-Aware Authority Gate: Security Depth Proof", "## Package Reality: Start Here"),
 );
 
 const docs = read("docs/flow-aware-authority-gate-proof.md");
