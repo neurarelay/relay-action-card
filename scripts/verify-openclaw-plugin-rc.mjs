@@ -10,7 +10,7 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const canonicalClawHubVersion = "0.1.3";
+const canonicalClawHubVersion = "0.1.4";
 const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackClawHubPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -198,7 +198,7 @@ requireIncludes("release_doc", releaseDoc, [
   "npm run verify:openclaw-runtime-approval",
   "Node `24`",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
-  "No canonical `@neurarelay` ClawHub publication has been performed",
+  "canonical `@neurarelay` ClawHub community package has been published as `0.1.4`",
   "Roman's explicit approval",
   "https://docs.openclaw.ai/plugins/manifest",
   "https://docs.openclaw.ai/plugins/building-plugins",
@@ -216,8 +216,8 @@ requireIncludes("approval_doc", approvalDoc, [
   "openclaw --profile neura-rc plugins install -l examples/openclaw/preflight-adapter",
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
-  "Do not run this without Roman approval",
-  "no canonical `@neurarelay` ClawHub publication has been performed",
+  "Do not run a future package-version or README-polish release without Roman approval",
+  "canonical `@neurarelay` ClawHub community package `0.1.4` is published with audits pending",
 ]);
 rejectUnsafe("approval_doc", approvalDoc);
 

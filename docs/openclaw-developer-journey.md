@@ -22,7 +22,7 @@ npm run openclaw:proof
 Optional attribution:
 
 ```bash
-npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+npm run openclaw:proof -- --source=openclaw_clawhub --campaign=ecosystem_availability_openclaw
 npm run openclaw:proof -- --live --source=chatgpt_gpt_store --campaign=action_card_proof_runner --surface=gpt_store_helper
 ```
 

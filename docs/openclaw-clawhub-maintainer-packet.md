@@ -1,9 +1,9 @@
 # OpenClaw-Style ClawHub Maintainer Packet
 
-Status: public-safe evidence packet; no OpenClaw / ClawHub listing, approval, publication, or partnership claim
-Date: 2026-05-13
+Status: public-safe evidence packet; canonical ClawHub community package published; no OpenClaw / ClawHub listing, approval, or partnership claim
+Date: 2026-05-18
 
-This packet collects the public evidence for reviewing the `@neurarelay` publisher-access request. It is intentionally an evidence index, not an official OpenClaw / ClawHub approval claim.
+This packet collects the public evidence for the `@neurarelay` OpenClaw-style preflight adapter path. It is intentionally an evidence index, not an official OpenClaw / ClawHub approval claim.
 
 ## Review Links
 
@@ -30,12 +30,16 @@ This packet collects the public evidence for reviewing the `@neurarelay` publish
 | Stable source commit | `fd349da8612e8523faf982d6ec47a69ab3d5d87c` |
 | Current source commit | `6bd9216402ee2778e3e592c9bef69ad7e841df9c` |
 | Package family | `code-plugin` |
+| Canonical ClawHub community package | `@neurarelay/openclaw-preflight-adapter@0.1.4` |
+| Canonical ClawHub plugin id | `neurarelay-openclaw-preflight-adapter` |
+| ClawHub audit state | ClawScan pending; Static analysis pass; VirusTotal pending |
 | Runtime tool | `neura_relay_preflight_action` |
 | Node floor | `>=22.14.0`; repo-pinned Node `24` |
 
 ## What Reviewers Can Verify
 
 - The stable npm package is live as `@neurarelay/openclaw-preflight-adapter@0.1.1`.
+- The canonical ClawHub community package is visible as `@neurarelay/openclaw-preflight-adapter@0.1.4`.
 - A clean npm consumer install verifier passes against the public package.
 - The ClawHub package dry-run passed under Node `24.15.0`.
 - GitHub Actions is green for the current OpenClaw-style integration commit.
@@ -59,7 +63,7 @@ npm run test:openclaw-preflight-adapter
 npm run test:openclaw-five-minute-demo
 ```
 
-The ClawHub release gate may run a dry-run package command, but it does not publish the package.
+The ClawHub release gate may run a dry-run package command, but it does not publish a new package version.
 
 ## Claim Boundaries
 
@@ -71,4 +75,4 @@ The ClawHub release gate may run a dry-run package command, but it does not publ
 - no public A2A token issuance
 - no unprotected A2A execution
 - no Registry auto-approval
-- maintainer or admin review is still required for ClawHub namespace or member access
+- ClawHub security audits and any maintainer/admin review should be treated as pending operational state, not approval

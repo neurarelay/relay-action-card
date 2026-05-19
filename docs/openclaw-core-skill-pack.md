@@ -1,6 +1,6 @@
 # OpenClaw Core Skill Pack
 
-Status: local community skill pack; ClawHub publication requires separate Roman approval  
+Status: local community skill pack; ClawHub skill publication requires separate Roman approval
 Date: 2026-05-13
 
 The OpenClaw Core Skill Pack gives agents one entry point for using Neura Relay before consequential local actions execute.
@@ -16,12 +16,13 @@ This is not an official OpenClaw or ClawHub integration, approval, endorsement, 
 | Surface | Current truth |
 | --- | --- |
 | Canonical npm package | `@neurarelay/openclaw-preflight-adapter@0.1.1` |
-| Current ClawHub community fallback | `@rpelevin/neura-relay-preflight-adapter@0.1.1` |
-| Canonical publisher request | `openclaw/clawhub#2190` |
+| Canonical ClawHub community package | `@neurarelay/openclaw-preflight-adapter@0.1.4` |
+| Historical ClawHub community fallback | `@rpelevin/neura-relay-preflight-adapter@0.1.1` |
+| ClawHub history thread | `openclaw/clawhub#2190` |
 | Source repo | `neurarelay/relay-action-card` |
-| Claim boundary | no official OpenClaw / ClawHub approval, endorsement, partnership, or canonical namespace claim |
+| Claim boundary | no official OpenClaw / ClawHub approval, listing, endorsement, partnership, integration, or skill publication claim |
 
-Use the canonical npm package for JavaScript imports. Treat the ClawHub fallback as a community publication while the `@neurarelay` publisher namespace is pending. The current `0.1.1` fallback is a metadata/readme correction for ClawHub; it does not replace the canonical npm package and does not create an official OpenClaw / ClawHub claim.
+Use the canonical npm package for JavaScript imports. Use the canonical ClawHub community package for OpenClaw installs when ClawHub audits and local policy allow it. The `@rpelevin` package remains a historical founder-publisher fallback only; it does not replace the canonical package and does not create an official OpenClaw / ClawHub claim.
 
 ## Contents
 
@@ -32,6 +33,21 @@ Use the canonical npm package for JavaScript imports. Treat the ClawHub fallback
 | `examples/openclaw/preflight-adapter` | Runtime `beforeAction(preflightAction)` adapter |
 | `docs/openclaw-copy-paste-agent-integration.md` | Copy-paste guard for local tool calls |
 | `docs/openclaw-clawhub-submission-readiness.md` | Publication and namespace truth packet |
+
+## ClawHub Skill Candidate
+
+Recommended first skill surface, if Roman later approves exact publication:
+
+| Field | Value |
+| --- | --- |
+| Skill name | `neura-openclaw-core` |
+| Display name | `Neura Relay Core For OpenClaw-Style Agents` |
+| Source path | `skills/openclaw/neura-relay-core` |
+| Package relationship | complements the plugin; does not replace `@neurarelay/openclaw-preflight-adapter` |
+| Purpose | teaches agents when to request a refs-only Action Card / Decision Receipt before messages, files, browser submits, shell commands, package/publisher changes, workflow state, memory writes, or data exports |
+| Current status | local candidate only; no ClawHub skill publication has been performed |
+
+This is the right second ClawHub surface because it gives agent builders the operating workflow while the plugin gives them the runtime hook. Do not publish the skill or add dashboard copy without Roman approval of the exact action and public text.
 
 ## What Agents Should Do
 

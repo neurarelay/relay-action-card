@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.3";
+const packageVersion = "0.1.4";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -154,7 +154,7 @@ if (Object.hasOwn(manifest, "compat")) failures.push("manifest_must_not_hold_com
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
-  "canonical `@neurarelay` ClawHub `0.1.3` package staged",
+  "canonical `@neurarelay` ClawHub community package `0.1.4` published",
   packageName,
   packageVersion,
   pluginId,
@@ -172,6 +172,10 @@ requireIncludes("submission_packet", packet, [
   "founder-publisher fallback remains published",
   "no official OpenClaw / ClawHub approval or listing claim",
   "toolNames=[\"neura_relay_preflight_action\"]",
+  "releaseId\": \"rd72j7xj1e8y2tajcf4h21k9v586z1tw\"",
+  "artifactSha256\": \"9e0df97f7d2e1e44a4d2c30d785a91ed1792219eddb0bfbec06af0a37a8f3eae\"",
+  "ClawScan pending",
+  "VirusTotal pending",
   "npm run verify:openclaw-runtime-approval",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
   "--dry-run --json",
@@ -180,7 +184,7 @@ requireIncludes("submission_packet", packet, [
   "Claim Boundaries",
   "Roman Approval Decision",
   `Approved: run ClawHub dry-run only for ${packageName}@${packageVersion}.`,
-  `Approved: publish ${packageName}@${packageVersion} to ClawHub`,
+  "Approved: publish a future README-only ClawHub polish release",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.1 to ClawHub as a community founder-publisher metadata/readme correction",
 ]);

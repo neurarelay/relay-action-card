@@ -109,7 +109,7 @@ npm run openclaw:proof -- --live --source=chatgpt_gpt_store --campaign=action_ca
 Optional refs-only attribution for live receipts:
 
 ```bash
-npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+npm run openclaw:proof -- --source=openclaw_clawhub --campaign=ecosystem_availability_openclaw
 NEURA_SOURCE=github NEURA_CAMPAIGN=first_receipt npm run example:relay -- --json
 ```
 
@@ -294,7 +294,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 
 - [`examples/openclaw/QUICKSTART.md`](examples/openclaw/QUICKSTART.md): fastest GitHub visitor path for the OpenClaw-style 5-minute receipt demo.
 - [`docs/openclaw-copy-paste-agent-integration.md`](docs/openclaw-copy-paste-agent-integration.md): copy-paste `beforeAction()` guard for agent runtimes before `message.send`, `file.delete`, and `package.publish`.
-- [`docs/openclaw-core-skill-pack.md`](docs/openclaw-core-skill-pack.md): single core skill pack for OpenClaw-style agents, including package/publisher action review and the current `@rpelevin` ClawHub community fallback boundary.
+- [`docs/openclaw-core-skill-pack.md`](docs/openclaw-core-skill-pack.md): single core skill pack for OpenClaw-style agents, including package/publisher action review and the current ClawHub community-package boundary.
 - [`docs/openclaw-computer-use-agent-loop.md`](docs/openclaw-computer-use-agent-loop.md): generic computer-use loop that pauses before message send, file delete, and package publish execution.
 - [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md): one-command developer journey proof.
 - [`docs/openclaw-five-minute-receipt-demo.md`](docs/openclaw-five-minute-receipt-demo.md): fastest install-to-proof path for message send, file delete, and package publish preflight.
@@ -305,7 +305,7 @@ The OpenClaw-style lane is rooted in `examples/openclaw/` and `skills/openclaw/`
 - [`docs/openclaw-severe-preflight-queue.md`](docs/openclaw-severe-preflight-queue.md): runtime-style queue that sends the severe scenario through `adapter.beforeAction(preflightAction)` before local execution.
 - [`docs/openclaw-clawhub-maintainer-packet.md`](docs/openclaw-clawhub-maintainer-packet.md): concise public-safe evidence index for ClawHub publisher-access review.
 - [`docs/openclaw-clawhub-response-checklist.md`](docs/openclaw-clawhub-response-checklist.md): local response path for grant, proof request, package-change request, rejection, or deferral.
-- [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md): final approval packet for an official OpenClaw / ClawHub submission or package publication decision.
+- [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md): current ClawHub package truth and future package-change approval packet.
 
 The near-miss report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. The workspace surface includes `workspace-surface/`, `run-workspace-decision-surface.mjs`, `verify-openclaw-workspace-surface.mjs`, and `openclaw-workspace-surface.test.mjs`. The Severe Scenario Proof Pack adds a single five-checkpoint incident path in `severe-scenario-proof/` with local HTML, Markdown, JSON, verifier, and unit test coverage. The Severe Preflight Queue runs the same incident through the actual adapter shape and records execution attempted as `false`.
 
@@ -438,7 +438,7 @@ npm run verify:openclaw-runtime-approval
 npm run test:openclaw-preflight-adapter
 ```
 
-The canonical ClawHub package is staged as `@neurarelay/openclaw-preflight-adapter@0.1.3` with plugin id `neurarelay-openclaw-preflight-adapter`. npm latest remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until a separate npm publish is approved. The release path is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the current ClawHub truth packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). The ClawHub community fallback remains published as `@rpelevin/neura-relay-preflight-adapter@0.1.1`. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or integration claim exists.
+The canonical ClawHub community package is published as `@neurarelay/openclaw-preflight-adapter@0.1.4` with plugin id `neurarelay-openclaw-preflight-adapter`; ClawHub shows current version `v0.1.4`, `latest` and `stable` tags, visible README, and security audits still pending. npm latest remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until a separate npm publish is approved. The release path is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the current ClawHub truth packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). The historical ClawHub community fallback remains published as `@rpelevin/neura-relay-preflight-adapter@0.1.1`. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or integration claim exists.
 
 The intentional adoption path is the stable install below.
 

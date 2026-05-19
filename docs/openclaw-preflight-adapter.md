@@ -1,6 +1,6 @@
 # OpenClaw-Style Preflight Adapter v0.1
 
-Status: stable npm package published; OpenClaw / ClawHub submission remains approval-gated
+Status: stable npm package published; canonical ClawHub community package published; further OpenClaw / ClawHub changes remain approval-gated
 Date: 2026-05-12
 
 This adapter turns the Action Receipt Kit into a plugin-ready runtime contract:
@@ -56,6 +56,14 @@ npm install @neurarelay/openclaw-preflight-adapter
 
 This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
 
+Published canonical ClawHub community package:
+
+```text
+clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
+```
+
+ClawHub currently shows current version `v0.1.4`, `latest` and `stable` tags, visible README, Static analysis pass, and ClawScan / VirusTotal pending. This is community package availability only, not an official OpenClaw or ClawHub approval, listing, endorsement, integration, or partnership.
+
 Use the package surface:
 
 ```js
@@ -78,7 +86,7 @@ npm run test:openclaw-preflight-adapter
 npm run test:openclaw-preflight-adapter:e2e
 ```
 
-Official OpenClaw / ClawHub submission or package publication requires Roman approval of the exact metadata, package name, public description, and publish/submission action.
+Further OpenClaw / ClawHub submission, package-version release, README polish release, metadata change, or public-copy action requires Roman approval of the exact metadata, package name, public description, and publish/submission action.
 
 ## Contract
 
@@ -101,7 +109,7 @@ It returns:
 ## Boundaries
 
 - no official OpenClaw or ClawHub claim
-- no OpenClaw / ClawHub submission or publication without Roman approval
+- no further OpenClaw / ClawHub submission, package-version release, metadata change, or public-copy action without Roman approval
 - no public API-key issuance
 - no public production MCP token issuance
 - no public A2A token issuance

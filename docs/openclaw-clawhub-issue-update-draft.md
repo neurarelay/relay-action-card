@@ -1,14 +1,15 @@
 # ClawHub Issue Update Draft
 
-Status: draft only; do not post without Roman approval
-Date: 2026-05-13
+Status: historical draft; superseded by May 18 canonical package publication; do not post without Roman approval
+Date: 2026-05-18
 
-Use this as the next claim-safe update for `openclaw/clawhub#2190` after Roman approves posting.
+Use only as historical context. The current ClawHub truth is in [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md): the canonical `@neurarelay/openclaw-preflight-adapter@0.1.4` community package is published and visible, security audits are pending, and no official OpenClaw / ClawHub approval, listing, endorsement, integration, or partnership claim exists.
 
 ```markdown
-Quick update from the `@neurarelay` side:
+Historical draft from the `@neurarelay` side:
 
 - Stable npm package: `@neurarelay/openclaw-preflight-adapter@0.1.1`
+- Canonical ClawHub community package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
 - Source path: `neurarelay/relay-action-card`, `examples/openclaw/preflight-adapter`
 - Green CI for the current OpenClaw-style integration commit: https://github.com/neurarelay/relay-action-card/actions/runs/25795608585
 - Maintainer evidence packet: https://github.com/neurarelay/relay-action-card/blob/main/docs/openclaw-clawhub-maintainer-packet.md
@@ -17,5 +18,5 @@ Quick update from the `@neurarelay` side:
 
 The adapter gives local autonomous computer-use runtimes a `beforeAction(preflightAction)` path before `message.send`, `file.delete`, and `package.publish`. It returns a Neura Decision Receipt route while the developer runtime keeps execution ownership.
 
-Boundary: this is not an official OpenClaw / ClawHub integration, listing, approval, publication, endorsement, or partnership claim. The request is still for maintainer/admin review of publisher namespace access.
+Boundary: this is not an official OpenClaw / ClawHub integration, listing, approval, publication, endorsement, or partnership claim. ClawHub security audits and any maintainer/admin review remain operational state, not approval.
 ```

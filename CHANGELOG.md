@@ -1,5 +1,20 @@
 # Changelog
 
+## ClawHub README-only polish release - 2026-05-18
+
+- Publishes the canonical ClawHub community package as `@neurarelay/openclaw-preflight-adapter@0.1.4` from the same source path with no functional behavior changes.
+- Moves the package README and metadata to the current canonical ClawHub version so the live ClawHub page presents the clean install path and claim boundaries.
+- Preserves npm latest as `@neurarelay/openclaw-preflight-adapter@0.1.1`; no npm `0.1.4` publish was performed.
+- Preserves the historical `@rpelevin/neura-relay-preflight-adapter@0.1.1` fallback and keeps the no-official-claim boundary.
+
+## ClawHub canonical community package metadata repair - 2026-05-18
+
+- Publishes the canonical ClawHub community package as `@neurarelay/openclaw-preflight-adapter@0.1.3`, release id `rd72j7xj1e8y2tajcf4h21k9v586z1tw`, source-linked to `neurarelay/relay-action-card@4d4e6730ada58e1589ac2c84c9411c58eabe10a7`.
+- Uses plugin id `neurarelay-openclaw-preflight-adapter` so it does not collide with the historical founder-publisher fallback id.
+- ClawHub now shows current version `v0.1.3`, `latest` and `stable` tags, visible README, Static analysis pass, and ClawScan / VirusTotal pending.
+- Preserves npm latest as `@neurarelay/openclaw-preflight-adapter@0.1.1`; no npm `0.1.3` publish was performed.
+- Preserves developer-owned execution, no private payload exposure, no public token/key issuance, and no official OpenClaw or ClawHub listing, approval, endorsement, integration, or partnership claim.
+
 ## OpenClaw 5-minute receipt demo - 2026-05-13
 
 - Publishes the founder-publisher fallback package to ClawHub community as `@rpelevin/neura-relay-preflight-adapter@0.1.0`, release id `rd71v95v9mqw6xebweek19qb6x86mfps`, source-linked to `neurarelay/relay-action-card@5b7a87288b90e34f7023ece6188e3e23908fd078`.

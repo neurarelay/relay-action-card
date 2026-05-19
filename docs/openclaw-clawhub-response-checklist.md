@@ -1,47 +1,48 @@
 # ClawHub Response Checklist
 
-Status: local response plan; canonical `@neurarelay` `0.1.3` publication remains approval-gated; no ClawHub listing, approval, or partnership claim
+Status: local response plan; canonical `@neurarelay` `0.1.4` community package published; no ClawHub listing, approval, or partnership claim
 Date: 2026-05-18
 
 Use this when `openclaw/clawhub#2190` receives maintainer/admin feedback.
 
-## If Publisher Access Is Granted
+## If Maintainers/Admins Respond
 
-1. Confirm the grant scope is exactly `@neurarelay` publisher access for `@rpelevin` or a verified `@neurarelay` org/team publisher path.
-2. Rerun the release gate locally using Node `24`:
+1. Confirm whether the response is about scan status, namespace/publisher access, plugin id ownership, package review, or a concrete product/change request.
+2. Treat scan progress as operational signal only. Do not claim official approval or listing from a passing scan alone.
+3. Rerun the release gate locally using Node `24` before any response that references package readiness:
 
    ```bash
    nvm use
    npm run verify:openclaw-clawhub-release
    ```
 
-3. Run the exact dry-run command one more time:
+4. If a README-only polish release is needed, run the exact dry-run command one more time with the next approved version:
 
    ```bash
-   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.3 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
+   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.5 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter --dry-run --json
    ```
 
-4. Stop for Roman approval before the real publish command:
+5. Stop for Roman approval before the real publish command:
 
    ```text
-   Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.3 to ClawHub.
+   Approved: publish @neurarelay/openclaw-preflight-adapter@0.1.5 to ClawHub.
    ```
 
-5. Only after that exact approval, run:
+6. Only after that exact approval, run:
 
    ```bash
-   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.3 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+   clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.5 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
    ```
 
-6. Verify install and runtime inspection:
+7. Verify install and runtime inspection:
 
    ```bash
-   openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.3
+   openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.5
    openclaw plugins inspect neurarelay-openclaw-preflight-adapter --runtime --json
    npm run verify:openclaw-runtime-approval
    ```
 
-7. Record the result without claiming official OpenClaw / ClawHub endorsement unless maintainers explicitly state that status.
+8. Record the result without claiming official OpenClaw / ClawHub endorsement unless maintainers explicitly state that status.
 
 ## If Maintainers Ask For Authority Proof
 

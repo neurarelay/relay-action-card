@@ -3,7 +3,7 @@
 Claim-safe OpenClaw-style preflight adapter package for Neura Relay:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.3
+@neurarelay/openclaw-preflight-adapter@0.1.4
 ```
 
 The ClawHub community fallback package remains:
@@ -12,7 +12,7 @@ The ClawHub community fallback package remains:
 @rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
-That founder-publisher package remains a temporary community fallback. The canonical `@neurarelay` ClawHub release is staged at `0.1.3` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. The latest public npm package remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until Roman separately approves a npm `0.1.3` publish.
+The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` ClawHub community package is published at `0.1.4` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. ClawHub shows the canonical package with `latest` and `stable` tags, current version `v0.1.4`, visible README, and security audits still pending. The latest public npm package remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until Roman separately approves a npm publish.
 
 It shows how a local autonomous computer-use runtime can call:
 
@@ -23,7 +23,7 @@ beforeAction(preflightAction)
   -> developer-owned route
 ```
 
-It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. OpenClaw / ClawHub publishing or submission requires Roman approval of the exact action.
+It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. Any further OpenClaw / ClawHub publishing, submission, package-version, or public-copy change requires Roman approval of the exact action.
 
 ## Install From npm
 
@@ -31,18 +31,24 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm `0.1.3` publish is approved.
+This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm publish is approved.
 
-When installing the current ClawHub community fallback, pin the published version:
+When installing the current canonical ClawHub community package, use:
+
+```bash
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter
+```
+
+Pin `0.1.4` when you need the exact current ClawHub package version:
+
+```bash
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
+```
+
+When installing the historical founder-publisher fallback, pin the published version:
 
 ```bash
 openclaw plugins install clawhub:@rpelevin/neura-relay-preflight-adapter@0.1.1
-```
-
-When Roman approves the canonical ClawHub publish, the intended install command is:
-
-```bash
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.3
 ```
 
 ```js
@@ -72,7 +78,7 @@ or `stop_before_execution`.
 - Neura does not execute the downstream action.
 - Private payload values, raw file contents, raw shell commands, and secrets must not be sent.
 - Public demo refs are treated as developer-supplied until Registry-backed authority is available.
-- The ClawHub community package and the staged canonical package are not official OpenClaw or ClawHub listings, approvals, endorsements, partnerships, or integration claims.
+- The ClawHub community packages are not official OpenClaw or ClawHub listings, approvals, endorsements, partnerships, or integration claims.
 
 ## Run
 

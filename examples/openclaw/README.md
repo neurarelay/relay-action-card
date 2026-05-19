@@ -18,7 +18,7 @@ npm run verify:openclaw-five-minute-demo
 
 Read [`QUICKSTART.md`](QUICKSTART.md) for the 5-minute GitHub visitor path. For reviewer-facing evidence, use [`docs/openclaw-clawhub-maintainer-packet.md`](../../docs/openclaw-clawhub-maintainer-packet.md).
 
-For a single agent-facing entry point, use [`skills/openclaw/neura-relay-core`](../../skills/openclaw/neura-relay-core) with [`docs/openclaw-core-skill-pack.md`](../../docs/openclaw-core-skill-pack.md). It covers message, file, browser, shell, package/publisher, workflow, memory, and data-export preflight review while preserving the current community fallback boundary.
+For a single agent-facing entry point, use [`skills/openclaw/neura-relay-core`](../../skills/openclaw/neura-relay-core) with [`docs/openclaw-core-skill-pack.md`](../../docs/openclaw-core-skill-pack.md). It covers message, file, browser, shell, package/publisher, workflow, memory, and data-export preflight review while preserving the community-package and no-official-claim boundaries.
 
 Start with the full local proof:
 
@@ -34,7 +34,7 @@ npm run openclaw:proof -- --live
 Add refs-only activation attribution when you want Relay receipts to show where a proof run came from:
 
 ```bash
-npm run openclaw:proof -- --source=clawhub --campaign=founder_fallback
+npm run openclaw:proof -- --source=openclaw_clawhub --campaign=ecosystem_availability_openclaw
 npm run openclaw:proof -- --live --source=chatgpt_gpt_store --campaign=action_card_proof_runner --surface=gpt_store_helper
 NEURA_SOURCE=github NEURA_CAMPAIGN=openclaw npm run openclaw:receipts -- --only=send-message --json
 ```
@@ -122,4 +122,4 @@ The Severe Scenario Proof Pack at `severe-scenario-proof/scenario.json` generate
 
 The Severe Preflight Queue at `run-severe-preflight-queue.mjs` generates `artifacts/openclaw-severe-preflight-queue/transcript.html` for the same incident using the existing `adapter.beforeAction(preflightAction)` path. It shows each preflight action, generated Action Card, adapter route, projected or live receipt route, and execution attempted as `false`. It is safe local projection by default; `--live` requests Relay receipts without local computer-use execution.
 
-The `preflight-adapter` folder adds the npm-published `beforeAction(preflightAction)` stable package for local autonomous computer-use runtimes: `@neurarelay/openclaw-preflight-adapter@0.1.1` under the `latest` tag. The old `rc` tag remains available only for release-candidate history. It is not submitted, listed, approved, or partnered by OpenClaw / ClawHub.
+The `preflight-adapter` folder adds the npm-published `beforeAction(preflightAction)` stable package for local autonomous computer-use runtimes: `@neurarelay/openclaw-preflight-adapter@0.1.1` under the npm `latest` tag. It also backs the canonical ClawHub community package `clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4`, which is visible with `latest,stable` tags while security audits are pending. The old npm `rc` tag remains available only for release-candidate history. This is not an official OpenClaw / ClawHub listing, approval, endorsement, integration, or partnership claim.

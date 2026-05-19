@@ -89,6 +89,7 @@ requireIncludes("skill", skill, [
   "name: neura-openclaw-core",
   "Decision Receipt",
   "@neurarelay/openclaw-preflight-adapter@0.1.1",
+  "@neurarelay/openclaw-preflight-adapter@0.1.4",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
   "package/publisher",
@@ -114,13 +115,19 @@ rejectUnsafe("scenarios", scenarios);
 const docs = read("docs/openclaw-core-skill-pack.md");
 requireIncludes("docs", docs, [
   "OpenClaw Core Skill Pack",
-  "ClawHub publication requires separate Roman approval",
+  "ClawHub skill publication requires separate Roman approval",
   "@neurarelay/openclaw-preflight-adapter@0.1.1",
+  "@neurarelay/openclaw-preflight-adapter@0.1.4",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
+  "ClawHub Skill Candidate",
+  "Skill name",
+  "neura-openclaw-core",
+  "Current status",
+  "local candidate only; no ClawHub skill publication has been performed",
   "npm run verify:openclaw-core-skill-pack",
   "does not publish to ClawHub",
-  "no official OpenClaw / ClawHub approval, endorsement, partnership, or canonical namespace claim",
+  "no official OpenClaw / ClawHub approval, listing, endorsement, partnership, integration, or skill publication claim",
 ]);
 rejectUnsafe("docs", docs);
 
@@ -128,7 +135,7 @@ const adapterPackage = JSON.parse(read("examples/openclaw/preflight-adapter/pack
 if (adapterPackage.name !== "@neurarelay/openclaw-preflight-adapter") {
   failures.push("adapter_package_wrong_canonical_name");
 }
-if (adapterPackage.version !== "0.1.1") failures.push("adapter_package_wrong_version");
+if (adapterPackage.version !== "0.1.4") failures.push("adapter_package_wrong_version");
 if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
   failures.push("adapter_package_claim_boundary_not_false");
 }
@@ -137,7 +144,8 @@ const submission = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission", submission, [
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "@neurarelay/openclaw-preflight-adapter@0.1.1",
-  "community publication only",
+  "@neurarelay/openclaw-preflight-adapter@0.1.4",
+  "community publications only",
 ]);
 rejectUnsafe("submission", submission);
 
@@ -148,12 +156,14 @@ console.log(
       verifier: "openclaw-core-skill-pack",
       skill: "skills/openclaw/neura-relay-core",
       canonicalNpmPackage: "@neurarelay/openclaw-preflight-adapter@0.1.1",
+      sourcePackageVersion: "@neurarelay/openclaw-preflight-adapter@0.1.4",
       currentClawHubCommunityFallback: "@rpelevin/neura-relay-preflight-adapter@0.1.1",
-      canonicalNamespaceRequest: "openclaw/clawhub#2190",
+      canonicalClawHubCommunityPackage: "@neurarelay/openclaw-preflight-adapter@0.1.4",
+      clawHubHistoryThread: "openclaw/clawhub#2190",
       boundaries: {
         official_openclaw_or_clawhub_claim: false,
         official_provider_integration_claim: false,
-        clawhub_publication_action: false,
+        clawhub_skill_publication_action: false,
         downstream_execution_by_neura: false,
         private_payload_exposure: false,
       },

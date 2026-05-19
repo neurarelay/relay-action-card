@@ -137,8 +137,9 @@ npm run openclaw:proof -- --live --source=openclaw_clawhub --campaign=ecosystem_
 Usable today:
 
 - `@neurarelay/openclaw-preflight-adapter` is the canonical npm package path
+- `clawhub:@neurarelay/openclaw-preflight-adapter` is the canonical ClawHub community package path at version `0.1.4`
+- ClawHub currently shows current version `v0.1.4`, `latest` and `stable` tags, visible README, and security audits pending
 - local proof surfaces cover messages, files, browser submits, shell commands, workflow transitions, memory writes, data exports, and package publishing
-- ClawHub canonical activation remains an admin/plugin-id transfer question, not a product-quality gap
 
 Boundary:
 

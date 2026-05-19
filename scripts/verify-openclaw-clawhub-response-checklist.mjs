@@ -9,18 +9,20 @@ const docPath = join(repoRoot, "docs/openclaw-clawhub-response-checklist.md");
 const doc = readFileSync(docPath, "utf8");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.3";
+const currentPackageVersion = "0.1.4";
+const nextPolishVersion = "0.1.5";
 
 for (const required of [
-  "If Publisher Access Is Granted",
+  "If Maintainers/Admins Respond",
   "If Maintainers Ask For Authority Proof",
   "If Maintainers Request Package Changes",
   "If Access Is Rejected Or Deferred",
   "npm run verify:openclaw-clawhub-release",
   "clawhub package publish examples/openclaw/preflight-adapter",
   "--dry-run --json",
-  `Approved: publish ${packageName}@${packageVersion} to ClawHub.`,
-  `openclaw plugins install clawhub:${packageName}@${packageVersion}`,
+  `Approved: publish ${packageName}@${nextPolishVersion} to ClawHub.`,
+  `openclaw plugins install clawhub:${packageName}@${nextPolishVersion}`,
+  "canonical `@neurarelay` `0.1.4` community package",
   "no official OpenClaw / ClawHub integration",
   "no downstream execution by Neura",
   "no private payload exposure",
@@ -50,13 +52,15 @@ console.log(
       doc: "docs/openclaw-clawhub-response-checklist.md",
       gates: {
         roman_approval_required_before_publish: doc.includes(
-          `Approved: publish ${packageName}@${packageVersion} to ClawHub.`,
+          `Approved: publish ${packageName}@${nextPolishVersion} to ClawHub.`,
         ),
         dry_run_before_publish: doc.includes("--dry-run --json"),
         post_publish_install_check: doc.includes(
-          `openclaw plugins install clawhub:${packageName}@${packageVersion}`,
+          `openclaw plugins install clawhub:${packageName}@${nextPolishVersion}`,
         ),
       },
+      currentPackageVersion,
+      nextPolishVersion,
       boundaries: {
         official_openclaw_or_clawhub_claim: false,
         downstream_execution_by_neura: false,
