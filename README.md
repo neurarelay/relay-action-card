@@ -97,6 +97,19 @@ npm install
 npm run openclaw:proof
 ```
 
+ClawHub community surfaces are also available:
+
+- Runtime hook package: [`@neurarelay/openclaw-preflight-adapter@0.1.4`](https://clawhub.ai/plugins/@neurarelay/openclaw-preflight-adapter)
+- Agent workflow skill: [`neura-openclaw-core@0.1.0`](https://clawhub.ai/neurarelay/neura-openclaw-core)
+
+Install the community package:
+
+```bash
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
+```
+
+The package supplies the runtime hook. The skill teaches the agent workflow. ClawHub security audits remain pending. This is community availability only, not official OpenClaw or ClawHub approval, listing, endorsement, integration, or partnership.
+
 Want a guided walkthrough in ChatGPT?
 Use the public GPT Store helper: [Neura Action Card Proof Runner](https://chatgpt.com/g/g-6a05f1dd38f881918a423e62cddee88e-neura-action-card-proof-runner).
 

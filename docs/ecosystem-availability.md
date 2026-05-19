@@ -132,12 +132,15 @@ Use when a local autonomous-agent runtime needs a pre-action receipt before exec
 npm run proof:openclaw -- --dry-run --json
 npm run openclaw:proof
 npm run openclaw:proof -- --live --source=openclaw_clawhub --campaign=ecosystem_availability_openclaw
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
 ```
 
 Usable today:
 
 - `@neurarelay/openclaw-preflight-adapter` is the canonical npm package path
 - `clawhub:@neurarelay/openclaw-preflight-adapter` is the canonical ClawHub community package path at version `0.1.4`
+- ClawHub runtime hook package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
+- ClawHub agent workflow skill: [`neura-openclaw-core@0.1.0`](https://clawhub.ai/neurarelay/neura-openclaw-core)
 - ClawHub currently shows current version `v0.1.4`, `latest` and `stable` tags, visible README, and security audits pending
 - local proof surfaces cover messages, files, browser submits, shell commands, workflow transitions, memory writes, data exports, and package publishing
 
