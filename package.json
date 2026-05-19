@@ -29,6 +29,7 @@
     "proof:swarm-authority": "node scripts/run-ecosystem-proof.mjs --ecosystem=swarm-authority",
     "proof:mcp-adk-authority": "node examples/mcp-adk-authority/run-proof.mjs",
     "proof:runtime-binding": "node examples/runtime-binding/run-proof.mjs",
+    "proof:flow-aware-authority": "node examples/flow-aware-authority/run-proof.mjs",
     "proof:swarm-authority-placement": "node examples/swarm-authority-placement/run-proof.mjs",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
     "openclaw:receipts": "node examples/openclaw/run-action-receipt-kit.mjs",
@@ -94,6 +95,7 @@
     "verify:ecosystem-availability-pack": "node scripts/verify-ecosystem-availability-pack.mjs",
     "verify:mcp-adk-authority-proof": "node scripts/verify-mcp-adk-authority-proof.mjs",
     "verify:runtime-bound-action-card-proof": "node scripts/verify-runtime-bound-action-card-proof.mjs",
+    "verify:flow-aware-authority-gate": "node scripts/verify-flow-aware-authority-gate.mjs",
     "verify:swarm-authority-placement-proof": "node scripts/verify-swarm-authority-placement-proof.mjs"
   },
   "dependencies": {
