@@ -74,6 +74,11 @@ for (const [label, text] of [
 }
 
 requireIncludes("readme", readme, [
+  "completion_artifact",
+  "artifact_type",
+  "neura_first_proof_completion",
+  "dry_run_preview_completed",
+  "metric_target",
   "npm run first-proof -- --json",
   "npm run first-proof -- --dry-run --json",
 ]);
@@ -91,9 +96,14 @@ requireIncludes("ecosystem_docs", ecosystemDocs, [
   "developer_owned_next_step",
   "npm run first-proof -- --json",
   "npm run first-proof -- --dry-run --json",
+  "completion_artifact",
+  "neura_first_proof_completion",
+  "dry_run_preview_completed",
+  "next_live_command",
   "source=npm_github",
   "campaign=package_reality_first_proof",
   "surface=scripts/run-first-proof",
+  "artifact_type=neura_first_proof_completion",
   '"private_payload_collected": false',
   '"private_payload_stored": false',
   '"downstream_execution_by_neura": false',
@@ -105,7 +115,12 @@ requireIncludes("first_proof_script", firstProofScript, [
   "receipt_ref_preview_first_proof_support_reply_001",
   "trace_ref_preview_first_proof_support_reply_001",
   "npm run first-proof -- --json",
+  "completionArtifact",
+  "neura_first_proof_completion",
+  "dry_run_preview_completed",
+  "live_first_proof_receipt_created",
   "private_payload_stored: false",
+  "public_token_issued: false",
   "provider_listing_or_partnership_claim: false",
 ]);
 
@@ -133,6 +148,68 @@ if (dryRun.status !== 0) {
   if (proof.mode !== "dry_run_no_production_receipts") failures.push("dry_run_wrong_mode");
   if (proof.command !== "npm run first-proof -- --dry-run --json") {
     failures.push("dry_run_command_not_canonical");
+  }
+  const artifact = proof.completion_artifact;
+  if (!artifact) failures.push("completion_artifact_missing");
+  if (artifact?.artifact_type !== "neura_first_proof_completion") {
+    failures.push("completion_artifact_wrong_type");
+  }
+  if (artifact?.artifact_version !== "0.1") {
+    failures.push("completion_artifact_wrong_version");
+  }
+  if (artifact?.status !== "dry_run_preview_completed") {
+    failures.push("completion_artifact_wrong_dry_status");
+  }
+  if (artifact?.proof !== "package-reality-first-proof") {
+    failures.push("completion_artifact_wrong_proof");
+  }
+  if (artifact?.command !== "npm run first-proof -- --dry-run --json") {
+    failures.push("completion_artifact_wrong_command");
+  }
+  if (artifact?.creates_production_receipt !== false) {
+    failures.push("completion_artifact_dry_run_must_not_create_receipt");
+  }
+  if (artifact?.metric_target !== "package_reality_first_proof") {
+    failures.push("completion_artifact_wrong_metric_target");
+  }
+  if (artifact?.next_live_command !== "npm run first-proof -- --json") {
+    failures.push("completion_artifact_missing_next_live_command");
+  }
+  if (artifact?.attribution?.source !== "verifier") {
+    failures.push("completion_artifact_wrong_source");
+  }
+  if (artifact?.attribution?.campaign !== "package_reality_first_proof") {
+    failures.push("completion_artifact_wrong_campaign");
+  }
+  if (artifact?.attribution?.surface !== "scripts/run-first-proof") {
+    failures.push("completion_artifact_wrong_surface");
+  }
+  if (!artifact?.attribution?.session_ref?.startsWith("first_proof_session:")) {
+    failures.push("completion_artifact_missing_session_ref");
+  }
+  if (artifact?.attribution?.refs_only !== true) {
+    failures.push("completion_artifact_refs_only_missing");
+  }
+  if (!Array.isArray(artifact?.receipt_refs) || artifact.receipt_refs.length !== 0) {
+    failures.push("completion_artifact_dry_run_receipts_must_be_empty");
+  }
+  if (
+    artifact?.preview_receipt?.receipt_ref !==
+    "receipt_ref_preview_first_proof_support_reply_001"
+  ) {
+    failures.push("completion_artifact_missing_preview_receipt");
+  }
+  if (
+    artifact?.boundaries?.private_payload_stored !== false ||
+    artifact?.boundaries?.downstream_execution_by_neura !== false ||
+    artifact?.boundaries?.public_token_issued !== false ||
+    artifact?.boundaries?.provider_listing_or_partnership_claim !== false ||
+    artifact?.boundaries?.registry_auto_approval !== false
+  ) {
+    failures.push("completion_artifact_boundaries_changed");
+  }
+  if (!artifact?.shareable_summary?.includes("Completed Neura local first-proof preview")) {
+    failures.push("completion_artifact_missing_shareable_summary");
   }
   if (proof.static_no_signup_preview?.creates_production_receipt !== false) {
     failures.push("static_preview_must_not_create_production_receipt");

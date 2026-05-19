@@ -44,16 +44,33 @@ See [`docs/flow-aware-authority-gate-proof.md`](docs/flow-aware-authority-gate-p
 
 ## Package Reality: Start Here
 
-npm downloads and GitHub clones are discovery signals, not adoption proof. To prove real usage, run the package proof that creates source/campaign-tagged receipt refs:
+npm downloads and GitHub clones are discovery signals, not adoption proof. Start with the credential-free preview, which returns a canonical first-proof completion artifact:
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
 cd relay-action-card
-npm install
+npm ci
+npm run first-proof -- --dry-run --json
+```
+
+The output includes `completion_artifact`:
+
+```json
+{
+  "artifact_type": "neura_first_proof_completion",
+  "status": "dry_run_preview_completed",
+  "metric_target": "package_reality_first_proof",
+  "next_live_command": "npm run first-proof -- --json"
+}
+```
+
+When you want to create source/campaign-tagged live receipt refs, run:
+
+```bash
 npm run first-proof -- --json
 ```
 
-This runs the two live package tracks that currently have market signal:
+The proof uses the two package tracks that currently have market signal:
 
 - SDK receipt path: `@neurarelay/sdk`
 - OpenClaw-style preflight path: `@neurarelay/openclaw-preflight-adapter`
@@ -74,14 +91,13 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 npm run first-proof -- --source=npm --campaign=package_reality_first_proof --surface=package_page
 ```
 
-For local verification without creating production receipts:
+Verify the completion artifact and attribution contract:
 
 ```bash
-npm run first-proof -- --dry-run --json
 npm run verify:first-proof
 ```
 
-Use `receipt_id` and `trace_ref` from this command as the real adoption signal. Do not infer execution from downloads or clones alone.
+Use `completion_artifact.receipt_refs`, `receipt_id`, `trace_ref`, `transaction_ref`, `source`, `campaign`, `surface`, and `session_ref` as the real adoption signal. Do not infer execution from downloads or clones alone.
 
 ## Relay Developers: Start Here
 

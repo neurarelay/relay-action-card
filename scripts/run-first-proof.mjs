@@ -133,6 +133,9 @@ const tracks = [
 
 const ok = tracks.every((track) => track.ok);
 const liveTracks = tracks.filter((track) => !track.skipped && !dryRun);
+const proofCommand = dryRun
+  ? "npm run first-proof -- --dry-run --json"
+  : "npm run first-proof -- --json";
 const staticFirstProofPreview = {
   preview: "static_no_signup_first_proof_preview",
   creates_production_receipt: false,
@@ -161,11 +164,82 @@ const staticFirstProofPreview = {
   },
 };
 
+function trackReceiptRef(track) {
+  const receipt =
+    track.output?.result?.receipt ??
+    track.output?.decision_receipt ??
+    track.output ??
+    null;
+  const transactionRef =
+    receipt?.transaction_ref ??
+    track.output?.transaction_ref ??
+    track.output?.result?.receipt?.transaction_ref ??
+    null;
+
+  return {
+    track: track.id,
+    receipt_id: receipt?.receipt_id ?? null,
+    trace_ref: receipt?.trace_ref ?? null,
+    transaction_ref: transactionRef,
+    route:
+      receipt?.route ??
+      receipt?.decision ??
+      track.output?.result?.route ??
+      track.output?.decision ??
+      null,
+  };
+}
+
+const receiptRefs = tracks
+  .filter((track) => !track.skipped)
+  .map(trackReceiptRef)
+  .filter((ref) => ref.receipt_id || ref.trace_ref || ref.route);
+
+const completionArtifact = {
+  artifact_type: "neura_first_proof_completion",
+  artifact_version: "0.1",
+  status: dryRun ? "dry_run_preview_completed" : "live_first_proof_receipt_created",
+  proof: "package-reality-first-proof",
+  command: proofCommand,
+  mode: dryRun ? "dry_run_no_production_receipts" : "live_public_relay_receipts",
+  creates_production_receipt: !dryRun,
+  attribution: {
+    source: defaultAttribution.neura_source,
+    campaign: defaultAttribution.neura_campaign,
+    surface: defaultAttribution.neura_surface,
+    session_ref: defaultAttribution.neura_session_ref,
+    refs_only: true,
+  },
+  metric_target: "package_reality_first_proof",
+  readback_hint:
+    "Known-source live receipts should appear under source=npm_github, campaign=package_reality_first_proof, surface=scripts/run-first-proof.",
+  preview_receipt:
+    dryRun
+      ? staticFirstProofPreview.decision_receipt_preview
+      : null,
+  receipt_refs: dryRun ? [] : receiptRefs,
+  next_live_command: dryRun ? "npm run first-proof -- --json" : null,
+  next_step: dryRun
+    ? "You completed the local first-proof preview. Run the live command only when you want to create production receipt and trace refs."
+    : "Share the receipt_id, trace_ref, transaction_ref, source, campaign, surface, and session_ref as the first-proof completion artifact.",
+  shareable_summary: dryRun
+    ? "Completed Neura local first-proof preview; no token, no private payload, no downstream execution."
+    : "Created Neura live first-proof receipt refs with known source/campaign/surface attribution; developer-owned execution preserved.",
+  boundaries: {
+    private_payload_stored: false,
+    downstream_execution_by_neura: false,
+    public_token_issued: false,
+    provider_listing_or_partnership_claim: false,
+    registry_auto_approval: false,
+  },
+};
+
 const output = {
   ok,
   proof: "package-reality-first-proof",
   mode: dryRun ? "dry_run_no_production_receipts" : "live_public_relay_receipts",
-  command: dryRun ? "npm run first-proof -- --dry-run --json" : "npm run first-proof -- --json",
+  command: proofCommand,
+  completion_artifact: completionArtifact,
   static_no_signup_preview: staticFirstProofPreview,
   activation_attribution: publicAttributionSummary(defaultAttribution),
   session_ref_present: true,
@@ -215,6 +289,11 @@ if (jsonOutput) {
   console.log("");
   console.log(ok ? "Package reality first proof passed." : "Package reality first proof failed.");
   console.log(`Mode: ${output.mode}`);
+  console.log(`Completion: ${completionArtifact.status}`);
+  console.log(
+    `Attribution: source=${completionArtifact.attribution.source} campaign=${completionArtifact.attribution.campaign} surface=${completionArtifact.attribution.surface}`,
+  );
+  console.log(`Session: ${completionArtifact.attribution.session_ref}`);
   for (const track of output.proof_execution_metric.tracks) {
     console.log(
       `${track.id}: ${track.skipped ? "skipped" : track.route} ${
@@ -222,6 +301,17 @@ if (jsonOutput) {
       }`,
     );
   }
+  if (dryRun) {
+    console.log(`Preview receipt: ${completionArtifact.preview_receipt.receipt_ref}`);
+    console.log(`Next live command: ${completionArtifact.next_live_command}`);
+  } else {
+    for (const ref of completionArtifact.receipt_refs) {
+      console.log(
+        `Live receipt: ${ref.track} receipt=${ref.receipt_id ?? "n/a"} trace=${ref.trace_ref ?? "n/a"} transaction=${ref.transaction_ref ?? "n/a"}`,
+      );
+    }
+  }
+  console.log(`Shareable summary: ${completionArtifact.shareable_summary}`);
   console.log("Developer-owned execution preserved. Neura returned receipt refs only.");
 }
 

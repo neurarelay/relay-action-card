@@ -184,10 +184,33 @@ No-signup first-proof preview:
 }
 ```
 
-The preview is static and does not create a production receipt. The live command below returns receipt and trace refs and creates the measurable first-proof signal.
+The preview is static and does not create a production receipt. The command below wraps that preview in a canonical first-proof completion artifact, so a cold evaluator can finish locally before using live Relay:
 
 ```bash
 npm run first-proof -- --dry-run --json
+```
+
+The dry-run output includes:
+
+```json
+{
+  "completion_artifact": {
+    "artifact_type": "neura_first_proof_completion",
+    "status": "dry_run_preview_completed",
+    "metric_target": "package_reality_first_proof",
+    "next_live_command": "npm run first-proof -- --json",
+    "boundaries": {
+      "private_payload_stored": false,
+      "downstream_execution_by_neura": false,
+      "public_token_issued": false
+    }
+  }
+}
+```
+
+The live command below returns receipt and trace refs inside `completion_artifact.receipt_refs` and creates the measurable first-proof signal.
+
+```bash
 npm run first-proof -- --json
 ```
 
@@ -197,6 +220,7 @@ Canonical live attribution:
 source=npm_github
 campaign=package_reality_first_proof
 surface=scripts/run-first-proof
+artifact_type=neura_first_proof_completion
 ```
 
 Usable today:
@@ -204,11 +228,12 @@ Usable today:
 - public direct Relay example
 - stable `@neurarelay/sdk` receipt helper path
 - first-proof command for package reality conversion
+- shareable first-proof completion artifact
 
 Boundary:
 
 - downloads and clones are discovery signals, not adoption proof
-- receipt refs and trace refs are the proof
+- completion artifact, receipt refs, trace refs, transaction refs, and session refs are the proof
 
 ## Swarm Runtimes
 
