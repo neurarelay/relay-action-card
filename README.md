@@ -11,6 +11,23 @@ Distribution proof:
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
 - The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
 
+## Automatic Discovery: Agent And Search Surfaces
+
+Use these URLs when an agent, crawler, evaluator, or developer needs the shortest machine-readable route into Neura Relay:
+
+- Relay AI-readable summary: [`https://www.neurarelay.com/llms.txt`](https://www.neurarelay.com/llms.txt)
+- Relay public Agent Card: [`https://www.neurarelay.com/.well-known/agent-card.json`](https://www.neurarelay.com/.well-known/agent-card.json)
+- Relay first proof: [`https://www.neurarelay.com/developers/first-proof`](https://www.neurarelay.com/developers/first-proof)
+- Relay SDK package: [`@neurarelay/sdk`](https://www.npmjs.com/package/@neurarelay/sdk)
+- NeuraPath Relay route: [`https://neurapath.ai/neura-relay`](https://neurapath.ai/neura-relay)
+- Frontsmith applied proof: [`https://frontsmith.neurapath.ai/llms.txt`](https://frontsmith.neurapath.ai/llms.txt)
+
+The discovery path should resolve to the same proof:
+
+```text
+Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / Registry context
+```
+
 ## Ecosystem Availability: Use Neura Today
 
 Choose the ecosystem path you are testing and run the matching dry-run proof:

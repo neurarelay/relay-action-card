@@ -15,6 +15,18 @@ The ecosystem paths below make the same spine usable from different runtimes. Ea
 
 No provider approval, listing, endorsement, integration, or partnership is claimed by this document. Production MCP, A2A, and private Relay access remain controlled.
 
+## Machine-Readable Discovery
+
+These are the current no-outbound discovery surfaces:
+
+- Relay llms.txt: `https://www.neurarelay.com/llms.txt`
+- Relay Agent Card: `https://www.neurarelay.com/.well-known/agent-card.json`
+- Relay first proof: `https://www.neurarelay.com/developers/first-proof`
+- NeuraPath Relay route: `https://neurapath.ai/neura-relay`
+- Frontsmith applied proof llms.txt: `https://frontsmith.neurapath.ai/llms.txt`
+
+Use these as discovery and evaluation entry points. They do not create public token issuance, provider approval, downstream execution by Neura, or any listing/endorsement claim.
+
 ## Commands
 
 Run the dry-run matrix first:

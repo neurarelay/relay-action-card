@@ -23,6 +23,14 @@ beforeAction(preflightAction)
   -> developer-owned route
 ```
 
+Machine-readable Relay discovery starts at:
+
+- `https://www.neurarelay.com/llms.txt`
+- `https://www.neurarelay.com/.well-known/agent-card.json`
+- `https://www.neurarelay.com/developers/first-proof`
+
+The OpenClaw-style adapter is one runtime path into the same Action Card to Decision Receipt proof. It is not an OpenClaw or ClawHub approval, listing, endorsement, integration, or partnership claim.
+
 It is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. Any further OpenClaw / ClawHub publishing, submission, package-version, or public-copy change requires Roman approval of the exact action.
 
 ## Install From npm
