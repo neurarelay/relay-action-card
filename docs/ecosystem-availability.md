@@ -214,12 +214,27 @@ The live command below returns receipt and trace refs inside `completion_artifac
 npm run first-proof -- --json
 ```
 
+If the evaluator arrived through the Neura Agent Infrastructure first-publication path on LinkedIn, preserve that public route in the live proof:
+
+```bash
+npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json
+```
+
 Canonical live attribution:
 
 ```text
 source=npm_github
 campaign=package_reality_first_proof
 surface=scripts/run-first-proof
+artifact_type=neura_first_proof_completion
+```
+
+LinkedIn first-publication attribution:
+
+```text
+source=linkedin
+campaign=linkedin_first_publication
+surface=developers_first_proof
 artifact_type=neura_first_proof_completion
 ```
 

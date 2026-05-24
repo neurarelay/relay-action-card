@@ -81,6 +81,8 @@ requireIncludes("readme", readme, [
   "metric_target",
   "npm run first-proof -- --json",
   "npm run first-proof -- --dry-run --json",
+  "npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json",
+  "LinkedIn attention -> Relay first-proof page -> attributed live receipt refs",
 ]);
 
 requireIncludes("ecosystem_docs", ecosystemDocs, [
@@ -103,6 +105,9 @@ requireIncludes("ecosystem_docs", ecosystemDocs, [
   "source=npm_github",
   "campaign=package_reality_first_proof",
   "surface=scripts/run-first-proof",
+  "source=linkedin",
+  "campaign=linkedin_first_publication",
+  "surface=developers_first_proof",
   "artifact_type=neura_first_proof_completion",
   '"private_payload_collected": false',
   '"private_payload_stored": false',
@@ -122,6 +127,10 @@ requireIncludes("first_proof_script", firstProofScript, [
   "private_payload_stored: false",
   "public_token_issued: false",
   "provider_listing_or_partnership_claim: false",
+  "linkedin_first_publication_command",
+  "source=linkedin",
+  "campaign=linkedin_first_publication",
+  "surface=developers_first_proof",
 ]);
 
 const dryRun = spawnSync(
@@ -174,6 +183,12 @@ if (dryRun.status !== 0) {
   }
   if (artifact?.next_live_command !== "npm run first-proof -- --json") {
     failures.push("completion_artifact_missing_next_live_command");
+  }
+  if (
+    artifact?.attribution_examples?.linkedin_first_publication_command !==
+    "npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json"
+  ) {
+    failures.push("completion_artifact_missing_linkedin_first_publication_command");
   }
   if (artifact?.attribution?.source !== "verifier") {
     failures.push("completion_artifact_wrong_source");

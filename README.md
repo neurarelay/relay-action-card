@@ -89,6 +89,13 @@ If you are coming from a specific surface, keep it measurable:
 npm run first-proof -- --json
 npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme
 npm run first-proof -- --source=npm --campaign=package_reality_first_proof --surface=package_page
+npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json
+```
+
+Use the LinkedIn command when the developer arrived through the Neura Agent Infrastructure first-publication path and is running the proof from the Relay first-proof page. This keeps the public route measurable as:
+
+```text
+LinkedIn attention -> Relay first-proof page -> attributed live receipt refs
 ```
 
 Verify the completion artifact and attribution contract:

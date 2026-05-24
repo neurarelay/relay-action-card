@@ -136,6 +136,8 @@ const liveTracks = tracks.filter((track) => !track.skipped && !dryRun);
 const proofCommand = dryRun
   ? "npm run first-proof -- --dry-run --json"
   : "npm run first-proof -- --json";
+const linkedinFirstPublicationCommand =
+  "npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json";
 const staticFirstProofPreview = {
   preview: "static_no_signup_first_proof_preview",
   creates_production_receipt: false,
@@ -212,7 +214,11 @@ const completionArtifact = {
   },
   metric_target: "package_reality_first_proof",
   readback_hint:
-    "Known-source live receipts should appear under source=npm_github, campaign=package_reality_first_proof, surface=scripts/run-first-proof.",
+    "Known-source live receipts should appear under source=npm_github, campaign=package_reality_first_proof, surface=scripts/run-first-proof. LinkedIn-origin receipts from the May 24 first publication should use source=linkedin, campaign=linkedin_first_publication, surface=developers_first_proof.",
+  attribution_examples: {
+    default_live_command: "npm run first-proof -- --json",
+    linkedin_first_publication_command: linkedinFirstPublicationCommand,
+  },
   preview_receipt:
     dryRun
       ? staticFirstProofPreview.decision_receipt_preview
