@@ -66,6 +66,17 @@ for (const phrase of [
   "source=benchmark",
   "campaign=agent_authority_week",
   "surface=agent_authority_benchmark_v0_1",
+  "surface=browser_use_credentialed_submit",
+  "surface=cline_consequential_actions",
+  "surface=autogen_multi_agent_handoff",
+  "surface=microsoft_agent_framework_delegated_action",
+  "surface=smolagents_code_agent_tool_authority",
+  "surface=google_adk_agent_authority",
+  "surface=semantic_kernel_tool_authority",
+  "surface=mcp_use_tool_authority",
+  "surface=simular_agent_s_computer_use_authority",
+  "surface=nanobrowser_browser_submit_authority",
+  "surface=stagehand_browser_agent_authority",
   "This benchmark does not say that any named framework fails, passes, endorses, integrates, approves, lists, or partners with Neura.",
 ]) {
   requireIncludes("docs", docs, phrase);
@@ -75,6 +86,13 @@ for (const phrase of [
   "Agent Authority Benchmark",
   "benchmark:agent-authority",
   "agent_authority_week",
+  "surface=smolagents_code_agent_tool_authority",
+  "surface=google_adk_agent_authority",
+  "surface=semantic_kernel_tool_authority",
+  "surface=mcp_use_tool_authority",
+  "surface=simular_agent_s_computer_use_authority",
+  "surface=nanobrowser_browser_submit_authority",
+  "surface=stagehand_browser_agent_authority",
   "docs/ai-agent-authority-gap.md",
 ]) {
   requireIncludes("readme", readme, phrase);
