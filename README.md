@@ -70,6 +70,8 @@ npm run verify:agent-authority-benchmark
 
 Agent Authority Benchmark v0.1 covers eight action classes: external email send, credentialed browser submit, customer data export, package publish, production deploy, permission change, ticket/workflow close, and persistent memory write.
 
+For the category framing behind the benchmark, see [`docs/ai-agent-authority-gap.md`](docs/ai-agent-authority-gap.md).
+
 If you came from an ecosystem discussion, start with the scenario that matches the workflow you are evaluating:
 
 | Ecosystem surface | Benchmark scenario | Tracked dry-run command |

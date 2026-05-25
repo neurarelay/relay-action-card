@@ -26,12 +26,15 @@ function rejectPattern(label, text, pattern) {
 const packageJson = JSON.parse(read("package.json"));
 const readme = read("README.md");
 const docsPath = "docs/agent-authority-benchmark.md";
+const gapPath = "docs/ai-agent-authority-gap.md";
 const runnerPath = "examples/agent-authority-benchmark/run-benchmark.mjs";
 
 if (!existsSync(resolve(repoRoot, docsPath))) failures.push("missing_agent_authority_benchmark_docs");
+if (!existsSync(resolve(repoRoot, gapPath))) failures.push("missing_ai_agent_authority_gap_docs");
 if (!existsSync(resolve(repoRoot, runnerPath))) failures.push("missing_agent_authority_benchmark_runner");
 
 const docs = existsSync(resolve(repoRoot, docsPath)) ? read(docsPath) : "";
+const gap = existsSync(resolve(repoRoot, gapPath)) ? read(gapPath) : "";
 const runner = existsSync(resolve(repoRoot, runnerPath)) ? read(runnerPath) : "";
 
 if (
@@ -72,8 +75,22 @@ for (const phrase of [
   "Agent Authority Benchmark",
   "benchmark:agent-authority",
   "agent_authority_week",
+  "docs/ai-agent-authority-gap.md",
 ]) {
   requireIncludes("readme", readme, phrase);
+}
+
+for (const phrase of [
+  "The AI Agent Authority Gap",
+  "Can the workflow prove authority for this exact action before execution?",
+  "Action Card -> Relay -> Decision Receipt -> developer-owned execution or restraint",
+  "npm run benchmark:agent-authority -- --dry-run --json",
+  "npm run verify:agent-authority-benchmark",
+  "first_proof_next_command",
+  "This report does not claim:",
+  "It does claim:",
+]) {
+  requireIncludes("gap", gap, phrase);
 }
 
 for (const phrase of [
@@ -90,6 +107,7 @@ for (const phrase of [
 
 for (const [label, text] of [
   ["docs", docs],
+  ["gap", gap],
   ["readme", readme],
 ]) {
   rejectPattern(label, text, /OpenAI\s+(approved|endorsed|listed|partnered)/i);
