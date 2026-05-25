@@ -59,6 +59,25 @@ It covers 20 deterministic dry-run scenarios, including SQL/base64/public-sink m
 
 See [`docs/flow-aware-authority-gate-proof.md`](docs/flow-aware-authority-gate-proof.md). Boundary: this is a public dry-run proof with no downstream execution by Neura, no private payload persistence, no provider/listing/partnership claim, no full runtime taint-tracking claim, and no claim that all possible scenarios are covered.
 
+## Agent Authority Benchmark
+
+Use this benchmark when the hard question is whether an agent workflow can prove authority before a consequential action executes.
+
+```bash
+npm run benchmark:agent-authority -- --dry-run --json
+npm run verify:agent-authority-benchmark
+```
+
+Agent Authority Benchmark v0.1 covers eight action classes: external email send, credentialed browser submit, customer data export, package publish, production deploy, permission change, ticket/workflow close, and persistent memory write.
+
+See [`docs/agent-authority-benchmark.md`](docs/agent-authority-benchmark.md). Boundary: this is a public dry-run benchmark shape and Neura Relay proof pattern. It does not claim any target framework fails, passes, endorses, integrates, approves, lists, or partners with Neura.
+
+For Agent Authority Week attribution, use:
+
+```bash
+npm run benchmark:agent-authority -- --dry-run --json --source=benchmark --campaign=agent_authority_week --surface=agent_authority_benchmark_v0_1
+```
+
 ## Package Reality: Start Here
 
 npm downloads and GitHub clones are discovery signals, not adoption proof. Start with the credential-free preview, which returns a canonical first-proof completion artifact:
