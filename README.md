@@ -17,7 +17,7 @@ Use these URLs when an agent, crawler, evaluator, or developer needs the shortes
 
 - Relay AI-readable summary: [`https://www.neurarelay.com/llms.txt`](https://www.neurarelay.com/llms.txt)
 - Relay public Agent Card: [`https://www.neurarelay.com/.well-known/agent-card.json`](https://www.neurarelay.com/.well-known/agent-card.json)
-- Relay first proof: [`https://www.neurarelay.com/developers/first-proof`](https://www.neurarelay.com/developers/first-proof)
+- Relay first proof: [`https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme)
 - Relay SDK package: [`@neurarelay/sdk`](https://www.npmjs.com/package/@neurarelay/sdk)
 - NeuraPath Relay route: [`https://neurapath.ai/neura-relay`](https://neurapath.ai/neura-relay)
 - Frontsmith applied proof: [`https://frontsmith.neurapath.ai/llms.txt`](https://frontsmith.neurapath.ai/llms.txt)
@@ -84,7 +84,7 @@ The output includes `completion_artifact`:
 When you want to create source/campaign-tagged live receipt refs, run:
 
 ```bash
-npm run first-proof -- --json
+npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme --json
 ```
 
 The proof uses the two package tracks that currently have market signal:
@@ -104,7 +104,7 @@ If you are coming from a specific surface, keep it measurable:
 
 ```bash
 npm run first-proof -- --json
-npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme
+npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme --json
 npm run first-proof -- --source=npm --campaign=package_reality_first_proof --surface=package_page
 npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json
 ```

@@ -21,7 +21,7 @@ These are the current no-outbound discovery surfaces:
 
 - Relay llms.txt: `https://www.neurarelay.com/llms.txt`
 - Relay Agent Card: `https://www.neurarelay.com/.well-known/agent-card.json`
-- Relay first proof: `https://www.neurarelay.com/developers/first-proof`
+- Relay first proof: `https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=ecosystem_docs`
 - NeuraPath Relay route: `https://neurapath.ai/neura-relay`
 - Frontsmith applied proof llms.txt: `https://frontsmith.neurapath.ai/llms.txt`
 
@@ -223,7 +223,7 @@ The dry-run output includes:
 The live command below returns receipt and trace refs inside `completion_artifact.receipt_refs` and creates the measurable first-proof signal.
 
 ```bash
-npm run first-proof -- --json
+npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=ecosystem_docs --json
 ```
 
 If the evaluator arrived through the Neura Agent Infrastructure first-publication path on LinkedIn, preserve that public route in the live proof:
