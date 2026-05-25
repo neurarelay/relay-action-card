@@ -148,6 +148,12 @@ if (run.status !== 0) {
     if (output.activation_attribution?.neura_surface !== "agent_authority_benchmark_v0_1") {
       failures.push("benchmark_missing_surface_attribution");
     }
+    if (
+      output.first_proof_next_command !==
+      "npm run first-proof -- --source=verifier --campaign=agent_authority_week --surface=agent_authority_benchmark_v0_1 --json"
+    ) {
+      failures.push("benchmark_first_proof_command_does_not_preserve_attribution");
+    }
     if (!Array.isArray(output.results) || output.results.length !== 8) {
       failures.push("benchmark_results_missing");
     }

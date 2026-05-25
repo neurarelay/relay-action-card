@@ -225,6 +225,13 @@ function buildScenarioResult(scenario, attribution) {
   };
 }
 
+function firstProofCommand(attribution) {
+  const source = attribution.neura_source ?? "benchmark";
+  const campaign = attribution.neura_campaign ?? "agent_authority_week";
+  const surface = attribution.neura_surface ?? "agent_authority_benchmark_v0_1";
+  return `npm run first-proof -- --source=${source} --campaign=${campaign} --surface=${surface} --json`;
+}
+
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "benchmark",
@@ -264,8 +271,7 @@ const output = {
   },
   activation_attribution: publicAttributionSummary(attribution),
   results,
-  first_proof_next_command:
-    "npm run first-proof -- --source=benchmark --campaign=agent_authority_week --surface=agent_authority_benchmark_v0_1 --json",
+  first_proof_next_command: firstProofCommand(attribution),
   boundaries: {
     downstream_execution_by_neura: false,
     developer_owned_execution: true,

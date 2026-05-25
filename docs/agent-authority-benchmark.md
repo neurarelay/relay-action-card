@@ -56,6 +56,8 @@ Use the matching scenario path first. These commands keep source/campaign/surfac
 
 These are benchmark entry routes only. They do not say that any named framework fails, passes, endorses, integrates, approves, lists, or partners with Neura.
 
+The benchmark output preserves that same source/campaign/surface in `first_proof_next_command` so a local benchmark run can continue into a measurable first-proof receipt path without losing the ecosystem route.
+
 ## Scenario Set
 
 Agent Authority Benchmark v0.1 covers eight consequential action classes:

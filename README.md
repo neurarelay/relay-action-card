@@ -81,6 +81,8 @@ If you came from an ecosystem discussion, start with the scenario that matches t
 
 These surfaces are routes into the benchmark only. They do not imply framework participation, pass/fail status, integration, endorsement, approval, listing, or partnership.
 
+The benchmark output preserves that same source/campaign/surface in `first_proof_next_command`, so a local benchmark run can continue into a measurable first-proof receipt path without losing the ecosystem route.
+
 See [`docs/agent-authority-benchmark.md`](docs/agent-authority-benchmark.md). Boundary: this is a public dry-run benchmark shape and Neura Relay proof pattern. It does not claim any target framework fails, passes, endorses, integrates, approves, lists, or partners with Neura.
 
 For Agent Authority Week attribution, use:
