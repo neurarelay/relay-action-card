@@ -70,6 +70,17 @@ npm run verify:agent-authority-benchmark
 
 Agent Authority Benchmark v0.1 covers eight action classes: external email send, credentialed browser submit, customer data export, package publish, production deploy, permission change, ticket/workflow close, and persistent memory write.
 
+If you came from an ecosystem discussion, start with the scenario that matches the workflow you are evaluating:
+
+| Ecosystem surface | Benchmark scenario | Tracked dry-run command |
+| --- | --- | --- |
+| browser-use discussion | `credentialed_browser_submit` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=browser_use_credentialed_submit` |
+| Cline discussion | `package_publish`, `production_deploy`, `permission_change`, `persistent_memory_write` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=cline_consequential_actions` |
+| AutoGen discussion | `workflow_close`, `persistent_memory_write`, `customer_data_export` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=autogen_multi_agent_handoff` |
+| Microsoft Agent Framework discussion | `workflow_close`, `permission_change`, `customer_data_export` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=microsoft_agent_framework_delegated_action` |
+
+These surfaces are routes into the benchmark only. They do not imply framework participation, pass/fail status, integration, endorsement, approval, listing, or partnership.
+
 See [`docs/agent-authority-benchmark.md`](docs/agent-authority-benchmark.md). Boundary: this is a public dry-run benchmark shape and Neura Relay proof pattern. It does not claim any target framework fails, passes, endorses, integrates, approves, lists, or partners with Neura.
 
 For Agent Authority Week attribution, use:

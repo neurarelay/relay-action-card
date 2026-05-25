@@ -43,6 +43,19 @@ Verify the benchmark contract:
 npm run verify:agent-authority-benchmark
 ```
 
+## If You Came From An Ecosystem Discussion
+
+Use the matching scenario path first. These commands keep source/campaign/surface attribution visible while staying in credential-free dry-run mode.
+
+| Ecosystem surface | Start with these scenarios | Command |
+| --- | --- | --- |
+| browser-use discussion | `credentialed_browser_submit` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=browser_use_credentialed_submit` |
+| Cline discussion | `package_publish`, `production_deploy`, `permission_change`, `persistent_memory_write` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=cline_consequential_actions` |
+| AutoGen discussion | `workflow_close`, `persistent_memory_write`, `customer_data_export` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=autogen_multi_agent_handoff` |
+| Microsoft Agent Framework discussion | `workflow_close`, `permission_change`, `customer_data_export` | `npm run benchmark:agent-authority -- --dry-run --json --source=github_discussion --campaign=agent_authority_week --surface=microsoft_agent_framework_delegated_action` |
+
+These are benchmark entry routes only. They do not say that any named framework fails, passes, endorses, integrates, approves, lists, or partners with Neura.
+
 ## Scenario Set
 
 Agent Authority Benchmark v0.1 covers eight consequential action classes:
