@@ -1,0 +1,77 @@
+{
+  "receipt_id": "dr_20260526_commerceops_tracking_reply_allow_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T18:00:00-04:00",
+  "action_card_id": "ac_20260526_commerceops_tracking_reply_001",
+  "decision": "allow",
+  "runtime_instruction": "continue",
+  "decision_reason": "The reply is factual, uses existing synthetic fulfillment evidence, and makes no refund, discount, promise, or state change.",
+  "actor": {
+    "type": "agent",
+    "name": "CommerceOps Demo Agent",
+    "runtime": "synthetic_commerce_agent"
+  },
+  "proposed_action": {
+    "action_type": "send_tracking_reply",
+    "target": "customer_thread:CO-1001",
+    "summary": "Send a factual tracking-status reply using existing fulfillment data.",
+    "params_hash": "sha256:commerceops_tracking_reply_001",
+    "amount_or_value_at_risk": "0.00 USD",
+    "customer_impact": "customer receives factual tracking update"
+  },
+  "risk": {
+    "risk_class": "factual_customer_reply",
+    "consequence_score": 1
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "commerceops.synthetic.tracking_reply.allowed",
+      "summary": "Factual tracking replies are allowed when they use existing evidence and do not include refunds, discounts, promises, or state changes."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "order:CO-1001.tracking_status",
+      "summary": "Synthetic carrier scan shows package is in transit."
+    },
+    {
+      "evidence_ref": "order:CO-1001.fulfillment_status",
+      "summary": "Synthetic order status is shipped."
+    }
+  ],
+  "authority": {
+    "authority_ref": "merchant_support_policy",
+    "approval_state": "pre_authorized_factual_reply",
+    "required_role": "support_agent"
+  },
+  "validity": {
+    "valid_for_action_type": "send_tracking_reply",
+    "valid_for_target": "customer_thread:CO-1001",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:commerceops_tracking_reply_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state"]
+  },
+  "execution": {
+    "allowed_next_step": "continue_with_factual_tracking_reply",
+    "blocked_downstream_actions": [],
+    "execution_boundary": "No real commerce platform, payment rail, fulfillment system, discount-code system, or customer-message channel is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_commerceops_tracking_reply_allow_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "commerceops_fire_drill"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "downstream_execution_performed_by_neura": false,
+    "real_shopify_touched": false,
+    "real_payment_touched": false,
+    "real_fulfillment_touched": false,
+    "real_discount_code_created": false,
+    "real_customer_message_sent": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

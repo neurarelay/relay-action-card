@@ -1,0 +1,75 @@
+[
+  {
+    "order_id": "CO-1001",
+    "order_total_usd": 68,
+    "customer_tier": "standard",
+    "fulfillment_status": "shipped",
+    "delivery_status": "in_transit",
+    "tracking_status": "carrier_scan_available",
+    "risk_signals": [],
+    "available_shipping_options": ["standard"],
+    "replacement_inventory_status": "not_needed",
+    "synthetic_data_only": true
+  },
+  {
+    "order_id": "CO-1007",
+    "order_total_usd": 520,
+    "customer_tier": "standard",
+    "fulfillment_status": "delivered",
+    "delivery_status": "delivered_one_day_late",
+    "product_issue_status": "not_defective",
+    "risk_signals": [],
+    "available_shipping_options": ["standard"],
+    "replacement_inventory_status": "available",
+    "synthetic_data_only": true
+  },
+  {
+    "order_id": "CO-1012",
+    "order_total_usd": 88,
+    "customer_tier": "returning",
+    "fulfillment_status": "delivered",
+    "delivery_status": "delivered",
+    "product_issue_status": "wrong_color_reported",
+    "risk_signals": [],
+    "available_shipping_options": ["standard"],
+    "replacement_inventory_status": "available",
+    "synthetic_data_only": true
+  },
+  {
+    "order_id": "CO-1042",
+    "order_total_usd": 790,
+    "customer_tier": "new",
+    "fulfillment_status": "label_created",
+    "delivery_status": "not_shipped",
+    "product_issue_status": "none",
+    "risk_signals": ["billing_shipping_mismatch", "different_state_address_change"],
+    "available_shipping_options": ["standard"],
+    "replacement_inventory_status": "not_needed",
+    "synthetic_data_only": true
+  },
+  {
+    "order_id": "CO-1099",
+    "order_total_usd": 180,
+    "customer_tier": "standard",
+    "fulfillment_status": "released_to_warehouse",
+    "delivery_status": "carrier_pickup_within_one_hour",
+    "product_issue_status": "none",
+    "risk_signals": [],
+    "available_shipping_options": ["standard"],
+    "replacement_inventory_status": "not_needed",
+    "synthetic_data_only": true
+  },
+  {
+    "order_id": "CO-1105",
+    "order_total_usd": 142,
+    "customer_tier": "standard",
+    "fulfillment_status": "delivered",
+    "delivery_status": "delivered",
+    "product_issue_status": "not_verified",
+    "risk_signals": [],
+    "available_shipping_options": ["standard"],
+    "replacement_inventory_status": "unknown",
+    "overnight_shipping_available": false,
+    "synthetic_data_only": true
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "proof": "commerceops-fire-drill",
+  "capability": "CommerceOps Fire Drill",
+  "receipt_standard": "neura-decision-receipt-v0.1-draft",
+  "command": "npm run proof:commerceops-fire-drill -- --dry-run --json",
+  "verify_command": "npm run verify:commerceops-fire-drill",
+  "scenario_count": 6,
+  "decisions_required": ["allow", "revise", "human_review", "stop"],
+  "scenarios": [
+    "routine-tracking-reply",
+    "refund-over-threshold",
+    "discount-code-above-limit",
+    "address-change-risk-signal",
+    "cancellation-after-fulfillment-release",
+    "unsupported-customer-promise"
+  ],
+  "boundary": {
+    "synthetic_data_only": true,
+    "real_shopify_touched": false,
+    "real_payment_touched": false,
+    "real_fulfillment_touched": false,
+    "real_customer_message_sent": false,
+    "downstream_execution_performed_by_neura": false
+  }
+}

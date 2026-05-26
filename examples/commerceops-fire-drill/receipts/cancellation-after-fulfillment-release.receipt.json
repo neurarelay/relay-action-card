@@ -1,0 +1,77 @@
+{
+  "receipt_id": "dr_20260526_commerceops_cancellation_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T18:20:00-04:00",
+  "action_card_id": "ac_20260526_commerceops_cancellation_001",
+  "decision": "human_review",
+  "runtime_instruction": "pause_for_human_review",
+  "decision_reason": "Order has been released to warehouse and requires fulfillment confirmation before cancellation or customer promise.",
+  "actor": {
+    "type": "agent",
+    "name": "CommerceOps Demo Agent",
+    "runtime": "synthetic_commerce_agent"
+  },
+  "proposed_action": {
+    "action_type": "cancel_order_after_release",
+    "target": "order:CO-1099",
+    "summary": "Cancel the order and notify fulfillment to stop shipment after warehouse release.",
+    "params_hash": "sha256:commerceops_cancellation_after_release_001",
+    "amount_or_value_at_risk": "180.00 USD",
+    "customer_impact": "customer may receive cancellation promise that fulfillment cannot honor"
+  },
+  "risk": {
+    "risk_class": "fulfillment_exception",
+    "consequence_score": 2
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "commerceops.synthetic.fulfillment.cancellation_release",
+      "summary": "Cancellation after warehouse release requires fulfillment confirmation before any customer promise."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "order:CO-1099.fulfillment_status",
+      "summary": "Synthetic fulfillment status is released to warehouse."
+    },
+    {
+      "evidence_ref": "order:CO-1099.carrier_pickup_window",
+      "summary": "Synthetic carrier pickup window is within one hour."
+    }
+  ],
+  "authority": {
+    "authority_ref": "merchant_fulfillment_owner",
+    "approval_state": "pending_fulfillment_confirmation",
+    "required_role": "fulfillment_owner"
+  },
+  "validity": {
+    "valid_for_action_type": "cancel_order_after_release",
+    "valid_for_target": "order:CO-1099",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:commerceops_cancellation_after_release_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state"]
+  },
+  "execution": {
+    "allowed_next_step": "request_fulfillment_confirmation",
+    "blocked_downstream_actions": ["cancel_order", "notify_fulfillment_stop_shipment", "send_cancellation_confirmation"],
+    "execution_boundary": "No real commerce platform, payment rail, fulfillment system, discount-code system, or customer-message channel is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_commerceops_cancellation_human_review_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "commerceops_fire_drill"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "downstream_execution_performed_by_neura": false,
+    "real_shopify_touched": false,
+    "real_payment_touched": false,
+    "real_fulfillment_touched": false,
+    "real_discount_code_created": false,
+    "real_customer_message_sent": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

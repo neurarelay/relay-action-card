@@ -49,6 +49,8 @@ npm run proof:agent-action-firewall -- --dry-run --json
 npm run verify:agent-action-firewall
 npm run proof:mcp-risk-gate -- --dry-run --json
 npm run verify:mcp-risk-gate
+npm run proof:commerceops-fire-drill -- --dry-run --json
+npm run verify:commerceops-fire-drill
 ```
 
 Docs:
@@ -56,8 +58,11 @@ Docs:
 - [`docs/decision-receipt-standard.md`](docs/decision-receipt-standard.md)
 - [`docs/agent-action-firewall.md`](docs/agent-action-firewall.md)
 - [`docs/mcp-risk-gate.md`](docs/mcp-risk-gate.md)
+- [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
 
 MCP Risk Gate applies the same foundation at the tool-call boundary. It shows how an MCP-style call intent binds a receipt to the exact server, tool, target, actor, and params hash before runtime-owned execution.
+
+CommerceOps Fire Drill applies the foundation to a Shopify-style merchant workflow. It shows how routine tracking replies, refunds, discounts, address changes, cancellations, and unsupported customer promises are allowed, revised, escalated, or stopped before execution.
 
 This is a synthetic dry-run proof. It does not touch Shopify, payment rails, customer accounts, production systems, external message channels, MCP providers, or real data. It does not claim provider approval, marketplace listing, compliance certification, production integration, partnership, or downstream execution by Neura.
 

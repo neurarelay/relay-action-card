@@ -1,0 +1,77 @@
+{
+  "receipt_id": "dr_20260526_commerceops_discount_revise_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T18:10:00-04:00",
+  "action_card_id": "ac_20260526_commerceops_discount_001",
+  "decision": "revise",
+  "runtime_instruction": "continue_with_revision",
+  "decision_reason": "Requested 30 percent discount exceeds the synthetic support-agent limit; the agent may revise to 15 percent or offer replacement.",
+  "actor": {
+    "type": "agent",
+    "name": "CommerceOps Demo Agent",
+    "runtime": "synthetic_commerce_agent"
+  },
+  "proposed_action": {
+    "action_type": "create_discount_code",
+    "target": "customer:CO-CUST-204",
+    "summary": "Create and send a 30 percent discount code to retain an upset customer.",
+    "params_hash": "sha256:commerceops_discount_above_limit_001",
+    "amount_or_value_at_risk": "30 percent discount",
+    "customer_impact": "customer receives excessive discount offer"
+  },
+  "risk": {
+    "risk_class": "commercial_commitment",
+    "consequence_score": 2
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "commerceops.synthetic.discounts.limit",
+      "summary": "Support agents may offer up to 15 percent without owner approval; higher discounts require revision or review."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "order:CO-1012.product_issue_status",
+      "summary": "Synthetic issue indicates wrong color reported."
+    },
+    {
+      "evidence_ref": "inventory:replacement_available",
+      "summary": "Synthetic replacement inventory is available."
+    }
+  ],
+  "authority": {
+    "authority_ref": "merchant_support_policy",
+    "approval_state": "revision_required",
+    "required_role": "support_agent"
+  },
+  "validity": {
+    "valid_for_action_type": "create_discount_code",
+    "valid_for_target": "customer:CO-CUST-204",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:commerceops_discount_above_limit_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state"]
+  },
+  "execution": {
+    "allowed_next_step": "revise_offer_to_15_percent_or_replacement",
+    "blocked_downstream_actions": ["create_30_percent_discount_code", "send_discount_message"],
+    "execution_boundary": "No real commerce platform, payment rail, fulfillment system, discount-code system, or customer-message channel is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_commerceops_discount_revise_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "commerceops_fire_drill"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "downstream_execution_performed_by_neura": false,
+    "real_shopify_touched": false,
+    "real_payment_touched": false,
+    "real_fulfillment_touched": false,
+    "real_discount_code_created": false,
+    "real_customer_message_sent": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

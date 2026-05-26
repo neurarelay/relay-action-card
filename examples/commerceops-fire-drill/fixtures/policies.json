@@ -1,0 +1,9 @@
+{
+  "commerceops.synthetic.tracking_reply.allowed": "Agents may send factual tracking replies from existing fulfillment evidence when no refund, discount, promise, or state change is included.",
+  "commerceops.synthetic.refunds.threshold": "Refunds above 250.00 USD require merchant-owner approval unless product loss or defect evidence is present.",
+  "commerceops.synthetic.discounts.limit": "Support agents may offer up to 15 percent without owner approval; higher discounts require revision or review.",
+  "commerceops.synthetic.address_change.verification": "High-value post-payment address changes with risk signals require verification before update.",
+  "commerceops.synthetic.fulfillment.cancellation_release": "Cancellation after warehouse release requires fulfillment confirmation before any customer promise.",
+  "commerceops.synthetic.customer_promises.evidence_required": "Agents cannot promise refunds, replacements, or expedited shipping without evidence, inventory, shipping availability, and required authority.",
+  "synthetic_data_only": true
+}

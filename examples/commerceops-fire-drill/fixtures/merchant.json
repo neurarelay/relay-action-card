@@ -1,0 +1,12 @@
+{
+  "merchant_id": "CO-MERCHANT-001",
+  "merchant_name": "Synthetic Main Street Goods",
+  "owner_role": "merchant_owner",
+  "support_role": "support_agent",
+  "refund_threshold_usd": 250,
+  "discount_limit_percent": 15,
+  "high_value_order_threshold_usd": 500,
+  "fulfillment_confirmation_required_after_release": true,
+  "customer_message_promise_rule": "Agents cannot promise refunds, replacements, expedited shipping, or cancellation outcomes without policy evidence and required authority.",
+  "synthetic_data_only": true
+}
