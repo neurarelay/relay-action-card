@@ -56,7 +56,7 @@ This proof shows the Gateway decision loop:
 proposed action -> policy/evidence/authority check -> allow/revise/human_review/stop receipt
 ```
 
-It is intentionally small. It gives Relay, CommerceOps, MCP Risk Gate, Failure Theater, and Strategic Partner Attack a shared proof foundation instead of making each surface re-explain the core mechanism.
+It is intentionally small. It gives Relay, MCP Risk Gate, and CommerceOps Fire Drill a shared proof foundation instead of making each surface re-explain the core mechanism.
 
 ## Boundary
 

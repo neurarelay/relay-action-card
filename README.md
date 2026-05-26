@@ -1,10 +1,43 @@
 # Relay Action Card
 
-Send an Action Card to Neura Relay. Get a governed Decision Receipt before execution.
+Run the Neura Relay Agent Action Gateway proof path before agent execution.
 
-This is the public developer starting point for Neura Relay: a runnable example for agent developers building AI agents, autonomous-agent workflows, or MCP-capable runtimes that need a governed checkpoint before execution. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a governed receipt before deciding what to execute.
+This is the public developer starting point for Neura Relay: a runnable proof package for agent developers building AI agents, autonomous-agent workflows, commerce operations, or MCP-capable runtimes that need authority before consequential action. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a Decision Receipt before deciding what to execute.
 
 Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
+
+## Agent Action Gateway: Start Here
+
+Use the Gateway proof ladder when you want the shortest local route from proposed agent action to Decision Receipt:
+
+```bash
+git clone https://github.com/neurarelay/relay-action-card.git
+cd relay-action-card
+npm ci
+npm run proof:agent-action-gateway -- --dry-run --json
+npm run verify:agent-action-gateway
+```
+
+Live Gateway page:
+
+```text
+https://www.neurarelay.com/agent-action-gateway
+```
+
+The proof ladder is:
+
+```text
+Agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned execution or restraint
+```
+
+| Step | Proof | Command |
+| --- | --- | --- |
+| 01 | Agent Action Firewall | `npm run proof:agent-action-firewall -- --dry-run --json` |
+| 02 | Decision Receipt Standard | `npm run verify:decision-receipt-standard` |
+| 03 | MCP Risk Gate | `npm run proof:mcp-risk-gate -- --dry-run --json` |
+| 04 | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` |
+
+No downstream execution by Neura. The developer-owned runtime decides whether to execute, revise, escalate, or stop after reading the receipt.
 
 Distribution proof:
 
@@ -17,6 +50,7 @@ Use these URLs when an agent, crawler, evaluator, or developer needs the shortes
 
 - Relay AI-readable summary: [`https://www.neurarelay.com/llms.txt`](https://www.neurarelay.com/llms.txt)
 - Relay public Agent Card: [`https://www.neurarelay.com/.well-known/agent-card.json`](https://www.neurarelay.com/.well-known/agent-card.json)
+- Relay Agent Action Gateway: [`https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=agent_action_gateway&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=agent_action_gateway&neura_surface=relay_action_card_readme)
 - Relay first proof: [`https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme)
 - Relay SDK package: [`@neurarelay/sdk`](https://www.npmjs.com/package/@neurarelay/sdk)
 - NeuraPath Relay route: [`https://neurapath.ai/neura-relay`](https://neurapath.ai/neura-relay)
@@ -30,20 +64,24 @@ Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / Registry cont
 
 ## Agent Action Gateway Proof Foundation
 
-Use this local proof when you want the smallest runnable version of the Agent Action Gateway path:
+Use this local proof when you want to inspect the individual pieces of the Agent Action Gateway path:
 
 ```text
 Action Card -> Agent Action Firewall -> Decision Receipt -> developer-owned execution or restraint
 ```
 
-The first foundation has two pieces:
+The foundation has four pieces:
 
+- Agent Action Firewall: proposed actions classify as `allow`, `revise`, `human_review`, or `stop`.
 - Decision Receipt Standard: the working receipt shape for what was authorized before execution.
-- Agent Action Firewall: the first Gateway capability, returning `allow`, `revise`, `human_review`, or `stop`.
+- MCP Risk Gate: tool-call intent binds to server, tool, target, actor, and params hash.
+- CommerceOps Fire Drill: commerce actions receive receipts before money-moving or customer-facing execution.
 
 Run:
 
 ```bash
+npm run proof:agent-action-gateway -- --dry-run --json
+npm run verify:agent-action-gateway
 npm run verify:decision-receipt-standard
 npm run proof:agent-action-firewall -- --dry-run --json
 npm run verify:agent-action-firewall
@@ -55,6 +93,7 @@ npm run verify:commerceops-fire-drill
 
 Docs:
 
+- [`docs/agent-action-gateway.md`](docs/agent-action-gateway.md)
 - [`docs/decision-receipt-standard.md`](docs/decision-receipt-standard.md)
 - [`docs/agent-action-firewall.md`](docs/agent-action-firewall.md)
 - [`docs/mcp-risk-gate.md`](docs/mcp-risk-gate.md)
@@ -1017,7 +1056,9 @@ skills/
     neura-memory-write-review/
     neura-data-export-review/
 scripts/
+  run-agent-action-gateway.mjs
   verify-relay-action-card-example.mjs
+  verify-agent-action-gateway.mjs
   verify-a2a-authenticated-client.mjs
   verify-mcp-developer-adoption-pack.mjs
   verify-developer-feedback-access-path.mjs
@@ -1046,6 +1087,11 @@ docs/
       near-miss-workbench-desktop.png
       near-miss-workbench-mobile.png
   a2a-controlled-client-pack.md
+  agent-action-gateway.md
+  agent-action-firewall.md
+  commerceops-fire-drill.md
+  decision-receipt-standard.md
+  mcp-risk-gate.md
   agentic-consent-delegated-authority.md
   authorization-bypass-scenarios.md
   controlled-mcp-beta-access.md
@@ -1089,6 +1135,7 @@ tests/
 ## Verify
 
 ```bash
+npm run verify:agent-action-gateway
 npm run verify:relay-example
 npm run verify:mcp-adoption-pack
 npm run verify:developer-feedback-access-path

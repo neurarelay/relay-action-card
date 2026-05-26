@@ -2,7 +2,7 @@
   "name": "relay-action-card",
   "version": "0.1.5",
   "private": true,
-  "description": "Run a Neura Relay Action Card and receive a Decision Receipt before execution.",
+  "description": "Run the Neura Relay Agent Action Gateway proof path before agent execution.",
   "engines": {
     "node": ">=22.14.0"
   },
@@ -30,6 +30,7 @@
     "proof:mcp-adk-authority": "node examples/mcp-adk-authority/run-proof.mjs",
     "proof:runtime-binding": "node examples/runtime-binding/run-proof.mjs",
     "proof:flow-aware-authority": "node examples/flow-aware-authority/run-proof.mjs",
+    "proof:agent-action-gateway": "node scripts/run-agent-action-gateway.mjs",
     "proof:agent-action-firewall": "node examples/agent-action-firewall/run-proof.mjs",
     "proof:mcp-risk-gate": "node examples/mcp-risk-gate/run-proof.mjs",
     "proof:commerceops-fire-drill": "node examples/commerceops-fire-drill/run-proof.mjs",
@@ -100,6 +101,7 @@
     "verify:mcp-adk-authority-proof": "node scripts/verify-mcp-adk-authority-proof.mjs",
     "verify:runtime-bound-action-card-proof": "node scripts/verify-runtime-bound-action-card-proof.mjs",
     "verify:flow-aware-authority-gate": "node scripts/verify-flow-aware-authority-gate.mjs",
+    "verify:agent-action-gateway": "node scripts/verify-agent-action-gateway.mjs",
     "verify:decision-receipt-standard": "node scripts/verify-decision-receipt-standard.mjs",
     "verify:agent-action-firewall": "node scripts/verify-agent-action-firewall.mjs",
     "verify:mcp-risk-gate": "node scripts/verify-mcp-risk-gate.mjs",
