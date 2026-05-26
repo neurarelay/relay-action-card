@@ -1,0 +1,79 @@
+{
+  "receipt_id": "dr_20260526_mcp_export_stop_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T15:20:00-04:00",
+  "action_card_id": "ac_20260526_mcp_export_001",
+  "decision": "stop",
+  "decision_reason": "Synthetic customer-record export lacks sufficient purpose, destination approval, and authority.",
+  "actor": {
+    "type": "agent",
+    "name": "MCP Risk Gate Demo Agent",
+    "runtime": "synthetic_mcp_tool_call"
+  },
+  "proposed_action": {
+    "action_type": "export_customer_records",
+    "target": "dataset:synthetic_customer_records",
+    "summary": "Export synthetic customer records through an MCP-style tool call.",
+    "params_hash": "sha256:mcp_export_001",
+    "amount_or_value_at_risk": "sensitive customer data class",
+    "customer_impact": "possible unauthorized data movement"
+  },
+  "risk": {
+    "risk_class": "sensitive_data_movement",
+    "consequence_score": 3
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "mcp.synthetic.data_export.purpose_required",
+      "summary": "Customer-record exports require purpose, destination, and owner-approved authority."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "export_request.destination_missing",
+      "summary": "Synthetic export request does not include an approved destination or purpose."
+    }
+  ],
+  "authority": {
+    "authority_ref": "data_owner",
+    "approval_state": "missing",
+    "required_role": "data_owner"
+  },
+  "validity": {
+    "valid_for_action_type": "export_customer_records",
+    "valid_for_target": "dataset:synthetic_customer_records",
+    "params_hash": "sha256:mcp_export_001",
+    "valid_until": null,
+    "invalid_if_changed": [
+      "action_type",
+      "target",
+      "params_hash",
+      "actor",
+      "policy_refs",
+      "evidence_refs",
+      "approval_state",
+      "required_authority_role"
+    ]
+  },
+  "execution": {
+    "allowed_next_step": "do_not_execute",
+    "blocked_downstream_actions": [
+      "export_customer_records",
+      "write_external_file",
+      "send_data_to_destination"
+    ],
+    "execution_boundary": "Neura returns a Decision Receipt only; no MCP tool, data export, or external destination is executed by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_mcp_export_stop_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "decision_receipt_standard"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "real_customer_data_used": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

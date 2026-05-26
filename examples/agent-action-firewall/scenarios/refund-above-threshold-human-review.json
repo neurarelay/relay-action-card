@@ -1,0 +1,63 @@
+{
+  "scenario_id": "refund-above-threshold-human-review",
+  "title": "Refund above threshold",
+  "expected_decision": "human_review",
+  "decision_reason": "Refund amount exceeds the synthetic merchant approval threshold.",
+  "action_card": {
+    "action_card_id": "ac_20260526_firewall_refund_001",
+    "standard": "neura-action-card-v0.1-draft",
+    "created_at": "2026-05-26T16:10:00-04:00",
+    "actor": {
+      "type": "agent",
+      "name": "Agent Action Firewall Demo Agent",
+      "runtime": "local_dry_run"
+    },
+    "proposed_action": {
+      "action_type": "refund_order",
+      "target": "order:CO-1007",
+      "summary": "Refund 420.00 USD for late delivery in a synthetic merchant workflow.",
+      "params_hash": "sha256:firewall_refund_001",
+      "amount_or_value_at_risk": "420.00 USD",
+      "customer_impact": "customer receives refund"
+    },
+    "risk": {
+      "risk_class": "money_movement",
+      "consequence_score": 3
+    },
+    "policy_refs": [
+      "commerceops.synthetic.refunds.threshold"
+    ],
+    "evidence_refs": [
+      "order:CO-1007.delivery_status"
+    ],
+    "authority_context": {
+      "authority_ref": "merchant_owner",
+      "required_role": "merchant_owner",
+      "approval_state": "pending"
+    },
+    "execution_boundary": {
+      "downstream_execution_owner": "developer_runtime",
+      "no_downstream_execution_by_neura": true
+    },
+    "trace": {
+      "trace_ref": "trace_20260526_firewall_refund_001",
+      "source": "github",
+      "campaign": "agent_action_gateway",
+      "surface": "agent_action_firewall"
+    },
+    "boundary": {
+      "synthetic_data_only": true,
+      "downstream_execution_performed_by_neura": false,
+      "provider_approval_claimed": false,
+      "compliance_certification_claimed": false
+    }
+  },
+  "receipt_expectation": {
+    "receipt_id": "dr_20260526_firewall_refund_human_review_001",
+    "allowed_next_step": "prepare_owner_review",
+    "blocked_downstream_actions": [
+      "refund_payment",
+      "send_refund_confirmation"
+    ]
+  }
+}

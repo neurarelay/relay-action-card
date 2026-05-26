@@ -1,0 +1,79 @@
+{
+  "receipt_id": "dr_20260526_firewall_status_lookup_allow_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T16:00:00-04:00",
+  "action_card_id": "ac_20260526_firewall_status_lookup_001",
+  "decision": "allow",
+  "decision_reason": "Synthetic internal status lookup is low-risk, read-only, and within owner-approved workspace scope.",
+  "actor": {
+    "type": "agent",
+    "name": "Agent Action Firewall Demo Agent",
+    "runtime": "local_dry_run"
+  },
+  "proposed_action": {
+    "action_type": "lookup_order_status",
+    "target": "order:CO-1001",
+    "summary": "Look up synthetic order status for an internal owner dashboard.",
+    "params_hash": "sha256:firewall_status_lookup_001",
+    "amount_or_value_at_risk": "0.00 USD",
+    "customer_impact": "none"
+  },
+  "risk": {
+    "risk_class": "read_only_internal_lookup",
+    "consequence_score": 1
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "commerceops.synthetic.read_only_lookup",
+      "summary": "Read-only synthetic status checks may proceed when no external system or customer channel is touched."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "order:CO-1001.synthetic_status",
+      "summary": "Synthetic order status exists in the local proof fixture."
+    }
+  ],
+  "authority": {
+    "authority_ref": "merchant_owner",
+    "approval_state": "pre_authorized_read_only",
+    "required_role": "owner_or_operator"
+  },
+  "validity": {
+    "valid_for_action_type": "lookup_order_status",
+    "valid_for_target": "order:CO-1001",
+    "params_hash": "sha256:firewall_status_lookup_001",
+    "valid_until": null,
+    "invalid_if_changed": [
+      "action_type",
+      "target",
+      "params_hash",
+      "actor",
+      "policy_refs",
+      "evidence_refs",
+      "approval_state",
+      "required_authority_role"
+    ]
+  },
+  "execution": {
+    "allowed_next_step": "developer_runtime_may_continue_read_only_lookup",
+    "blocked_downstream_actions": [
+      "send_customer_message",
+      "update_order",
+      "refund_payment"
+    ],
+    "execution_boundary": "Neura returns a Decision Receipt only; no downstream commerce platform or customer channel is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_firewall_status_lookup_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "agent_action_firewall"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "real_customer_data_used": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

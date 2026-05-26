@@ -1,0 +1,78 @@
+{
+  "receipt_id": "dr_20260526_firewall_refund_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T16:10:00-04:00",
+  "action_card_id": "ac_20260526_firewall_refund_001",
+  "decision": "human_review",
+  "decision_reason": "Refund amount exceeds the synthetic merchant approval threshold.",
+  "actor": {
+    "type": "agent",
+    "name": "Agent Action Firewall Demo Agent",
+    "runtime": "local_dry_run"
+  },
+  "proposed_action": {
+    "action_type": "refund_order",
+    "target": "order:CO-1007",
+    "summary": "Refund 420.00 USD for late delivery in a synthetic merchant workflow.",
+    "params_hash": "sha256:firewall_refund_001",
+    "amount_or_value_at_risk": "420.00 USD",
+    "customer_impact": "customer receives refund"
+  },
+  "risk": {
+    "risk_class": "money_movement",
+    "consequence_score": 3
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "commerceops.synthetic.refunds.threshold",
+      "summary": "Refunds above 250.00 USD require merchant-owner approval."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "order:CO-1007.delivery_status",
+      "summary": "Synthetic delivery status indicates one-day delay."
+    }
+  ],
+  "authority": {
+    "authority_ref": "merchant_owner",
+    "approval_state": "pending",
+    "required_role": "merchant_owner"
+  },
+  "validity": {
+    "valid_for_action_type": "refund_order",
+    "valid_for_target": "order:CO-1007",
+    "params_hash": "sha256:firewall_refund_001",
+    "valid_until": null,
+    "invalid_if_changed": [
+      "action_type",
+      "target",
+      "params_hash",
+      "actor",
+      "policy_refs",
+      "evidence_refs",
+      "approval_state",
+      "required_authority_role"
+    ]
+  },
+  "execution": {
+    "allowed_next_step": "prepare_owner_review",
+    "blocked_downstream_actions": [
+      "refund_payment",
+      "send_refund_confirmation"
+    ],
+    "execution_boundary": "Neura returns a Decision Receipt only; no commerce platform or customer channel is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_firewall_refund_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "agent_action_firewall"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "real_customer_data_used": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

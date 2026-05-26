@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.neurarelay.com/schemas/action-card.v0.1.json",
+  "title": "Neura Action Card v0.1 Draft",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "action_card_id",
+    "standard",
+    "created_at",
+    "actor",
+    "proposed_action",
+    "risk",
+    "policy_refs",
+    "evidence_refs",
+    "authority_context",
+    "execution_boundary",
+    "trace",
+    "boundary"
+  ],
+  "properties": {
+    "action_card_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "standard": {
+      "const": "neura-action-card-v0.1-draft"
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor": {
+      "type": "object",
+      "required": ["type", "name", "runtime"],
+      "properties": {
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "runtime": { "type": "string" }
+      }
+    },
+    "proposed_action": {
+      "type": "object",
+      "required": ["action_type", "target", "summary", "params_hash"],
+      "properties": {
+        "action_type": { "type": "string" },
+        "target": { "type": "string" },
+        "summary": { "type": "string" },
+        "params_hash": { "type": "string", "pattern": "^sha256:" },
+        "amount_or_value_at_risk": { "type": "string" },
+        "customer_impact": { "type": "string" }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": ["risk_class", "consequence_score"],
+      "properties": {
+        "risk_class": { "type": "string" },
+        "consequence_score": { "type": "integer", "minimum": 0, "maximum": 3 }
+      }
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "authority_context": {
+      "type": "object",
+      "required": ["authority_ref", "required_role", "approval_state"],
+      "properties": {
+        "authority_ref": { "type": "string" },
+        "required_role": { "type": "string" },
+        "approval_state": { "type": "string" }
+      }
+    },
+    "execution_boundary": {
+      "type": "object",
+      "required": ["downstream_execution_owner", "no_downstream_execution_by_neura"],
+      "properties": {
+        "downstream_execution_owner": { "type": "string" },
+        "no_downstream_execution_by_neura": { "const": true }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "required": ["trace_ref", "source", "campaign", "surface"],
+      "properties": {
+        "trace_ref": { "type": "string" },
+        "source": { "type": "string" },
+        "campaign": { "type": "string" },
+        "surface": { "type": "string" }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "synthetic_data_only",
+        "downstream_execution_performed_by_neura",
+        "provider_approval_claimed",
+        "compliance_certification_claimed"
+      ],
+      "properties": {
+        "synthetic_data_only": { "const": true },
+        "downstream_execution_performed_by_neura": { "const": false },
+        "provider_approval_claimed": { "const": false },
+        "compliance_certification_claimed": { "const": false }
+      }
+    }
+  }
+}

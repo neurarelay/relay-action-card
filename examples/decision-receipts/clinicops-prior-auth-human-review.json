@@ -1,0 +1,79 @@
+{
+  "receipt_id": "dr_20260526_clinicops_prior_auth_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T15:25:00-04:00",
+  "action_card_id": "ac_20260526_clinicops_prior_auth_001",
+  "decision": "human_review",
+  "decision_reason": "Synthetic prior-authorization draft belongs in a regulated-style workflow and requires professional human review before any external use.",
+  "actor": {
+    "type": "agent",
+    "name": "ClinicOps Demo Agent",
+    "runtime": "synthetic_workflow"
+  },
+  "proposed_action": {
+    "action_type": "draft_prior_authorization_note",
+    "target": "synthetic_patient_case:CL-204",
+    "summary": "Draft a prior-authorization note using synthetic patient data.",
+    "params_hash": "sha256:clinicops_prior_auth_001",
+    "amount_or_value_at_risk": "regulated workflow decision support",
+    "customer_impact": "synthetic patient communication and policy-heavy workflow context"
+  },
+  "risk": {
+    "risk_class": "regulated_synthetic_workflow",
+    "consequence_score": 3
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "clinicops.synthetic.professional_review_required",
+      "summary": "Policy-heavy clinical administrative drafts require professional human review before external use."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "synthetic_patient_case:CL-204.policy_notes",
+      "summary": "Synthetic policy notes are available, but do not authorize external action."
+    }
+  ],
+  "authority": {
+    "authority_ref": "clinic_operator_or_clinician",
+    "approval_state": "pending",
+    "required_role": "qualified_human_reviewer"
+  },
+  "validity": {
+    "valid_for_action_type": "draft_prior_authorization_note",
+    "valid_for_target": "synthetic_patient_case:CL-204",
+    "params_hash": "sha256:clinicops_prior_auth_001",
+    "valid_until": null,
+    "invalid_if_changed": [
+      "action_type",
+      "target",
+      "params_hash",
+      "actor",
+      "policy_refs",
+      "evidence_refs",
+      "approval_state",
+      "required_authority_role"
+    ]
+  },
+  "execution": {
+    "allowed_next_step": "prepare_human_review_packet",
+    "blocked_downstream_actions": [
+      "send_patient_message",
+      "submit_prior_authorization",
+      "write_to_clinic_system"
+    ],
+    "execution_boundary": "Neura returns a Decision Receipt only; no patient, insurer, provider, or clinic system is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_clinicops_prior_auth_human_review_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "decision_receipt_standard"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "real_customer_data_used": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

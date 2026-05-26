@@ -28,6 +28,34 @@ The discovery path should resolve to the same proof:
 Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / Registry context
 ```
 
+## Agent Action Gateway Proof Foundation
+
+Use this local proof when you want the smallest runnable version of the Agent Action Gateway path:
+
+```text
+Action Card -> Agent Action Firewall -> Decision Receipt -> developer-owned execution or restraint
+```
+
+The first foundation has two pieces:
+
+- Decision Receipt Standard: the working receipt shape for what was authorized before execution.
+- Agent Action Firewall: the first Gateway capability, returning `allow`, `revise`, `human_review`, or `stop`.
+
+Run:
+
+```bash
+npm run verify:decision-receipt-standard
+npm run proof:agent-action-firewall -- --dry-run --json
+npm run verify:agent-action-firewall
+```
+
+Docs:
+
+- [`docs/decision-receipt-standard.md`](docs/decision-receipt-standard.md)
+- [`docs/agent-action-firewall.md`](docs/agent-action-firewall.md)
+
+This is a synthetic dry-run proof. It does not touch Shopify, payment rails, customer accounts, production systems, external message channels, MCP providers, or real data. It does not claim provider approval, marketplace listing, compliance certification, production integration, partnership, or downstream execution by Neura.
+
 ## Ecosystem Availability: Use Neura Today
 
 Choose the ecosystem path you are testing and run the matching dry-run proof:

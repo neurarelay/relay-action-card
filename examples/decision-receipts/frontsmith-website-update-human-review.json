@@ -1,0 +1,78 @@
+{
+  "receipt_id": "dr_20260526_frontsmith_website_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T15:10:00-04:00",
+  "action_card_id": "ac_20260526_frontsmith_website_001",
+  "decision": "human_review",
+  "decision_reason": "Public website update changes business-facing claims and needs owner review before launch.",
+  "actor": {
+    "type": "agent",
+    "name": "Frontsmith Demo Agent",
+    "runtime": "codex_native_local_workspace"
+  },
+  "proposed_action": {
+    "action_type": "publish_website_update",
+    "target": "frontsmith-demo-site:homepage",
+    "summary": "Publish a synthetic contractor homepage update.",
+    "params_hash": "sha256:frontsmith_website_001",
+    "amount_or_value_at_risk": "public business claim",
+    "customer_impact": "site visitors may see updated offer language"
+  },
+  "risk": {
+    "risk_class": "public_business_claim",
+    "consequence_score": 2
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "frontsmith.synthetic.website.owner_review_required",
+      "summary": "Public website changes require owner review before launch."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "frontsmith.owner_brief.website_update",
+      "summary": "Owner brief exists for the proposed synthetic website update."
+    }
+  ],
+  "authority": {
+    "authority_ref": "business_owner",
+    "approval_state": "pending",
+    "required_role": "business_owner"
+  },
+  "validity": {
+    "valid_for_action_type": "publish_website_update",
+    "valid_for_target": "frontsmith-demo-site:homepage",
+    "params_hash": "sha256:frontsmith_website_001",
+    "valid_until": null,
+    "invalid_if_changed": [
+      "action_type",
+      "target",
+      "params_hash",
+      "actor",
+      "policy_refs",
+      "evidence_refs",
+      "approval_state",
+      "required_authority_role"
+    ]
+  },
+  "execution": {
+    "allowed_next_step": "prepare_owner_review",
+    "blocked_downstream_actions": [
+      "publish_website_update",
+      "deploy_site"
+    ],
+    "execution_boundary": "Neura returns a Decision Receipt only; no website deployment is performed by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260526_frontsmith_website_human_review_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "decision_receipt_standard"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "real_customer_data_used": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

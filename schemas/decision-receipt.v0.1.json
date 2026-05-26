@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.neurarelay.com/schemas/decision-receipt.v0.1.json",
+  "title": "Neura Decision Receipt v0.1 Draft",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "receipt_id",
+    "standard",
+    "created_at",
+    "action_card_id",
+    "decision",
+    "decision_reason",
+    "actor",
+    "proposed_action",
+    "risk",
+    "policy_basis",
+    "evidence_basis",
+    "authority",
+    "validity",
+    "execution",
+    "trace",
+    "boundary"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "standard": { "const": "neura-decision-receipt-v0.1-draft" },
+    "created_at": { "type": "string", "minLength": 1 },
+    "action_card_id": { "type": "string", "minLength": 1 },
+    "decision": {
+      "enum": ["allow", "revise", "human_review", "stop"]
+    },
+    "decision_reason": { "type": "string", "minLength": 1 },
+    "actor": {
+      "type": "object",
+      "required": ["type", "name", "runtime"],
+      "properties": {
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "runtime": { "type": "string" }
+      }
+    },
+    "proposed_action": {
+      "type": "object",
+      "required": ["action_type", "target", "summary", "params_hash"],
+      "properties": {
+        "action_type": { "type": "string" },
+        "target": { "type": "string" },
+        "summary": { "type": "string" },
+        "params_hash": { "type": "string", "pattern": "^sha256:" },
+        "amount_or_value_at_risk": { "type": "string" },
+        "customer_impact": { "type": "string" }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": ["risk_class", "consequence_score"],
+      "properties": {
+        "risk_class": { "type": "string" },
+        "consequence_score": { "type": "integer", "minimum": 0, "maximum": 3 }
+      }
+    },
+    "policy_basis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["policy_ref", "summary"],
+        "properties": {
+          "policy_ref": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "evidence_basis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["evidence_ref", "summary"],
+        "properties": {
+          "evidence_ref": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": ["authority_ref", "approval_state", "required_role"],
+      "properties": {
+        "authority_ref": { "type": "string" },
+        "approval_state": { "type": "string" },
+        "required_role": { "type": "string" }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": [
+        "valid_for_action_type",
+        "valid_for_target",
+        "params_hash",
+        "invalid_if_changed"
+      ],
+      "properties": {
+        "valid_for_action_type": { "type": "string" },
+        "valid_for_target": { "type": "string" },
+        "params_hash": { "type": "string", "pattern": "^sha256:" },
+        "valid_until": { "type": ["string", "null"] },
+        "invalid_if_changed": {
+          "type": "array",
+          "items": { "type": "string" },
+          "contains": { "const": "params_hash" }
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["allowed_next_step", "blocked_downstream_actions", "execution_boundary"],
+      "properties": {
+        "allowed_next_step": { "type": "string" },
+        "blocked_downstream_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "execution_boundary": { "type": "string" }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "required": ["trace_ref", "source", "campaign", "surface"],
+      "properties": {
+        "trace_ref": { "type": "string" },
+        "source": { "type": "string" },
+        "campaign": { "type": "string" },
+        "surface": { "type": "string" }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "downstream_execution_performed_by_neura",
+        "real_customer_data_used",
+        "provider_approval_claimed",
+        "compliance_certification_claimed"
+      ],
+      "properties": {
+        "downstream_execution_performed_by_neura": { "const": false },
+        "real_customer_data_used": { "const": false },
+        "provider_approval_claimed": { "const": false },
+        "compliance_certification_claimed": { "const": false }
+      }
+    }
+  }
+}

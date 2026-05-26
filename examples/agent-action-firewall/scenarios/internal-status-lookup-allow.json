@@ -1,0 +1,64 @@
+{
+  "scenario_id": "internal-status-lookup-allow",
+  "title": "Internal status lookup",
+  "expected_decision": "allow",
+  "decision_reason": "Synthetic internal status lookup is low-risk, read-only, and within owner-approved workspace scope.",
+  "action_card": {
+    "action_card_id": "ac_20260526_firewall_status_lookup_001",
+    "standard": "neura-action-card-v0.1-draft",
+    "created_at": "2026-05-26T16:00:00-04:00",
+    "actor": {
+      "type": "agent",
+      "name": "Agent Action Firewall Demo Agent",
+      "runtime": "local_dry_run"
+    },
+    "proposed_action": {
+      "action_type": "lookup_order_status",
+      "target": "order:CO-1001",
+      "summary": "Look up synthetic order status for an internal owner dashboard.",
+      "params_hash": "sha256:firewall_status_lookup_001",
+      "amount_or_value_at_risk": "0.00 USD",
+      "customer_impact": "none"
+    },
+    "risk": {
+      "risk_class": "read_only_internal_lookup",
+      "consequence_score": 1
+    },
+    "policy_refs": [
+      "commerceops.synthetic.read_only_lookup"
+    ],
+    "evidence_refs": [
+      "order:CO-1001.synthetic_status"
+    ],
+    "authority_context": {
+      "authority_ref": "merchant_owner",
+      "required_role": "owner_or_operator",
+      "approval_state": "pre_authorized_read_only"
+    },
+    "execution_boundary": {
+      "downstream_execution_owner": "developer_runtime",
+      "no_downstream_execution_by_neura": true
+    },
+    "trace": {
+      "trace_ref": "trace_20260526_firewall_status_lookup_001",
+      "source": "github",
+      "campaign": "agent_action_gateway",
+      "surface": "agent_action_firewall"
+    },
+    "boundary": {
+      "synthetic_data_only": true,
+      "downstream_execution_performed_by_neura": false,
+      "provider_approval_claimed": false,
+      "compliance_certification_claimed": false
+    }
+  },
+  "receipt_expectation": {
+    "receipt_id": "dr_20260526_firewall_status_lookup_allow_001",
+    "allowed_next_step": "developer_runtime_may_continue_read_only_lookup",
+    "blocked_downstream_actions": [
+      "send_customer_message",
+      "update_order",
+      "refund_payment"
+    ]
+  }
+}
