@@ -1,0 +1,35 @@
+{
+  "scenario_id": "refund-over-threshold-human-review",
+  "title": "Refund over threshold",
+  "expected_decision": "human_review",
+  "runtime_instruction": "pause_for_human_review",
+  "decision_reason": "Refund amount exceeds the synthetic merchant approval threshold.",
+  "mcp_call": {
+    "call_id": "mcp_call_20260526_refund_001",
+    "mcp_server": "synthetic-commerce-tools",
+    "tool_name": "refund_order",
+    "target": "order:CO-1007",
+    "params_hash": "sha256:mcp_refund_001",
+    "params": {
+      "amount": 420,
+      "currency": "USD",
+      "reason": "late_delivery",
+      "synthetic": true
+    },
+    "actor": {
+      "agent_name": "CommerceOps Demo Agent",
+      "runtime": "synthetic_mcp_client"
+    },
+    "risk_context": {
+      "risk_class": "money_movement",
+      "consequence_score": 3
+    },
+    "policy_refs": ["commerceops.synthetic.refunds.threshold"],
+    "evidence_refs": ["order:CO-1007.delivery_scan", "policy:refund-threshold-v1"],
+    "attribution": {
+      "source": "github",
+      "campaign": "agent_action_gateway",
+      "surface": "mcp_risk_gate"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "receipt_id": "dr_20260526_mcp_refund_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T17:05:00-04:00",
+  "action_card_id": "ac_20260526_mcp_refund_001",
+  "decision": "human_review",
+  "decision_reason": "Refund amount exceeds the synthetic merchant approval threshold.",
+  "runtime_instruction": "pause_for_human_review",
+  "actor": { "type": "agent", "name": "CommerceOps Demo Agent", "runtime": "synthetic_mcp_client" },
+  "proposed_action": {
+    "action_type": "refund_order",
+    "target": "order:CO-1007",
+    "summary": "Refund 420.00 USD through an MCP-style tool call.",
+    "params_hash": "sha256:mcp_refund_001",
+    "amount_or_value_at_risk": "420.00 USD",
+    "customer_impact": "customer receives refund"
+  },
+  "risk": { "risk_class": "money_movement", "consequence_score": 3 },
+  "policy_basis": [{ "policy_ref": "commerceops.synthetic.refunds.threshold", "summary": "Refunds above 250.00 USD require merchant-owner approval." }],
+  "evidence_basis": [{ "evidence_ref": "order:CO-1007.delivery_scan", "summary": "Synthetic delivery scan indicates late delivery." }],
+  "authority": { "authority_ref": "merchant_owner", "approval_state": "pending", "required_role": "merchant_owner" },
+  "mcp_binding": { "mcp_server": "synthetic-commerce-tools", "tool_name": "refund_order", "target": "order:CO-1007", "actor": "CommerceOps Demo Agent", "params_hash": "sha256:mcp_refund_001" },
+  "validity": {
+    "valid_for_action_type": "refund_order",
+    "valid_for_target": "order:CO-1007",
+    "valid_for_mcp_server": "synthetic-commerce-tools",
+    "valid_for_tool_name": "refund_order",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:mcp_refund_001",
+    "valid_until": null,
+    "invalid_if_changed": ["mcp_server", "tool_name", "action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": { "allowed_next_step": "pause_for_human_review", "blocked_downstream_actions": ["refund_payment", "send_refund_confirmation"], "execution_boundary": "Neura returns a Decision Receipt only; no MCP server or downstream tool is executed by Neura." },
+  "trace": { "trace_ref": "trace_20260526_mcp_refund_human_review_001", "source": "github", "campaign": "agent_action_gateway", "surface": "mcp_risk_gate" },
+  "boundary": { "downstream_execution_performed_by_neura": false, "real_customer_data_used": false, "real_mcp_server_called": false, "provider_approval_claimed": false, "compliance_certification_claimed": false }
+}

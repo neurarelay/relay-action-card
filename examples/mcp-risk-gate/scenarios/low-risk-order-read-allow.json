@@ -1,0 +1,34 @@
+{
+  "scenario_id": "low-risk-order-read-allow",
+  "title": "Low-risk order read",
+  "expected_decision": "allow",
+  "runtime_instruction": "continue",
+  "decision_reason": "Synthetic read-only order lookup creates no external change and is within owner-approved workspace scope.",
+  "mcp_call": {
+    "call_id": "mcp_call_20260526_order_read_001",
+    "mcp_server": "synthetic-commerce-tools",
+    "tool_name": "get_order_status",
+    "target": "order:CO-1001",
+    "params_hash": "sha256:mcp_order_read_001",
+    "params": {
+      "order_ref": "order:CO-1001",
+      "fields": ["status", "last_scan"],
+      "synthetic": true
+    },
+    "actor": {
+      "agent_name": "CommerceOps Demo Agent",
+      "runtime": "synthetic_mcp_client"
+    },
+    "risk_context": {
+      "risk_class": "read_only_internal_lookup",
+      "consequence_score": 1
+    },
+    "policy_refs": ["commerceops.synthetic.read_only_lookup"],
+    "evidence_refs": ["order:CO-1001.synthetic_status"],
+    "attribution": {
+      "source": "github",
+      "campaign": "agent_action_gateway",
+      "surface": "mcp_risk_gate"
+    }
+  }
+}

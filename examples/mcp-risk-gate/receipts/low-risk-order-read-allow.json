@@ -1,0 +1,36 @@
+{
+  "receipt_id": "dr_20260526_mcp_order_read_allow_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T17:00:00-04:00",
+  "action_card_id": "ac_20260526_mcp_order_read_001",
+  "decision": "allow",
+  "decision_reason": "Synthetic read-only order lookup creates no external change and is within owner-approved workspace scope.",
+  "runtime_instruction": "continue",
+  "actor": { "type": "agent", "name": "CommerceOps Demo Agent", "runtime": "synthetic_mcp_client" },
+  "proposed_action": {
+    "action_type": "get_order_status",
+    "target": "order:CO-1001",
+    "summary": "Read synthetic order status through an MCP-style tool call.",
+    "params_hash": "sha256:mcp_order_read_001",
+    "amount_or_value_at_risk": "0.00 USD",
+    "customer_impact": "none"
+  },
+  "risk": { "risk_class": "read_only_internal_lookup", "consequence_score": 1 },
+  "policy_basis": [{ "policy_ref": "commerceops.synthetic.read_only_lookup", "summary": "Read-only synthetic status checks may proceed when no external system or customer channel is touched." }],
+  "evidence_basis": [{ "evidence_ref": "order:CO-1001.synthetic_status", "summary": "Synthetic order status exists in the proof fixture." }],
+  "authority": { "authority_ref": "merchant_owner", "approval_state": "pre_authorized_read_only", "required_role": "owner_or_operator" },
+  "mcp_binding": { "mcp_server": "synthetic-commerce-tools", "tool_name": "get_order_status", "target": "order:CO-1001", "actor": "CommerceOps Demo Agent", "params_hash": "sha256:mcp_order_read_001" },
+  "validity": {
+    "valid_for_action_type": "get_order_status",
+    "valid_for_target": "order:CO-1001",
+    "valid_for_mcp_server": "synthetic-commerce-tools",
+    "valid_for_tool_name": "get_order_status",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:mcp_order_read_001",
+    "valid_until": null,
+    "invalid_if_changed": ["mcp_server", "tool_name", "action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": { "allowed_next_step": "continue", "blocked_downstream_actions": ["send_customer_message", "update_order", "refund_payment"], "execution_boundary": "Neura returns a Decision Receipt only; no MCP server or downstream tool is executed by Neura." },
+  "trace": { "trace_ref": "trace_20260526_mcp_order_read_allow_001", "source": "github", "campaign": "agent_action_gateway", "surface": "mcp_risk_gate" },
+  "boundary": { "downstream_execution_performed_by_neura": false, "real_customer_data_used": false, "real_mcp_server_called": false, "provider_approval_claimed": false, "compliance_certification_claimed": false }
+}

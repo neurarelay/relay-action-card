@@ -1,0 +1,36 @@
+{
+  "receipt_id": "dr_20260526_mcp_customer_promise_stop_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T17:20:00-04:00",
+  "action_card_id": "ac_20260526_mcp_customer_promise_001",
+  "decision": "stop",
+  "decision_reason": "Customer message promises refund and replacement without enough evidence or owner-approved remedy.",
+  "runtime_instruction": "do_not_execute",
+  "actor": { "type": "agent", "name": "CommerceOps Demo Agent", "runtime": "synthetic_mcp_client" },
+  "proposed_action": {
+    "action_type": "send_customer_email",
+    "target": "customer_thread:CO-THREAD-77",
+    "summary": "Send a synthetic customer email promising refund and replacement.",
+    "params_hash": "sha256:mcp_customer_promise_001",
+    "amount_or_value_at_risk": "customer commitment",
+    "customer_impact": "customer receives unsupported business promise"
+  },
+  "risk": { "risk_class": "external_customer_commitment", "consequence_score": 3 },
+  "policy_basis": [{ "policy_ref": "commerceops.synthetic.customer_promises.owner_review_required", "summary": "Refund and replacement promises require evidence and owner approval." }],
+  "evidence_basis": [{ "evidence_ref": "order:CO-1007.missing_replacement_option", "summary": "Synthetic evidence shows replacement option is not available." }],
+  "authority": { "authority_ref": "merchant_owner", "approval_state": "missing", "required_role": "merchant_owner" },
+  "mcp_binding": { "mcp_server": "synthetic-commerce-tools", "tool_name": "send_customer_email", "target": "customer_thread:CO-THREAD-77", "actor": "CommerceOps Demo Agent", "params_hash": "sha256:mcp_customer_promise_001" },
+  "validity": {
+    "valid_for_action_type": "send_customer_email",
+    "valid_for_target": "customer_thread:CO-THREAD-77",
+    "valid_for_mcp_server": "synthetic-commerce-tools",
+    "valid_for_tool_name": "send_customer_email",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:mcp_customer_promise_001",
+    "valid_until": null,
+    "invalid_if_changed": ["mcp_server", "tool_name", "action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": { "allowed_next_step": "do_not_execute", "blocked_downstream_actions": ["send_customer_email", "create_refund", "create_replacement_order"], "execution_boundary": "Neura returns a Decision Receipt only; no MCP server or downstream tool is executed by Neura." },
+  "trace": { "trace_ref": "trace_20260526_mcp_customer_promise_stop_001", "source": "github", "campaign": "agent_action_gateway", "surface": "mcp_risk_gate" },
+  "boundary": { "downstream_execution_performed_by_neura": false, "real_customer_data_used": false, "real_mcp_server_called": false, "provider_approval_claimed": false, "compliance_certification_claimed": false }
+}

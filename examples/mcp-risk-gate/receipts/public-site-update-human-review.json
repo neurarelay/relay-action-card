@@ -1,0 +1,36 @@
+{
+  "receipt_id": "dr_20260526_mcp_site_update_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T17:15:00-04:00",
+  "action_card_id": "ac_20260526_mcp_site_update_001",
+  "decision": "human_review",
+  "decision_reason": "Public website copy change creates business-facing claims and needs owner review.",
+  "runtime_instruction": "pause_for_human_review",
+  "actor": { "type": "agent", "name": "Frontsmith Demo Agent", "runtime": "synthetic_mcp_client" },
+  "proposed_action": {
+    "action_type": "publish_site_update",
+    "target": "frontsmith-demo-site:homepage",
+    "summary": "Publish a synthetic homepage update through an MCP-style tool call.",
+    "params_hash": "sha256:mcp_site_update_001",
+    "amount_or_value_at_risk": "public business claim",
+    "customer_impact": "site visitors may see updated offer language"
+  },
+  "risk": { "risk_class": "public_business_claim", "consequence_score": 2 },
+  "policy_basis": [{ "policy_ref": "frontsmith.synthetic.website.owner_review_required", "summary": "Public website changes require owner review before launch." }],
+  "evidence_basis": [{ "evidence_ref": "frontsmith.owner_brief.website_update", "summary": "Owner brief exists for the proposed synthetic website update." }],
+  "authority": { "authority_ref": "business_owner", "approval_state": "pending", "required_role": "business_owner" },
+  "mcp_binding": { "mcp_server": "synthetic-frontsmith-tools", "tool_name": "publish_site_update", "target": "frontsmith-demo-site:homepage", "actor": "Frontsmith Demo Agent", "params_hash": "sha256:mcp_site_update_001" },
+  "validity": {
+    "valid_for_action_type": "publish_site_update",
+    "valid_for_target": "frontsmith-demo-site:homepage",
+    "valid_for_mcp_server": "synthetic-frontsmith-tools",
+    "valid_for_tool_name": "publish_site_update",
+    "valid_for_actor": "Frontsmith Demo Agent",
+    "params_hash": "sha256:mcp_site_update_001",
+    "valid_until": null,
+    "invalid_if_changed": ["mcp_server", "tool_name", "action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": { "allowed_next_step": "pause_for_human_review", "blocked_downstream_actions": ["publish_site_update", "deploy_site"], "execution_boundary": "Neura returns a Decision Receipt only; no MCP server or downstream tool is executed by Neura." },
+  "trace": { "trace_ref": "trace_20260526_mcp_site_update_human_review_001", "source": "github", "campaign": "agent_action_gateway", "surface": "mcp_risk_gate" },
+  "boundary": { "downstream_execution_performed_by_neura": false, "real_customer_data_used": false, "real_mcp_server_called": false, "provider_approval_claimed": false, "compliance_certification_claimed": false }
+}

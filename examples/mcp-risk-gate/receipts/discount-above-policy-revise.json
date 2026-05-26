@@ -1,0 +1,36 @@
+{
+  "receipt_id": "dr_20260526_mcp_discount_revise_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-26T17:10:00-04:00",
+  "action_card_id": "ac_20260526_mcp_discount_001",
+  "decision": "revise",
+  "decision_reason": "Requested discount exceeds the synthetic merchant policy limit; the agent may revise to the allowed limit.",
+  "runtime_instruction": "continue_with_revision",
+  "actor": { "type": "agent", "name": "CommerceOps Demo Agent", "runtime": "synthetic_mcp_client" },
+  "proposed_action": {
+    "action_type": "create_discount_code",
+    "target": "customer:CO-CUST-204",
+    "summary": "Create a 30 percent discount code through an MCP-style tool call.",
+    "params_hash": "sha256:mcp_discount_001",
+    "amount_or_value_at_risk": "30 percent discount",
+    "customer_impact": "customer receives excessive discount offer"
+  },
+  "risk": { "risk_class": "commercial_commitment", "consequence_score": 2 },
+  "policy_basis": [{ "policy_ref": "commerceops.synthetic.discounts.max_without_review", "summary": "Discounts above 15 percent require revision or owner review." }],
+  "evidence_basis": [{ "evidence_ref": "customer:CO-CUST-204.recovery_context", "summary": "Synthetic recovery context exists but does not justify the requested discount level." }],
+  "authority": { "authority_ref": "merchant_owner", "approval_state": "revision_required", "required_role": "owner_or_operator" },
+  "mcp_binding": { "mcp_server": "synthetic-commerce-tools", "tool_name": "create_discount_code", "target": "customer:CO-CUST-204", "actor": "CommerceOps Demo Agent", "params_hash": "sha256:mcp_discount_001" },
+  "validity": {
+    "valid_for_action_type": "create_discount_code",
+    "valid_for_target": "customer:CO-CUST-204",
+    "valid_for_mcp_server": "synthetic-commerce-tools",
+    "valid_for_tool_name": "create_discount_code",
+    "valid_for_actor": "CommerceOps Demo Agent",
+    "params_hash": "sha256:mcp_discount_001",
+    "valid_until": null,
+    "invalid_if_changed": ["mcp_server", "tool_name", "action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": { "allowed_next_step": "continue_with_revision", "blocked_downstream_actions": ["create_discount_code", "send_discount_message"], "execution_boundary": "Neura returns a Decision Receipt only; no MCP server or downstream tool is executed by Neura." },
+  "trace": { "trace_ref": "trace_20260526_mcp_discount_revise_001", "source": "github", "campaign": "agent_action_gateway", "surface": "mcp_risk_gate" },
+  "boundary": { "downstream_execution_performed_by_neura": false, "real_customer_data_used": false, "real_mcp_server_called": false, "provider_approval_claimed": false, "compliance_certification_claimed": false }
+}

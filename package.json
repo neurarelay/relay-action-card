@@ -31,6 +31,7 @@
     "proof:runtime-binding": "node examples/runtime-binding/run-proof.mjs",
     "proof:flow-aware-authority": "node examples/flow-aware-authority/run-proof.mjs",
     "proof:agent-action-firewall": "node examples/agent-action-firewall/run-proof.mjs",
+    "proof:mcp-risk-gate": "node examples/mcp-risk-gate/run-proof.mjs",
     "proof:swarm-authority-placement": "node examples/swarm-authority-placement/run-proof.mjs",
     "benchmark:agent-authority": "node examples/agent-authority-benchmark/run-benchmark.mjs",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
@@ -100,6 +101,7 @@
     "verify:flow-aware-authority-gate": "node scripts/verify-flow-aware-authority-gate.mjs",
     "verify:decision-receipt-standard": "node scripts/verify-decision-receipt-standard.mjs",
     "verify:agent-action-firewall": "node scripts/verify-agent-action-firewall.mjs",
+    "verify:mcp-risk-gate": "node scripts/verify-mcp-risk-gate.mjs",
     "verify:swarm-authority-placement-proof": "node scripts/verify-swarm-authority-placement-proof.mjs",
     "verify:agent-authority-benchmark": "node scripts/verify-agent-authority-benchmark.mjs"
   },
