@@ -10,7 +10,8 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const canonicalNpmPackage = "@neurarelay/openclaw-preflight-adapter";
 const founderClawHubPackage = "@rpelevin/neura-relay-preflight-adapter";
-const packageVersion = "0.1.1";
+const canonicalPackageVersion = "0.1.4";
+const founderPackageVersion = "0.1.1";
 const failures = [];
 const steps = [];
 
@@ -77,7 +78,7 @@ requireNode();
 
 const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.json");
 if (adapterPackage.name !== canonicalNpmPackage) failures.push("canonical_npm_package_name_drifted");
-if (adapterPackage.version !== packageVersion) failures.push("canonical_package_version_drifted");
+if (adapterPackage.version !== canonicalPackageVersion) failures.push("canonical_package_version_drifted");
 if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
   failures.push("claim_boundary_missing");
 }
@@ -90,10 +91,11 @@ cpSync(pluginRoot, founderPackageRoot, { recursive: true });
 const founderPackageJsonPath = join(founderPackageRoot, "package.json");
 const founderPackageJson = JSON.parse(readFileSync(founderPackageJsonPath, "utf8"));
 founderPackageJson.name = founderClawHubPackage;
-founderPackageJson.openclaw.install.npmSpec = `${founderClawHubPackage}@${packageVersion}`;
+founderPackageJson.version = founderPackageVersion;
+founderPackageJson.openclaw.install.npmSpec = `${founderClawHubPackage}@${founderPackageVersion}`;
 founderPackageJson.neura = {
   ...founderPackageJson.neura,
-  canonicalNpmPackage: `${canonicalNpmPackage}@${packageVersion}`,
+  canonicalNpmPackage: `${canonicalNpmPackage}@${canonicalPackageVersion}`,
   canonicalPublisherNamespaceRequest: "openclaw/clawhub#2190",
 };
 writeFileSync(founderPackageJsonPath, `${JSON.stringify(founderPackageJson, null, 2)}\n`);
@@ -141,7 +143,7 @@ if (tarballPath && install.ok) {
       "--display-name",
       "Neura Relay Preflight Adapter",
       "--version",
-      packageVersion,
+      founderPackageVersion,
       "--tags",
       "stable",
       "--source-repo",
@@ -164,7 +166,7 @@ const expectedDryRun = {
   name: founderClawHubPackage,
   displayName: "Neura Relay Preflight Adapter",
   family: "code-plugin",
-  version: packageVersion,
+  version: founderPackageVersion,
   commit,
 };
 
@@ -189,8 +191,8 @@ const report = {
     short_commit: shortCommit,
     status_short: git(["status", "--short"]),
   },
-  canonical_npm_package: `${canonicalNpmPackage}@${packageVersion}`,
-  founder_clawhub_package: founderClawHubPackage,
+  canonical_npm_package: `${canonicalNpmPackage}@${canonicalPackageVersion}`,
+  founder_clawhub_package: `${founderClawHubPackage}@${founderPackageVersion}`,
   dry_run: dryRun.payload,
   exact_dry_run_command: [
     "clawhub",
@@ -206,7 +208,7 @@ const report = {
     "--display-name",
     "\"Neura Relay Preflight Adapter\"",
     "--version",
-    packageVersion,
+    founderPackageVersion,
     "--tags",
     "stable",
     "--source-repo",

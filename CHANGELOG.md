@@ -1,10 +1,16 @@
 # Changelog
 
+## OpenClaw adapter npm latest publish - 2026-05-28
+
+- Publishes `@neurarelay/openclaw-preflight-adapter@0.1.4` to npm under the `latest` tag through npm Trusted Publishing.
+- Aligns npm latest with the canonical ClawHub community package version and the source package version.
+- Preserves npm `rc=0.1.0-rc.2`, the historical `@rpelevin/neura-relay-preflight-adapter@0.1.1` ClawHub fallback, and the no-official-claim boundary.
+
 ## ClawHub README-only polish release - 2026-05-18
 
 - Publishes the canonical ClawHub community package as `@neurarelay/openclaw-preflight-adapter@0.1.4` from the same source path with no functional behavior changes.
 - Moves the package README and metadata to the current canonical ClawHub version so the live ClawHub page presents the clean install path and claim boundaries.
-- Preserves npm latest as `@neurarelay/openclaw-preflight-adapter@0.1.1`; no npm `0.1.4` publish was performed.
+- At publication time, preserved npm latest as `@neurarelay/openclaw-preflight-adapter@0.1.1`; npm latest was moved to `0.1.4` in the later trusted-publishing release.
 - Preserves the historical `@rpelevin/neura-relay-preflight-adapter@0.1.1` fallback and keeps the no-official-claim boundary.
 
 ## ClawHub canonical community package metadata repair - 2026-05-18

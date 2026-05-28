@@ -54,7 +54,7 @@ The stable npm package can be installed by an outside developer:
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm publish is approved.
+This is the stable npm install path. It resolves to `@neurarelay/openclaw-preflight-adapter@0.1.4` under npm `latest`.
 
 The public package surface is:
 

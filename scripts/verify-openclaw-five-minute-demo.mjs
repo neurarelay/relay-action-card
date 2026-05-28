@@ -136,13 +136,13 @@ const scenarios = [
       proposedAction: {
         type: "package.publish",
         summary: "Publish a package only after version, provenance, and approval refs are checked.",
-        target: "package_ref:@neurarelay/openclaw-preflight-adapter@0.1.1"
+        target: "package_ref:@neurarelay/openclaw-preflight-adapter@0.1.4"
       },
       authority: {
         ...baseAuthority,
         authorityScope: "controlled_package_release",
         allowedActions: ["package.publish"],
-        allowedResources: ["package_ref:@neurarelay/openclaw-preflight-adapter@0.1.1"],
+        allowedResources: ["package_ref:@neurarelay/openclaw-preflight-adapter@0.1.4"],
         policyRefs: ["policy_ref_release_approval", "policy_ref_claim_boundary_review"],
         authorityScopeRef: "authority_scope_ref_package_release"
       },

@@ -15,7 +15,7 @@ This is a community example skill pack. It is not an official OpenClaw or ClawHu
 
 ## Current Package Truth
 
-- Canonical npm package: `@neurarelay/openclaw-preflight-adapter@0.1.1`
+- Canonical npm package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
 - Canonical ClawHub community package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
 - Historical ClawHub community fallback: `@rpelevin/neura-relay-preflight-adapter@0.1.1`
 - ClawHub history thread: `openclaw/clawhub#2190`

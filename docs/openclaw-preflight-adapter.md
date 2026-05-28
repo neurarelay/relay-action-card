@@ -43,7 +43,7 @@ Current public docs reviewed for this shape:
 Published stable npm package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.1
+@neurarelay/openclaw-preflight-adapter@0.1.4
 ```
 
 Use Node `24` via `.nvmrc`; runtime verification requires Node `>=22.14.0`.
@@ -54,7 +54,7 @@ Install from npm:
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. The old `@rc` tag remains available only for release-candidate history.
+This is the stable npm install path. npm `latest` resolves to `0.1.4`; the old `@rc` tag remains available only for release-candidate history.
 
 Published canonical ClawHub community package:
 

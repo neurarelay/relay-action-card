@@ -12,7 +12,7 @@ The ClawHub community fallback package remains:
 @rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
-The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` ClawHub community package is published at `0.1.4` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. ClawHub shows the canonical package with `latest` and `stable` tags, current version `v0.1.4`, visible README, and security audits still pending. The latest public npm package remains `@neurarelay/openclaw-preflight-adapter@0.1.1` until Roman separately approves a npm publish.
+The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` package is published at `0.1.4` on npm `latest` and as the canonical ClawHub community package with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. ClawHub shows the canonical package with `latest` and `stable` tags, current version `v0.1.4`, visible README, and security audits still pending.
 
 It shows how a local autonomous computer-use runtime can call:
 
@@ -39,7 +39,7 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. It currently resolves to the latest public npm release until a separate npm publish is approved.
+This is the stable npm install path. It resolves to `@neurarelay/openclaw-preflight-adapter@0.1.4` under npm `latest`.
 
 When installing the current canonical ClawHub community package, use:
 

@@ -88,7 +88,6 @@ requireIncludes("skill", skill, [
   "---",
   "name: neura-openclaw-core",
   "Decision Receipt",
-  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@neurarelay/openclaw-preflight-adapter@0.1.4",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
   "openclaw/clawhub#2190",
@@ -116,7 +115,6 @@ const docs = read("docs/openclaw-core-skill-pack.md");
 requireIncludes("docs", docs, [
   "OpenClaw Core Skill Pack",
   "community skill pack published on ClawHub",
-  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@neurarelay/openclaw-preflight-adapter@0.1.4",
   "neura-openclaw-core@0.1.0",
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
@@ -146,7 +144,6 @@ if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
 const submission = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission", submission, [
   "@rpelevin/neura-relay-preflight-adapter@0.1.1",
-  "@neurarelay/openclaw-preflight-adapter@0.1.1",
   "@neurarelay/openclaw-preflight-adapter@0.1.4",
   "community publications only",
 ]);
@@ -158,7 +155,7 @@ console.log(
       ok: failures.length === 0,
       verifier: "openclaw-core-skill-pack",
       skill: "skills/openclaw/neura-relay-core",
-      canonicalNpmPackage: "@neurarelay/openclaw-preflight-adapter@0.1.1",
+      canonicalNpmPackage: "@neurarelay/openclaw-preflight-adapter@0.1.4",
       sourcePackageVersion: "@neurarelay/openclaw-preflight-adapter@0.1.4",
       currentClawHubCommunityFallback: "@rpelevin/neura-relay-preflight-adapter@0.1.1",
       canonicalClawHubCommunityPackage: "@neurarelay/openclaw-preflight-adapter@0.1.4",

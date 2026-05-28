@@ -8,7 +8,7 @@ Use only as historical context. The current ClawHub truth is in [`openclaw-clawh
 ```markdown
 Historical draft from the `@neurarelay` side:
 
-- Stable npm package: `@neurarelay/openclaw-preflight-adapter@0.1.1`
+- Stable npm package at draft time: `@neurarelay/openclaw-preflight-adapter@0.1.1`; current package truth lives in `openclaw-clawhub-submission-readiness.md`
 - Canonical ClawHub community package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
 - Source path: `neurarelay/relay-action-card`, `examples/openclaw/preflight-adapter`
 - Green CI for the current OpenClaw-style integration commit: https://github.com/neurarelay/relay-action-card/actions/runs/25795608585

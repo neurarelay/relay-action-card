@@ -133,7 +133,7 @@ const ecosystems = {
     requiredEnv: [],
     requestTemplate: {
       package: "@neurarelay/openclaw-preflight-adapter",
-      package_latest_expected: "0.1.1",
+      package_latest_expected: "0.1.4",
       local_proof: "npm run openclaw:proof",
       live_receipt_proof:
         "npm run openclaw:proof -- --live --source=openclaw_clawhub --campaign=ecosystem_availability_openclaw",

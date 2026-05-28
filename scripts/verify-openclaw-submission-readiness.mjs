@@ -174,7 +174,7 @@ rejectUnsafe("publish_workflow", publishWorkflow);
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
-  "canonical `@neurarelay` ClawHub community package `0.1.4` published",
+  "canonical `@neurarelay` package `0.1.4` published on npm latest and ClawHub community",
   packageName,
   packageVersion,
   pluginId,
