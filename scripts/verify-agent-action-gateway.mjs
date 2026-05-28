@@ -68,6 +68,7 @@ const requiredFiles = [
   "docs/decision-receipt-standard.md",
   "docs/mcp-risk-gate.md",
   "docs/commerceops-fire-drill.md",
+  "docs/delegated-action-trust-proof.md",
   "scripts/run-agent-action-gateway.mjs",
   "scripts/verify-agent-action-gateway.mjs",
 ];
@@ -99,6 +100,7 @@ requireIncludes("readme", readme, [
   "Decision Receipt Standard",
   "MCP Risk Gate",
   "CommerceOps Fire Drill",
+  "Delegated Action Trust",
   "No downstream execution by Neura",
 ]);
 requireIncludes("docs", docs, [
@@ -109,6 +111,7 @@ requireIncludes("docs", docs, [
   "Decision Receipt Standard",
   "MCP Risk Gate",
   "CommerceOps Fire Drill",
+  "Delegated Action Trust",
   "No downstream execution by Neura",
   "https://www.neurarelay.com/agent-action-gateway",
 ]);
@@ -137,9 +140,9 @@ if (output) {
   if (output.mode !== "local_dry_run_gateway_ladder_no_downstream_execution") {
     failures.push("wrong_gateway_mode");
   }
-  if (output.scenario_count !== 16) failures.push("wrong_gateway_scenario_count");
-  if (output.proof_ladder?.length !== 4) failures.push("wrong_gateway_ladder_length");
-  for (const step of ["01", "02", "03", "04"]) {
+  if (output.scenario_count !== 22) failures.push("wrong_gateway_scenario_count");
+  if (output.proof_ladder?.length !== 5) failures.push("wrong_gateway_ladder_length");
+  for (const step of ["01", "02", "03", "04", "05"]) {
     if (!output.proof_ladder?.some((result) => result.step === step && result.ok === true)) {
       failures.push(`missing_gateway_step_${step}`);
     }

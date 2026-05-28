@@ -35,6 +35,7 @@
     "proof:mcp-risk-gate": "node examples/mcp-risk-gate/run-proof.mjs",
     "proof:commerceops-fire-drill": "node examples/commerceops-fire-drill/run-proof.mjs",
     "proof:clinicops-synthetic": "node examples/clinicops-synthetic-proof/run-proof.mjs",
+    "proof:delegated-action-trust": "node examples/delegated-action-trust/run-proof.mjs",
     "proof:swarm-authority-placement": "node examples/swarm-authority-placement/run-proof.mjs",
     "benchmark:agent-authority": "node examples/agent-authority-benchmark/run-benchmark.mjs",
     "openclaw:dry-run": "node examples/openclaw/run-action-receipt-kit.mjs --dry-run",
@@ -108,6 +109,7 @@
     "verify:mcp-risk-gate": "node scripts/verify-mcp-risk-gate.mjs",
     "verify:commerceops-fire-drill": "node scripts/verify-commerceops-fire-drill.mjs",
     "verify:clinicops-synthetic": "node scripts/verify-clinicops-synthetic-proof.mjs",
+    "verify:delegated-action-trust": "node scripts/verify-delegated-action-trust-proof.mjs",
     "verify:swarm-authority-placement-proof": "node scripts/verify-swarm-authority-placement-proof.mjs",
     "verify:agent-authority-benchmark": "node scripts/verify-agent-authority-benchmark.mjs"
   },

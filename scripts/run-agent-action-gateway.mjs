@@ -40,6 +40,13 @@ const proofSteps = [
     script: "examples/commerceops-fire-drill/run-proof.mjs",
     surface: "commerceops_fire_drill",
   },
+  {
+    step: "05",
+    proof: "delegated-action-trust",
+    capability: "Delegated Action Trust",
+    script: "examples/delegated-action-trust/run-proof.mjs",
+    surface: "delegated_action_trust",
+  },
 ];
 
 function proofArgs(surface) {
@@ -123,6 +130,7 @@ try {
     runDecisionReceiptStandard(),
     runProof(proofSteps[1]),
     runProof(proofSteps[2]),
+    runProof(proofSteps[3]),
   ];
   const ok = proofResults.every((result) => result.ok === true);
   const decisionCounts = {};

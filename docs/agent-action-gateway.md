@@ -28,6 +28,7 @@ npm run proof:agent-action-firewall -- --dry-run --json
 npm run verify:decision-receipt-standard
 npm run proof:mcp-risk-gate -- --dry-run --json
 npm run proof:commerceops-fire-drill -- --dry-run --json
+npm run proof:delegated-action-trust -- --dry-run --json
 npm run proof:clinicops-synthetic -- --dry-run --json
 ```
 
@@ -37,6 +38,7 @@ npm run proof:clinicops-synthetic -- --dry-run --json
 | 02 | Decision Receipt Standard | Receipt fields bind the decision to action type, target, params hash, actor, policy, evidence, authority, and trace refs |
 | 03 | MCP Risk Gate | MCP-style tool calls bind to exact server, tool, target, actor, and params hash before runtime-owned execution |
 | 04 | CommerceOps Fire Drill | Commerce actions such as refunds, discounts, address changes, cancellations, replies, and promises receive receipts before execution |
+| 05 | Delegated Action Trust | Delegation depth, inherited scope, purpose drift, and kill-chain sequence signals become pre-action receipts |
 
 Applied proof cases can extend the ladder without changing the core four-step Gateway proof. ClinicOps Synthetic Proof is one such applied case for regulated-style synthetic workflows:
 
@@ -65,6 +67,7 @@ This proof shows the same mechanism across three environments:
 - a generic proposed agent action
 - an MCP-style tool-call boundary
 - a money-moving commerce workflow
+- a multi-agent delegated workflow
 - a regulated-style synthetic workflow
 
 Different contexts, same Relay mechanism:
