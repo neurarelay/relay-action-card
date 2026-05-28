@@ -78,6 +78,7 @@ function run(command, args, options = {}) {
 const requiredFiles = [
   "README.md",
   "CHANGELOG.md",
+  ".github/workflows/openclaw-preflight-adapter-publish.yml",
   "docs/openclaw-clawhub-submission-readiness.md",
   "docs/openclaw-plugin-release-candidate.md",
   "docs/openclaw-preflight-adapter.md",
@@ -150,6 +151,20 @@ if (!manifest.contracts?.tools?.includes("neura_relay_preflight_action")) {
 if (Object.hasOwn(manifest, "entry")) failures.push("manifest_must_not_hold_runtime_entry");
 if (Object.hasOwn(manifest, "build")) failures.push("manifest_must_not_hold_build_metadata");
 if (Object.hasOwn(manifest, "compat")) failures.push("manifest_must_not_hold_compat_metadata");
+
+const publishWorkflow = read(".github/workflows/openclaw-preflight-adapter-publish.yml");
+requireIncludes("publish_workflow", publishWorkflow, [
+  `default: "${packageVersion}"`,
+  `Type exactly publish ${packageName}@${packageVersion}`,
+  `inputs.version == '${packageVersion}'`,
+  `inputs.confirm_publish == 'publish ${packageName}@${packageVersion}'`,
+  `pkg.version !== '${packageVersion}'`,
+  `pkg.openclaw?.install?.npmSpec !== '${packageName}@${packageVersion}'`,
+  `npm view ${packageName}@${packageVersion} version`,
+  "npm publish --access public --tag latest",
+  "NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}",
+]);
+rejectUnsafe("publish_workflow", publishWorkflow);
 
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
@@ -281,6 +296,7 @@ console.log(
       },
       submission_gate: {
         roman_approval_required: true,
+        npm_publish_workflow_locked_to_version: packageVersion,
         dry_run_command_documented: true,
         publish_command_documented: true,
         official_openclaw_or_clawhub_claim: false,
