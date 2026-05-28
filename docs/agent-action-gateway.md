@@ -1,8 +1,8 @@
 # Pre-Action Authority
 
-Pre-Action Authority is the developer proof path for Neura Relay.
+Pre-Action Authority is the developer path for Neura Relay when an agent proposes a consequential action.
 
-It shows how a proposed consequential agent action becomes an Action Card, passes through Relay governance, and returns a Decision Receipt before the developer-owned runtime decides what happens next.
+It shows how a proposed action becomes an Action Card, passes through Relay governance, and returns a Decision Receipt before the developer-owned runtime decides what happens next.
 
 ## Core Path
 
@@ -10,9 +10,9 @@ It shows how a proposed consequential agent action becomes an Action Card, passe
 Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
 ```
 
-Neura Relay remains the product. Pre-Action Authority is the proof path that makes the authority-before-action mechanism concrete for developers.
+Neura Relay remains the product. Pre-Action Authority is the public developer path that makes the authority-before-action mechanism concrete.
 
-## Proof Ladder
+## Local Authority Ladder
 
 Run the full local ladder:
 
@@ -21,7 +21,7 @@ npm run proof:pre-action-authority -- --dry-run --json
 npm run verify:pre-action-authority
 ```
 
-Or run each piece directly:
+Or run each check directly:
 
 ```bash
 npm run proof:agent-action-firewall -- --dry-run --json
@@ -32,7 +32,7 @@ npm run proof:authority-path -- --dry-run --json
 npm run proof:clinicops-synthetic -- --dry-run --json
 ```
 
-| Step | Proof | What it confirms |
+| Step | Check | What it confirms |
 | --- | --- | --- |
 | 01 | Agent Action Firewall | Proposed actions classify as `allow`, `revise`, `human_review`, or `stop` before execution |
 | 02 | Decision Receipt Standard | Receipt fields bind the decision to action type, target, params hash, actor, policy, evidence, authority, and trace refs |
@@ -40,7 +40,7 @@ npm run proof:clinicops-synthetic -- --dry-run --json
 | 04 | CommerceOps Fire Drill | Commerce actions such as refunds, discounts, address changes, cancellations, replies, and promises receive receipts before execution |
 | 05 | Authority Path Proof | Authority path depth, scope envelope, purpose fit, and sequence context become pre-action receipts |
 
-Applied proof cases can extend the ladder without changing the core four-step authority proof. ClinicOps Synthetic Proof is one such applied case for regulated-style synthetic workflows:
+Applied examples can extend the ladder without changing the core route. ClinicOps Synthetic Proof is one such applied case for regulated-style synthetic workflows:
 
 ```bash
 npm run verify:clinicops-synthetic
@@ -60,9 +60,9 @@ The full ladder returns one JSON artifact with:
 
 The output is designed to be used as a local developer receipt-path proof, not as a production integration claim.
 
-## What This Proves
+## What It Shows
 
-This proof shows the same mechanism across three environments:
+The same Relay mechanism works across several action types:
 
 - a generic proposed agent action
 - an MCP-style tool-call boundary

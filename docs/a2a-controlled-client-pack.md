@@ -2,7 +2,7 @@
 
 Status: v0.3 Agent Card discovery shape with v0.2 controlled-access proof for SDK 0.1.0 and A2A Controlled Runtime v1 response checks.
 
-This pack proves the narrow A2A surface Neura can stand behind today:
+This pack documents the narrow A2A surface Neura can stand behind today:
 
 ```text
 public Agent Card discovery -> controlled /a2a message/send -> Decision Receipt task
@@ -13,6 +13,8 @@ It is not a public A2A token program, public API-key program, agent directory li
 ```text
 Action Card -> Relay -> Decision Receipt -> developer-owned execution
 ```
+
+Use this as a controlled handoff path, not as a public agent network.
 
 ## What To Run
 
@@ -42,7 +44,7 @@ Verify the pack:
 npm run verify:a2a-authenticated-client
 ```
 
-Without `RELAY_A2A_ACCESS_TOKEN`, the verifier proves public discovery and reports the protected execution proof as skipped. With a token, it also confirms the protected `message/send` task returns a Decision Receipt, trace ref, and transaction ref.
+Without `RELAY_A2A_ACCESS_TOKEN`, the verifier checks public discovery and reports the protected execution path as skipped. With a token, it also confirms the protected `message/send` task returns a Decision Receipt, trace ref, and transaction ref.
 
 ## Controlled Access Lane
 

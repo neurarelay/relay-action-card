@@ -1,14 +1,14 @@
 # Relay Action Card
 
-Run the Neura Relay Pre-Action Authority proof path before agent execution.
+Run Neura Relay's Pre-Action Authority path before an agent changes real systems.
 
-This is the public developer starting point for Neura Relay: a runnable proof package for agent developers building AI agents, autonomous-agent workflows, commerce operations, or MCP-capable runtimes that need authority before consequential action. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a Decision Receipt before deciding what to execute.
+This is the public developer starting point for Neura Relay: a runnable package for agent developers building autonomous workflows, commerce operations, MCP-capable runtimes, or governed handoffs that need authority before consequential action. Your runtime sends a proposed action as an Action Card. Relay evaluates identity, authority, evidence, policy, and risk, then returns a Decision Receipt. Your system keeps execution ownership.
 
 Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
 
-## Pre-Action Authority: Start Here
+## Start With Pre-Action Authority
 
-Use the authority proof ladder when you want the shortest local route from proposed action to Decision Receipt:
+Run the local authority flow when you want the shortest route from proposed action to Decision Receipt:
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -18,19 +18,19 @@ npm run proof:pre-action-authority -- --dry-run --json
 npm run verify:pre-action-authority
 ```
 
-Live authority page:
+Live product page:
 
 ```text
 https://www.neurarelay.com/agent-action-gateway
 ```
 
-The proof ladder is:
+The path is:
 
 ```text
 Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
 ```
 
-| Step | Proof | Command |
+| Step | Check | Command |
 | --- | --- | --- |
 | 01 | Agent Action Firewall | `npm run proof:agent-action-firewall -- --dry-run --json` |
 | 02 | Decision Receipt Standard | `npm run verify:decision-receipt-standard` |
@@ -38,21 +38,21 @@ Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> de
 | 04 | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` |
 | 05 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
 
-Applied proof cases also include:
+Applied examples also include:
 
 ```bash
 npm run proof:clinicops-synthetic -- --dry-run --json
 npm run verify:clinicops-synthetic
 ```
 
-No downstream execution by Neura. The developer-owned runtime decides whether to execute, revise, escalate, or stop after reading the receipt.
+No downstream execution by Neura. The developer-owned runtime reads the receipt and decides whether to continue, revise, review, or stop.
 
-Distribution proof:
+Distribution:
 
 - Neura Relay MCP is active in the Official MCP Registry as [`com.neurarelay/relay-mcp`](https://registry.modelcontextprotocol.io/?q=com.neurarelay%2Frelay-mcp).
 - The listing points to protected `/mcp`; sandbox tokens come from Workspace and production/private access remains controlled.
 
-## Automatic Discovery: Agent And Search Surfaces
+## Automatic Discovery
 
 Use these URLs when an agent, crawler, evaluator, or developer needs the shortest machine-readable route into Neura Relay:
 
@@ -61,31 +61,34 @@ Use these URLs when an agent, crawler, evaluator, or developer needs the shortes
 - Relay Pre-Action Authority: [`https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme)
 - Relay first proof: [`https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme)
 - Relay SDK package: [`@neurarelay/sdk`](https://www.npmjs.com/package/@neurarelay/sdk)
+- Controlled A2A handoff path: [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md)
 - NeuraPath Relay route: [`https://neurapath.ai/neura-relay`](https://neurapath.ai/neura-relay)
 - Frontsmith applied proof: [`https://frontsmith.neurapath.ai/llms.txt`](https://frontsmith.neurapath.ai/llms.txt)
 
 The discovery path should resolve to the same proof:
 
 ```text
-Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / Registry context
+Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / optional Registry context
 ```
+
+Registry is an optional production-trust upgrade. Relay must still work without it.
 
 ## Pre-Action Authority Proof Foundation
 
-Use this local proof when you want to inspect the individual pieces of the Pre-Action Authority path:
+Use the full local flow when you want to inspect the individual pieces of the Pre-Action Authority path:
 
 ```text
-Action Card -> Agent Action Firewall -> Decision Receipt -> developer-owned execution or restraint
+Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned route
 ```
 
-The foundation has four pieces:
+The package includes five core checks plus one applied synthetic case:
 
 - Agent Action Firewall: proposed actions classify as `allow`, `revise`, `human_review`, or `stop`.
 - Decision Receipt Standard: the working receipt shape for what was authorized before execution.
 - MCP Risk Gate: tool-call intent binds to server, tool, target, actor, and params hash.
 - CommerceOps Fire Drill: commerce actions receive receipts before money-moving or customer-facing execution.
 - Authority Path Proof: authority path depth, scope envelope, purpose fit, and sequence context become pre-action receipts.
-- ClinicOps Synthetic Proof: regulated-style synthetic actions receive receipts before scheduling, patient-message, prior-auth, insurance follow-up, or policy-exception execution.
+- ClinicOps Synthetic Proof: an applied synthetic case for scheduling, patient-message, prior-auth, insurance follow-up, and policy-exception actions.
 
 Run:
 
