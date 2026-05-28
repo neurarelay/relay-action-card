@@ -76,8 +76,17 @@ jobs:
             exit 1
           fi
 
+      - name: Normalize npm token for publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          token="$(printf '%s' "$NODE_AUTH_TOKEN" | tr -d '\r\n')"
+          test -n "$token"
+          echo "::add-mask::$token"
+          printf "//registry.npmjs.org/:_authToken=%s\n" "$token" > "$NPM_CONFIG_USERCONFIG"
+
       - name: Publish package
         working-directory: examples/openclaw/preflight-adapter
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public --tag latest
+          NPM_TAG: ${{ inputs.npm_tag }}
+        run: npm publish --access public --tag "$NPM_TAG"

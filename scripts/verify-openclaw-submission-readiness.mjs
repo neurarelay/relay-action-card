@@ -161,7 +161,11 @@ requireIncludes("publish_workflow", publishWorkflow, [
   `pkg.version !== '${packageVersion}'`,
   `pkg.openclaw?.install?.npmSpec !== '${packageName}@${packageVersion}'`,
   `npm view ${packageName}@${packageVersion} version`,
-  "npm publish --access public --tag latest",
+  "Normalize npm token for publish",
+  "tr -d '\\r\\n'",
+  "printf \"//registry.npmjs.org/:_authToken=%s\\n\" \"$token\" > \"$NPM_CONFIG_USERCONFIG\"",
+  "NPM_TAG: ${{ inputs.npm_tag }}",
+  'npm publish --access public --tag "$NPM_TAG"',
   "NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}",
 ]);
 rejectUnsafe("publish_workflow", publishWorkflow);
