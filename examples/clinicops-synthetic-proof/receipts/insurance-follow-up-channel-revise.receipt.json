@@ -1,0 +1,83 @@
+{
+  "receipt_id": "dr_20260527_clinicops_insurance_follow_up_revise_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-27T21:13:00-04:00",
+  "action_card_id": "ac_20260527_clinicops_insurance_follow_up_001",
+  "decision": "revise",
+  "runtime_instruction": "continue_with_revision",
+  "decision_reason": "Insurer-facing follow-up cannot use an unconfirmed external channel; the action must be revised before any external use.",
+  "actor": {
+    "type": "agent",
+    "name": "ClinicOps Demo Agent",
+    "runtime": "synthetic_workflow"
+  },
+  "proposed_action": {
+    "action_type": "send_insurer_follow_up",
+    "target": "synthetic_case:CL-204:insurance_queue",
+    "summary": "Send an insurer-facing follow-up through a channel not confirmed as allowed for this synthetic case.",
+    "params_hash": "sha256:clinicops_insurance_follow_up_001",
+    "amount_or_value_at_risk": "regulated-style external administrative communication",
+    "customer_impact": "synthetic insurer-facing communication tied to administrative workflow"
+  },
+  "risk": {
+    "risk_class": "regulated_synthetic_workflow",
+    "consequence_score": 2
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "clinicops.synthetic.insurance_follow_up.allowed_channel",
+      "summary": "Insurer-facing follow-up must use an allowed channel; if the channel is not confirmed, the action must be revised or sent to review."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "synthetic_case:CL-204.insurance_context",
+      "summary": "Synthetic insurance context shows the allowed channel has not been confirmed."
+    },
+    {
+      "evidence_ref": "channel:synthetic_insurer_submission",
+      "summary": "Synthetic insurer submission is an external channel and is not allowed for dry run execution."
+    }
+  ],
+  "authority": {
+    "authority_ref": "qualified_human_reviewer",
+    "approval_state": "revision_required",
+    "required_role": "qualified_human_reviewer"
+  },
+  "validity": {
+    "valid_for_action_type": "send_insurer_follow_up",
+    "valid_for_target": "synthetic_case:CL-204:insurance_queue",
+    "valid_for_actor": "ClinicOps Demo Agent",
+    "params_hash": "sha256:clinicops_insurance_follow_up_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": {
+    "allowed_next_step": "select_allowed_channel_or_prepare_human_review",
+    "blocked_downstream_actions": ["send_insurer_follow_up", "attach_case_packet", "write_to_external_queue"],
+    "execution_boundary": "Neura returns a Decision Receipt only; no provider, clinic, scheduling, patient-message, EHR, or insurer system is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260527_clinicops_insurance_follow_up_revise_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "clinicops_synthetic_proof"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "phi_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "real_provider_system_touched": false,
+    "real_insurer_system_touched": false,
+    "real_ehr_touched": false,
+    "real_scheduling_system_touched": false,
+    "real_patient_message_sent": false,
+    "real_prior_authorization_submitted": false,
+    "hipaa_compliance_claimed": false,
+    "medical_advice_claimed": false,
+    "clinical_accuracy_claimed": false,
+    "provider_approval_claimed": false,
+    "insurer_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

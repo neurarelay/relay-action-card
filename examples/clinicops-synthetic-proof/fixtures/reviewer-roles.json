@@ -1,0 +1,23 @@
+{
+  "qualified_human_reviewer": {
+    "role_ref": "qualified_human_reviewer",
+    "can_approve_external_patient_message": true,
+    "can_approve_prior_auth_packet": true,
+    "can_approve_schedule_change": true,
+    "can_apply_policy_exception": false
+  },
+  "clinic_operations_owner": {
+    "role_ref": "clinic_operations_owner",
+    "can_approve_external_patient_message": false,
+    "can_approve_prior_auth_packet": false,
+    "can_approve_schedule_change": true,
+    "can_apply_policy_exception": false
+  },
+  "policy_exception_owner": {
+    "role_ref": "policy_exception_owner",
+    "can_approve_external_patient_message": false,
+    "can_approve_prior_auth_packet": false,
+    "can_approve_schedule_change": false,
+    "can_apply_policy_exception": true
+  }
+}

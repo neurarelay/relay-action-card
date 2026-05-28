@@ -1,0 +1,42 @@
+[
+  {
+    "synthetic_case_id": "CL-204",
+    "case_type": "prior_authorization",
+    "case_summary": "Synthetic administrative case for local proof only.",
+    "appointment_context": {
+      "appointment_ref": "appt:CL-204-A",
+      "requested_change": "earlier_slot",
+      "policy_sensitive_reason": true,
+      "review_required": true
+    },
+    "message_context": {
+      "draft_ref": "message:CL-204-follow-up",
+      "message_purpose": "administrative_next_steps",
+      "contains_medical_advice": false,
+      "external_use_requires_review": true
+    },
+    "prior_auth_context": {
+      "packet_ref": "prior_auth:CL-204",
+      "policy_notes_ref": "policy_notes:CL-204",
+      "payer_requirement_ref": "payer_requirement:CL-204",
+      "review_required": true
+    },
+    "insurance_context": {
+      "queue_ref": "insurance_queue:CL-204",
+      "allowed_channel_confirmed": false,
+      "external_follow_up_requires_review": true
+    },
+    "exception_context": {
+      "exception_ref": "exception:CL-204",
+      "owner_approval_present": false,
+      "supporting_evidence_complete": false
+    },
+    "boundary": {
+      "synthetic_data_only": true,
+      "phi_used": false,
+      "real_provider_system_touched": false,
+      "real_insurer_system_touched": false,
+      "real_patient_message_sent": false
+    }
+  }
+]

@@ -1,0 +1,83 @@
+{
+  "receipt_id": "dr_20260527_clinicops_patient_message_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-27T21:11:00-04:00",
+  "action_card_id": "ac_20260527_clinicops_patient_message_001",
+  "decision": "human_review",
+  "runtime_instruction": "pause_for_human_review",
+  "decision_reason": "Patient-facing administrative message draft requires qualified human review before external use.",
+  "actor": {
+    "type": "agent",
+    "name": "ClinicOps Demo Agent",
+    "runtime": "synthetic_workflow"
+  },
+  "proposed_action": {
+    "action_type": "send_patient_follow_up_message",
+    "target": "synthetic_case:CL-204:message",
+    "summary": "Send a synthetic patient follow-up message that includes administrative next steps.",
+    "params_hash": "sha256:clinicops_patient_message_001",
+    "amount_or_value_at_risk": "regulated-style patient-facing communication",
+    "customer_impact": "synthetic patient-like communication and expectation setting"
+  },
+  "risk": {
+    "risk_class": "regulated_synthetic_workflow",
+    "consequence_score": 3
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "clinicops.synthetic.patient_message.review_required",
+      "summary": "Patient-facing administrative message drafts require qualified human review before external use."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "synthetic_case:CL-204.message_context",
+      "summary": "Synthetic message context is administrative and external use requires review."
+    },
+    {
+      "evidence_ref": "policy:clinicops.synthetic.patient_message.review_required",
+      "summary": "Synthetic patient-message policy requires review before external use."
+    }
+  ],
+  "authority": {
+    "authority_ref": "qualified_human_reviewer",
+    "approval_state": "pending",
+    "required_role": "qualified_human_reviewer"
+  },
+  "validity": {
+    "valid_for_action_type": "send_patient_follow_up_message",
+    "valid_for_target": "synthetic_case:CL-204:message",
+    "valid_for_actor": "ClinicOps Demo Agent",
+    "params_hash": "sha256:clinicops_patient_message_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": {
+    "allowed_next_step": "prepare_message_review_packet",
+    "blocked_downstream_actions": ["send_patient_message", "write_to_patient_record", "trigger_follow_up_workflow"],
+    "execution_boundary": "Neura returns a Decision Receipt only; no provider, clinic, scheduling, patient-message, EHR, or insurer system is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260527_clinicops_patient_message_human_review_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "clinicops_synthetic_proof"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "phi_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "real_provider_system_touched": false,
+    "real_insurer_system_touched": false,
+    "real_ehr_touched": false,
+    "real_scheduling_system_touched": false,
+    "real_patient_message_sent": false,
+    "real_prior_authorization_submitted": false,
+    "hipaa_compliance_claimed": false,
+    "medical_advice_claimed": false,
+    "clinical_accuracy_claimed": false,
+    "provider_approval_claimed": false,
+    "insurer_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

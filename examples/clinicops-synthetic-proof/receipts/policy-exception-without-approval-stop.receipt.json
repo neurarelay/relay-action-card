@@ -1,0 +1,83 @@
+{
+  "receipt_id": "dr_20260527_clinicops_policy_exception_stop_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-27T21:14:00-04:00",
+  "action_card_id": "ac_20260527_clinicops_policy_exception_001",
+  "decision": "stop",
+  "runtime_instruction": "do_not_execute",
+  "decision_reason": "Policy exception has no owner approval and incomplete supporting evidence, so it must stop before execution.",
+  "actor": {
+    "type": "agent",
+    "name": "ClinicOps Demo Agent",
+    "runtime": "synthetic_workflow"
+  },
+  "proposed_action": {
+    "action_type": "apply_policy_exception",
+    "target": "synthetic_case:CL-204:exception",
+    "summary": "Apply a policy exception for a synthetic case without reviewer approval.",
+    "params_hash": "sha256:clinicops_policy_exception_001",
+    "amount_or_value_at_risk": "regulated-style policy exception",
+    "customer_impact": "synthetic patient-like and administrative workflow expectations may change"
+  },
+  "risk": {
+    "risk_class": "regulated_synthetic_workflow",
+    "consequence_score": 3
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "clinicops.synthetic.policy_exception.owner_approval_required",
+      "summary": "Policy exceptions cannot be applied without owner approval and complete supporting evidence."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "synthetic_case:CL-204.exception_context",
+      "summary": "Synthetic exception context shows owner approval is missing and supporting evidence is incomplete."
+    },
+    {
+      "evidence_ref": "policy:clinicops.synthetic.policy_exception.owner_approval_required",
+      "summary": "Synthetic policy exception rule requires owner approval and complete supporting evidence."
+    }
+  ],
+  "authority": {
+    "authority_ref": "policy_exception_owner",
+    "approval_state": "missing",
+    "required_role": "policy_exception_owner"
+  },
+  "validity": {
+    "valid_for_action_type": "apply_policy_exception",
+    "valid_for_target": "synthetic_case:CL-204:exception",
+    "valid_for_actor": "ClinicOps Demo Agent",
+    "params_hash": "sha256:clinicops_policy_exception_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": {
+    "allowed_next_step": "collect_owner_approval_and_complete_evidence",
+    "blocked_downstream_actions": ["apply_policy_exception", "notify_patient", "notify_insurer", "write_to_clinic_system"],
+    "execution_boundary": "Neura returns a Decision Receipt only; no provider, clinic, scheduling, patient-message, EHR, or insurer system is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260527_clinicops_policy_exception_stop_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "clinicops_synthetic_proof"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "phi_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "real_provider_system_touched": false,
+    "real_insurer_system_touched": false,
+    "real_ehr_touched": false,
+    "real_scheduling_system_touched": false,
+    "real_patient_message_sent": false,
+    "real_prior_authorization_submitted": false,
+    "hipaa_compliance_claimed": false,
+    "medical_advice_claimed": false,
+    "clinical_accuracy_claimed": false,
+    "provider_approval_claimed": false,
+    "insurer_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

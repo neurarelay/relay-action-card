@@ -1,0 +1,8 @@
+{
+  "clinicops.synthetic.scheduling.policy_check": "Scheduling changes with policy-sensitive reason codes require qualified human review before schedule update or patient notice.",
+  "clinicops.synthetic.patient_message.review_required": "Patient-facing administrative message drafts require qualified human review before external use.",
+  "clinicops.synthetic.prior_auth.evidence_refs_required": "Prior-authorization drafts require policy notes, referral or order notes, payer requirement refs, and qualified human review before external use.",
+  "clinicops.synthetic.insurance_follow_up.allowed_channel": "Insurer-facing follow-up must use an allowed channel; if the channel is not confirmed, the action must be revised or sent to review.",
+  "clinicops.synthetic.policy_exception.owner_approval_required": "Policy exceptions cannot be applied without owner approval and complete supporting evidence.",
+  "synthetic_data_only": true
+}

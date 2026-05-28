@@ -37,6 +37,13 @@ Agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> devel
 | 03 | MCP Risk Gate | `npm run proof:mcp-risk-gate -- --dry-run --json` |
 | 04 | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` |
 
+Applied proof cases also include:
+
+```bash
+npm run proof:clinicops-synthetic -- --dry-run --json
+npm run verify:clinicops-synthetic
+```
+
 No downstream execution by Neura. The developer-owned runtime decides whether to execute, revise, escalate, or stop after reading the receipt.
 
 Distribution proof:
@@ -76,6 +83,7 @@ The foundation has four pieces:
 - Decision Receipt Standard: the working receipt shape for what was authorized before execution.
 - MCP Risk Gate: tool-call intent binds to server, tool, target, actor, and params hash.
 - CommerceOps Fire Drill: commerce actions receive receipts before money-moving or customer-facing execution.
+- ClinicOps Synthetic Proof: regulated-style synthetic actions receive receipts before scheduling, patient-message, prior-auth, insurance follow-up, or policy-exception execution.
 
 Run:
 
@@ -89,6 +97,8 @@ npm run proof:mcp-risk-gate -- --dry-run --json
 npm run verify:mcp-risk-gate
 npm run proof:commerceops-fire-drill -- --dry-run --json
 npm run verify:commerceops-fire-drill
+npm run proof:clinicops-synthetic -- --dry-run --json
+npm run verify:clinicops-synthetic
 ```
 
 Docs:
@@ -98,12 +108,15 @@ Docs:
 - [`docs/agent-action-firewall.md`](docs/agent-action-firewall.md)
 - [`docs/mcp-risk-gate.md`](docs/mcp-risk-gate.md)
 - [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
+- [`docs/clinicops-synthetic-proof.md`](docs/clinicops-synthetic-proof.md)
 
 MCP Risk Gate applies the same foundation at the tool-call boundary. It shows how an MCP-style call intent binds a receipt to the exact server, tool, target, actor, and params hash before runtime-owned execution.
 
 CommerceOps Fire Drill applies the foundation to a Shopify-style merchant workflow. It shows how routine tracking replies, refunds, discounts, address changes, cancellations, and unsupported customer promises are allowed, revised, escalated, or stopped before execution.
 
-This is a synthetic dry-run proof. It does not touch Shopify, payment rails, customer accounts, production systems, external message channels, MCP providers, or real data. It does not claim provider approval, marketplace listing, compliance certification, production integration, partnership, or downstream execution by Neura.
+ClinicOps Synthetic Proof applies the foundation to regulated-style synthetic workflows. It shows how scheduling changes, patient-message drafts, prior-auth notes, insurance follow-up, and policy exceptions are escalated, revised, or stopped before external use.
+
+This is a synthetic dry-run proof. It does not touch Shopify, payment rails, customer accounts, production systems, external message channels, MCP providers, real provider systems, real insurer systems, real EHRs, real scheduling systems, real patient messages, or real data. It does not claim provider approval, insurer approval, marketplace listing, compliance certification, HIPAA compliance, medical advice, clinical accuracy, production integration, partnership, or downstream execution by Neura.
 
 ## Ecosystem Availability: Use Neura Today
 

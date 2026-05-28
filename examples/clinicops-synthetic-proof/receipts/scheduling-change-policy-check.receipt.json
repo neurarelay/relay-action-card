@@ -1,0 +1,83 @@
+{
+  "receipt_id": "dr_20260527_clinicops_scheduling_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-27T21:10:00-04:00",
+  "action_card_id": "ac_20260527_clinicops_scheduling_001",
+  "decision": "human_review",
+  "runtime_instruction": "pause_for_human_review",
+  "decision_reason": "Scheduling change has a policy-sensitive reason code and requires qualified review before schedule update or patient notice.",
+  "actor": {
+    "type": "agent",
+    "name": "ClinicOps Demo Agent",
+    "runtime": "synthetic_workflow"
+  },
+  "proposed_action": {
+    "action_type": "change_synthetic_appointment_slot",
+    "target": "synthetic_case:CL-204:appointment",
+    "summary": "Move a synthetic appointment to an earlier slot after an intake note indicates a policy-sensitive reason.",
+    "params_hash": "sha256:clinicops_scheduling_change_001",
+    "amount_or_value_at_risk": "regulated-style scheduling workflow",
+    "customer_impact": "synthetic patient-like expectation and operational schedule change"
+  },
+  "risk": {
+    "risk_class": "regulated_synthetic_workflow",
+    "consequence_score": 2
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "clinicops.synthetic.scheduling.policy_check",
+      "summary": "Scheduling changes with policy-sensitive reason codes require qualified human review before schedule update or patient notice."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "synthetic_case:CL-204.appointment_context",
+      "summary": "Synthetic appointment context indicates an earlier slot request with a policy-sensitive reason."
+    },
+    {
+      "evidence_ref": "policy:clinicops.synthetic.scheduling.policy_check",
+      "summary": "Synthetic scheduling policy requires review before update or patient notice."
+    }
+  ],
+  "authority": {
+    "authority_ref": "clinic_operations_owner",
+    "approval_state": "pending",
+    "required_role": "clinic_operations_owner"
+  },
+  "validity": {
+    "valid_for_action_type": "change_synthetic_appointment_slot",
+    "valid_for_target": "synthetic_case:CL-204:appointment",
+    "valid_for_actor": "ClinicOps Demo Agent",
+    "params_hash": "sha256:clinicops_scheduling_change_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": {
+    "allowed_next_step": "prepare_schedule_review_packet",
+    "blocked_downstream_actions": ["update_schedule", "send_patient_confirmation", "write_to_clinic_system"],
+    "execution_boundary": "Neura returns a Decision Receipt only; no provider, clinic, scheduling, patient-message, EHR, or insurer system is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260527_clinicops_scheduling_human_review_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "clinicops_synthetic_proof"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "phi_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "real_provider_system_touched": false,
+    "real_insurer_system_touched": false,
+    "real_ehr_touched": false,
+    "real_scheduling_system_touched": false,
+    "real_patient_message_sent": false,
+    "real_prior_authorization_submitted": false,
+    "hipaa_compliance_claimed": false,
+    "medical_advice_claimed": false,
+    "clinical_accuracy_claimed": false,
+    "provider_approval_claimed": false,
+    "insurer_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

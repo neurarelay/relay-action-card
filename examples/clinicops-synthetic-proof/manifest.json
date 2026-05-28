@@ -1,0 +1,33 @@
+{
+  "proof": "clinicops-synthetic-proof",
+  "capability": "ClinicOps Synthetic Proof",
+  "receipt_standard": "neura-decision-receipt-v0.1-draft",
+  "command": "npm run proof:clinicops-synthetic -- --dry-run --json",
+  "verify_command": "npm run verify:clinicops-synthetic",
+  "scenario_count": 5,
+  "decisions_required": ["human_review", "revise", "stop"],
+  "scenarios": [
+    "scheduling-change-policy-check",
+    "patient-message-human-review",
+    "prior-auth-draft-human-review",
+    "insurance-follow-up-channel-revise",
+    "policy-exception-without-approval-stop"
+  ],
+  "boundary": {
+    "synthetic_data_only": true,
+    "phi_used": false,
+    "real_provider_system_touched": false,
+    "real_insurer_system_touched": false,
+    "real_ehr_touched": false,
+    "real_scheduling_system_touched": false,
+    "real_patient_message_sent": false,
+    "real_prior_authorization_submitted": false,
+    "downstream_execution_performed_by_neura": false,
+    "hipaa_compliance_claimed": false,
+    "medical_advice_claimed": false,
+    "clinical_accuracy_claimed": false,
+    "provider_approval_claimed": false,
+    "insurer_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

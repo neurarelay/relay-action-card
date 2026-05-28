@@ -1,0 +1,87 @@
+{
+  "receipt_id": "dr_20260527_clinicops_prior_auth_human_review_001",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "created_at": "2026-05-27T21:12:00-04:00",
+  "action_card_id": "ac_20260527_clinicops_prior_auth_001",
+  "decision": "human_review",
+  "runtime_instruction": "pause_for_human_review",
+  "decision_reason": "Prior-authorization draft is policy-heavy and requires qualified human review before external use.",
+  "actor": {
+    "type": "agent",
+    "name": "ClinicOps Demo Agent",
+    "runtime": "synthetic_workflow"
+  },
+  "proposed_action": {
+    "action_type": "draft_prior_authorization_note",
+    "target": "synthetic_case:CL-204:prior_auth",
+    "summary": "Prepare a synthetic prior-authorization note using case, policy, and requirement refs.",
+    "params_hash": "sha256:clinicops_prior_auth_draft_001",
+    "amount_or_value_at_risk": "regulated-style administrative workflow",
+    "customer_impact": "synthetic patient-like communication and policy-heavy workflow context"
+  },
+  "risk": {
+    "risk_class": "regulated_synthetic_workflow",
+    "consequence_score": 3
+  },
+  "policy_basis": [
+    {
+      "policy_ref": "clinicops.synthetic.prior_auth.evidence_refs_required",
+      "summary": "Prior-authorization drafts require policy notes, referral or order notes, payer requirement refs, and qualified human review before external use."
+    }
+  ],
+  "evidence_basis": [
+    {
+      "evidence_ref": "synthetic_case:CL-204.prior_auth_context",
+      "summary": "Synthetic prior-auth context is present and review is required."
+    },
+    {
+      "evidence_ref": "policy_notes:CL-204",
+      "summary": "Synthetic policy notes are available but do not authorize external action."
+    },
+    {
+      "evidence_ref": "payer_requirement:CL-204",
+      "summary": "Synthetic payer requirement summary is available for review packet preparation."
+    }
+  ],
+  "authority": {
+    "authority_ref": "qualified_human_reviewer",
+    "approval_state": "pending",
+    "required_role": "qualified_human_reviewer"
+  },
+  "validity": {
+    "valid_for_action_type": "draft_prior_authorization_note",
+    "valid_for_target": "synthetic_case:CL-204:prior_auth",
+    "valid_for_actor": "ClinicOps Demo Agent",
+    "params_hash": "sha256:clinicops_prior_auth_draft_001",
+    "valid_until": null,
+    "invalid_if_changed": ["action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
+  },
+  "execution": {
+    "allowed_next_step": "prepare_human_review_packet",
+    "blocked_downstream_actions": ["send_patient_message", "submit_prior_authorization", "write_to_clinic_system"],
+    "execution_boundary": "Neura returns a Decision Receipt only; no provider, clinic, scheduling, patient-message, EHR, or insurer system is touched by Neura."
+  },
+  "trace": {
+    "trace_ref": "trace_20260527_clinicops_prior_auth_human_review_001",
+    "source": "github",
+    "campaign": "agent_action_gateway",
+    "surface": "clinicops_synthetic_proof"
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "phi_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "real_provider_system_touched": false,
+    "real_insurer_system_touched": false,
+    "real_ehr_touched": false,
+    "real_scheduling_system_touched": false,
+    "real_patient_message_sent": false,
+    "real_prior_authorization_submitted": false,
+    "hipaa_compliance_claimed": false,
+    "medical_advice_claimed": false,
+    "clinical_accuracy_claimed": false,
+    "provider_approval_claimed": false,
+    "insurer_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

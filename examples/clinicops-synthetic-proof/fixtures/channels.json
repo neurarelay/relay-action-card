@@ -1,0 +1,22 @@
+{
+  "internal_review_queue": {
+    "channel_ref": "channel:internal_review_queue",
+    "external": false,
+    "allowed_for_dry_run": true
+  },
+  "synthetic_patient_message": {
+    "channel_ref": "channel:synthetic_patient_message",
+    "external": true,
+    "allowed_for_dry_run": false
+  },
+  "synthetic_insurer_submission": {
+    "channel_ref": "channel:synthetic_insurer_submission",
+    "external": true,
+    "allowed_for_dry_run": false
+  },
+  "synthetic_clinic_system_write": {
+    "channel_ref": "channel:synthetic_clinic_system_write",
+    "external": false,
+    "allowed_for_dry_run": false
+  }
+}
