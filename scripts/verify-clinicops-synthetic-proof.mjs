@@ -229,7 +229,7 @@ const docs = read("docs/clinicops-synthetic-proof.md");
 const readme = read("README.md");
 requireIncludes("docs", docs, [
   "ClinicOps Synthetic Proof",
-  "Synthetic ClinicOps intent -> Action Card -> Agent Action Gateway -> Decision Receipt",
+  "Synthetic ClinicOps intent -> Action Card -> Pre-Action Authority -> Decision Receipt",
   "npm run proof:clinicops-synthetic -- --dry-run --json",
   "npm run verify:clinicops-synthetic",
   "`human_review`",
@@ -313,7 +313,7 @@ const run = spawnSync(
     "--dry-run",
     "--json",
     "--source=verifier",
-    "--campaign=agent_action_gateway",
+    "--campaign=pre_action_authority",
     "--surface=clinicops_synthetic_proof",
   ],
   { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },

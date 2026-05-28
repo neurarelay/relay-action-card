@@ -1,6 +1,6 @@
 # Agent Action Firewall
 
-Agent Action Firewall is the first Agent Action Gateway capability in Neura Relay.
+Agent Action Firewall is the first Pre-Action Authority capability in Neura Relay.
 
 It turns proposed consequential agent actions into Decision Receipts before execution. The downstream product, runtime, or owner still decides whether execution happens elsewhere.
 

@@ -40,7 +40,7 @@
     "write_to_clinic_system"
   ],
   "source": "github",
-  "campaign": "agent_action_gateway",
+  "campaign": "pre_action_authority",
   "surface": "clinicops_synthetic_proof",
   "synthetic_data_only": true
 }

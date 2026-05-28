@@ -1,13 +1,13 @@
 # CommerceOps Fire Drill
 
-CommerceOps Fire Drill is a synthetic proof of Neura Relay as the Agent Action Gateway for money-moving commerce operations.
+CommerceOps Fire Drill is a synthetic proof of Neura Relay as the Pre-Action Authority for money-moving commerce operations.
 
 It shows a Shopify-style merchant agent proposing familiar business actions, then receiving a Decision Receipt before anything executes.
 
 ## Core Path
 
 ```text
-Commerce agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned execution or restraint
+Commerce agent intent -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
 ```
 
 ## Run The Proof

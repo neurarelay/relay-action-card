@@ -18,7 +18,7 @@ const receiptsDir = join(repoRoot, "examples/mcp-risk-gate/receipts");
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "github",
-  defaultCampaign: "agent_action_gateway",
+  defaultCampaign: "pre_action_authority",
   defaultSurface: "mcp_risk_gate",
 });
 
@@ -205,7 +205,7 @@ const output = {
   capability: "MCP Risk Gate",
   mode: "local_dry_run_mcp_tool_call_no_downstream_execution",
   pattern:
-    "MCP tool-call intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> runtime-owned execution or restraint",
+    "MCP tool-call intent -> Action Card -> Pre-Action Authority -> Decision Receipt -> runtime-owned execution or restraint",
   receipt_standard: "neura-decision-receipt-v0.1-draft",
   scenario_count: results.length,
   decisions_covered: Object.keys(decisionCounts).filter((decision) => decisionCounts[decision] > 0),

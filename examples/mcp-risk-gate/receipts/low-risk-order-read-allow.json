@@ -31,6 +31,6 @@
     "invalid_if_changed": ["mcp_server", "tool_name", "action_type", "target", "params_hash", "actor", "policy_refs", "evidence_refs", "approval_state", "required_authority_role"]
   },
   "execution": { "allowed_next_step": "continue", "blocked_downstream_actions": ["send_customer_message", "update_order", "refund_payment"], "execution_boundary": "Neura returns a Decision Receipt only; no MCP server or downstream tool is executed by Neura." },
-  "trace": { "trace_ref": "trace_20260526_mcp_order_read_allow_001", "source": "github", "campaign": "agent_action_gateway", "surface": "mcp_risk_gate" },
+  "trace": { "trace_ref": "trace_20260526_mcp_order_read_allow_001", "source": "github", "campaign": "pre_action_authority", "surface": "mcp_risk_gate" },
   "boundary": { "downstream_execution_performed_by_neura": false, "real_customer_data_used": false, "real_mcp_server_called": false, "provider_approval_claimed": false, "compliance_certification_claimed": false }
 }

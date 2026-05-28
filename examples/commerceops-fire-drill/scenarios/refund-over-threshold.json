@@ -33,7 +33,7 @@
   "expected_allowed_next_step": "prepare_owner_review",
   "expected_blocked_actions": ["refund_payment", "send_refund_confirmation"],
   "source": "github",
-  "campaign": "agent_action_gateway",
+  "campaign": "pre_action_authority",
   "surface": "commerceops_fire_drill",
   "synthetic_data_only": true
 }

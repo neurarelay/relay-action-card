@@ -32,7 +32,7 @@
   "expected_allowed_next_step": "request_customer_verification",
   "expected_blocked_actions": ["update_shipping_address", "release_modified_fulfillment"],
   "source": "github",
-  "campaign": "agent_action_gateway",
+  "campaign": "pre_action_authority",
   "surface": "commerceops_fire_drill",
   "synthetic_data_only": true
 }

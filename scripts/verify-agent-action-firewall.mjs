@@ -198,7 +198,7 @@ requireIncludes("docs", docs, [
   "no downstream execution by Neura",
 ]);
 requireIncludes("readme", readme, [
-  "Agent Action Gateway Proof Foundation",
+  "Pre-Action Authority Proof Foundation",
   "Agent Action Firewall",
   "npm run proof:agent-action-firewall -- --dry-run --json",
   "npm run verify:agent-action-firewall",
@@ -241,7 +241,7 @@ const run = spawnSync(
     "--dry-run",
     "--json",
     "--source=verifier",
-    "--campaign=agent_action_gateway",
+    "--campaign=pre_action_authority",
     "--surface=agent_action_firewall",
   ],
   {

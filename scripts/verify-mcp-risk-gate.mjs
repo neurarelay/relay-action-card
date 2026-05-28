@@ -141,7 +141,7 @@ const docs = read("docs/mcp-risk-gate.md");
 const readme = read("README.md");
 requireIncludes("docs", docs, [
   "MCP Risk Gate",
-  "MCP tool-call intent -> Action Card -> Agent Action Gateway -> Decision Receipt",
+  "MCP tool-call intent -> Action Card -> Pre-Action Authority -> Decision Receipt",
   "server, tool, target, actor, or params hash changes",
   "`allow`",
   "`revise`",
@@ -192,7 +192,7 @@ const run = spawnSync(
     "--dry-run",
     "--json",
     "--source=verifier",
-    "--campaign=agent_action_gateway",
+    "--campaign=pre_action_authority",
     "--surface=mcp_risk_gate",
   ],
   { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },

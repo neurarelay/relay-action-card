@@ -228,7 +228,7 @@ const docs = read("docs/commerceops-fire-drill.md");
 const readme = read("README.md");
 requireIncludes("docs", docs, [
   "CommerceOps Fire Drill",
-  "Commerce agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt",
+  "Commerce agent intent -> Action Card -> Pre-Action Authority -> Decision Receipt",
   "npm run proof:commerceops-fire-drill -- --dry-run --json",
   "npm run verify:commerceops-fire-drill",
   "`allow`",
@@ -306,7 +306,7 @@ const run = spawnSync(
     "--dry-run",
     "--json",
     "--source=verifier",
-    "--campaign=agent_action_gateway",
+    "--campaign=pre_action_authority",
     "--surface=commerceops_fire_drill",
   ],
   { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },

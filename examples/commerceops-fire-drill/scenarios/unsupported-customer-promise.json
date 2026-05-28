@@ -32,7 +32,7 @@
   "expected_allowed_next_step": "draft_safe_response_for_owner_review",
   "expected_blocked_actions": ["send_customer_email", "refund_payment", "create_replacement_order", "promise_overnight_shipping"],
   "source": "github",
-  "campaign": "agent_action_gateway",
+  "campaign": "pre_action_authority",
   "surface": "commerceops_fire_drill",
   "synthetic_data_only": true
 }

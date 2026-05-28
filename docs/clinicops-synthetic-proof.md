@@ -1,13 +1,13 @@
 # ClinicOps Synthetic Proof
 
-ClinicOps Synthetic Proof is a local dry-run proof of Neura Relay as the Agent Action Gateway for regulated-style, policy-heavy synthetic operations.
+ClinicOps Synthetic Proof is a local dry-run proof of Neura Relay as the Pre-Action Authority for regulated-style, policy-heavy synthetic operations.
 
 It shows a synthetic workflow agent proposing scheduling, patient-message, prior-auth, insurance follow-up, and policy-exception actions, then receiving a Decision Receipt before anything external happens.
 
 ## Core Path
 
 ```text
-Synthetic ClinicOps intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned review or restraint
+Synthetic ClinicOps intent -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned review or restraint
 ```
 
 ## Run The Proof

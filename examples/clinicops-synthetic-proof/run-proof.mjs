@@ -20,7 +20,7 @@ const receiptsDir = join(proofRoot, "receipts");
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "github",
-  defaultCampaign: "agent_action_gateway",
+  defaultCampaign: "pre_action_authority",
   defaultSurface: "clinicops_synthetic_proof",
 });
 
@@ -187,7 +187,7 @@ const output = {
   capability: "ClinicOps Synthetic Proof",
   mode: "local_dry_run_regulated_synthetic_workflow_no_downstream_execution",
   pattern:
-    "Synthetic ClinicOps intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned review or restraint",
+    "Synthetic ClinicOps intent -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned review or restraint",
   receipt_standard: "neura-decision-receipt-v0.1-draft",
   fixture_summary: loadFixturesSummary(),
   scenario_count: results.length,

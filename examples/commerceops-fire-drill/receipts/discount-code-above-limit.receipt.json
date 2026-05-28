@@ -60,7 +60,7 @@
   "trace": {
     "trace_ref": "trace_20260526_commerceops_discount_revise_001",
     "source": "github",
-    "campaign": "agent_action_gateway",
+    "campaign": "pre_action_authority",
     "surface": "commerceops_fire_drill"
   },
   "boundary": {

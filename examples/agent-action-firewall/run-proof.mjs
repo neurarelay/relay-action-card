@@ -18,7 +18,7 @@ const receiptsDir = join(repoRoot, "examples/agent-action-firewall/receipts");
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "github",
-  defaultCampaign: "agent_action_gateway",
+  defaultCampaign: "pre_action_authority",
   defaultSurface: "agent_action_firewall",
 });
 

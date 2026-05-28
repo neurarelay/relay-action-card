@@ -7,7 +7,7 @@ It shows how a proposed tool call can become an Action Card, receive a Decision 
 ## Core Path
 
 ```text
-MCP tool-call intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> runtime-owned execution or restraint
+MCP tool-call intent -> Action Card -> Pre-Action Authority -> Decision Receipt -> runtime-owned execution or restraint
 ```
 
 MCP makes tools reachable. Neura Relay makes consequential tool calls accountable before execution.

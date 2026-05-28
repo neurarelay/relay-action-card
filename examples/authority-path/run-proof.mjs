@@ -12,99 +12,99 @@ const listOnly = argv.includes("--list");
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "github",
-  defaultCampaign: "agent_action_gateway",
-  defaultSurface: "delegated_action_trust",
+  defaultCampaign: "pre_action_authority",
+  defaultSurface: "authority_path",
 });
 
 const actorRefs = {
   owner: "owner_ref_acme_operations",
   orchestrator: "agent_ref_ops_orchestrator",
   analyst: "agent_ref_refund_analyst",
-  worker: "agent_ref_delegated_worker",
+  worker: "agent_ref_authority_worker",
   auditor: "agent_ref_sequence_auditor",
 };
 
 const scenarios = [
   {
-    scenario_id: "delegated-scope-allow",
-    title: "Child agent stays inside delegated read scope",
+    scenario_id: "authority-scope-allow",
+    title: "Worker stays inside assigned read scope",
     decision: "allow",
     risk_class: "low",
     actor: actorRefs.analyst,
     action_type: "read_order_status",
     target: "order:CO-1007",
-    params_hash: "sha256:delegated_scope_allow_001",
-    delegation_depth: 1,
-    trust_score: 91,
-    trust_floor: 75,
-    reason: "Child agent request stays within parent resource and action scope.",
+    params_hash: "sha256:scope_envelope_allow_001",
+    authority_path_depth: 1,
+    authority_score: 91,
+    required_authority_floor: 75,
+    reason: "Proposed read stays within the assigned resource and action scope.",
     allowed_next_step: "return_status_summary",
     blocked_downstream_actions: [],
-    delegation_path: [actorRefs.owner, actorRefs.orchestrator, actorRefs.analyst],
+    authority_path: [actorRefs.owner, actorRefs.orchestrator, actorRefs.analyst],
     flags: [],
   },
   {
-    scenario_id: "deep-delegation-human-review",
-    title: "Three-hop delegated refund requires owner review",
+    scenario_id: "indirect-refund-human-review",
+    title: "Indirect refund path requires owner review",
     decision: "human_review",
     risk_class: "money_movement_high",
     actor: actorRefs.worker,
     action_type: "issue_refund",
     target: "order:CO-2019",
-    params_hash: "sha256:deep_delegation_refund_001",
-    delegation_depth: 3,
-    trust_score: 64,
-    trust_floor: 85,
+    params_hash: "sha256:indirect_refund_path_001",
+    authority_path_depth: 3,
+    authority_score: 64,
+    required_authority_floor: 85,
     reason:
-      "Delegation depth and money-movement risk require owner review before execution.",
+      "Authority is too indirect for money movement without owner review before execution.",
     allowed_next_step: "prepare_owner_review",
     blocked_downstream_actions: ["refund_payment", "send_refund_confirmation"],
-    delegation_path: [
+    authority_path: [
       actorRefs.owner,
       actorRefs.orchestrator,
       actorRefs.analyst,
       actorRefs.worker,
     ],
-    flags: ["DELEGATION_DEPTH_DECAY", "MONEY_MOVEMENT_REQUIRES_OWNER_REVIEW"],
+    flags: ["AUTHORITY_PATH_TOO_INDIRECT", "MONEY_MOVEMENT_REQUIRES_OWNER_REVIEW"],
   },
   {
-    scenario_id: "delegated-scope-violation-stop",
-    title: "Delegated worker attempts resource outside parent scope",
+    scenario_id: "scope-envelope-violation-stop",
+    title: "Worker attempts resource outside scope envelope",
     decision: "stop",
     risk_class: "scope_violation",
     actor: actorRefs.worker,
     action_type: "export_customer_records",
     target: "customer_export:all",
-    params_hash: "sha256:delegated_scope_violation_001",
-    delegation_depth: 2,
-    trust_score: 18,
-    trust_floor: 90,
+    params_hash: "sha256:scope_envelope_violation_001",
+    authority_path_depth: 2,
+    authority_score: 18,
+    required_authority_floor: 90,
     reason:
-      "Requested target is outside the resource scope inherited from the delegation chain.",
-    allowed_next_step: "request_new_authority_scope",
+      "Requested target is outside the scope envelope carried by the authority path.",
+    allowed_next_step: "request_scope_envelope_update",
     blocked_downstream_actions: ["export_customer_records", "upload_export"],
-    delegation_path: [actorRefs.owner, actorRefs.orchestrator, actorRefs.worker],
-    flags: ["CHAIN_SCOPE_VIOLATION", "RESOURCE_OUTSIDE_DELEGATED_SCOPE"],
+    authority_path: [actorRefs.owner, actorRefs.orchestrator, actorRefs.worker],
+    flags: ["SCOPE_ENVELOPE_VIOLATION", "RESOURCE_OUTSIDE_ASSIGNED_SCOPE"],
   },
   {
-    scenario_id: "bulk-read-then-export-stop",
-    title: "Bulk reads followed by export are treated as a kill-chain pattern",
+    scenario_id: "valid-reads-then-export-stop",
+    title: "Valid reads followed by export require stop",
     decision: "stop",
     risk_class: "data_exfiltration",
     actor: actorRefs.auditor,
     action_type: "export_report_bundle",
     target: "reports:quarterly_bundle",
     params_hash: "sha256:bulk_read_then_export_001",
-    delegation_depth: 0,
-    trust_score: 22,
-    trust_floor: 90,
+    authority_path_depth: 0,
+    authority_score: 22,
+    required_authority_floor: 90,
     reason:
       "Ten synthetic reads in the sequence were followed by an export attempt.",
     allowed_next_step: "open_security_review",
     blocked_downstream_actions: ["export_report_bundle", "send_external_archive"],
-    delegation_path: [actorRefs.owner, actorRefs.auditor],
-    flags: ["KILL_CHAIN:BULK_READ_THEN_EXFIL", "SEQUENCE_REQUIRES_REVIEW"],
-    behavioral_sequence: [
+    authority_path: [actorRefs.owner, actorRefs.auditor],
+    flags: ["SEQUENCE_RISK:BULK_READ_THEN_EXPORT", "SEQUENCE_REQUIRES_REVIEW"],
+    sequence_context: [
       "read:/reports/q1.pdf",
       "read:/reports/q2.pdf",
       "read:/reports/q3.pdf",
@@ -127,33 +127,33 @@ const scenarios = [
     action_type: "send_external_email",
     target: "external:vendor@example.test",
     params_hash: "sha256:purpose_drift_external_send_001",
-    delegation_depth: 0,
-    trust_score: 31,
-    trust_floor: 88,
+    authority_path_depth: 0,
+    authority_score: 31,
+    required_authority_floor: 88,
     reason:
       "Declared purpose covers summarization, not external transmission of report data.",
     allowed_next_step: "revise_to_internal_summary",
     blocked_downstream_actions: ["send_external_email", "attach_report_bundle"],
-    delegation_path: [actorRefs.owner, actorRefs.auditor],
+    authority_path: [actorRefs.owner, actorRefs.auditor],
     flags: ["PURPOSE_DRIFT", "EXTERNAL_TRANSMISSION_NOT_AUTHORIZED"],
   },
   {
     scenario_id: "policy-revision-required",
-    title: "Allowed delegation but proposed action must be narrowed",
+    title: "Allowed authority path but proposed action must be narrowed",
     decision: "revise",
     risk_class: "customer_commitment_medium",
     actor: actorRefs.analyst,
     action_type: "send_customer_update",
     target: "customer_thread:CO-3012",
     params_hash: "sha256:policy_revision_required_001",
-    delegation_depth: 1,
-    trust_score: 72,
-    trust_floor: 80,
+    authority_path_depth: 1,
+    authority_score: 72,
+    required_authority_floor: 80,
     reason:
-      "Delegation is valid, but the proposed message promises an unsupported delivery date.",
+      "Authority path is valid, but the proposed message promises an unsupported delivery date.",
     allowed_next_step: "revise_message_without_delivery_promise",
     blocked_downstream_actions: ["send_customer_update_with_unsupported_promise"],
-    delegation_path: [actorRefs.owner, actorRefs.orchestrator, actorRefs.analyst],
+    authority_path: [actorRefs.owner, actorRefs.orchestrator, actorRefs.analyst],
     flags: ["POLICY_REVISION_REQUIRED", "CUSTOMER_PROMISE_UNSUPPORTED"],
   },
 ];
@@ -166,8 +166,8 @@ function buildActionCard(scenario) {
     actor: {
       type: "agent",
       ref: scenario.actor,
-      delegation_depth: scenario.delegation_depth,
-      delegation_path: scenario.delegation_path,
+      authority_path_depth: scenario.authority_path_depth,
+      authority_path: scenario.authority_path,
     },
     proposed_action: {
       action_type: scenario.action_type,
@@ -177,19 +177,19 @@ function buildActionCard(scenario) {
     },
     risk: {
       class: scenario.risk_class,
-      trust_score: scenario.trust_score,
-      trust_floor: scenario.trust_floor,
+      authority_score: scenario.authority_score,
+      required_authority_floor: scenario.required_authority_floor,
       flags: scenario.flags,
     },
-    policy_refs: ["policy:delegated_action_trust_v0_1"],
+    policy_refs: ["policy:authority_path_v0_1"],
     evidence_refs: [
-      `evidence:${scenario.scenario_id}:delegation_chain`,
+      `evidence:${scenario.scenario_id}:authority_path`,
       `evidence:${scenario.scenario_id}:proposed_action`,
     ],
     authority_context: {
-      delegated_by: scenario.delegation_path[0],
+      authority_origin: scenario.authority_path[0],
       acting_agent: scenario.actor,
-      inherited_scope_checked: true,
+      scope_envelope_checked: true,
       registry_backed_authority: "reference_required_for_production",
     },
     execution_boundary: {
@@ -220,18 +220,18 @@ function buildReceipt(scenario, actionCard) {
     actor: actionCard.actor,
     proposed_action: actionCard.proposed_action,
     risk: actionCard.risk,
-    trust_analysis: {
-      trust_score: scenario.trust_score,
-      trust_floor: scenario.trust_floor,
-      delegation_depth: scenario.delegation_depth,
+    authority_path_review: {
+      authority_score: scenario.authority_score,
+      required_authority_floor: scenario.required_authority_floor,
+      authority_path_depth: scenario.authority_path_depth,
       flags: scenario.flags,
-      behavioral_sequence: scenario.behavioral_sequence ?? [],
+      sequence_context: scenario.sequence_context ?? [],
     },
     policy_basis: [
       {
-        policy_ref: "policy:delegated_action_trust_v0_1",
+        policy_ref: "policy:authority_path_v0_1",
         summary:
-          "Delegated actions must stay within inherited scope, purpose, behavioral sequence, and risk floor.",
+          "Actions must stay inside authority path, scope envelope, stated purpose, sequence context, and required authority floor.",
       },
     ],
     evidence_basis: actionCard.evidence_refs.map((evidence_ref) => ({
@@ -239,9 +239,9 @@ function buildReceipt(scenario, actionCard) {
       summary: "Synthetic reference used for local proof only.",
     })),
     authority: {
-      delegation_path: scenario.delegation_path,
-      inherited_scope_checked: true,
-      delegation_depth: scenario.delegation_depth,
+      authority_path: scenario.authority_path,
+      scope_envelope_checked: true,
+      authority_path_depth: scenario.authority_path_depth,
       approval_state:
         scenario.decision === "allow" ? "approved_by_policy" : "not_approved_for_execution",
       required_role:
@@ -253,10 +253,10 @@ function buildReceipt(scenario, actionCard) {
         "target",
         "params_hash",
         "actor",
-        "delegation_path",
-        "authority_scope",
+        "authority_path",
+        "scope_envelope",
         "approval_state",
-        "behavioral_sequence",
+        "sequence_context",
       ],
     },
     execution: {
@@ -288,10 +288,10 @@ function buildResult(scenario) {
     decision_reason: scenario.reason,
     action_card: actionCard,
     decision_receipt: decisionReceipt,
-    parity_plus: {
-      borrowed_pattern:
-        "delegation depth, inherited scope, purpose drift, behavioral sequence, and kill-chain flags",
-      neura_difference:
+    capability_added: {
+      mechanism:
+        "authority path depth, scope envelope, purpose fit, sequence context, and action risk become pre-action receipt factors",
+      neura_output:
         "portable pre-action Decision Receipt with validity, authority refs, policy/evidence refs, and developer-owned execution boundary",
     },
   };
@@ -302,7 +302,7 @@ if (listOnly) {
     JSON.stringify(
       {
         ok: true,
-        proof: "delegated-action-trust",
+        proof: "authority-path",
         scenarios: scenarios.map(({ scenario_id, title, decision }) => ({
           scenario_id,
           title,
@@ -326,11 +326,11 @@ const decisionCounts = Object.fromEntries(
 
 const output = {
   ok: true,
-  proof: "delegated-action-trust",
-  capability: "Delegated Action Trust",
+  proof: "authority-path",
+  capability: "Authority Path Proof",
   mode: "local_dry_run_no_downstream_execution",
   pattern:
-    "Delegated action intent -> trust and sequence analysis -> Decision Receipt -> developer-owned execution or restraint",
+    "Proposed action -> authority path review -> Decision Receipt -> developer-owned execution or restraint",
   receipt_standard: "neura-decision-receipt-v0.1-draft",
   scenario_count: results.length,
   decisions_covered: Object.keys(decisionCounts).filter((decision) => decisionCounts[decision] > 0),
@@ -352,7 +352,7 @@ const output = {
 if (jsonOutput) {
   console.log(JSON.stringify(output, null, 2));
 } else {
-  console.log("Delegated Action Trust dry-run proof");
+  console.log("Authority Path Proof dry-run proof");
   console.log(`Scenarios: ${output.scenario_count}`);
   console.log(
     `Decisions: allow=${decisionCounts.allow}, revise=${decisionCounts.revise}, human_review=${decisionCounts.human_review}, stop=${decisionCounts.stop}`,

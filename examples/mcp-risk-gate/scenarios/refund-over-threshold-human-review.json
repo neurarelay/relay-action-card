@@ -28,7 +28,7 @@
     "evidence_refs": ["order:CO-1007.delivery_scan", "policy:refund-threshold-v1"],
     "attribution": {
       "source": "github",
-      "campaign": "agent_action_gateway",
+      "campaign": "pre_action_authority",
       "surface": "mcp_risk_gate"
     }
   }

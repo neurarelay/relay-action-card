@@ -32,7 +32,7 @@
   "expected_allowed_next_step": "request_fulfillment_confirmation",
   "expected_blocked_actions": ["cancel_order", "notify_fulfillment_stop_shipment", "send_cancellation_confirmation"],
   "source": "github",
-  "campaign": "agent_action_gateway",
+  "campaign": "pre_action_authority",
   "surface": "commerceops_fire_drill",
   "synthetic_data_only": true
 }

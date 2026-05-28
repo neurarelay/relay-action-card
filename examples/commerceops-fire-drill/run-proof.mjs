@@ -20,7 +20,7 @@ const receiptsDir = join(proofRoot, "receipts");
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "github",
-  defaultCampaign: "agent_action_gateway",
+  defaultCampaign: "pre_action_authority",
   defaultSurface: "commerceops_fire_drill",
 });
 
@@ -178,7 +178,7 @@ const output = {
   capability: "CommerceOps Fire Drill",
   mode: "local_dry_run_commerce_agent_no_downstream_execution",
   pattern:
-    "Commerce agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned execution or restraint",
+    "Commerce agent intent -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint",
   receipt_standard: "neura-decision-receipt-v0.1-draft",
   fixture_summary: loadFixturesSummary(),
   scenario_count: results.length,

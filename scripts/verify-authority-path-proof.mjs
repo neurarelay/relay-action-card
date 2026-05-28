@@ -9,10 +9,10 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const expectedDecisions = new Set(["allow", "revise", "human_review", "stop"]);
 const expectedScenarios = new Set([
-  "delegated-scope-allow",
-  "deep-delegation-human-review",
-  "delegated-scope-violation-stop",
-  "bulk-read-then-export-stop",
+  "authority-scope-allow",
+  "indirect-refund-human-review",
+  "scope-envelope-violation-stop",
+  "valid-reads-then-export-stop",
   "purpose-drift-stop",
   "policy-revision-required",
 ]);
@@ -45,7 +45,7 @@ function rejectUnsafeClaims(label, text) {
     /provider\s+(approval|endorsement|partnership)\s+(exists|is\s+live|is\s+active|is\s+confirmed)/i,
     /compliance\s+(certification|approval)\s+(exists|is\s+live|is\s+active|is\s+confirmed)/i,
     /is\s+compliance\s+certified/i,
-    /Microsoft\s+(built|owns|endorses|approved)\s+AgentGate/i,
+    /Microsoft\s+(built|owns|endorses|approved)\s+(Neura|Relay|this\s+proof)/i,
     /Neura\s+executes\s+(the\s+)?downstream/i,
     /downstream_execution_performed_by_neura"\s*:\s*true/i,
   ];
@@ -70,34 +70,34 @@ function parseJsonOutput(result, label) {
 }
 
 const requiredFiles = [
-  "docs/delegated-action-trust-proof.md",
-  "examples/delegated-action-trust/run-proof.mjs",
-  "scripts/verify-delegated-action-trust-proof.mjs",
+  "docs/authority-path-proof.md",
+  "examples/authority-path/run-proof.mjs",
+  "scripts/verify-authority-path-proof.mjs",
 ];
 for (const file of requiredFiles) requireFile(file);
 
 const packageJson = readJson("package.json");
 if (
-  packageJson.scripts?.["proof:delegated-action-trust"] !==
-  "node examples/delegated-action-trust/run-proof.mjs"
+  packageJson.scripts?.["proof:authority-path"] !==
+  "node examples/authority-path/run-proof.mjs"
 ) {
-  failures.push("package_missing_proof_delegated_action_trust_script");
+  failures.push("package_missing_proof_authority_path_script");
 }
 if (
-  packageJson.scripts?.["verify:delegated-action-trust"] !==
-  "node scripts/verify-delegated-action-trust-proof.mjs"
+  packageJson.scripts?.["verify:authority-path"] !==
+  "node scripts/verify-authority-path-proof.mjs"
 ) {
-  failures.push("package_missing_verify_delegated_action_trust_script");
+  failures.push("package_missing_verify_authority_path_script");
 }
 
-const docs = read("docs/delegated-action-trust-proof.md");
+const docs = read("docs/authority-path-proof.md");
 const readme = read("README.md");
 
 requireIncludes("docs", docs, [
-  "Delegated Action Trust",
-  "Delegated action intent -> trust and sequence analysis -> Decision Receipt",
-  "npm run proof:delegated-action-trust -- --dry-run --json",
-  "npm run verify:delegated-action-trust",
+  "Authority Path Proof",
+  "Proposed action -> authority path review -> Decision Receipt",
+  "npm run proof:authority-path -- --dry-run --json",
+  "npm run verify:authority-path",
   "`allow`",
   "`revise`",
   "`human_review`",
@@ -105,9 +105,9 @@ requireIncludes("docs", docs, [
   "No downstream execution by Neura",
 ]);
 requireIncludes("readme", readme, [
-  "Delegated Action Trust",
-  "npm run proof:delegated-action-trust -- --dry-run --json",
-  "npm run verify:delegated-action-trust",
+  "Authority Path Proof",
+  "npm run proof:authority-path -- --dry-run --json",
+  "npm run verify:authority-path",
 ]);
 rejectUnsafeClaims("docs", docs);
 rejectUnsafeClaims("readme", readme);
@@ -116,13 +116,13 @@ const run = spawnSync(
   "npm",
   [
     "run",
-    "proof:delegated-action-trust",
+    "proof:authority-path",
     "--",
     "--dry-run",
     "--json",
     "--source=verifier",
-    "--campaign=agent_action_gateway",
-    "--surface=delegated_action_trust",
+    "--campaign=pre_action_authority",
+    "--surface=authority_path",
   ],
   {
     cwd: repoRoot,
@@ -130,11 +130,11 @@ const run = spawnSync(
     stdio: ["ignore", "pipe", "pipe"],
   },
 );
-const output = parseJsonOutput(run, "delegated_action_trust_proof");
+const output = parseJsonOutput(run, "authority_path_proof");
 
 if (output) {
-  if (output.ok !== true) failures.push("delegated_action_output_not_ok");
-  if (output.proof !== "delegated-action-trust") failures.push("wrong_proof_name");
+  if (output.ok !== true) failures.push("authority_path_output_not_ok");
+  if (output.proof !== "authority-path") failures.push("wrong_proof_name");
   if (output.mode !== "local_dry_run_no_downstream_execution") failures.push("wrong_mode");
   if (output.scenario_count !== 6) failures.push("wrong_scenario_count");
   if (output.receipt_standard !== "neura-decision-receipt-v0.1-draft") {
@@ -162,7 +162,7 @@ if (output) {
       failures.push(`${result.scenario_id}_params_hash_mismatch`);
     }
     for (const field of [
-      "trust_analysis",
+      "authority_path_review",
       "policy_basis",
       "evidence_basis",
       "authority",
@@ -173,19 +173,19 @@ if (output) {
     ]) {
       if (!receipt?.[field]) failures.push(`${result.scenario_id}_receipt_missing_${field}`);
     }
-    for (const invalidator of ["delegation_path", "authority_scope", "behavioral_sequence"]) {
+    for (const invalidator of ["authority_path", "scope_envelope", "sequence_context"]) {
       if (!receipt?.validity?.invalid_if_changed?.includes(invalidator)) {
         failures.push(`${result.scenario_id}_missing_invalidator_${invalidator}`);
       }
     }
-    if (receipt?.authority?.inherited_scope_checked !== true) {
+    if (receipt?.authority?.scope_envelope_checked !== true) {
       failures.push(`${result.scenario_id}_scope_not_checked`);
     }
     if (receipt?.boundary?.downstream_execution_performed_by_neura !== false) {
       failures.push(`${result.scenario_id}_downstream_boundary_open`);
     }
-    if (result.parity_plus?.neura_difference?.includes("Decision Receipt") !== true) {
-      failures.push(`${result.scenario_id}_missing_parity_plus_difference`);
+    if (result.capability_added?.neura_output?.includes("Decision Receipt") !== true) {
+      failures.push(`${result.scenario_id}_missing_capability_output`);
     }
   }
   for (const scenario of expectedScenarios) {
@@ -205,9 +205,9 @@ if (output) {
 }
 
 if (failures.length > 0) {
-  console.error("Delegated Action Trust verification failed:");
+  console.error("Authority Path Proof verification failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Delegated Action Trust verification passed.");
+console.log("Authority Path Proof verification passed.");

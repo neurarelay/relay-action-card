@@ -34,7 +34,7 @@
   "expected_allowed_next_step": "continue_with_factual_tracking_reply",
   "expected_blocked_actions": [],
   "source": "github",
-  "campaign": "agent_action_gateway",
+  "campaign": "pre_action_authority",
   "surface": "commerceops_fire_drill",
   "synthetic_data_only": true
 }

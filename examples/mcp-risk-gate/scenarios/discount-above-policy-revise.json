@@ -27,7 +27,7 @@
     "evidence_refs": ["customer:CO-CUST-204.recovery_context"],
     "attribution": {
       "source": "github",
-      "campaign": "agent_action_gateway",
+      "campaign": "pre_action_authority",
       "surface": "mcp_risk_gate"
     }
   }

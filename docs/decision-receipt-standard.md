@@ -2,12 +2,12 @@
 
 Decision Receipt Standard v0.1 is the working Neura reference format for recording what was authorized before a consequential agent action executes.
 
-It is not an industry standard, compliance certification, provider approval, or execution system. It is the output object for the Agent Action Gateway proof path.
+It is not an industry standard, compliance certification, provider approval, or execution system. It is the output object for the Pre-Action Authority proof path.
 
 ## Core Path
 
 ```text
-Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned execution or restraint
+Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
 ```
 
 Logs tell you what happened. A Decision Receipt tells you what was authorized before it happened.

@@ -190,7 +190,7 @@ const docs = read("docs/decision-receipt-standard.md");
 const readme = read("README.md");
 requireIncludes("docs", docs, [
   "Decision Receipt Standard v0.1",
-  "Action Card -> Agent Action Gateway -> Decision Receipt",
+  "Action Card -> Pre-Action Authority -> Decision Receipt",
   "`allow`",
   "`revise`",
   "`human_review`",
@@ -203,7 +203,7 @@ requireIncludes("docs", docs, [
   "no-downstream-execution boundary",
 ]);
 requireIncludes("readme", readme, [
-  "Agent Action Gateway Proof Foundation",
+  "Pre-Action Authority Proof Foundation",
   "Decision Receipt Standard",
   "npm run verify:decision-receipt-standard",
 ]);

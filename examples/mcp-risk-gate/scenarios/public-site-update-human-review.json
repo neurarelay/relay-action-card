@@ -27,7 +27,7 @@
     "evidence_refs": ["frontsmith.owner_brief.website_update"],
     "attribution": {
       "source": "github",
-      "campaign": "agent_action_gateway",
+      "campaign": "pre_action_authority",
       "surface": "mcp_risk_gate"
     }
   }

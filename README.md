@@ -1,24 +1,24 @@
 # Relay Action Card
 
-Run the Neura Relay Agent Action Gateway proof path before agent execution.
+Run the Neura Relay Pre-Action Authority proof path before agent execution.
 
 This is the public developer starting point for Neura Relay: a runnable proof package for agent developers building AI agents, autonomous-agent workflows, commerce operations, or MCP-capable runtimes that need authority before consequential action. Your agent proposes an action, Relay evaluates identity, authority, evidence, policy, and risk, and your system receives a Decision Receipt before deciding what to execute.
 
 Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
 
-## Agent Action Gateway: Start Here
+## Pre-Action Authority: Start Here
 
-Use the Gateway proof ladder when you want the shortest local route from proposed agent action to Decision Receipt:
+Use the authority proof ladder when you want the shortest local route from proposed action to Decision Receipt:
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
 cd relay-action-card
 npm ci
-npm run proof:agent-action-gateway -- --dry-run --json
-npm run verify:agent-action-gateway
+npm run proof:pre-action-authority -- --dry-run --json
+npm run verify:pre-action-authority
 ```
 
-Live Gateway page:
+Live authority page:
 
 ```text
 https://www.neurarelay.com/agent-action-gateway
@@ -27,7 +27,7 @@ https://www.neurarelay.com/agent-action-gateway
 The proof ladder is:
 
 ```text
-Agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned execution or restraint
+Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
 ```
 
 | Step | Proof | Command |
@@ -36,7 +36,7 @@ Agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> devel
 | 02 | Decision Receipt Standard | `npm run verify:decision-receipt-standard` |
 | 03 | MCP Risk Gate | `npm run proof:mcp-risk-gate -- --dry-run --json` |
 | 04 | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` |
-| 05 | Delegated Action Trust | `npm run proof:delegated-action-trust -- --dry-run --json` |
+| 05 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
 
 Applied proof cases also include:
 
@@ -58,7 +58,7 @@ Use these URLs when an agent, crawler, evaluator, or developer needs the shortes
 
 - Relay AI-readable summary: [`https://www.neurarelay.com/llms.txt`](https://www.neurarelay.com/llms.txt)
 - Relay public Agent Card: [`https://www.neurarelay.com/.well-known/agent-card.json`](https://www.neurarelay.com/.well-known/agent-card.json)
-- Relay Agent Action Gateway: [`https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=agent_action_gateway&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=agent_action_gateway&neura_surface=relay_action_card_readme)
+- Relay Pre-Action Authority: [`https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme)
 - Relay first proof: [`https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme)
 - Relay SDK package: [`@neurarelay/sdk`](https://www.npmjs.com/package/@neurarelay/sdk)
 - NeuraPath Relay route: [`https://neurapath.ai/neura-relay`](https://neurapath.ai/neura-relay)
@@ -70,9 +70,9 @@ The discovery path should resolve to the same proof:
 Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / Registry context
 ```
 
-## Agent Action Gateway Proof Foundation
+## Pre-Action Authority Proof Foundation
 
-Use this local proof when you want to inspect the individual pieces of the Agent Action Gateway path:
+Use this local proof when you want to inspect the individual pieces of the Pre-Action Authority path:
 
 ```text
 Action Card -> Agent Action Firewall -> Decision Receipt -> developer-owned execution or restraint
@@ -84,14 +84,14 @@ The foundation has four pieces:
 - Decision Receipt Standard: the working receipt shape for what was authorized before execution.
 - MCP Risk Gate: tool-call intent binds to server, tool, target, actor, and params hash.
 - CommerceOps Fire Drill: commerce actions receive receipts before money-moving or customer-facing execution.
-- Delegated Action Trust: delegation depth, inherited scope, purpose drift, and kill-chain sequence signals become pre-action receipts.
+- Authority Path Proof: authority path depth, scope envelope, purpose fit, and sequence context become pre-action receipts.
 - ClinicOps Synthetic Proof: regulated-style synthetic actions receive receipts before scheduling, patient-message, prior-auth, insurance follow-up, or policy-exception execution.
 
 Run:
 
 ```bash
-npm run proof:agent-action-gateway -- --dry-run --json
-npm run verify:agent-action-gateway
+npm run proof:pre-action-authority -- --dry-run --json
+npm run verify:pre-action-authority
 npm run verify:decision-receipt-standard
 npm run proof:agent-action-firewall -- --dry-run --json
 npm run verify:agent-action-firewall
@@ -99,8 +99,8 @@ npm run proof:mcp-risk-gate -- --dry-run --json
 npm run verify:mcp-risk-gate
 npm run proof:commerceops-fire-drill -- --dry-run --json
 npm run verify:commerceops-fire-drill
-npm run proof:delegated-action-trust -- --dry-run --json
-npm run verify:delegated-action-trust
+npm run proof:authority-path -- --dry-run --json
+npm run verify:authority-path
 npm run proof:clinicops-synthetic -- --dry-run --json
 npm run verify:clinicops-synthetic
 ```
@@ -112,14 +112,14 @@ Docs:
 - [`docs/agent-action-firewall.md`](docs/agent-action-firewall.md)
 - [`docs/mcp-risk-gate.md`](docs/mcp-risk-gate.md)
 - [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
-- [`docs/delegated-action-trust-proof.md`](docs/delegated-action-trust-proof.md)
+- [`docs/authority-path-proof.md`](docs/authority-path-proof.md)
 - [`docs/clinicops-synthetic-proof.md`](docs/clinicops-synthetic-proof.md)
 
 MCP Risk Gate applies the same foundation at the tool-call boundary. It shows how an MCP-style call intent binds a receipt to the exact server, tool, target, actor, and params hash before runtime-owned execution.
 
 CommerceOps Fire Drill applies the foundation to a Shopify-style merchant workflow. It shows how routine tracking replies, refunds, discounts, address changes, cancellations, and unsupported customer promises are allowed, revised, escalated, or stopped before execution.
 
-Delegated Action Trust applies the foundation to multi-agent delegated work. It shows how delegation depth, inherited scope, purpose drift, behavioral sequence, and kill-chain signals become portable Decision Receipts before execution.
+Authority Path Proof applies the foundation to indirect authority paths. It shows how authority path depth, scope envelope, purpose fit, and sequence context become portable Decision Receipts before execution.
 
 ClinicOps Synthetic Proof applies the foundation to regulated-style synthetic workflows. It shows how scheduling changes, patient-message drafts, prior-auth notes, insurance follow-up, and policy exceptions are escalated, revised, or stopped before external use.
 
@@ -1155,7 +1155,7 @@ tests/
 ## Verify
 
 ```bash
-npm run verify:agent-action-gateway
+npm run verify:pre-action-authority
 npm run verify:relay-example
 npm run verify:mcp-adoption-pack
 npm run verify:developer-feedback-access-path

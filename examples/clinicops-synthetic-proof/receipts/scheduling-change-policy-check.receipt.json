@@ -60,7 +60,7 @@
   "trace": {
     "trace_ref": "trace_20260527_clinicops_scheduling_human_review_001",
     "source": "github",
-    "campaign": "agent_action_gateway",
+    "campaign": "pre_action_authority",
     "surface": "clinicops_synthetic_proof"
   },
   "boundary": {

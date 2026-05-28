@@ -68,7 +68,7 @@ const requiredFiles = [
   "docs/decision-receipt-standard.md",
   "docs/mcp-risk-gate.md",
   "docs/commerceops-fire-drill.md",
-  "docs/delegated-action-trust-proof.md",
+  "docs/authority-path-proof.md",
   "scripts/run-agent-action-gateway.mjs",
   "scripts/verify-agent-action-gateway.mjs",
 ];
@@ -76,42 +76,54 @@ for (const file of requiredFiles) requireFile(file);
 
 const packageJson = readJson("package.json");
 if (
+  packageJson.scripts?.["proof:pre-action-authority"] !==
+  "node scripts/run-agent-action-gateway.mjs"
+) {
+  failures.push("package_missing_proof_pre_action_authority_script");
+}
+if (
+  packageJson.scripts?.["verify:pre-action-authority"] !==
+  "node scripts/verify-agent-action-gateway.mjs"
+) {
+  failures.push("package_missing_verify_pre_action_authority_script");
+}
+if (
   packageJson.scripts?.["proof:agent-action-gateway"] !==
   "node scripts/run-agent-action-gateway.mjs"
 ) {
-  failures.push("package_missing_proof_agent_action_gateway_script");
+  failures.push("package_missing_compat_pre_action_authority_proof_script");
 }
 if (
   packageJson.scripts?.["verify:agent-action-gateway"] !==
   "node scripts/verify-agent-action-gateway.mjs"
 ) {
-  failures.push("package_missing_verify_agent_action_gateway_script");
+  failures.push("package_missing_compat_pre_action_authority_verify_script");
 }
 
 const readme = read("README.md");
 const docs = read("docs/agent-action-gateway.md");
 
 requireIncludes("readme", readme, [
-  "Agent Action Gateway",
+  "Pre-Action Authority",
   "https://www.neurarelay.com/agent-action-gateway",
-  "npm run proof:agent-action-gateway -- --dry-run --json",
-  "npm run verify:agent-action-gateway",
+  "npm run proof:pre-action-authority -- --dry-run --json",
+  "npm run verify:pre-action-authority",
   "Agent Action Firewall",
   "Decision Receipt Standard",
   "MCP Risk Gate",
   "CommerceOps Fire Drill",
-  "Delegated Action Trust",
+  "Authority Path Proof",
   "No downstream execution by Neura",
 ]);
 requireIncludes("docs", docs, [
-  "Agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt",
-  "npm run proof:agent-action-gateway -- --dry-run --json",
-  "npm run verify:agent-action-gateway",
+  "Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt",
+  "npm run proof:pre-action-authority -- --dry-run --json",
+  "npm run verify:pre-action-authority",
   "Agent Action Firewall",
   "Decision Receipt Standard",
   "MCP Risk Gate",
   "CommerceOps Fire Drill",
-  "Delegated Action Trust",
+  "Authority Path Proof",
   "No downstream execution by Neura",
   "https://www.neurarelay.com/agent-action-gateway",
 ]);
@@ -122,26 +134,26 @@ const run = spawnSync(
   "npm",
   [
     "run",
-    "proof:agent-action-gateway",
+    "proof:pre-action-authority",
     "--",
     "--dry-run",
     "--json",
     "--source=verifier",
-    "--campaign=agent_action_gateway",
-    "--surface=gateway_ladder",
+    "--campaign=pre_action_authority",
+    "--surface=authority_ladder",
   ],
   { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
 );
-const output = parseJsonOutput(run, "agent_action_gateway_proof");
+const output = parseJsonOutput(run, "pre_action_authority_proof");
 
 if (output) {
   if (output.ok !== true) failures.push("gateway_output_not_ok");
-  if (output.proof !== "agent-action-gateway") failures.push("wrong_gateway_proof_name");
-  if (output.mode !== "local_dry_run_gateway_ladder_no_downstream_execution") {
+  if (output.proof !== "pre-action-authority") failures.push("wrong_pre_action_authority_proof_name");
+  if (output.mode !== "local_dry_run_pre_action_authority_no_downstream_execution") {
     failures.push("wrong_gateway_mode");
   }
   if (output.scenario_count !== 22) failures.push("wrong_gateway_scenario_count");
-  if (output.proof_ladder?.length !== 5) failures.push("wrong_gateway_ladder_length");
+  if (output.proof_ladder?.length !== 5) failures.push("wrong_authority_ladder_length");
   for (const step of ["01", "02", "03", "04", "05"]) {
     if (!output.proof_ladder?.some((result) => result.step === step && result.ok === true)) {
       failures.push(`missing_gateway_step_${step}`);
@@ -172,9 +184,9 @@ if (output) {
 }
 
 if (failures.length > 0) {
-  console.error("Agent Action Gateway verification failed:");
+  console.error("Pre-Action Authority verification failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Agent Action Gateway verification passed.");
+console.log("Pre-Action Authority verification passed.");

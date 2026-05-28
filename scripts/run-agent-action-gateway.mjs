@@ -14,8 +14,8 @@ const jsonOutput = argv.includes("--json");
 const attribution = buildRelayAttribution({
   argv,
   defaultSource: "github",
-  defaultCampaign: "agent_action_gateway",
-  defaultSurface: "gateway_ladder",
+  defaultCampaign: "pre_action_authority",
+  defaultSurface: "authority_ladder",
 });
 
 const proofSteps = [
@@ -42,10 +42,10 @@ const proofSteps = [
   },
   {
     step: "05",
-    proof: "delegated-action-trust",
-    capability: "Delegated Action Trust",
-    script: "examples/delegated-action-trust/run-proof.mjs",
-    surface: "delegated_action_trust",
+    proof: "authority-path",
+    capability: "Authority Path Proof",
+    script: "examples/authority-path/run-proof.mjs",
+    surface: "authority_path",
   },
 ];
 
@@ -54,7 +54,7 @@ function proofArgs(surface) {
     "--dry-run",
     "--json",
     `--source=${attribution.neura_source ?? "github"}`,
-    `--campaign=${attribution.neura_campaign ?? "agent_action_gateway"}`,
+    `--campaign=${attribution.neura_campaign ?? "pre_action_authority"}`,
     `--surface=${surface}`,
   ];
 }
@@ -143,11 +143,11 @@ try {
 
   const output = {
     ok,
-    proof: "agent-action-gateway",
-    capability: "Agent Action Gateway",
-    mode: "local_dry_run_gateway_ladder_no_downstream_execution",
+    proof: "pre-action-authority",
+    capability: "Pre-Action Authority",
+    mode: "local_dry_run_pre_action_authority_no_downstream_execution",
     pattern:
-      "Agent intent -> Action Card -> Agent Action Gateway -> Decision Receipt -> developer-owned execution or restraint",
+      "Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint",
     receipt_standard: "neura-decision-receipt-v0.1-draft",
     proof_ladder: proofResults,
     scenario_count: proofResults.reduce((total, result) => total + (result.scenario_count ?? 0), 0),
@@ -167,8 +167,8 @@ try {
       public_action_authorized: false,
     },
     docs: {
-      gateway_doc: "docs/agent-action-gateway.md",
-      gateway_url: "https://www.neurarelay.com/agent-action-gateway",
+      authority_doc: "docs/agent-action-gateway.md",
+      authority_url: "https://www.neurarelay.com/agent-action-gateway",
       first_proof_url: "https://www.neurarelay.com/developers/first-proof",
     },
   };
@@ -176,7 +176,7 @@ try {
   if (jsonOutput) {
     console.log(JSON.stringify(output, null, 2));
   } else {
-    console.log("Agent Action Gateway dry-run proof ladder");
+    console.log("Pre-Action Authority dry-run proof ladder");
     console.log(`Status: ${ok ? "passed" : "failed"}`);
     console.log(`Scenarios: ${output.scenario_count}`);
     console.log(

@@ -27,7 +27,7 @@
     "evidence_refs": ["order:CO-1001.synthetic_status"],
     "attribution": {
       "source": "github",
-      "campaign": "agent_action_gateway",
+      "campaign": "pre_action_authority",
       "surface": "mcp_risk_gate"
     }
   }
