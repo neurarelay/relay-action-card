@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
@@ -30,9 +31,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
-          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -75,15 +75,6 @@ jobs:
             cat /tmp/openclaw-version.txt
             exit 1
           fi
-
-      - name: Normalize npm token for publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          token="$(printf '%s' "$NODE_AUTH_TOKEN" | tr -d '\r\n')"
-          test -n "$token"
-          echo "::add-mask::$token"
-          printf "//registry.npmjs.org/:_authToken=%s\n" "$token" > "$NPM_CONFIG_USERCONFIG"
 
       - name: Publish package
         working-directory: examples/openclaw/preflight-adapter

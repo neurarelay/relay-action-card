@@ -161,13 +161,14 @@ requireIncludes("publish_workflow", publishWorkflow, [
   `pkg.version !== '${packageVersion}'`,
   `pkg.openclaw?.install?.npmSpec !== '${packageName}@${packageVersion}'`,
   `npm view ${packageName}@${packageVersion} version`,
-  "Normalize npm token for publish",
-  "tr -d '\\r\\n'",
-  "printf \"//registry.npmjs.org/:_authToken=%s\\n\" \"$token\" > \"$NPM_CONFIG_USERCONFIG\"",
+  "id-token: write",
+  "node-version: 24",
   "NPM_TAG: ${{ inputs.npm_tag }}",
   'npm publish --access public --tag "$NPM_TAG"',
-  "NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}",
 ]);
+if (publishWorkflow.includes("NODE_AUTH_TOKEN") || publishWorkflow.includes("secrets.NPM_TOKEN")) {
+  failures.push("publish_workflow_must_use_trusted_publishing");
+}
 rejectUnsafe("publish_workflow", publishWorkflow);
 
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
