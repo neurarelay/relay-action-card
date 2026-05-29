@@ -59,6 +59,24 @@ function inheritedArgs(surface) {
   return args;
 }
 
+function firstProofCommand({ dryRun: commandDryRun = false } = {}) {
+  const args = [
+    ...(commandDryRun ? ["--dry-run"] : []),
+    "--json",
+    ["source", defaultAttribution.neura_source],
+    ["campaign", defaultAttribution.neura_campaign],
+    ["surface", defaultAttribution.neura_surface],
+    ["session-ref", defaultAttribution.neura_session_ref],
+  ]
+    .flatMap((item) => {
+      if (typeof item === "string") return [item];
+      const [name, value] = item;
+      return value ? [`--${name}=${value}`] : [];
+    });
+
+  return `npm run first-proof -- ${args.join(" ")}`;
+}
+
 function runTrack({ id, label, args, skipped = false, reason = null }) {
   if (skipped) {
     return { id, label, ok: true, skipped: true, reason };
@@ -133,9 +151,8 @@ const tracks = [
 
 const ok = tracks.every((track) => track.ok);
 const liveTracks = tracks.filter((track) => !track.skipped && !dryRun);
-const proofCommand = dryRun
-  ? "npm run first-proof -- --dry-run --json"
-  : "npm run first-proof -- --json";
+const proofCommand = firstProofCommand({ dryRun });
+const nextLiveCommand = firstProofCommand({ dryRun: false });
 const linkedinFirstPublicationCommand =
   "npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json";
 const staticFirstProofPreview = {
@@ -214,9 +231,9 @@ const completionArtifact = {
   },
   metric_target: "package_reality_first_proof",
   readback_hint:
-    "Known-source live receipts should appear under source=npm_github, campaign=package_reality_first_proof, surface=scripts/run-first-proof. LinkedIn-origin receipts from the May 24 first publication should use source=linkedin, campaign=linkedin_first_publication, surface=developers_first_proof.",
+    "Known-source live receipts should preserve completion_artifact.attribution. First-proof conversion readback should count campaign=package_reality_first_proof while using source and surface to separate Relay site, GitHub, LinkedIn, X, and other origins.",
   attribution_examples: {
-    default_live_command: "npm run first-proof -- --json",
+    default_live_command: nextLiveCommand,
     linkedin_first_publication_command: linkedinFirstPublicationCommand,
   },
   preview_receipt:
@@ -224,7 +241,7 @@ const completionArtifact = {
       ? staticFirstProofPreview.decision_receipt_preview
       : null,
   receipt_refs: dryRun ? [] : receiptRefs,
-  next_live_command: dryRun ? "npm run first-proof -- --json" : null,
+  next_live_command: dryRun ? nextLiveCommand : null,
   next_step: dryRun
     ? "You completed the local first-proof preview. Run the live command only when you want to create production receipt and trace refs."
     : "Share the receipt_id, trace_ref, transaction_ref, source, campaign, surface, and session_ref as the first-proof completion artifact.",

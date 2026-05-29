@@ -28,6 +28,12 @@ function rejectIncludes(label, text, phrases) {
   }
 }
 
+function requireCommandIncludes(label, command, phrases) {
+  for (const phrase of phrases) {
+    if (!command?.includes(phrase)) failures.push(`${label}_missing_${phrase}`);
+  }
+}
+
 function parseJson(stdout) {
   const start = stdout.search(/[{[]/);
   if (start < 0) throw new Error("no JSON found");
@@ -124,6 +130,9 @@ requireIncludes("first_proof_script", firstProofScript, [
   "neura_first_proof_completion",
   "dry_run_preview_completed",
   "live_first_proof_receipt_created",
+  "firstProofCommand",
+  "nextLiveCommand",
+  "completion_artifact.attribution",
   "private_payload_stored: false",
   "public_token_issued: false",
   "provider_listing_or_partnership_claim: false",
@@ -155,9 +164,13 @@ if (dryRun.status !== 0) {
   const proof = parseJson(dryRun.stdout);
   if (proof.ok !== true) failures.push("dry_run_not_ok");
   if (proof.mode !== "dry_run_no_production_receipts") failures.push("dry_run_wrong_mode");
-  if (proof.command !== "npm run first-proof -- --dry-run --json") {
-    failures.push("dry_run_command_not_canonical");
-  }
+  requireCommandIncludes("dry_run_command", proof.command, [
+    "npm run first-proof -- --dry-run --json",
+    "--source=verifier",
+    "--campaign=package_reality_first_proof",
+    "--surface=scripts/run-first-proof",
+    "--session-ref=first_proof_session:",
+  ]);
   const artifact = proof.completion_artifact;
   if (!artifact) failures.push("completion_artifact_missing");
   if (artifact?.artifact_type !== "neura_first_proof_completion") {
@@ -172,18 +185,37 @@ if (dryRun.status !== 0) {
   if (artifact?.proof !== "package-reality-first-proof") {
     failures.push("completion_artifact_wrong_proof");
   }
-  if (artifact?.command !== "npm run first-proof -- --dry-run --json") {
-    failures.push("completion_artifact_wrong_command");
-  }
+  requireCommandIncludes("completion_artifact_command", artifact?.command, [
+    "npm run first-proof -- --dry-run --json",
+    "--source=verifier",
+    "--campaign=package_reality_first_proof",
+    "--surface=scripts/run-first-proof",
+    "--session-ref=first_proof_session:",
+  ]);
   if (artifact?.creates_production_receipt !== false) {
     failures.push("completion_artifact_dry_run_must_not_create_receipt");
   }
   if (artifact?.metric_target !== "package_reality_first_proof") {
     failures.push("completion_artifact_wrong_metric_target");
   }
-  if (artifact?.next_live_command !== "npm run first-proof -- --json") {
-    failures.push("completion_artifact_missing_next_live_command");
-  }
+  requireCommandIncludes("completion_artifact_next_live_command", artifact?.next_live_command, [
+    "npm run first-proof -- --json",
+    "--source=verifier",
+    "--campaign=package_reality_first_proof",
+    "--surface=scripts/run-first-proof",
+    "--session-ref=first_proof_session:",
+  ]);
+  requireCommandIncludes(
+    "completion_artifact_default_live_command",
+    artifact?.attribution_examples?.default_live_command,
+    [
+      "npm run first-proof -- --json",
+      "--source=verifier",
+      "--campaign=package_reality_first_proof",
+      "--surface=scripts/run-first-proof",
+      "--session-ref=first_proof_session:",
+    ],
+  );
   if (
     artifact?.attribution_examples?.linkedin_first_publication_command !==
     "npm run first-proof -- --source=linkedin --campaign=linkedin_first_publication --surface=developers_first_proof --json"

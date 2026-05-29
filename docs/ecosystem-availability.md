@@ -210,7 +210,7 @@ The dry-run output includes:
     "artifact_type": "neura_first_proof_completion",
     "status": "dry_run_preview_completed",
     "metric_target": "package_reality_first_proof",
-    "next_live_command": "npm run first-proof -- --json",
+    "next_live_command": "npm run first-proof -- --json --source=npm_github --campaign=package_reality_first_proof --surface=scripts/run-first-proof --session-ref=first_proof_session:<generated>",
     "boundaries": {
       "private_payload_stored": false,
       "downstream_execution_by_neura": false,
