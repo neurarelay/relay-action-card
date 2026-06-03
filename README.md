@@ -2,9 +2,49 @@
 
 Run Neura Relay's Pre-Action Authority path before an agent changes real systems.
 
-This is the public developer starting point for Neura Relay: a runnable package for agent developers building autonomous workflows, commerce operations, MCP-capable runtimes, or governed handoffs that need authority before consequential action. Your runtime sends a proposed action as an Action Card. Relay evaluates identity, authority, evidence, policy, and risk, then returns a Decision Receipt. Your system keeps execution ownership.
+This is the public developer proof repo for Neura Relay. It shows the same core mechanism across direct API, SDK, MCP-capable runtimes, A2A discovery, OpenClaw-style local agents, commerce operations, and governed handoffs:
+
+```text
+Proposed action -> Action Card -> Neura Relay -> Decision Receipt -> developer-owned execution or restraint
+```
+
+Your runtime keeps execution ownership. Relay evaluates identity, authority, evidence, policy, and risk, then returns a receipt before consequential action happens elsewhere.
 
 Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
+
+## Start In 30 Seconds
+
+Use the first-proof command when you want the shortest credible signal from clone to receipt-path proof:
+
+```bash
+git clone https://github.com/neurarelay/relay-action-card.git
+cd relay-action-card
+npm ci
+npm run first-proof -- --dry-run --json
+```
+
+When you are ready to create live receipt refs, keep the route measurable:
+
+```bash
+npm run first-proof -- --source=github --campaign=package_reality_first_proof --surface=readme --json
+```
+
+The output carries a `completion_artifact` with receipt refs, trace refs, source/campaign/surface attribution, and claim boundaries. Treat that artifact as the first useful adoption signal, not GitHub clones or npm downloads alone.
+
+## Current Public Proof Map
+
+Use the current map when you need to choose the right proof lane for an agent workflow, customer conversation, or validator packet:
+
+- first proof: `npm run first-proof -- --dry-run --json`
+- core Action Card path: `npm run example:relay -- --example=support-reply --json`
+- pre-action authority proof set: `npm run proof:pre-action-authority -- --dry-run --json`
+- protected MCP proof: `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json`
+- commerce/payment-style proof: `npm run proof:commerceops-fire-drill -- --dry-run --json`
+- local autonomous-agent proof: `npm run openclaw:five-minute-demo`
+
+Full map: [`docs/current-public-proof-map.md`](docs/current-public-proof-map.md).
+
+Registry remains an optional production-trust upgrade. Protected MCP remains controlled access. Neura Relay does not execute downstream actions and this repo does not claim customer adoption, provider approval, ecosystem endorsement, integration, or partnership.
 
 ## Start With Pre-Action Authority
 
@@ -24,11 +64,7 @@ Live product page:
 https://www.neurarelay.com/agent-action-gateway
 ```
 
-The path is:
-
-```text
-Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
-```
+The path is the same proof spine: Action Card in, Decision Receipt out, developer-owned execution or restraint after the receipt.
 
 | Step | Check | Command |
 | --- | --- | --- |
@@ -378,11 +414,7 @@ Choose the lane that matches what you want to prove:
 
 The OpenClaw-style kit covers local agent messages, file changes, browser submits, shell commands, workflow changes, memory writes, and data exports without claiming an official OpenClaw or ClawHub integration.
 
-Fastest OpenClaw-style adapter install path:
-
-```bash
-npm install @neurarelay/openclaw-preflight-adapter
-```
+Fastest OpenClaw-style adapter install details live in [`docs/openclaw-preflight-adapter.md`](docs/openclaw-preflight-adapter.md).
 
 ```js
 import { createNeuraPreflightAdapter } from "@neurarelay/openclaw-preflight-adapter";
@@ -675,13 +707,7 @@ npm run test:openclaw-preflight-adapter
 
 The canonical package is published as `@neurarelay/openclaw-preflight-adapter@0.1.4` on npm `latest` and as the canonical ClawHub community package with plugin id `neurarelay-openclaw-preflight-adapter`. ClawHub shows current version `v0.1.4`, `latest` and `stable` tags, visible README, and security audits still pending. The release path is documented in [`docs/openclaw-plugin-release-candidate.md`](docs/openclaw-plugin-release-candidate.md), with the runtime verification and publish approval packet in [`docs/openclaw-runtime-verification-and-publish-approval.md`](docs/openclaw-runtime-verification-and-publish-approval.md), and the current ClawHub truth packet in [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). The historical ClawHub community fallback remains published as `@rpelevin/neura-relay-preflight-adapter@0.1.1`. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or integration claim exists.
 
-The intentional adoption path is the stable install below.
-
-Install the adapter from npm:
-
-```bash
-npm install @neurarelay/openclaw-preflight-adapter
-```
+The intentional adoption path is the stable adapter package documented in [`docs/openclaw-preflight-adapter.md`](docs/openclaw-preflight-adapter.md).
 
 Use the public package surface:
 

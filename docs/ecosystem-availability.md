@@ -1,7 +1,7 @@
 # Ecosystem Availability
 
 Status: public developer proof map; no provider approval or listing claim  
-Last updated: 2026-05-18
+Last updated: 2026-06-03
 
 ## Use Neura Today
 
@@ -22,6 +22,7 @@ These are the current no-outbound discovery surfaces:
 - Relay llms.txt: `https://www.neurarelay.com/llms.txt`
 - Relay Agent Card: `https://www.neurarelay.com/.well-known/agent-card.json`
 - Relay first proof: `https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=ecosystem_docs`
+- Current public proof map: [`docs/current-public-proof-map.md`](current-public-proof-map.md)
 - NeuraPath Relay route: `https://neurapath.ai/neura-relay`
 - Frontsmith applied proof llms.txt: `https://frontsmith.neurapath.ai/llms.txt`
 

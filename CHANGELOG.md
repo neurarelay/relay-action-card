@@ -1,5 +1,12 @@
 # Changelog
 
+## Public proof conversion refresh - 2026-06-03
+
+- Sharpens the README entry path around first proof, Decision Receipts, optional Registry context, and protected MCP.
+- Adds `docs/current-public-proof-map.md` as the current claim-safe route map from developer attention to first-proof evidence, live receipt refs, feedback, Registry identity, sandbox MCP, or controlled production/private access.
+- Keeps downloads, clones, views, and stars framed as discovery signals only, not adoption proof.
+- Preserves no-customer-adoption, no-provider-approval, no-ecosystem-endorsement, no-integration, no-partnership, no-public-token-issuance, and no-downstream-execution boundaries.
+
 ## OpenClaw adapter npm latest publish - 2026-05-28
 
 - Publishes `@neurarelay/openclaw-preflight-adapter@0.1.4` to npm under the `latest` tag through npm Trusted Publishing.
