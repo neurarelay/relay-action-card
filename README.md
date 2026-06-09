@@ -41,6 +41,7 @@ Use the current map when you need to choose the right proof lane for an agent wo
 - protected MCP proof: `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json`
 - commerce/payment-style proof: `npm run proof:commerceops-fire-drill -- --dry-run --json`
 - agentic commerce Decision Receipt proof: `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json`
+- authority injection wrapper proof: `npm run proof:authority-injection-wrapper -- --dry-run --json`
 - implementation SWAT templates: `npm run verify:implementation-swat-pack`
 - shadow-agent stop receipt proof: `npm run proof:shadow-agent-inventory -- --dry-run --json`
 - local autonomous-agent proof: `npm run openclaw:five-minute-demo`
@@ -77,8 +78,9 @@ The path is the same proof spine: Action Card in, Decision Receipt out, develope
 | 04 | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` |
 | 05 | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` |
 | 06 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
-| 07 | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` |
-| 08 | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` |
+| 07 | Tool-call Authority Injection Wrapper | `npm run proof:authority-injection-wrapper -- --dry-run --json` |
+| 08 | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` |
+| 09 | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` |
 
 Applied examples also include:
 
@@ -147,6 +149,8 @@ npm run proof:commerceops-fire-drill -- --dry-run --json
 npm run verify:commerceops-fire-drill
 npm run proof:agentic-commerce-decision-receipt -- --dry-run --json
 npm run verify:agentic-commerce-decision-receipt
+npm run proof:authority-injection-wrapper -- --dry-run --json
+npm run verify:authority-injection-wrapper
 npm run verify:implementation-swat-pack
 npm run proof:shadow-agent-inventory -- --dry-run --json
 npm run verify:shadow-agent-inventory-stop-receipt
@@ -164,6 +168,7 @@ Docs:
 - [`docs/mcp-risk-gate.md`](docs/mcp-risk-gate.md)
 - [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
 - [`docs/agentic-commerce-decision-receipt.md`](docs/agentic-commerce-decision-receipt.md)
+- [`docs/authority-injection-wrapper.md`](docs/authority-injection-wrapper.md)
 - [`docs/implementation-swat-packet-library.md`](docs/implementation-swat-packet-library.md)
 - [`docs/shadow-agent-inventory-stop-receipt.md`](docs/shadow-agent-inventory-stop-receipt.md)
 - [`docs/authority-path-proof.md`](docs/authority-path-proof.md)
@@ -174,6 +179,8 @@ MCP Risk Gate applies the same foundation at the tool-call boundary. It shows ho
 CommerceOps Fire Drill applies the foundation to a Shopify-style merchant workflow. It shows how routine tracking replies, refunds, discounts, address changes, cancellations, and unsupported customer promises are allowed, revised, escalated, or stopped before execution.
 
 Agentic Commerce Decision Receipt applies the same foundation to the buyer-language wedge: before an agent refunds, credits, adjusts a subscription, creates a payment link, or sends a payment-related customer promise, the receipt binds the exact economic action, target, amount class, currency, customer ref, policy refs, evidence refs, and approval state.
+
+Tool-call Authority Injection Wrapper applies the foundation at the runtime placement point. It shows how `wrapTool`, `beforeAction`, `resolveAuthority`, and `afterAction` turn one consequential tool call into Agent I/O Events, an Action Card, a Decision Receipt, and a runtime-owned execution gate before the tool executes.
 
 Implementation SWAT Packet Library turns concrete maintainer asks into reusable schema, acceptance-test, receipt-example, PR-scope, approval-packet, and no-action-readback templates. It is for implementation help after a concrete ask, not broad outreach.
 
