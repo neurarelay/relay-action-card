@@ -40,6 +40,7 @@ Use the current map when you need to choose the right proof lane for an agent wo
 - pre-action authority proof set: `npm run proof:pre-action-authority -- --dry-run --json`
 - protected MCP proof: `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json`
 - commerce/payment-style proof: `npm run proof:commerceops-fire-drill -- --dry-run --json`
+- agentic commerce Decision Receipt proof: `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json`
 - local autonomous-agent proof: `npm run openclaw:five-minute-demo`
 
 Full map: [`docs/current-public-proof-map.md`](docs/current-public-proof-map.md).
@@ -72,7 +73,8 @@ The path is the same proof spine: Action Card in, Decision Receipt out, develope
 | 02 | Decision Receipt Standard | `npm run verify:decision-receipt-standard` |
 | 03 | MCP Risk Gate | `npm run proof:mcp-risk-gate -- --dry-run --json` |
 | 04 | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` |
-| 05 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
+| 05 | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` |
+| 06 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
 
 Applied examples also include:
 
@@ -138,6 +140,8 @@ npm run proof:mcp-risk-gate -- --dry-run --json
 npm run verify:mcp-risk-gate
 npm run proof:commerceops-fire-drill -- --dry-run --json
 npm run verify:commerceops-fire-drill
+npm run proof:agentic-commerce-decision-receipt -- --dry-run --json
+npm run verify:agentic-commerce-decision-receipt
 npm run proof:authority-path -- --dry-run --json
 npm run verify:authority-path
 npm run proof:clinicops-synthetic -- --dry-run --json
@@ -151,6 +155,7 @@ Docs:
 - [`docs/agent-action-firewall.md`](docs/agent-action-firewall.md)
 - [`docs/mcp-risk-gate.md`](docs/mcp-risk-gate.md)
 - [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
+- [`docs/agentic-commerce-decision-receipt.md`](docs/agentic-commerce-decision-receipt.md)
 - [`docs/authority-path-proof.md`](docs/authority-path-proof.md)
 - [`docs/clinicops-synthetic-proof.md`](docs/clinicops-synthetic-proof.md)
 
@@ -158,11 +163,13 @@ MCP Risk Gate applies the same foundation at the tool-call boundary. It shows ho
 
 CommerceOps Fire Drill applies the foundation to a Shopify-style merchant workflow. It shows how routine tracking replies, refunds, discounts, address changes, cancellations, and unsupported customer promises are allowed, revised, escalated, or stopped before execution.
 
+Agentic Commerce Decision Receipt applies the same foundation to the buyer-language wedge: before an agent refunds, credits, adjusts a subscription, creates a payment link, or sends a payment-related customer promise, the receipt binds the exact economic action, target, amount class, currency, customer ref, policy refs, evidence refs, and approval state.
+
 Authority Path Proof applies the foundation to indirect authority paths. It shows how authority path depth, scope envelope, purpose fit, and sequence context become portable Decision Receipts before execution.
 
 ClinicOps Synthetic Proof applies the foundation to regulated-style synthetic workflows. It shows how scheduling changes, patient-message drafts, prior-auth notes, insurance follow-up, and policy exceptions are escalated, revised, or stopped before external use.
 
-This is a synthetic dry-run proof. It does not touch Shopify, payment rails, customer accounts, production systems, external message channels, MCP providers, real provider systems, real insurer systems, real EHRs, real scheduling systems, real patient messages, or real data. It does not claim provider approval, insurer approval, marketplace listing, compliance certification, HIPAA compliance, medical advice, clinical accuracy, production integration, partnership, or downstream execution by Neura.
+This is a synthetic dry-run proof. It does not touch Shopify, Stripe, payment rails, cards, wallets, customer accounts, production systems, external message channels, MCP providers, real provider systems, real insurer systems, real EHRs, real scheduling systems, real patient messages, or real data. It does not claim provider approval, insurer approval, marketplace listing, compliance certification, HIPAA compliance, medical advice, clinical accuracy, payment processing, production integration, partnership, or downstream execution by Neura.
 
 ## Ecosystem Availability: Use Neura Today
 

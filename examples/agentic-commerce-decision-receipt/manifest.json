@@ -1,0 +1,29 @@
+{
+  "proof": "agentic-commerce-decision-receipt",
+  "capability": "Agentic Commerce Decision Receipt",
+  "receipt_standard": "neura-decision-receipt-v0.1-draft",
+  "agent_io_standard": "neura-agent-io-event-envelope-v0.1-draft",
+  "approval_receipt_standard": "neura-mcp-approval-receipt-v0.1-draft",
+  "command": "npm run proof:agentic-commerce-decision-receipt -- --dry-run --json",
+  "verify_command": "npm run verify:agentic-commerce-decision-receipt",
+  "source_proof": "commerceops-fire-drill",
+  "canonical_scenario": "refund-over-threshold",
+  "decisions_required": ["allow", "revise", "human_review", "stop"],
+  "economic_actions": [
+    "refund_order",
+    "create_discount_code",
+    "change_shipping_address",
+    "cancel_order_after_release",
+    "send_customer_email"
+  ],
+  "boundary": {
+    "synthetic_data_only": true,
+    "real_payment_touched": false,
+    "real_shopify_touched": false,
+    "real_customer_data_used": false,
+    "real_customer_message_sent": false,
+    "downstream_execution_performed_by_neura": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

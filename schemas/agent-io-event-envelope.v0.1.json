@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.neurarelay.com/schemas/agent-io-event-envelope.v0.1.json",
+  "title": "Neura Agent I/O Event Envelope v0.1 Draft",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "standard",
+    "event_ref",
+    "event_type",
+    "event_phase",
+    "event_time",
+    "event_sequence",
+    "tenant_ref",
+    "environment",
+    "trace_ref",
+    "actor",
+    "io",
+    "payload",
+    "boundary"
+  ],
+  "properties": {
+    "standard": { "const": "neura-agent-io-event-envelope-v0.1-draft" },
+    "event_ref": { "type": "string", "minLength": 1 },
+    "event_type": {
+      "enum": [
+        "agent.session.started",
+        "agent.intent.created",
+        "tool.call.proposed",
+        "mcp.approval.requested",
+        "policy.evaluated",
+        "authority.evaluated",
+        "registry.context.attached",
+        "decision.issued",
+        "approval.human_requested",
+        "approval.human_resolved",
+        "approval.expired",
+        "approval.consumed",
+        "args.changed",
+        "execution.started",
+        "execution.completed",
+        "execution.failed",
+        "trace.replayed",
+        "ledger.recorded",
+        "export.emitted"
+      ]
+    },
+    "event_phase": {
+      "enum": ["pre_action", "decision", "approval", "execution", "post_action", "replay", "export"]
+    },
+    "event_time": { "type": "string", "minLength": 1 },
+    "event_sequence": { "type": "integer", "minimum": 1 },
+    "tenant_ref": { "type": "string", "minLength": 1 },
+    "environment": { "type": "string", "minLength": 1 },
+    "trace_ref": { "type": "string", "minLength": 1 },
+    "transaction_ref": { "type": "string" },
+    "receipt_id": { "type": "string" },
+    "action_card_ref": { "type": "string" },
+    "session_ref": { "type": "string" },
+    "run_ref": { "type": "string" },
+    "tool_call_ref": { "type": "string" },
+    "approval_request_id": { "type": "string" },
+    "agent_ref": { "type": "string" },
+    "capability_ref": { "type": "string" },
+    "actor": {
+      "type": "object",
+      "required": ["type", "name", "runtime"],
+      "properties": {
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "runtime": { "type": "string" }
+      }
+    },
+    "io": {
+      "type": "object",
+      "required": ["surface", "direction", "action_type"],
+      "properties": {
+        "surface": { "type": "string" },
+        "direction": { "enum": ["ingress", "egress", "internal"] },
+        "mcp_server_ref": { "type": "string" },
+        "tool_name": { "type": "string" },
+        "action_type": { "type": "string" },
+        "target_ref": { "type": "string" },
+        "target_hash": { "type": "string", "pattern": "^sha256:" },
+        "args_hash": { "type": "string", "pattern": "^sha256:" },
+        "summary_hash": { "type": "string", "pattern": "^sha256:" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "state": { "enum": ["allow", "revise", "human_review", "stop", "not_applicable"] },
+        "risk_class": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "reason": { "type": "string" }
+      }
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "payload": {
+      "type": "object",
+      "required": ["tier", "redaction_status", "private_payload_stored"],
+      "properties": {
+        "tier": { "enum": ["T0", "T1", "T2"] },
+        "redaction_status": { "type": "string" },
+        "private_payload_stored": { "const": false },
+        "payload_ref": { "type": ["string", "null"] },
+        "metadata": { "type": "object" }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "downstream_execution_performed_by_neura",
+        "private_payload_stored",
+        "provider_approval_claimed",
+        "compliance_certification_claimed"
+      ],
+      "properties": {
+        "downstream_execution_performed_by_neura": { "const": false },
+        "private_payload_stored": { "const": false },
+        "provider_approval_claimed": { "const": false },
+        "compliance_certification_claimed": { "const": false }
+      }
+    }
+  }
+}

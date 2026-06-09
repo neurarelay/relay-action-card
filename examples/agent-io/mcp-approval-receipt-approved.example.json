@@ -1,0 +1,64 @@
+{
+  "approval_receipt_id": "mcp_approval_receipt_agent_io_demo_001",
+  "standard": "neura-mcp-approval-receipt-v0.1-draft",
+  "created_at": "2026-06-09T16:03:30Z",
+  "approval_request_id": "approval_req_ref_mcp_refund_order_001",
+  "decision_receipt_id": "decision_receipt_agent_io_demo_001",
+  "mcp_binding": {
+    "tenant_ref": "tenant_ref_demo_hash",
+    "environment": "proof",
+    "mcp_server_ref": "mcp_server_ref_commerce_demo",
+    "tool_name": "refund_order",
+    "target_ref": "order_ref_hash_91b7",
+    "args_hash": "sha256:53fd2e88c5e27524d4b68d1a9a7b6db0c1f1d0bb3b9f1f88c6e8d5b3a1f2d4cc",
+    "actor_ref": "registry_agent_ref_demo_support_agent",
+    "policy_refs": ["policy_ref_refunds_over_threshold_require_owner"],
+    "evidence_refs": ["evidence_ref_order_status_digest", "evidence_ref_owner_approval_digest"]
+  },
+  "approval": {
+    "state": "approved",
+    "required_role": "owner",
+    "approved_by_ref": "owner_ref_hash_c17a",
+    "approved_at": "2026-06-09T16:03:28Z"
+  },
+  "validity": {
+    "valid_until": "2026-06-09T16:08:30Z",
+    "one_shot": true,
+    "consumed_at": null,
+    "invalid_if_changed": [
+      "tenant_ref",
+      "environment",
+      "mcp_server_ref",
+      "tool_name",
+      "target_ref",
+      "args_hash",
+      "actor_ref",
+      "policy_refs",
+      "evidence_refs",
+      "approval_state"
+    ]
+  },
+  "execution": {
+    "allowed_next_step": "developer_owned_runtime_may_execute_bound_call_once",
+    "execution_boundary": "Neura returns a pre-action approval receipt only; the developer-owned runtime decides and performs any downstream execution.",
+    "outcome_ref": null
+  },
+  "trace": {
+    "trace_ref": "trace_ref_agent_io_demo_001",
+    "tool_call_ref": "tool_call_ref_mcp_refund_order_001",
+    "transaction_ref": "relay_txn_ref_agent_io_demo_001"
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "payload_ref": null
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "real_mcp_server_called": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

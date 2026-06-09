@@ -1,0 +1,59 @@
+{
+  "standard": "neura-agent-io-event-envelope-v0.1-draft",
+  "event_ref": "agent_io_evt_decision_issued_001",
+  "event_type": "decision.issued",
+  "event_phase": "decision",
+  "event_time": "2026-06-09T16:00:05Z",
+  "event_sequence": 3,
+  "tenant_ref": "tenant_ref_demo_hash",
+  "environment": "proof",
+  "trace_ref": "trace_ref_agent_io_demo_001",
+  "transaction_ref": "relay_txn_ref_agent_io_demo_001",
+  "receipt_id": "decision_receipt_agent_io_demo_001",
+  "action_card_ref": "action_card_ref_agent_io_demo_001",
+  "session_ref": "session_ref_agent_io_demo_001",
+  "run_ref": "run_ref_agent_io_demo_001",
+  "tool_call_ref": "tool_call_ref_mcp_refund_order_001",
+  "approval_request_id": "approval_req_ref_mcp_refund_order_001",
+  "agent_ref": "registry_agent_ref_demo_support_agent",
+  "capability_ref": "capability_ref_refund_order",
+  "actor": {
+    "type": "agent",
+    "name": "Demo Support Agent",
+    "runtime": "synthetic-mcp-client"
+  },
+  "io": {
+    "surface": "mcp_tool_call",
+    "direction": "egress",
+    "mcp_server_ref": "mcp_server_ref_commerce_demo",
+    "tool_name": "refund_order",
+    "action_type": "refund_order",
+    "target_ref": "order_ref_hash_91b7",
+    "target_hash": "sha256:8f3d8b7fb9ed2b1b1a35d1d63f75f1a7a20284a8e7c802bd8fffd5a6fbfeaa19",
+    "args_hash": "sha256:53fd2e88c5e27524d4b68d1a9a7b6db0c1f1d0bb3b9f1f88c6e8d5b3a1f2d4cc",
+    "summary_hash": "sha256:77e6c3c4f7d31b9f3a12ccae4ad7f6423ca788bb44168a4b57f12adad984aa08"
+  },
+  "decision": {
+    "state": "human_review",
+    "risk_class": 3,
+    "reason": "Decision Receipt requires owner review and blocks downstream execution until the developer-owned runtime receives approval."
+  },
+  "policy_refs": ["policy_ref_refunds_over_threshold_require_owner"],
+  "evidence_refs": ["evidence_ref_order_status_digest"],
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "payload_ref": null,
+    "metadata": {
+      "receipt_id": "decision_receipt_agent_io_demo_001",
+      "ledger_persisted": true
+    }
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "standard": "neura-agent-io-event-envelope-v0.1-draft",
+  "event_ref": "agent_io_evt_ambiguous_target_decision_issued_001",
+  "event_type": "decision.issued",
+  "event_phase": "decision",
+  "event_time": "2026-06-09T16:10:03Z",
+  "event_sequence": 6,
+  "tenant_ref": "tenant_ref_demo_hash",
+  "environment": "proof",
+  "trace_ref": "trace_ref_agent_io_ambiguous_target_001",
+  "transaction_ref": "relay_txn_ref_agent_io_ambiguous_target_001",
+  "receipt_id": "decision_receipt_agent_io_ambiguous_target_001",
+  "action_card_ref": "action_card_ref_agent_io_ambiguous_target_001",
+  "session_ref": "session_ref_agent_io_ambiguous_target_001",
+  "run_ref": "run_ref_agent_io_ambiguous_target_001",
+  "tool_call_ref": "tool_call_ref_procurement_washington_trip_001",
+  "agent_ref": "registry_agent_ref_demo_procurement_agent",
+  "capability_ref": "capability_ref_book_travel",
+  "actor": {
+    "type": "agent",
+    "name": "Demo Procurement Agent",
+    "runtime": "synthetic-mcp-client"
+  },
+  "io": {
+    "surface": "mcp_tool_call",
+    "direction": "egress",
+    "mcp_server_ref": "mcp_server_ref_travel_procurement_demo",
+    "tool_name": "book_travel",
+    "action_type": "book_travel",
+    "target_ref": "destination_ref_ambiguous_washington",
+    "target_hash": "sha256:5ec0d4a1830ad69209b1f9e7fd10222df06cc1bb096c6d52c6e1ea1f1bdb745a",
+    "args_hash": "sha256:3b465e9a8a84f9177af213eb7a5efa53295d86af6795f1f81628a73f2e1ab7c9",
+    "summary_hash": "sha256:02734cd8452a02f050728cf385f771f4877e06f65cc7be4499e7e47e6f9b7e08"
+  },
+  "decision": {
+    "state": "revise",
+    "risk_class": 2,
+    "reason": "Ambiguous destination target requires confirmation before booking, payment, message, or memory write."
+  },
+  "policy_refs": ["policy_ref_travel_spend_requires_confirmed_destination"],
+  "evidence_refs": ["evidence_ref_trip_request_digest"],
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "payload_ref": null,
+    "metadata": {
+      "receipt_id": "decision_receipt_agent_io_ambiguous_target_001",
+      "reason_code": "ambiguous_target",
+      "execution_rule": "do_not_execute_until_target_is_confirmed",
+      "ledger_persisted": true
+    }
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "compliance_certification_claimed": false
+  }
+}

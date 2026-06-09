@@ -1,7 +1,7 @@
 # Current Public Proof Map
 
 Status: public developer proof map; no customer, provider, ecosystem, approval, listing, integration, endorsement, or partnership claim
-Last updated: 2026-06-03
+Last updated: 2026-06-09
 
 Use this map when you need to route a developer, evaluator, validator, or agent-runtime conversation into the smallest Neura Relay proof that can create useful evidence.
 
@@ -39,6 +39,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 | Show the core Relay mechanism | Core Action Card path | `npm run example:relay -- --example=support-reply --json` | Decision Receipt, trace ref, developer-owned execution boundary |
 | Show authority before consequential action | Pre-Action Authority set | `npm run proof:pre-action-authority -- --dry-run --json` | Agent Action Firewall, Decision Receipt Standard, MCP Risk Gate, CommerceOps Fire Drill, Authority Path Proof |
 | Show payment or commerce-style approval control | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` | refund, discount, address-change, cancellation, and customer-promise routing before execution |
+| Show buyer-language commerce control | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` | exact economic action, target, amount class, currency, customer ref, policy/evidence refs, and approval state bound before execution |
 | Show tool-call governance for MCP-capable runtimes | Protected MCP path | `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json` | five Neura tools, validation, resolution, receipt lookup, trace replay, Agent Passport lookup |
 | Show local autonomous-agent preflight | OpenClaw-style local proof | `npm run openclaw:five-minute-demo` | message send, file delete, and package publish reviewed before local execution |
 | Show source-to-sink authority depth | Flow-Aware Authority Gate | `npm run proof:flow-aware-authority -- --dry-run --json` | source refs, transformation refs, sink refs, purpose, scope, policy, and side-effect refs |

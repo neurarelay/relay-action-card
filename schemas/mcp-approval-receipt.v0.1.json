@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.neurarelay.com/schemas/mcp-approval-receipt.v0.1.json",
+  "title": "Neura MCP Approval Receipt v0.1 Draft",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "approval_receipt_id",
+    "standard",
+    "created_at",
+    "approval_request_id",
+    "decision_receipt_id",
+    "mcp_binding",
+    "approval",
+    "validity",
+    "execution",
+    "trace",
+    "payload",
+    "boundary"
+  ],
+  "properties": {
+    "approval_receipt_id": { "type": "string", "minLength": 1 },
+    "standard": { "const": "neura-mcp-approval-receipt-v0.1-draft" },
+    "created_at": { "type": "string", "minLength": 1 },
+    "approval_request_id": { "type": "string", "minLength": 1 },
+    "decision_receipt_id": { "type": "string", "minLength": 1 },
+    "mcp_binding": {
+      "type": "object",
+      "required": [
+        "tenant_ref",
+        "environment",
+        "mcp_server_ref",
+        "tool_name",
+        "target_ref",
+        "args_hash",
+        "actor_ref"
+      ],
+      "properties": {
+        "tenant_ref": { "type": "string" },
+        "environment": { "type": "string" },
+        "mcp_server_ref": { "type": "string" },
+        "tool_name": { "type": "string" },
+        "target_ref": { "type": "string" },
+        "args_hash": { "type": "string", "pattern": "^sha256:" },
+        "actor_ref": { "type": "string" },
+        "policy_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["state", "required_role"],
+      "properties": {
+        "state": {
+          "enum": ["pending", "approved", "denied", "expired", "consumed", "revoked", "requires_human_review"]
+        },
+        "required_role": { "type": "string" },
+        "approved_by_ref": { "type": ["string", "null"] },
+        "approved_at": { "type": ["string", "null"] }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": ["valid_until", "one_shot", "invalid_if_changed"],
+      "properties": {
+        "valid_until": { "type": "string" },
+        "one_shot": { "type": "boolean" },
+        "consumed_at": { "type": ["string", "null"] },
+        "invalid_if_changed": {
+          "type": "array",
+          "items": { "type": "string" },
+          "contains": { "const": "args_hash" }
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["allowed_next_step", "execution_boundary"],
+      "properties": {
+        "allowed_next_step": { "type": "string" },
+        "execution_boundary": { "type": "string" },
+        "outcome_ref": { "type": ["string", "null"] }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "required": ["trace_ref", "tool_call_ref"],
+      "properties": {
+        "trace_ref": { "type": "string" },
+        "tool_call_ref": { "type": "string" },
+        "transaction_ref": { "type": "string" }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": ["tier", "redaction_status", "private_payload_stored"],
+      "properties": {
+        "tier": { "enum": ["T0", "T1", "T2"] },
+        "redaction_status": { "type": "string" },
+        "private_payload_stored": { "const": false },
+        "payload_ref": { "type": ["string", "null"] }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "downstream_execution_performed_by_neura",
+        "real_mcp_server_called",
+        "private_payload_stored",
+        "provider_approval_claimed",
+        "compliance_certification_claimed"
+      ],
+      "properties": {
+        "downstream_execution_performed_by_neura": { "const": false },
+        "real_mcp_server_called": { "const": false },
+        "private_payload_stored": { "const": false },
+        "provider_approval_claimed": { "const": false },
+        "compliance_certification_claimed": { "const": false }
+      }
+    }
+  }
+}
