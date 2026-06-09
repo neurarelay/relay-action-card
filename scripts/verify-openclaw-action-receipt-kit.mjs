@@ -309,15 +309,20 @@ rejectUnsafe("examples_readme", openclawReadme);
 
 const examplesReadme = read("examples/README.md");
 requireIncludes("examples/README.md", examplesReadme, [
-  "This folder has five lanes.",
+  "This folder has core integration lanes plus proof packs.",
   "OpenClaw-style receipt kit",
+  "Shadow Agent Inventory / Stop Receipt",
   "Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer-owned route",
+  "traffic refs -> inventory finding -> stop recommendation receipt -> customer-runtime shutdown or quarantine",
   "examples/openclaw",
+  "shadow-agent-inventory/",
   "npm run openclaw:proof",
   "npm run openclaw:workbench",
   "npm run openclaw:workspace-proof",
   "npm run verify:openclaw-workspace-surface",
   "npm run verify:openclaw-action-receipt-kit",
+  "npm run proof:shadow-agent-inventory -- --dry-run --json",
+  "npm run verify:shadow-agent-inventory-stop-receipt",
   "not an official OpenClaw or ClawHub integration",
 ]);
 rejectUnsafe("examples/README.md", examplesReadme);
