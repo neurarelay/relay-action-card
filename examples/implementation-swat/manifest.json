@@ -70,7 +70,7 @@
     {
       "id": "shadow-agent-inventory-stop-receipt",
       "artifact": "audit-only stop-receipt service framing",
-      "verification": "future verifier"
+      "verification": "npm run verify:shadow-agent-inventory-stop-receipt"
     }
   ],
   "required_packet_sections": [

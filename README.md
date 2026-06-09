@@ -42,6 +42,7 @@ Use the current map when you need to choose the right proof lane for an agent wo
 - commerce/payment-style proof: `npm run proof:commerceops-fire-drill -- --dry-run --json`
 - agentic commerce Decision Receipt proof: `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json`
 - implementation SWAT templates: `npm run verify:implementation-swat-pack`
+- shadow-agent stop receipt proof: `npm run proof:shadow-agent-inventory -- --dry-run --json`
 - local autonomous-agent proof: `npm run openclaw:five-minute-demo`
 
 Full map: [`docs/current-public-proof-map.md`](docs/current-public-proof-map.md).
@@ -77,6 +78,7 @@ The path is the same proof spine: Action Card in, Decision Receipt out, develope
 | 05 | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` |
 | 06 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
 | 07 | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` |
+| 08 | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` |
 
 Applied examples also include:
 
@@ -121,13 +123,14 @@ Use the full local flow when you want to inspect the individual pieces of the Pr
 Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned route
 ```
 
-The package includes five core checks plus one applied synthetic case:
+The package includes core checks plus applied synthetic cases:
 
 - Agent Action Firewall: proposed actions classify as `allow`, `revise`, `human_review`, or `stop`.
 - Decision Receipt Standard: the working receipt shape for what was authorized before execution.
 - MCP Risk Gate: tool-call intent binds to server, tool, target, actor, and params hash.
 - CommerceOps Fire Drill: commerce actions receive receipts before money-moving or customer-facing execution.
 - Authority Path Proof: authority path depth, scope envelope, purpose fit, and sequence context become pre-action receipts.
+- Shadow Agent Inventory / Stop Receipt: refs-only traffic becomes inventory findings and stop recommendation receipts while customer runtime owns shutdown.
 - ClinicOps Synthetic Proof: an applied synthetic case for scheduling, patient-message, prior-auth, insurance follow-up, and policy-exception actions.
 
 Run:
@@ -145,6 +148,8 @@ npm run verify:commerceops-fire-drill
 npm run proof:agentic-commerce-decision-receipt -- --dry-run --json
 npm run verify:agentic-commerce-decision-receipt
 npm run verify:implementation-swat-pack
+npm run proof:shadow-agent-inventory -- --dry-run --json
+npm run verify:shadow-agent-inventory-stop-receipt
 npm run proof:authority-path -- --dry-run --json
 npm run verify:authority-path
 npm run proof:clinicops-synthetic -- --dry-run --json
@@ -160,6 +165,7 @@ Docs:
 - [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
 - [`docs/agentic-commerce-decision-receipt.md`](docs/agentic-commerce-decision-receipt.md)
 - [`docs/implementation-swat-packet-library.md`](docs/implementation-swat-packet-library.md)
+- [`docs/shadow-agent-inventory-stop-receipt.md`](docs/shadow-agent-inventory-stop-receipt.md)
 - [`docs/authority-path-proof.md`](docs/authority-path-proof.md)
 - [`docs/clinicops-synthetic-proof.md`](docs/clinicops-synthetic-proof.md)
 
@@ -171,11 +177,13 @@ Agentic Commerce Decision Receipt applies the same foundation to the buyer-langu
 
 Implementation SWAT Packet Library turns concrete maintainer asks into reusable schema, acceptance-test, receipt-example, PR-scope, approval-packet, and no-action-readback templates. It is for implementation help after a concrete ask, not broad outreach.
 
+Shadow Agent Inventory / Stop Receipt turns refs-only agent traffic into governed, stale-authority, and shadow-agent findings, then issues stop recommendation receipts where customer runtime shutdown or quarantine is required. Neura does not shut down agents; the customer runtime owns enforcement after reading the receipt.
+
 Authority Path Proof applies the foundation to indirect authority paths. It shows how authority path depth, scope envelope, purpose fit, and sequence context become portable Decision Receipts before execution.
 
 ClinicOps Synthetic Proof applies the foundation to regulated-style synthetic workflows. It shows how scheduling changes, patient-message drafts, prior-auth notes, insurance follow-up, and policy exceptions are escalated, revised, or stopped before external use.
 
-This is a synthetic dry-run proof. It does not touch Shopify, Stripe, payment rails, cards, wallets, customer accounts, production systems, external message channels, MCP providers, real provider systems, real insurer systems, real EHRs, real scheduling systems, real patient messages, or real data. It does not claim provider approval, insurer approval, marketplace listing, compliance certification, HIPAA compliance, medical advice, clinical accuracy, payment processing, production integration, partnership, or downstream execution by Neura.
+This is a synthetic dry-run proof. It does not touch Shopify, Stripe, payment rails, cards, wallets, customer accounts, production systems, external message channels, MCP providers, real provider systems, real insurer systems, real EHRs, real scheduling systems, real patient messages, customer runtimes, real agent credentials, or real data. It does not claim provider approval, insurer approval, marketplace listing, compliance certification, HIPAA compliance, medical advice, clinical accuracy, payment processing, production integration, partnership, kill-switch control, customer adoption, or downstream execution by Neura.
 
 ## Ecosystem Availability: Use Neura Today
 

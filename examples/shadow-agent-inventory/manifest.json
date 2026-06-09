@@ -1,0 +1,54 @@
+{
+  "name": "shadow-agent-inventory-stop-receipt",
+  "version": "0.1.0",
+  "status": "synthetic_service_framing",
+  "purpose": "Turn refs-only agent traffic into inventory findings and stop recommendation receipts without claiming Neura performs runtime shutdown.",
+  "proof": "shadow-agent-inventory-stop-receipt",
+  "capability": "Shadow Agent Inventory / Stop Receipt",
+  "proof_command": "npm run proof:shadow-agent-inventory -- --dry-run --json",
+  "verify_command": "npm run verify:shadow-agent-inventory-stop-receipt",
+  "pattern": "traffic refs -> inventory finding -> stop recommendation receipt -> customer-runtime shutdown or quarantine",
+  "source_refs": [
+    "relay_traffic_ledger_refs",
+    "agent_io_event_refs",
+    "decision_receipt_refs",
+    "registry_authority_refs",
+    "tool_catalog_refs",
+    "policy_refs"
+  ],
+  "finding_types": [
+    "known_governed_agent",
+    "stale_authority_agent",
+    "shadow_agent_detected"
+  ],
+  "required_receipt_fields": [
+    "receipt_id",
+    "standard",
+    "receipt_type",
+    "finding_id",
+    "decision",
+    "runtime_instruction",
+    "inventory",
+    "authority",
+    "recommendation",
+    "execution",
+    "validity",
+    "payload",
+    "boundary"
+  ],
+  "boundary": {
+    "synthetic_data_only": true,
+    "templates_only": false,
+    "private_payload_stored": false,
+    "real_customer_data_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_shutdown_performed_by_neura": false,
+    "provider_approval_claimed": false,
+    "customer_adoption_claimed": false,
+    "compliance_certification_claimed": false,
+    "public_action_authorized": false,
+    "pr_authorized": false,
+    "github_comment_authorized": false,
+    "email_or_dm_authorized": false
+  }
+}

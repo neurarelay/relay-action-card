@@ -1,0 +1,45 @@
+{
+  "finding_id": "finding:governed_support_agent",
+  "finding_type": "known_governed_agent",
+  "observed_at": "2026-06-09T17:40:00.000Z",
+  "title": "Known support triage agent remains inside approved read-only scope",
+  "agent_ref": "agent_ref:hash:support_triage_agent",
+  "runtime_ref": "runtime_ref:customer_support_workspace",
+  "owner_ref": "owner_ref:support_ops_admin",
+  "authority_refs": [
+    "registry_authority_ref:support_triage_read_only:v1"
+  ],
+  "policy_refs": [
+    "policy_ref:support_read_only_lookup",
+    "policy_ref:no_customer_message_without_receipt"
+  ],
+  "evidence_refs": [
+    "ledger_ref:agent_io:governed_support_agent:latest",
+    "decision_receipt_ref:internal_status_lookup_allow"
+  ],
+  "traffic_summary": {
+    "events_observed": 18,
+    "observed_action_classes": [
+      "internal_status_lookup"
+    ],
+    "latest_trace_ref": "trace_ref:governed_support_agent:latest",
+    "private_payload_stored": false,
+    "redaction_status": "metadata_refs_hashes_only"
+  },
+  "risk": {
+    "level": "low",
+    "signals": [
+      "owner_present",
+      "authority_current",
+      "read_only_scope"
+    ]
+  },
+  "recommended_decision": "allow",
+  "stop_receipt_required": false,
+  "boundary": {
+    "synthetic_data_only": true,
+    "private_payload_stored": false,
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_shutdown_performed_by_neura": false
+  }
+}

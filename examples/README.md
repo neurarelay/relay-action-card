@@ -1,6 +1,6 @@
 # Neura Developer Examples
 
-This folder has five lanes.
+This folder has core integration lanes plus proof packs.
 
 - **Core Relay** (`core`): send an Action Card to Relay and receive a Decision Receipt.
 - **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and the stable local preflight adapter.
@@ -8,6 +8,7 @@ This folder has five lanes.
 - **A2A protected proof** (`a2a`): inspect public Agent Card discovery and run controlled protected `message/send` proof when access exists.
 - **Optional MCP** (`mcp`): call Relay through protected MCP tools with a Workspace sandbox token or controlled production/private access.
 - **SDK** (`sdk`): use the typed `@neurarelay/sdk` public package path.
+- **Shadow Agent Inventory / Stop Receipt** (`shadow-agent-inventory`): inspect refs-only inventory findings and stop recommendation receipts without customer-runtime shutdown by Neura.
 
 The core path is the default:
 
@@ -47,6 +48,12 @@ The A2A path keeps discovery public and execution protected:
 
 ```text
 A2A client -> public Agent Card -> protected /a2a message/send -> Decision Receipt task
+```
+
+The Shadow Agent Inventory path keeps enforcement customer-owned:
+
+```text
+traffic refs -> inventory finding -> stop recommendation receipt -> customer-runtime shutdown or quarantine
 ```
 
 For MCP-capable runtimes, start here when you need a protected tool-call governance example rather than a standalone SDK. The examples show how to validate or resolve an Action Card before developer-owned execution.
@@ -124,6 +131,16 @@ examples/
       adapter.mjs
       fixtures/
         send-message.preflight.json
+  shadow-agent-inventory/
+    manifest.json
+    run-proof.mjs
+    findings/
+      governed-support-agent.json
+      stale-authority-crm-agent.json
+      unknown-data-export-agent.json
+    receipts/
+      stale-authority-crm-agent.stop-receipt.json
+      unknown-data-export-agent.stop-receipt.json
   sdk/
     README.md
     resolve-action-card-sdk.mjs
@@ -190,6 +207,15 @@ npm run verify:delegated-authority-scenarios
 ```
 
 The delegated authority proof sends one permitted delegated action, one wrong-resource action, one wrong-action attempt, and one expired-authority action to Relay. It keeps delegated authority refs-only and preserves developer-owned execution.
+
+Run the Shadow Agent Inventory / Stop Receipt proof:
+
+```bash
+npm run proof:shadow-agent-inventory -- --dry-run --json
+npm run verify:shadow-agent-inventory-stop-receipt
+```
+
+The proof emits governed, stale-authority, and shadow-agent findings plus two stop recommendation receipts. It does not shut down customer runtimes, disable real agents, store private payload, or claim provider/customer approval.
 
 Run the high-risk core example:
 

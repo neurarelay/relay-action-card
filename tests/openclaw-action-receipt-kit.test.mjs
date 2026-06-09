@@ -261,18 +261,26 @@ test("README exposes the visual OpenClaw proof before setup", () => {
 
 test("examples README exposes OpenClaw as a first-class lane", () => {
   const readme = read("examples/README.md");
-  assert.match(readme, /This folder has five lanes/);
+  assert.match(readme, /This folder has core integration lanes plus proof packs/);
   assert.match(readme, /OpenClaw-style receipt kit/);
+  assert.match(readme, /Shadow Agent Inventory \/ Stop Receipt/);
   assert.match(
     readme,
     /Local autonomous action -> Action Card -> Relay -> Decision Receipt -> developer-owned route/,
   );
+  assert.match(
+    readme,
+    /traffic refs -> inventory finding -> stop recommendation receipt -> customer-runtime shutdown or quarantine/,
+  );
   assert.equal(readme.includes("examples/openclaw"), true);
+  assert.equal(readme.includes("shadow-agent-inventory/"), true);
   assert.match(readme, /npm run openclaw:proof/);
   assert.match(readme, /npm run openclaw:workbench/);
   assert.match(readme, /npm run openclaw:workspace-proof/);
   assert.match(readme, /npm run verify:openclaw-workspace-surface/);
   assert.match(readme, /npm run verify:openclaw-action-receipt-kit/);
+  assert.match(readme, /npm run proof:shadow-agent-inventory -- --dry-run --json/);
+  assert.match(readme, /npm run verify:shadow-agent-inventory-stop-receipt/);
   assert.match(readme, /not an official OpenClaw or ClawHub integration/);
 });
 

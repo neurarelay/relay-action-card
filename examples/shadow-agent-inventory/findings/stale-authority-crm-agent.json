@@ -1,0 +1,46 @@
+{
+  "finding_id": "finding:stale_authority_crm_agent",
+  "finding_type": "stale_authority_agent",
+  "observed_at": "2026-06-09T17:41:00.000Z",
+  "title": "CRM update agent is still proposing writes after authority expiry",
+  "agent_ref": "agent_ref:hash:crm_update_agent",
+  "runtime_ref": "runtime_ref:crm_automation_worker",
+  "owner_ref": "owner_ref:revenue_ops_admin",
+  "authority_refs": [
+    "registry_authority_ref:crm_update_write_scope:expired"
+  ],
+  "policy_refs": [
+    "policy_ref:crm_write_requires_current_authority",
+    "policy_ref:stale_authority_requires_stop"
+  ],
+  "evidence_refs": [
+    "ledger_ref:agent_io:crm_update_agent:latest",
+    "decision_receipt_ref:delegated_expired_authority_stop"
+  ],
+  "traffic_summary": {
+    "events_observed": 7,
+    "observed_action_classes": [
+      "crm_account_update",
+      "workflow_state_change"
+    ],
+    "latest_trace_ref": "trace_ref:stale_authority_crm_agent:latest",
+    "private_payload_stored": false,
+    "redaction_status": "metadata_refs_hashes_only"
+  },
+  "risk": {
+    "level": "high",
+    "signals": [
+      "authority_expired",
+      "write_scope",
+      "changed_approval_state"
+    ]
+  },
+  "recommended_decision": "stop",
+  "stop_receipt_required": true,
+  "boundary": {
+    "synthetic_data_only": true,
+    "private_payload_stored": false,
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_shutdown_performed_by_neura": false
+  }
+}

@@ -41,7 +41,7 @@ The verifier checks the manifest, templates, README routing, proof-map routing, 
 | Agentic Commerce Decision Receipt | receipt example, acceptance tests | `npm run verify:agentic-commerce-decision-receipt` |
 | Delegated Authority | field map, acceptance tests | `npm run verify:delegated-authority-scenarios` |
 | OTel / Agent Flight Recorder | field map, no-action readback until a concrete field ask appears | use Protocol OTel mapping in product repo |
-| Shadow Agent Inventory / stop receipt | no-action readback until concrete audit or stop-receipt ask appears | future verifier |
+| Shadow Agent Inventory / stop receipt | receipt example, acceptance tests, no-action readback until concrete audit ask appears | `npm run verify:shadow-agent-inventory-stop-receipt` |
 
 ## Minimum Useful Packet
 

@@ -1,0 +1,100 @@
+{
+  "receipt_id": "stop_receipt:stale_authority_crm_agent:2026-06-09",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "receipt_type": "shadow_agent_stop_receipt",
+  "created_at": "2026-06-09T17:43:00.000Z",
+  "finding_id": "finding:stale_authority_crm_agent",
+  "action_card_id": "action_card:synthetic:stale_authority_crm_agent",
+  "decision": "stop",
+  "runtime_instruction": "customer_runtime_stop_or_quarantine",
+  "decision_reason": "CRM write proposals continued after delegated authority expired.",
+  "inventory": {
+    "agent_ref": "agent_ref:hash:crm_update_agent",
+    "runtime_ref": "runtime_ref:crm_automation_worker",
+    "owner_ref": "owner_ref:revenue_ops_admin",
+    "agent_identity_status": "known_owner_stale_authority",
+    "observed_action_classes": [
+      "crm_account_update",
+      "workflow_state_change"
+    ],
+    "source_refs": [
+      "ledger_ref:agent_io:crm_update_agent:latest",
+      "decision_receipt_ref:delegated_expired_authority_stop"
+    ],
+    "private_payload_stored": false,
+    "redaction_status": "metadata_refs_hashes_only"
+  },
+  "risk": {
+    "level": "high",
+    "signals": [
+      "authority_expired",
+      "write_scope",
+      "changed_approval_state"
+    ]
+  },
+  "authority": {
+    "standing": "expired",
+    "authority_refs": [
+      "registry_authority_ref:crm_update_write_scope:expired"
+    ],
+    "registry_context_ref": "registry_context_ref:crm_update_scope_expired",
+    "policy_refs": [
+      "policy_ref:crm_write_requires_current_authority",
+      "policy_ref:stale_authority_requires_stop"
+    ]
+  },
+  "recommendation": {
+    "recommended_customer_runtime_action": "pause_agent_schedule_and_require_owner_reapproval",
+    "neura_performed_shutdown": false,
+    "requires_owner_confirmation": true,
+    "next_review": "owner_reapproval_or_scope_reduction"
+  },
+  "execution": {
+    "allowed_next_step": "customer_runtime_stop_or_quarantine",
+    "blocked_downstream_actions": [
+      "crm_account_update",
+      "workflow_state_change"
+    ],
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_owns_shutdown": true
+  },
+  "validity": {
+    "valid_for": "this finding and matching authority state only",
+    "params_hash": "sha256:crm-update-agent-observed-action-classes",
+    "invalid_if_changed": [
+      "agent_ref",
+      "runtime_ref",
+      "owner_ref",
+      "authority_refs",
+      "policy_refs",
+      "observed_action_classes",
+      "approval_state",
+      "params_hash"
+    ]
+  },
+  "trace": {
+    "trace_ref": "trace_ref:stale_authority_crm_agent:latest",
+    "ledger_refs": [
+      "ledger_ref:agent_io:crm_update_agent:latest"
+    ],
+    "source": "github",
+    "campaign": "shadow_agent_inventory",
+    "surface": "relay_action_card"
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "private_payload_stored": false,
+    "real_customer_data_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_shutdown_performed_by_neura": false,
+    "provider_approval_claimed": false,
+    "customer_adoption_claimed": false,
+    "compliance_certification_claimed": false,
+    "public_action_authorized": false
+  }
+}

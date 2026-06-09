@@ -1,0 +1,46 @@
+{
+  "finding_id": "finding:unknown_data_export_agent",
+  "finding_type": "shadow_agent_detected",
+  "observed_at": "2026-06-09T17:42:00.000Z",
+  "title": "Unknown agent is proposing data export without owner or purpose refs",
+  "agent_ref": "agent_ref:hash:unknown_data_export_worker",
+  "runtime_ref": "runtime_ref:unmatched_batch_worker",
+  "owner_ref": "owner_ref:missing",
+  "authority_refs": [],
+  "policy_refs": [
+    "policy_ref:data_export_requires_owner",
+    "policy_ref:data_export_requires_purpose",
+    "policy_ref:unknown_agent_requires_stop"
+  ],
+  "evidence_refs": [
+    "ledger_ref:agent_io:unknown_data_export_agent:latest",
+    "tool_catalog_ref:export_customer_records"
+  ],
+  "traffic_summary": {
+    "events_observed": 3,
+    "observed_action_classes": [
+      "customer_record_export",
+      "external_file_write"
+    ],
+    "latest_trace_ref": "trace_ref:unknown_data_export_agent:latest",
+    "private_payload_stored": false,
+    "redaction_status": "metadata_refs_hashes_only"
+  },
+  "risk": {
+    "level": "critical",
+    "signals": [
+      "owner_missing",
+      "authority_not_found",
+      "data_export",
+      "missing_business_purpose"
+    ]
+  },
+  "recommended_decision": "stop",
+  "stop_receipt_required": true,
+  "boundary": {
+    "synthetic_data_only": true,
+    "private_payload_stored": false,
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_shutdown_performed_by_neura": false
+  }
+}

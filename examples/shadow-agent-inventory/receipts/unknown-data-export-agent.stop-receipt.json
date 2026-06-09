@@ -1,0 +1,100 @@
+{
+  "receipt_id": "stop_receipt:unknown_data_export_agent:2026-06-09",
+  "standard": "neura-decision-receipt-v0.1-draft",
+  "receipt_type": "shadow_agent_stop_receipt",
+  "created_at": "2026-06-09T17:44:00.000Z",
+  "finding_id": "finding:unknown_data_export_agent",
+  "action_card_id": "action_card:synthetic:unknown_data_export_agent",
+  "decision": "stop",
+  "runtime_instruction": "customer_runtime_stop_or_quarantine",
+  "decision_reason": "Unknown agent proposed data export without owner, authority, or purpose refs.",
+  "inventory": {
+    "agent_ref": "agent_ref:hash:unknown_data_export_worker",
+    "runtime_ref": "runtime_ref:unmatched_batch_worker",
+    "owner_ref": "owner_ref:missing",
+    "agent_identity_status": "unknown_owner_no_authority",
+    "observed_action_classes": [
+      "customer_record_export",
+      "external_file_write"
+    ],
+    "source_refs": [
+      "ledger_ref:agent_io:unknown_data_export_agent:latest",
+      "tool_catalog_ref:export_customer_records"
+    ],
+    "private_payload_stored": false,
+    "redaction_status": "metadata_refs_hashes_only"
+  },
+  "risk": {
+    "level": "critical",
+    "signals": [
+      "owner_missing",
+      "authority_not_found",
+      "data_export",
+      "missing_business_purpose"
+    ]
+  },
+  "authority": {
+    "standing": "not_found",
+    "authority_refs": [],
+    "registry_context_ref": "registry_context_ref:no_authority_match",
+    "policy_refs": [
+      "policy_ref:data_export_requires_owner",
+      "policy_ref:data_export_requires_purpose",
+      "policy_ref:unknown_agent_requires_stop"
+    ]
+  },
+  "recommendation": {
+    "recommended_customer_runtime_action": "disable_agent_route_or_quarantine_before_next_run",
+    "neura_performed_shutdown": false,
+    "requires_owner_confirmation": true,
+    "next_review": "assign_owner_or_remove_agent"
+  },
+  "execution": {
+    "allowed_next_step": "customer_runtime_stop_or_quarantine",
+    "blocked_downstream_actions": [
+      "customer_record_export",
+      "external_file_write"
+    ],
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_owns_shutdown": true
+  },
+  "validity": {
+    "valid_for": "this finding and matching unknown-owner state only",
+    "params_hash": "sha256:unknown-data-export-observed-action-classes",
+    "invalid_if_changed": [
+      "agent_ref",
+      "runtime_ref",
+      "owner_ref",
+      "authority_refs",
+      "policy_refs",
+      "observed_action_classes",
+      "approval_state",
+      "params_hash"
+    ]
+  },
+  "trace": {
+    "trace_ref": "trace_ref:unknown_data_export_agent:latest",
+    "ledger_refs": [
+      "ledger_ref:agent_io:unknown_data_export_agent:latest"
+    ],
+    "source": "github",
+    "campaign": "shadow_agent_inventory",
+    "surface": "relay_action_card"
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false
+  },
+  "boundary": {
+    "synthetic_data_only": true,
+    "private_payload_stored": false,
+    "real_customer_data_used": false,
+    "downstream_execution_performed_by_neura": false,
+    "customer_runtime_shutdown_performed_by_neura": false,
+    "provider_approval_claimed": false,
+    "customer_adoption_claimed": false,
+    "compliance_certification_claimed": false,
+    "public_action_authorized": false
+  }
+}
