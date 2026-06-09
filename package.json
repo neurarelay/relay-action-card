@@ -111,6 +111,7 @@
     "verify:agent-io-event-envelope": "node scripts/verify-agent-io-event-envelope.mjs",
     "verify:mcp-approval-receipt": "node scripts/verify-mcp-approval-receipt.mjs",
     "verify:agentic-commerce-decision-receipt": "node scripts/verify-agentic-commerce-decision-receipt.mjs",
+    "verify:implementation-swat-pack": "node scripts/verify-implementation-swat-pack.mjs",
     "verify:agent-action-firewall": "node scripts/verify-agent-action-firewall.mjs",
     "verify:mcp-risk-gate": "node scripts/verify-mcp-risk-gate.mjs",
     "verify:commerceops-fire-drill": "node scripts/verify-commerceops-fire-drill.mjs",

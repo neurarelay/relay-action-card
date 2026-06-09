@@ -1,0 +1,95 @@
+{
+  "name": "implementation-swat-packet-library",
+  "version": "0.1.0",
+  "status": "templates_only",
+  "purpose": "Turn concrete maintainer asks into schema, fixture, verifier, example, and PR-scope packets without broad outreach.",
+  "verify_command": "npm run verify:implementation-swat-pack",
+  "templates": [
+    {
+      "id": "schema-field-map",
+      "path": "examples/implementation-swat/templates/schema-field-map.md",
+      "use_when": "A maintainer asks how fields map to an approval, receipt, Agent I/O, delegated-authority, or OTel shape."
+    },
+    {
+      "id": "acceptance-test-fixtures",
+      "path": "examples/implementation-swat/templates/acceptance-test-fixtures.md",
+      "use_when": "A project needs concrete pass/fail behavior or verifier obligations."
+    },
+    {
+      "id": "receipt-example",
+      "path": "examples/implementation-swat/templates/receipt-example.md",
+      "use_when": "A project asks for one safe JSON example."
+    },
+    {
+      "id": "pr-scope",
+      "path": "examples/implementation-swat/templates/pr-scope.md",
+      "use_when": "A maintainer gives a module, file, or test boundary for a narrow PR."
+    },
+    {
+      "id": "maintainer-reply-approval",
+      "path": "examples/implementation-swat/templates/maintainer-reply-approval.md",
+      "use_when": "Roman needs exact approval before any public reply."
+    },
+    {
+      "id": "no-action-readback",
+      "path": "examples/implementation-swat/templates/no-action-readback.md",
+      "use_when": "The correct move is to hold because no concrete ask exists."
+    }
+  ],
+  "lanes": [
+    {
+      "id": "mcp-approval-receipt",
+      "artifact": "MCP Approval Receipt field map, tests, or example",
+      "verification": "npm run verify:mcp-approval-receipt"
+    },
+    {
+      "id": "agent-io-event-envelope",
+      "artifact": "Agent I/O Event Envelope mapping or fixture",
+      "verification": "npm run verify:agent-io-event-envelope"
+    },
+    {
+      "id": "agent-action-firewall",
+      "artifact": "pre-action decision tests",
+      "verification": "npm run verify:agent-action-firewall"
+    },
+    {
+      "id": "agentic-commerce-decision-receipt",
+      "artifact": "commerce-style Decision Receipt example",
+      "verification": "npm run verify:agentic-commerce-decision-receipt"
+    },
+    {
+      "id": "delegated-authority",
+      "artifact": "delegated authority scope, standing, expiry, and revocation tests",
+      "verification": "npm run verify:delegated-authority-scenarios"
+    },
+    {
+      "id": "otel-agent-flight-recorder",
+      "artifact": "decision-point field map",
+      "verification": "Protocol product verifier"
+    },
+    {
+      "id": "shadow-agent-inventory-stop-receipt",
+      "artifact": "audit-only stop-receipt service framing",
+      "verification": "future verifier"
+    }
+  ],
+  "required_packet_sections": [
+    "Concrete ask",
+    "Evidence",
+    "Proposed artifact",
+    "Verification",
+    "Boundary",
+    "Approval state"
+  ],
+  "boundary": {
+    "templates_only": true,
+    "public_action_authorized": false,
+    "pr_authorized": false,
+    "github_comment_authorized": false,
+    "email_or_dm_authorized": false,
+    "provider_approval_claimed": false,
+    "customer_adoption_claimed": false,
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false
+  }
+}
