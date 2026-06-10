@@ -50,6 +50,12 @@ Full map: [`docs/current-public-proof-map.md`](docs/current-public-proof-map.md)
 
 Registry remains an optional production-trust upgrade. Protected MCP remains controlled access. Neura Relay does not execute downstream actions and this repo does not claim customer adoption, provider approval, ecosystem endorsement, integration, or partnership.
 
+## Commercial Boundary
+
+This repo proves the Action Card -> Decision Receipt pattern in public, runnable examples.
+
+Paid Relay operationalizes the pattern in hosted or enterprise environments with protected action families, custom decision maps, receipt retention, audit exports, integrations, support, and Agent Traffic Intelligence. The examples do not claim customer adoption, provider approval, production integration, compliance certification, partnership, or downstream execution by Neura.
+
 ## Start With Pre-Action Authority
 
 Run the local authority flow when you want the shortest route from proposed action to Decision Receipt:
