@@ -60,7 +60,7 @@ for (const [label, source] of [
 ]) {
   requireIncludes(label, source, "npm run example:sdk:authority-routing");
   requireIncludes(label, source, "hold_for_registry_backed_authority");
-  requireIncludes(label, source, "developer_owned_execution");
+  requireIncludes(label, source, "runtime-owned");
   requireIncludes(label, source, "0.1.1");
   requireIncludes(label, source, "no public API");
 }
@@ -112,13 +112,19 @@ if (proof) {
     if (result.developer_route !== result.expected_public_route) {
       fail(`${result.id}_route`, result);
     }
+    if (result.runtime_route !== result.expected_public_route) {
+      fail(`${result.id}_runtime_route`, result);
+    }
     if (!result.receipt_id || !result.trace_ref || !result.transaction_ref) {
       fail(`${result.id}_refs`, result);
     }
     if (result.authority_context?.refs_only !== true) {
       fail(`${result.id}_refs_only`, result.authority_context);
     }
-    if (result.boundary?.developer_keeps_execution !== true) {
+    if (
+      result.boundary?.developer_keeps_execution !== true ||
+      result.boundary?.runtime_owns_execution !== true
+    ) {
       fail(`${result.id}_developer_execution`, result.boundary);
     }
   }

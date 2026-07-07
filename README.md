@@ -2,15 +2,19 @@
 
 Run Neura Relay's Pre-Action Authority path before an agent changes real systems.
 
-This is the public developer proof repo for Neura Relay. It shows the same core mechanism across direct API, SDK, MCP-capable runtimes, A2A discovery, OpenClaw-style local agents, commerce operations, and governed handoffs:
+This is the public runtime proof repo for Neura Relay. It shows the same core mechanism across direct API, SDK, MCP-capable runtimes, A2A discovery, OpenClaw-style local agents, commerce operations, and governed handoffs:
 
 ```text
-Proposed action -> Action Card -> Neura Relay -> Decision Receipt -> developer-owned execution or restraint
+Proposed action -> Action Card -> Neura Relay -> Decision Receipt -> runtime-owned execution or restraint
 ```
 
 Your runtime keeps execution ownership. Relay evaluates identity, authority, evidence, policy, and risk, then returns a receipt before consequential action happens elsewhere.
 
 Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
+
+## Neura Local Alignment
+
+The accepted Neura Local release uses the same boundary as this repo: local intent is intercepted before execution, Action Cards and Decision Receipts stay refs-only, Relay records the decision path, Registry supplies context only, and the local/customer runtime keeps real execution ownership.
 
 ## Start In 30 Seconds
 
@@ -74,7 +78,7 @@ Live product page:
 https://www.neurarelay.com/agent-action-gateway
 ```
 
-The path is the same proof spine: Action Card in, Decision Receipt out, developer-owned execution or restraint after the receipt.
+The path is the same proof spine: Action Card in, Decision Receipt out, runtime-owned execution or restraint after the receipt.
 
 | Step | Check | Command |
 | --- | --- | --- |
@@ -95,7 +99,7 @@ npm run proof:clinicops-synthetic -- --dry-run --json
 npm run verify:clinicops-synthetic
 ```
 
-No downstream execution by Neura. The developer-owned runtime reads the receipt and decides whether to continue, revise, review, or stop.
+No downstream execution by Neura. The runtime reads the receipt and decides whether to continue, revise, review, or stop.
 
 Distribution:
 
@@ -128,7 +132,7 @@ Registry is an optional production-trust upgrade. Relay must still work without 
 Use the full local flow when you want to inspect the individual pieces of the Pre-Action Authority path:
 
 ```text
-Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned route
+Action Card -> Pre-Action Authority -> Decision Receipt -> runtime-owned route
 ```
 
 The package includes core checks plus applied synthetic cases:
@@ -223,7 +227,7 @@ npm run proof:flow-aware-authority -- --dry-run --json
 npm run verify:flow-aware-authority-gate
 ```
 
-The proof binds source refs, transformation refs, sink/destination refs, purpose refs, authority freshness/scope refs, tool side-effect refs, policy/evidence refs, data labels, and exact-call `params_hash` before developer-owned execution.
+The proof binds source refs, transformation refs, sink/destination refs, purpose refs, authority freshness/scope refs, tool side-effect refs, policy/evidence refs, data labels, and exact-call `params_hash` before runtime-owned execution.
 
 It covers 20 deterministic dry-run scenarios, including SQL/base64/public-sink movement, indirect prompt injection, tool poisoning, excessive agency, secret leakage, memory poisoning, cross-tenant leaks, browser submits, package publishes, permission changes, workflow state changes, deployment changes, multi-agent handoff loss, stale authority, hidden tool side effects, and allowed tool / forbidden data movement cases.
 
@@ -843,7 +847,7 @@ npm run example:sdk
 npm run example:sdk:authority-routing
 ```
 
-The authority-routing example uses `@neurarelay/sdk@0.1.1` against the delegated-authority fixtures and converts each Decision Receipt into a developer route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the developer can supply Registry-backed delegated authority. A production app should only treat a receipt as `ready_for_developer_owned_execution` when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
+The authority-routing example uses `@neurarelay/sdk@0.1.1` against the delegated-authority fixtures and converts each Decision Receipt into a runtime route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the runtime can supply Registry-backed delegated authority. A production app should only treat the compatibility route `ready_for_developer_owned_execution` as ready when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
 Use the SDK to read public A2A discovery. Run protected `message/send` only with controlled access:
 
@@ -908,7 +912,7 @@ The delegated authority proof is refs-only: access is not consent, consent is no
 Relay Decision Receipts now expose `authority_context.source` for delegated authority:
 
 - `registry_reference_packet` means Relay matched the delegated authority refs against a protected Registry Relay Reference Packet.
-- `developer_supplied_unverified` means Relay preserved the developer-supplied refs without claiming Registry-backed authority.
+- `developer_supplied_unverified` means Relay preserved caller-supplied refs without claiming Registry-backed authority.
 
 These public fixtures intentionally use demo delegated-authority refs, so live public examples should report `developer_supplied_unverified` while still returning refs-only Decision Receipts.
 

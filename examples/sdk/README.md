@@ -9,7 +9,7 @@ Version 0.1.1 includes typed `authority_context.source` support in the SDK packa
 The SDK path keeps the same core mechanism as the public example:
 
 ```text
-SDK client -> Action Card -> Relay -> Decision Receipt -> developer-owned execution
+SDK client -> Action Card -> Relay -> Decision Receipt -> runtime-owned execution
 ```
 
 Use the SDK when you want typed helpers around the same Relay surfaces already proven in this repo.
@@ -46,7 +46,7 @@ The authority-routing example runs the four delegated-authority Action Cards and
 - `hold_for_registry_backed_authority` when the receipt can proceed but the public demo refs are only `developer_supplied_unverified`
 - `human_review`, `revise`, or `stop` when Relay says the action should not auto-proceed
 
-This keeps execution in the developer-owned system. It is no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
+The route name is a 0.1.1 compatibility name. Read it as runtime-owned execution. Boundary: no public API keys, public tokens, downstream execution, or Registry auto-approval.
 
 Inspect public A2A discovery through the SDK and, when controlled access exists, run protected `message/send`:
 
@@ -95,7 +95,7 @@ const route =
     : "hold_for_registry_backed_authority";
 ```
 
-Public demo Action Cards should report `developer_supplied_unverified`, so the example deliberately holds before production execution. A private developer flow can use the protected Relay route and the SDK private developer helper to inspect `production_trust.delegated_authority` before choosing the same route.
+Public demo Action Cards should report `developer_supplied_unverified`, so the example deliberately holds before production execution. A protected runtime flow can use the protected Relay route and the SDK compatibility helper to inspect `production_trust.delegated_authority` before choosing the same route.
 
 ## Optional Protected Adapters
 

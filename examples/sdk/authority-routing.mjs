@@ -49,7 +49,7 @@ const scenarios = [
   },
 ];
 
-function routeReceiptForDeveloper(receipt) {
+function routeReceiptForRuntime(receipt) {
   const decision = receipt?.decision ?? null;
   const authority = receipt?.authority_context ?? null;
   const source = authority?.source ?? null;
@@ -91,12 +91,13 @@ for (const scenario of scenarios) {
   );
   const receipt = response.decision_receipt;
   const authorityContext = receipt?.authority_context ?? null;
-  const developerRoute = routeReceiptForDeveloper(receipt);
+  const runtimeRoute = routeReceiptForRuntime(receipt);
 
   results.push({
     id: scenario.id,
     decision: receipt?.decision ?? null,
-    developer_route: developerRoute,
+    developer_route: runtimeRoute,
+    runtime_route: runtimeRoute,
     expected_public_route: scenario.expectedPublicRoute,
     receipt_id: receipt?.receipt_id ?? null,
     trace_ref: receipt?.trace_ref ?? null,
@@ -115,6 +116,7 @@ for (const scenario of scenarios) {
     boundary: {
       relay_execution: false,
       developer_keeps_execution: true,
+      runtime_owns_execution: true,
       public_api_key_issued: false,
       public_production_mcp_token_issued: false,
       public_a2a_token_issued: false,
@@ -130,7 +132,7 @@ const proof = {
   version: "0.1.1",
   activation_attribution: publicAttributionSummary(activationAttribution),
   routing_policy:
-    `proceed requires Registry-backed delegated authority before developer-owned execution; ${publicDemoAuthoritySource} demo refs hold for Registry trust`,
+    `proceed requires Registry-backed delegated authority before runtime-owned execution; ${publicDemoAuthoritySource} demo refs hold for Registry trust`,
   results,
   boundaries: {
     public_api_key_issuance: false,
@@ -151,7 +153,7 @@ if (jsonOutput) {
     console.log("");
     console.log(`Scenario: ${result.id}`);
     console.log(`Decision: ${result.decision}`);
-    console.log(`Developer route: ${result.developer_route}`);
+    console.log(`Runtime route: ${result.runtime_route}`);
     console.log(`Authority source: ${result.authority_context?.source ?? "none"}`);
     console.log(
       `Authority validation: ${

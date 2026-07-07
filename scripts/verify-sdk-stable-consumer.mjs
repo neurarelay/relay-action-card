@@ -174,7 +174,7 @@ if (a2aToken) {
   }
 
   if (artifactData.downstream_execution !== "developer_owned_not_performed_by_relay") {
-    throw new Error("protected A2A proof did not preserve developer-owned execution");
+    throw new Error("protected A2A proof did not preserve runtime-owned execution");
   }
 
   protectedA2A = {
@@ -218,6 +218,7 @@ console.log(JSON.stringify({
     route: routeReceiptForDeveloper(delegated.decision_receipt),
     ready_requires_registry_reference_packet: true,
     developer_owned_execution: true,
+    runtime_owns_execution: true,
     relay_execution: false
   },
   a2aDiscovery: {
@@ -308,6 +309,7 @@ console.log(JSON.stringify({
     if (
       proof.publicAuthorityRouting?.ready_requires_registry_reference_packet !== true ||
       proof.publicAuthorityRouting?.developer_owned_execution !== true ||
+      proof.publicAuthorityRouting?.runtime_owns_execution !== true ||
       proof.publicAuthorityRouting?.relay_execution !== false
     ) {
       fail("public_authority_routing_boundary", proof.publicAuthorityRouting);
