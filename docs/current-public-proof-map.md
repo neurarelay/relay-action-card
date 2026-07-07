@@ -47,7 +47,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 | Need | Proof lane | Command | What to look for |
 | --- | --- | --- | --- |
 | Show the core Relay mechanism | Core Action Card path | `npm run example:relay -- --example=support-reply --json` | Decision Receipt, trace ref, runtime-owned execution boundary |
-| Show the SDK receipt path | SDK Action Card path | `npm run example:sdk -- --json` | `@neurarelay/sdk@0.1.2`, Decision Receipt, trace ref, runtime-owned execution boundary |
+| Show the SDK receipt path | SDK Action Card path | `npm run example:sdk -- --json` | `@neurarelay/sdk@0.1.3`, Decision Receipt, trace ref, runtime-owned execution boundary |
 | Show SDK authority routing | SDK authority routing | `npm run example:sdk:authority-routing -- --json` | `hold_for_registry_backed_authority` until Registry-backed authority is ready |
 | Show authority before consequential action | Pre-Action Authority set | `npm run proof:pre-action-authority -- --dry-run --json` | Agent Action Firewall, Decision Receipt Standard, MCP Risk Gate, CommerceOps Fire Drill, Authority Path Proof |
 | Show payment or commerce-style approval control | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` | refund, discount, address-change, cancellation, and customer-promise routing before execution |

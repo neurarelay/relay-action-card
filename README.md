@@ -529,7 +529,7 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
-Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.2` is now available as a public npm package.
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.3` is now available as a public npm package.
 
 Package note: Neura packages are published to npm, not GitHub Packages, so GitHub may show no repository packages even while npm packages are live.
 
@@ -855,7 +855,7 @@ RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 
 ## SDK Path
 
-The SDK path uses `@neurarelay/sdk@0.1.2`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
+The SDK path uses `@neurarelay/sdk@0.1.3`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
 
 Install dependencies and run the SDK example:
 
@@ -865,7 +865,7 @@ npm run example:sdk
 npm run example:sdk:authority-routing
 ```
 
-The authority-routing example uses `@neurarelay/sdk@0.1.2` against the delegated-authority fixtures and converts each Decision Receipt into a runtime route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the runtime can supply Registry-backed delegated authority. A production app should only treat the compatibility route `ready_for_developer_owned_execution` as ready when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
+The authority-routing example uses `@neurarelay/sdk@0.1.3` against the delegated-authority fixtures and converts each Decision Receipt into a runtime route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the runtime can supply Registry-backed delegated authority. A production app should only treat the compatibility route `ready_for_developer_owned_execution` as ready when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
 Use the SDK to read public A2A discovery. Run protected `message/send` only with controlled access:
 
@@ -881,7 +881,7 @@ npm run verify:sdk-stable-consumer
 npm run verify:sdk-authority-routing
 ```
 
-That verifier installs `@neurarelay/sdk@0.1.2` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. The SDK is stable for the receipt path, not a public token program.
+That verifier installs `@neurarelay/sdk@0.1.3` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. The SDK is stable for the receipt path, not a public token program.
 
 ## A2A Protected Client Proof
 

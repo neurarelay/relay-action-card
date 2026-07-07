@@ -127,6 +127,6 @@
     "verify:agent-authority-benchmark": "node scripts/verify-agent-authority-benchmark.mjs"
   },
   "dependencies": {
-    "@neurarelay/sdk": "0.1.2"
+    "@neurarelay/sdk": "0.1.3"
   }
 }

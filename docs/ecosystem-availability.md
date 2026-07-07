@@ -289,7 +289,7 @@ artifact_type=neura_first_proof_completion
 Usable today:
 
 - public direct Relay example
-- stable `@neurarelay/sdk@0.1.2` receipt helper path
+- stable `@neurarelay/sdk@0.1.3` receipt helper path
 - first-proof command for package reality conversion
 - shareable first-proof completion artifact
 
