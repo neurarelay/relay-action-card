@@ -117,7 +117,9 @@ requireIncludes("readme", readme, [
   "No downstream execution by Neura",
 ]);
 requireIncludes("docs", docs, [
-  "Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt",
+  "Relay action review",
+  "Proposed action -> Action Card -> Relay action review -> Decision Receipt",
+  "`pre-action-authority`",
   "npm run proof:pre-action-authority -- --dry-run --json",
   "npm run verify:pre-action-authority",
   "Agent Action Firewall",
@@ -185,9 +187,9 @@ if (output) {
 }
 
 if (failures.length > 0) {
-  console.error("Pre-Action Authority verification failed:");
+  console.error("Relay action review verification failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Pre-Action Authority verification passed.");
+console.log("Relay action review verification passed.");

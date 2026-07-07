@@ -1,18 +1,18 @@
 # Relay Action Review
 
-Pre-Action Authority is the proof-lane name for Neura Relay action review when an agent proposes a consequential action.
+Relay action review is the proof lane for checking a consequential agent action before execution.
 
 It shows how a proposed action becomes an Action Card, passes through Relay review, and returns a Decision Receipt before the runtime decides what happens next.
 
 ## Core Path
 
 ```text
-Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
+Proposed action -> Action Card -> Relay action review -> Decision Receipt -> developer-owned execution or restraint
 ```
 
-Neura Relay remains the product. Pre-Action Authority is the compatibility label for the developer proof path that makes review-before-action concrete.
+Neura Relay remains the product. The npm script names keep the legacy `pre-action-authority` label for compatibility; the public product language is Relay action review.
 
-## Local Authority Ladder
+## Local Review Ladder
 
 Run the full local ladder:
 
@@ -90,7 +90,7 @@ Developer-owned runtimes still execute, revise, escalate, or stop downstream act
 
 ## Live Surface
 
-The production-facing authority page is:
+The production-facing action review page is:
 
 ```text
 https://www.neurarelay.com/agent-action-gateway
@@ -105,5 +105,5 @@ https://www.neurarelay.com/developers/first-proof
 The measurable path is:
 
 ```text
-GitHub / npm / site visit -> local authority proof -> first receipt refs -> qualified developer reply
+GitHub / npm / site visit -> local action review proof -> first receipt refs -> qualified developer reply
 ```
