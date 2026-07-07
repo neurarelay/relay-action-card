@@ -49,7 +49,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 | Show the core Relay mechanism | Core Action Card path | `npm run example:relay -- --example=support-reply --json` | Decision Receipt, trace ref, runtime-owned execution boundary |
 | Show the SDK receipt path | SDK Action Card path | `npm run example:sdk -- --json` | `@neurarelay/sdk@0.1.3`, Decision Receipt, trace ref, runtime-owned execution boundary |
 | Show SDK authority routing | SDK authority routing | `npm run example:sdk:authority-routing -- --json` | `hold_for_registry_backed_authority` until Registry-backed authority is ready |
-| Show authority before consequential action | Pre-Action Authority set | `npm run proof:pre-action-authority -- --dry-run --json` | Agent Action Firewall, Decision Receipt Standard, MCP Risk Gate, CommerceOps Fire Drill, Authority Path Proof |
+| Show authority before consequential action | Action review set | `npm run proof:pre-action-authority -- --dry-run --json` | Agent Action Firewall, Decision Receipt Standard, MCP Risk Gate, CommerceOps Fire Drill, Authority Path Proof |
 | Show payment or commerce-style approval control | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` | refund, discount, address-change, cancellation, and customer-promise routing before execution |
 | Show buyer-language commerce control | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` | exact economic action, target, amount class, currency, customer ref, policy/evidence refs, and approval state bound before execution |
 | Show injected authority before a tool executes | Tool-call Authority Injection Wrapper | `npm run proof:authority-injection-wrapper -- --dry-run --json` | `wrapTool`, `beforeAction`, `resolveAuthority`, `afterAction`, Agent I/O Events, Decision Receipt, changed args / expired / one-shot rejection |
@@ -66,7 +66,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 
 - Relay: `https://www.neurarelay.com`
 - First proof: `https://www.neurarelay.com/developers/first-proof`
-- Pre-Action Authority: `https://www.neurarelay.com/agent-action-gateway`
+- Action review: `https://www.neurarelay.com/agent-action-gateway`
 - AI-readable summary: `https://www.neurarelay.com/llms.txt`
 - public Agent Card: `https://www.neurarelay.com/.well-known/agent-card.json`
 - protected MCP endpoint: `https://www.neurarelay.com/mcp`

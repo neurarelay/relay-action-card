@@ -1,5 +1,12 @@
 # Changelog
 
+## SDK 0.1.3 public proof release - 2026-07-07
+
+- Aligns the public SDK path, A2A controlled client pack, docs, examples, package lock, and verifier scripts with `@neurarelay/sdk@0.1.3`.
+- Refreshes the README entry path around Relay action review while preserving the existing `pre-action-authority` command compatibility used by public proofs and verifiers.
+- Confirms the public repo points to npm `@neurarelay/sdk` latest `0.1.3`, with clean SDK stable-consumer, SDK authority-routing, A2A discovery, first-proof, Relay example, ecosystem availability, and OpenClaw kit checks.
+- Preserves the refs-only, runtime-owned execution, no public token issuance, no downstream execution by Neura, no Registry auto-approval, and no provider/listing/partnership claim boundaries.
+
 ## Public proof conversion refresh - 2026-06-03
 
 - Sharpens the README entry path around first proof, Decision Receipts, optional Registry context, and protected MCP.

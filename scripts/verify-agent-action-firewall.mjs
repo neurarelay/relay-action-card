@@ -198,7 +198,7 @@ requireIncludes("docs", docs, [
   "no downstream execution by Neura",
 ]);
 requireIncludes("readme", readme, [
-  "Pre-Action Authority Proof Foundation",
+  "Action Review Proof Foundation",
   "Agent Action Firewall",
   "npm run proof:agent-action-firewall -- --dry-run --json",
   "npm run verify:agent-action-firewall",

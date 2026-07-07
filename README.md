@@ -43,7 +43,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 
 The output carries a `completion_artifact` with receipt refs, trace refs, source/campaign/surface attribution, and claim boundaries. Treat that artifact as the first useful adoption signal, not GitHub clones or npm downloads alone.
 
-## Current Public Proof Map
+## Choose A Proof Lane
 
 Use the current map when you need to choose the right proof lane for an agent workflow, customer conversation, or validator packet:
 
@@ -72,9 +72,9 @@ This repo proves the Action Card -> Decision Receipt pattern in public, runnable
 
 Paid Relay operationalizes the pattern in hosted or enterprise environments with protected action families, custom decision maps, receipt retention, audit exports, integrations, support, and Agent Traffic Intelligence. The examples do not claim customer adoption, provider approval, production integration, compliance certification, partnership, or downstream execution by Neura.
 
-## Start With Action Review
+## Review Actions Before Execution
 
-Run the local authority flow when you want the shortest route from proposed action to Decision Receipt:
+Run the local review flow when you want the shortest route from proposed action to Decision Receipt:
 
 ```bash
 git clone https://github.com/neurarelay/relay-action-card.git
@@ -90,7 +90,7 @@ Live product page:
 https://www.neurarelay.com/agent-action-gateway
 ```
 
-The public meaning is simple: Relay reviews the proposed action and returns a Decision Receipt before execution. The script name keeps the older Pre-Action Authority label because that proof lane is already wired into examples and verifiers.
+The public meaning is simple: Relay reviews the proposed action and returns a Decision Receipt before execution. The command names keep the legacy `pre-action-authority` label for compatibility; the product language is Relay action review.
 
 The path is the same proof spine: Action Card in, Decision Receipt out, runtime-owned execution or restraint after the receipt.
 
@@ -127,7 +127,7 @@ Use these URLs when an agent, crawler, evaluator, or developer needs the shortes
 
 - Relay AI-readable summary: [`https://www.neurarelay.com/llms.txt`](https://www.neurarelay.com/llms.txt)
 - Relay public Agent Card: [`https://www.neurarelay.com/.well-known/agent-card.json`](https://www.neurarelay.com/.well-known/agent-card.json)
-- Relay Pre-Action Authority: [`https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme)
+- Relay action review: [`https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/agent-action-gateway?neura_source=github&neura_campaign=pre_action_authority&neura_surface=relay_action_card_readme)
 - Relay first proof: [`https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme`](https://www.neurarelay.com/developers/first-proof?neura_source=github&neura_campaign=package_reality_first_proof&neura_surface=relay_action_card_readme)
 - Relay SDK package: [`@neurarelay/sdk`](https://www.npmjs.com/package/@neurarelay/sdk)
 - Controlled A2A handoff path: [`docs/a2a-controlled-client-pack.md`](docs/a2a-controlled-client-pack.md)
@@ -142,12 +142,12 @@ Action Card -> Neura Relay -> Decision Receipt -> trace / ledger / optional Regi
 
 Registry is an optional production-trust upgrade. Relay must still work without it.
 
-## Pre-Action Authority Proof Foundation
+## Action Review Proof Foundation
 
-Use the full local flow when you want to inspect the individual pieces of the Pre-Action Authority path:
+Use the full local flow when you want to inspect the individual pieces of the action-review path:
 
 ```text
-Action Card -> Pre-Action Authority -> Decision Receipt -> runtime-owned route
+Action Card -> Relay action review -> Decision Receipt -> runtime-owned route
 ```
 
 The package includes core checks plus applied synthetic cases:

@@ -203,7 +203,7 @@ requireIncludes("docs", docs, [
   "no-downstream-execution boundary",
 ]);
 requireIncludes("readme", readme, [
-  "Pre-Action Authority Proof Foundation",
+  "Action Review Proof Foundation",
   "Decision Receipt Standard",
   "npm run verify:decision-receipt-standard",
 ]);

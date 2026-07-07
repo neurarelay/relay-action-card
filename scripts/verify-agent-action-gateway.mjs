@@ -104,7 +104,8 @@ const readme = read("README.md");
 const docs = read("docs/agent-action-gateway.md");
 
 requireIncludes("readme", readme, [
-  "Pre-Action Authority",
+  "Relay action review",
+  "`pre-action-authority`",
   "https://www.neurarelay.com/agent-action-gateway",
   "npm run proof:pre-action-authority -- --dry-run --json",
   "npm run verify:pre-action-authority",
