@@ -75,7 +75,7 @@ Do not paste private tokens, API keys, internal dashboards, or private payloads 
 - Keep npm as the stable public install path.
 - Keep the repo docs as OpenClaw-style examples, not a ClawHub approval or endorsement claim.
 - Do not create another issue unless maintainers ask for a new route.
-- Continue developer adoption through `npm install @neurarelay/openclaw-preflight-adapter` and the copy-paste integration path.
+- Continue developer proof usage through `npm install @neurarelay/openclaw-preflight-adapter` and the copy-paste integration path.
 
 ## Claim Boundaries
 

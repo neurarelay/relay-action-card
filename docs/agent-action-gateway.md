@@ -1,8 +1,8 @@
-# Pre-Action Authority
+# Relay Action Review
 
-Pre-Action Authority is the developer path for Neura Relay when an agent proposes a consequential action.
+Pre-Action Authority is the proof-lane name for Neura Relay action review when an agent proposes a consequential action.
 
-It shows how a proposed action becomes an Action Card, passes through Relay governance, and returns a Decision Receipt before the developer-owned runtime decides what happens next.
+It shows how a proposed action becomes an Action Card, passes through Relay review, and returns a Decision Receipt before the runtime decides what happens next.
 
 ## Core Path
 
@@ -10,7 +10,7 @@ It shows how a proposed action becomes an Action Card, passes through Relay gove
 Proposed action -> Action Card -> Pre-Action Authority -> Decision Receipt -> developer-owned execution or restraint
 ```
 
-Neura Relay remains the product. Pre-Action Authority is the public developer path that makes the authority-before-action mechanism concrete.
+Neura Relay remains the product. Pre-Action Authority is the compatibility label for the developer proof path that makes review-before-action concrete.
 
 ## Local Authority Ladder
 

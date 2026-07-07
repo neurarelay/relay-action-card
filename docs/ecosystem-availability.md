@@ -1,17 +1,19 @@
 # Ecosystem Availability
 
 Status: public developer proof map; no provider approval or listing claim  
-Last updated: 2026-06-03
+Last updated: 2026-07-07
 
 ## Use Neura Today
 
-Neura is the pre-action authority layer:
+Neura Relay is the action-review layer before important agent actions execute:
 
 ```text
 proposed agent action -> Action Card -> Neura Relay -> Decision Receipt -> developer-owned execution
 ```
 
-The ecosystem paths below make the same spine usable from different runtimes. Each path has a credential-free dry run and a controlled live route when access exists.
+The ecosystem paths below make the same spine usable from different runtimes. Relay returns the decision, Registry supplies production identity and authority context when needed, Protocol keeps the message and receipt shapes portable, Neura Local uses the same before-execution boundary locally, and the SDK gives developers typed helpers for the receipt path.
+
+Each path has a credential-free dry run and a controlled live route when access exists.
 
 No provider approval, listing, endorsement, integration, or partnership is claimed by this document. Production MCP, A2A, and private Relay access remain controlled.
 
@@ -30,6 +32,14 @@ Use these as discovery and evaluation entry points. They do not create public to
 
 ## Commands
 
+Start with the direct and SDK receipt paths:
+
+```bash
+npm run example:relay -- --example=support-reply --json
+npm run example:sdk -- --json
+npm run example:sdk:authority-routing -- --json
+```
+
 Run the dry-run matrix first:
 
 ```bash
@@ -40,6 +50,7 @@ npm run proof:a2a -- --agent-card-only --json
 npm run proof:openclaw -- --dry-run --json
 npm run proof:swarm-authority -- --dry-run --json
 npm run proof:swarm-authority-placement -- --dry-run --json
+npm run proof:local-authority-runtime -- --dry-run --json
 ```
 
 Then lock the pack:
@@ -49,6 +60,30 @@ npm run verify:ecosystem-availability-pack
 ```
 
 Every proof path carries safe `source/campaign/surface` attribution and keeps private payloads, tokens, file contents, browser form values, and downstream execution outside Neura.
+
+## Neura Local Boundary
+
+Use when the question is whether the same Relay decision boundary can be applied before local actions execute.
+
+```bash
+npm run proof:local-authority-runtime -- --dry-run --json
+npm run verify:local-authority-runtime
+```
+
+Usable today:
+
+- refs-only local manifest and Action Card generation
+- controlled Relay receipt bridge through mock transport
+- scoped local-runtime route bridge
+- local binding verifier and ledger event
+- fail-closed checks for changed args, changed target, changed actor, expired receipts, one-shot reuse, and non-proceed routes
+
+Boundary:
+
+- local package consumer proof only
+- no public package release claim from this repo
+- no proprietary website intake
+- no downstream execution by Neura
 
 ## MCP Registry / Generic MCP Clients
 
@@ -137,9 +172,9 @@ Boundary:
 - no public A2A token issuance
 - no A2A directory, catalog, approval, or partnership claim
 
-## OpenClaw / ClawHub
+## OpenClaw / ClawHub Compatibility
 
-Use when a local autonomous-agent runtime needs a pre-action receipt before execution.
+Use when an OpenClaw-style local autonomous-agent runtime needs a receipt before execution. This is a compatibility lane for local action review, not the primary product story.
 
 ```bash
 npm run proof:openclaw -- --dry-run --json
@@ -163,7 +198,7 @@ Boundary:
 - no official OpenClaw or ClawHub listing, approval, endorsement, integration, or partnership claim
 - developer/runtime owns execution
 
-## SDK / GitHub
+## SDK / GitHub / First Proof
 
 Use when a developer wants the direct Action Card path first.
 
@@ -254,7 +289,7 @@ artifact_type=neura_first_proof_completion
 Usable today:
 
 - public direct Relay example
-- stable `@neurarelay/sdk` receipt helper path
+- stable `@neurarelay/sdk@0.1.2` receipt helper path
 - first-proof command for package reality conversion
 - shareable first-proof completion artifact
 

@@ -5,6 +5,8 @@ Date: 2026-05-19
 
 The OpenClaw Core Skill Pack gives agents one entry point for using Neura Relay before consequential local actions execute.
 
+It is a compatibility surface for the current Relay review story: proposed local actions become refs-only Action Cards, Relay returns a Decision Receipt, and the runtime keeps execution. The primary product path remains Relay, Registry, Protocol, Neura Local, and the SDK; this pack shows the same boundary in OpenClaw-style agent workflows.
+
 ```text
 proposed action -> refs-only Action Card -> Relay Decision Receipt -> runtime-owned execution
 ```

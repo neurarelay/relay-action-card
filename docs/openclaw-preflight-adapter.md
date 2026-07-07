@@ -3,13 +3,13 @@
 Status: stable npm package published; canonical ClawHub community package published; further OpenClaw / ClawHub changes remain approval-gated
 Date: 2026-05-12
 
-This adapter turns the Action Receipt Kit into a plugin-ready runtime contract:
+This adapter turns the Action Receipt Kit into a plugin-ready runtime contract for the OpenClaw-style compatibility lane:
 
 ```text
 beforeAction(preflightAction) -> Action Card -> Relay Decision Receipt -> developer-owned route
 ```
 
-It is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP, or A2A integration, listing, approval, or partnership. It is an OpenClaw-style package for developers who want to route proposed local actions through Neura before execution.
+It is not an official OpenClaw, ClawHub, OpenAI, Codex, Anthropic, Claude, MCP, or A2A integration, listing, approval, or partnership. It is an OpenClaw-style package for developers who want to route proposed local actions through the same Relay review and Decision Receipt boundary used by the SDK, protected MCP/A2A paths, and Neura Local.
 
 ## Official Path Readiness
 

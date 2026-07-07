@@ -5,6 +5,8 @@ Date: 2026-05-12
 
 This document covers the OpenClaw Action Receipt Pack v0.1 and the runnable Action Receipt Kit that ships with it. The kit shows how an OpenClaw-style autonomous computer-use agent can create a Neura Action Card before messages, file changes, browser submits, shell commands, workflow changes, memory writes, or data exports execute.
 
+Treat this pack as a compatibility lane for the same Relay review boundary used by the core examples, the SDK path, protected MCP/A2A paths, and Neura Local. It preserves the OpenClaw-style proof surface without making OpenClaw or ClawHub the primary product story.
+
 ```text
 proposed local agent action -> Action Card -> Relay Decision Receipt -> user or runtime-owned execution
 ```

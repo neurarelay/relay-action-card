@@ -3,17 +3,42 @@
 This folder has core integration lanes plus proof packs.
 
 - **Core Relay** (`core`): send an Action Card to Relay and receive a Decision Receipt.
-- **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and the stable local preflight adapter.
-- **CrewAI-style guardrail receipt refs** (`crewai`): attach a Neura pre-action receipt ref beside a guardrail verdict as provider-owned metadata or an optional top-level pointer.
+- **SDK** (`sdk`): use the typed `@neurarelay/sdk` public package path for the same receipt flow.
 - **A2A protected proof** (`a2a`): inspect public Agent Card discovery and run controlled protected `message/send` proof when access exists.
 - **Optional MCP** (`mcp`): call Relay through protected MCP tools with a Workspace sandbox token or controlled production/private access.
-- **SDK** (`sdk`): use the typed `@neurarelay/sdk` public package path.
+- **Local Authority Runtime** (`local-authority-runtime`): prove the Neura Local-style boundary with refs-only Action Cards, local binding, and no downstream execution by Neura.
+- **CrewAI-style guardrail receipt refs** (`crewai`): attach a Neura pre-action receipt ref beside a guardrail verdict as provider-owned metadata or an optional top-level pointer.
+- **OpenClaw-style receipt kit** (`openclaw`): run public-safe autonomous computer-use Action Cards, a visual near-miss workbench, and the stable local preflight adapter as a compatibility lane.
 - **Shadow Agent Inventory / Stop Receipt** (`shadow-agent-inventory`): inspect refs-only inventory findings and stop recommendation receipts without customer-runtime shutdown by Neura.
 
 The core path is the default:
 
 ```text
 Action Card -> Relay -> Decision Receipt -> trace
+```
+
+The SDK path packages the same mechanism:
+
+```text
+SDK client -> Action Card -> Relay -> Decision Receipt
+```
+
+The A2A path keeps discovery public and execution protected:
+
+```text
+A2A client -> public Agent Card -> protected /a2a message/send -> Decision Receipt task
+```
+
+The MCP path is only an adapter:
+
+```text
+MCP runtime -> protected Neura MCP tool -> same Relay decision spine
+```
+
+The local runtime path mirrors Neura Local's accepted boundary:
+
+```text
+local action surface -> refs-only Action Card -> Relay-compatible receipt -> local binding verifier
 ```
 
 The OpenClaw-style path is public-safe local-action review:
@@ -31,24 +56,6 @@ GuardrailDecision verdict -> metadata["receipt_ref"] or receipt_ref -> pre-actio
 ```
 
 It is external proof alignment only, not a CrewAI integration, approval, listing, endorsement, or partnership claim.
-
-The MCP path is only an adapter:
-
-```text
-MCP runtime -> protected Neura MCP tool -> same Relay decision spine
-```
-
-The SDK path packages the same mechanism:
-
-```text
-SDK client -> Action Card -> Relay -> Decision Receipt
-```
-
-The A2A path keeps discovery public and execution protected:
-
-```text
-A2A client -> public Agent Card -> protected /a2a message/send -> Decision Receipt task
-```
 
 The Shadow Agent Inventory path keeps enforcement customer-owned:
 
@@ -102,6 +109,8 @@ examples/
   crewai/
     README.md
     guardrail_receipt_ref.py
+  local-authority-runtime/
+    run-proof.mjs
   openclaw/
     README.md
     action-receipt-kit.manifest.json
@@ -150,7 +159,9 @@ examples/
 
 `examples/mcp/action-cards` contains Action Cards used as inputs to MCP tool calls. It is not a separate protocol and it does not replace `examples/core`.
 
-`examples/openclaw` contains OpenClaw-style public-safe examples only. The npm adapter is stable and public, but the lane is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
+`examples/local-authority-runtime` is the consumer proof for the Neura Local-style boundary. It checks local discovery, refs-only Action Cards, controlled Relay receipt bridging, local binding, and fail-closed replay cases without claiming a public package release or downstream execution by Neura.
+
+`examples/openclaw` contains OpenClaw-style public-safe examples only. The npm adapter is stable and public, but this compatibility lane is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
 
 ## Fast Checks
 
@@ -158,6 +169,21 @@ Run the public core path:
 
 ```bash
 npm run example:relay
+```
+
+Run the SDK receipt path:
+
+```bash
+npm run example:sdk
+npm run example:sdk:authority-routing
+npm run verify:sdk-stable-consumer
+```
+
+Run the Neura Local-style runtime proof:
+
+```bash
+npm run proof:local-authority-runtime -- --dry-run --json
+npm run verify:local-authority-runtime
 ```
 
 Run the OpenClaw-style local proof:

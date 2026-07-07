@@ -1,20 +1,28 @@
 # Relay Action Card
 
-Run Neura Relay's Pre-Action Authority path before an agent changes real systems.
+Run Neura Relay review before an agent changes real systems.
 
-This is the public runtime proof repo for Neura Relay. It shows the same core mechanism across direct API, SDK, MCP-capable runtimes, A2A discovery, OpenClaw-style local agents, commerce operations, and governed handoffs:
+This is the public runtime proof repo for Neura Relay. It shows the same core mechanism across direct API, SDK, MCP-capable runtimes, A2A discovery, local runtime checks, commerce operations, and governed handoffs:
 
 ```text
 Proposed action -> Action Card -> Neura Relay -> Decision Receipt -> runtime-owned execution or restraint
 ```
 
-Your runtime keeps execution ownership. Relay evaluates identity, authority, evidence, policy, and risk, then returns a receipt before consequential action happens elsewhere.
+Your runtime keeps execution ownership. Relay evaluates identity, authority, evidence, policy, and risk, then returns a Decision Receipt before consequential action happens elsewhere.
 
 Runtime: use Node `24` via `.nvmrc`; OpenClaw runtime verification requires Node `>=22.14.0`.
 
-## Neura Local Alignment
+## How The Neura Stack Fits
 
-The accepted Neura Local release uses the same boundary as this repo: local intent is intercepted before execution, Action Cards and Decision Receipts stay refs-only, Relay records the decision path, Registry supplies context only, and the local/customer runtime keeps real execution ownership.
+This repo is the runnable public proof for the same mechanism used across the Neura stack:
+
+- **Relay** reviews proposed actions and returns a Decision Receipt before execution.
+- **Registry** supplies identity, owner, capability, standing, and authority refs when production trust is needed.
+- **Protocol** defines the portable Action Card, Decision Receipt, and Agent I/O Event shapes used across the examples.
+- **Neura Local** applies the same boundary before local actions execute; Action Cards and Decision Receipts stay refs-only, and the local/customer runtime keeps real execution ownership.
+- **SDK** gives Node developers typed helpers for the same Relay receipt path.
+
+The boundary is the product: Relay decides the route, while the runtime, application, or owner decides whether execution continues elsewhere.
 
 ## Start In 30 Seconds
 
@@ -40,16 +48,19 @@ The output carries a `completion_artifact` with receipt refs, trace refs, source
 Use the current map when you need to choose the right proof lane for an agent workflow, customer conversation, or validator packet:
 
 - first proof: `npm run first-proof -- --dry-run --json`
-- core Action Card path: `npm run example:relay -- --example=support-reply --json`
-- pre-action authority proof set: `npm run proof:pre-action-authority -- --dry-run --json`
-- protected MCP proof: `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json`
-- commerce/payment-style proof: `npm run proof:commerceops-fire-drill -- --dry-run --json`
-- agentic commerce Decision Receipt proof: `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json`
-- authority injection wrapper proof: `npm run proof:authority-injection-wrapper -- --dry-run --json`
+- direct Relay review: `npm run example:relay -- --example=support-reply --json`
+- SDK receipt path: `npm run example:sdk -- --json`
+- SDK authority routing: `npm run example:sdk:authority-routing -- --json`
+- full action-review proof set: `npm run proof:pre-action-authority -- --dry-run --json`
+- protected MCP route: `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json`
+- A2A public discovery: `npm run example:a2a -- --agent-card-only`
 - local authority runtime proof: `npm run proof:local-authority-runtime -- --dry-run --json`
+- commerce action review: `npm run proof:commerceops-fire-drill -- --dry-run --json`
+- agentic commerce Decision Receipt proof: `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json`
+- tool-call authority injection wrapper proof: `npm run proof:authority-injection-wrapper -- --dry-run --json`
 - implementation SWAT templates: `npm run verify:implementation-swat-pack`
 - shadow-agent stop receipt proof: `npm run proof:shadow-agent-inventory -- --dry-run --json`
-- local autonomous-agent proof: `npm run openclaw:five-minute-demo`
+- OpenClaw-style local compatibility proof: `npm run openclaw:five-minute-demo`
 
 Full map: [`docs/current-public-proof-map.md`](docs/current-public-proof-map.md).
 
@@ -61,7 +72,7 @@ This repo proves the Action Card -> Decision Receipt pattern in public, runnable
 
 Paid Relay operationalizes the pattern in hosted or enterprise environments with protected action families, custom decision maps, receipt retention, audit exports, integrations, support, and Agent Traffic Intelligence. The examples do not claim customer adoption, provider approval, production integration, compliance certification, partnership, or downstream execution by Neura.
 
-## Start With Pre-Action Authority
+## Start With Action Review
 
 Run the local authority flow when you want the shortest route from proposed action to Decision Receipt:
 
@@ -78,6 +89,8 @@ Live product page:
 ```text
 https://www.neurarelay.com/agent-action-gateway
 ```
+
+The public meaning is simple: Relay reviews the proposed action and returns a Decision Receipt before execution. The script name keeps the older Pre-Action Authority label because that proof lane is already wired into examples and verifiers.
 
 The path is the same proof spine: Action Card in, Decision Receipt out, runtime-owned execution or restraint after the receipt.
 
@@ -516,7 +529,7 @@ The MCP path is optional compatibility:
 MCP-capable runtime -> protected /mcp -> same Relay decision spine
 ```
 
-Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.1` is now available as a public npm package.
+Use this repo when you are looking for copyable examples for agent governance, tool-call review, Action Cards, Decision Receipts, protected MCP tool calls, SDK adoption, and Registry Agent Passport context. It remains the public example repo, and `@neurarelay/sdk@0.1.2` is now available as a public npm package.
 
 Package note: Neura packages are published to npm, not GitHub Packages, so GitHub may show no repository packages even while npm packages are live.
 
@@ -842,7 +855,7 @@ RELAY_BASE_URL=http://localhost:3000 npm run example:relay
 
 ## SDK Path
 
-The SDK path uses `@neurarelay/sdk@0.1.1`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
+The SDK path uses `@neurarelay/sdk@0.1.2`. It keeps the same Action Card and Decision Receipt mechanism as the direct example, with optional helper clients for protected A2A and MCP.
 
 Install dependencies and run the SDK example:
 
@@ -852,7 +865,7 @@ npm run example:sdk
 npm run example:sdk:authority-routing
 ```
 
-The authority-routing example uses `@neurarelay/sdk@0.1.1` against the delegated-authority fixtures and converts each Decision Receipt into a runtime route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the runtime can supply Registry-backed delegated authority. A production app should only treat the compatibility route `ready_for_developer_owned_execution` as ready when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
+The authority-routing example uses `@neurarelay/sdk@0.1.2` against the delegated-authority fixtures and converts each Decision Receipt into a runtime route. Public demo refs intentionally route a permitted delegated action to `hold_for_registry_backed_authority` until the runtime can supply Registry-backed delegated authority. A production app should only treat the compatibility route `ready_for_developer_owned_execution` as ready when authority is Registry-backed and ready. This is stable SDK adoption, with no public API-key issuance, no public token issuance, no downstream execution, and no Registry auto-approval.
 
 Use the SDK to read public A2A discovery. Run protected `message/send` only with controlled access:
 
@@ -868,7 +881,7 @@ npm run verify:sdk-stable-consumer
 npm run verify:sdk-authority-routing
 ```
 
-That verifier installs `@neurarelay/sdk@0.1.1` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. The SDK is stable for the receipt path, not a public token program.
+That verifier installs `@neurarelay/sdk@0.1.2` from npm in a temporary project, checks the aggregate client plus subpath exports, resolves the Action Card through production Relay, checks delegated-authority `authority_context.source` at runtime, checks public A2A Agent Card discovery, and uses `RELAY_A2A_ACCESS_TOKEN` for protected A2A only when controlled access is present. The SDK is stable for the receipt path, not a public token program.
 
 ## A2A Protected Client Proof
 

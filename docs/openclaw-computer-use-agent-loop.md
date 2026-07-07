@@ -9,7 +9,7 @@ This example shows where a generic autonomous computer-use runtime should pause 
 plan local action -> beforeExecute(action) -> adapter.beforeAction(preflightAction) -> execute only if route is ready
 ```
 
-The loop covers the three adoption hooks developers recognize quickly:
+The loop covers three compatibility checkpoints developers recognize quickly:
 
 | Loop checkpoint | Action | Default local state |
 | --- | --- | --- |

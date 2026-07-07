@@ -1,6 +1,10 @@
 # OpenClaw-Style 5-Minute Receipt Demo
 
-This is the fastest public-safe proof loop for autonomous computer-use developers:
+This is the fastest public-safe proof loop for autonomous computer-use developers.
+
+Use it as the OpenClaw-style compatibility path for the same Relay review boundary used by the core examples, the SDK, and Neura Local. It proves that a local runtime can request a Decision Receipt before execution without turning OpenClaw or ClawHub into an official dependency.
+
+Run it with:
 
 ```bash
 npm install

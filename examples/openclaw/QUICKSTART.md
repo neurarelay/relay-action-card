@@ -2,6 +2,8 @@
 
 Use this when you want the fastest Neura proof for autonomous computer-use agents.
 
+This is the OpenClaw-style compatibility path for the same Relay review boundary used by the core examples, the SDK, and Neura Local. It shows how a local runtime can ask for a Decision Receipt before execution without making OpenClaw or ClawHub an official product dependency.
+
 ```bash
 npm install
 npm run openclaw:five-minute-demo

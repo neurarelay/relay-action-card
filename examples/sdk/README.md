@@ -1,10 +1,10 @@
 # SDK Path
 
-Status: published stable npm package for `@neurarelay/sdk@0.1.1`.
+Status: published stable npm package for `@neurarelay/sdk@0.1.2`.
 
 This is the public npm package path for the SDK examples.
 
-Version 0.1.1 includes typed `authority_context.source` support in the SDK package. The JavaScript examples also read the same runtime field returned by production Relay.
+Version 0.1.2 includes typed `authority_context.source` support and the current public receipt helper path. The JavaScript examples also read the same runtime field returned by production Relay.
 
 The SDK path keeps the same core mechanism as the public example:
 
@@ -46,7 +46,7 @@ The authority-routing example runs the four delegated-authority Action Cards and
 - `hold_for_registry_backed_authority` when the receipt can proceed but the public demo refs are only `developer_supplied_unverified`
 - `human_review`, `revise`, or `stop` when Relay says the action should not auto-proceed
 
-The route name is a 0.1.1 compatibility name. Read it as runtime-owned execution. Boundary: no public API keys, public tokens, downstream execution, or Registry auto-approval.
+The route name is a compatibility name. Read it as runtime-owned execution. Boundary: no public API keys, public tokens, downstream execution, or Registry auto-approval.
 
 Inspect public A2A discovery through the SDK and, when controlled access exists, run protected `message/send`:
 
@@ -62,7 +62,7 @@ npm run verify:sdk-stable-consumer
 npm run verify:sdk-authority-routing
 ```
 
-That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.1`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
+That verifier creates a temporary Node project, installs `@neurarelay/sdk@0.1.2`, checks aggregate and subpath SDK exports, resolves the example Action Card against Relay, checks public A2A Agent Card discovery, and runs protected A2A only when `RELAY_A2A_ACCESS_TOKEN` is available.
 
 ## Resolve With SDK
 

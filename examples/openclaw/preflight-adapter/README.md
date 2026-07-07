@@ -14,6 +14,8 @@ The ClawHub community fallback package remains:
 
 The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` package is published at `0.1.4` on npm `latest` and as the canonical ClawHub community package with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. ClawHub shows the canonical package with `latest` and `stable` tags, current version `v0.1.4`, visible README, and security audits still pending.
 
+This adapter is the OpenClaw-style compatibility path for the same Relay review boundary used by the core examples, the SDK, protected MCP/A2A paths, and Neura Local. Use it when a local runtime wants a Decision Receipt before execution while preserving developer-owned execution.
+
 It shows how a local autonomous computer-use runtime can call:
 
 ```text

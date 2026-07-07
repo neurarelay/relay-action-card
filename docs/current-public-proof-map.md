@@ -1,7 +1,7 @@
 # Current Public Proof Map
 
 Status: public runtime proof map; no customer, provider, ecosystem, approval, listing, integration, endorsement, or partnership claim
-Last updated: 2026-06-30
+Last updated: 2026-07-07
 
 Use this map when you need to route an evaluator, validator, or agent-runtime conversation into the smallest Neura Relay proof that can create useful evidence.
 
@@ -11,9 +11,17 @@ The operating spine stays constant:
 Proposed action -> Action Card -> Neura Relay -> Decision Receipt -> runtime-owned execution or restraint
 ```
 
-Neura Relay returns the pre-action authority record. The runtime, application, or agent keeps execution ownership after reading the receipt.
+Neura Relay returns the pre-action review record. The runtime, application, or agent keeps execution ownership after reading the receipt.
 
 Neura Local now uses the same accepted release boundary: consequential local intent is intercepted before execution, Action Cards and Decision Receipts stay refs-only, Registry supplies context only, and local/customer runtime owns real side effects.
+
+## Stack Fit
+
+- Relay reviews proposed actions and returns the Decision Receipt.
+- Registry supplies identity, owner, capability, standing, and authority refs when production trust is needed.
+- Protocol defines the portable Action Card, Decision Receipt, and Agent I/O Event shapes.
+- Neura Local applies the same review boundary before local actions execute.
+- The SDK gives developers typed helpers for the same receipt path.
 
 ## Fastest Proof
 
@@ -39,6 +47,8 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 | Need | Proof lane | Command | What to look for |
 | --- | --- | --- | --- |
 | Show the core Relay mechanism | Core Action Card path | `npm run example:relay -- --example=support-reply --json` | Decision Receipt, trace ref, runtime-owned execution boundary |
+| Show the SDK receipt path | SDK Action Card path | `npm run example:sdk -- --json` | `@neurarelay/sdk@0.1.2`, Decision Receipt, trace ref, runtime-owned execution boundary |
+| Show SDK authority routing | SDK authority routing | `npm run example:sdk:authority-routing -- --json` | `hold_for_registry_backed_authority` until Registry-backed authority is ready |
 | Show authority before consequential action | Pre-Action Authority set | `npm run proof:pre-action-authority -- --dry-run --json` | Agent Action Firewall, Decision Receipt Standard, MCP Risk Gate, CommerceOps Fire Drill, Authority Path Proof |
 | Show payment or commerce-style approval control | CommerceOps Fire Drill | `npm run proof:commerceops-fire-drill -- --dry-run --json` | refund, discount, address-change, cancellation, and customer-promise routing before execution |
 | Show buyer-language commerce control | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` | exact economic action, target, amount class, currency, customer ref, policy/evidence refs, and approval state bound before execution |
@@ -47,7 +57,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 | Convert a concrete maintainer ask into implementation help | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` | schema/test/example/PR-scope templates with no public action until exact approval |
 | Show shadow-agent audit and stop framing | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` | refs-only inventory findings, stop recommendation receipts, and customer-runtime shutdown boundary |
 | Show tool-call governance for MCP-capable runtimes | Protected MCP path | `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json` | five Neura tools, validation, resolution, receipt lookup, trace replay, Agent Passport lookup |
-| Show local autonomous-agent preflight | OpenClaw-style local proof | `npm run openclaw:five-minute-demo` | message send, file delete, and package publish reviewed before local execution |
+| Show local autonomous-agent compatibility | OpenClaw-style local proof | `npm run openclaw:five-minute-demo` | message send, file delete, and package publish reviewed before local execution |
 | Show source-to-sink authority depth | Flow-Aware Authority Gate | `npm run proof:flow-aware-authority -- --dry-run --json` | source refs, transformation refs, sink refs, purpose, scope, policy, and side-effect refs |
 | Show public discovery before controlled execution | A2A discovery path | `npm run proof:a2a -- --agent-card-only --json` | public Agent Card discovery with protected execution boundary |
 | Show ecosystem route options | Ecosystem availability pack | `npm run verify:ecosystem-availability-pack` | MCP, OpenAI, Claude, A2A, OpenClaw, SDK/GitHub, and swarm-runtime proof paths without provider claims |

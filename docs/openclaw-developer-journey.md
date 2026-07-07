@@ -10,6 +10,8 @@ Local agent action -> Action Card -> Relay Decision Receipt -> developer-owned r
 
 It shows the problem before integration work starts: an agent is about to send data, change files, submit a browser action, run a command, change workflow state, write memory, export data, or change persistent workspace state. Neura gives the developer a Decision Receipt before that action becomes real.
 
+This journey is a compatibility proof under the current Relay story. The main product path is Relay review, Registry-backed identity where available, Protocol-shaped receipts, Neura Local runtime control, and the published SDK; the OpenClaw lane shows that the same boundary also works for OpenClaw-style local runtimes.
+
 ## Clone To Confidence
 
 ```bash

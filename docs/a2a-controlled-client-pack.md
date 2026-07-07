@@ -1,6 +1,6 @@
 # A2A Controlled Client Pack
 
-Status: v0.3 Agent Card discovery shape with v0.2 controlled-access proof for SDK 0.1.0 and A2A Controlled Runtime v1 response checks.
+Status: v0.3 Agent Card discovery shape with v0.2 controlled-access proof for SDK 0.1.2 and A2A Controlled Runtime v1 response checks.
 
 This pack documents the narrow A2A surface Neura can stand behind today:
 
