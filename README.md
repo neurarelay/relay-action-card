@@ -46,6 +46,7 @@ Use the current map when you need to choose the right proof lane for an agent wo
 - commerce/payment-style proof: `npm run proof:commerceops-fire-drill -- --dry-run --json`
 - agentic commerce Decision Receipt proof: `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json`
 - authority injection wrapper proof: `npm run proof:authority-injection-wrapper -- --dry-run --json`
+- local authority runtime proof: `npm run proof:local-authority-runtime -- --dry-run --json`
 - implementation SWAT templates: `npm run verify:implementation-swat-pack`
 - shadow-agent stop receipt proof: `npm run proof:shadow-agent-inventory -- --dry-run --json`
 - local autonomous-agent proof: `npm run openclaw:five-minute-demo`
@@ -89,8 +90,9 @@ The path is the same proof spine: Action Card in, Decision Receipt out, runtime-
 | 05 | Agentic Commerce Decision Receipt | `npm run proof:agentic-commerce-decision-receipt -- --dry-run --json` |
 | 06 | Authority Path Proof | `npm run proof:authority-path -- --dry-run --json` |
 | 07 | Tool-call Authority Injection Wrapper | `npm run proof:authority-injection-wrapper -- --dry-run --json` |
-| 08 | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` |
-| 09 | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` |
+| 08 | Local Authority Runtime | `npm run proof:local-authority-runtime -- --dry-run --json` |
+| 09 | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` |
+| 10 | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` |
 
 Applied examples also include:
 
@@ -161,6 +163,8 @@ npm run proof:agentic-commerce-decision-receipt -- --dry-run --json
 npm run verify:agentic-commerce-decision-receipt
 npm run proof:authority-injection-wrapper -- --dry-run --json
 npm run verify:authority-injection-wrapper
+npm run proof:local-authority-runtime -- --dry-run --json
+npm run verify:local-authority-runtime
 npm run verify:implementation-swat-pack
 npm run proof:shadow-agent-inventory -- --dry-run --json
 npm run verify:shadow-agent-inventory-stop-receipt
@@ -179,6 +183,7 @@ Docs:
 - [`docs/commerceops-fire-drill.md`](docs/commerceops-fire-drill.md)
 - [`docs/agentic-commerce-decision-receipt.md`](docs/agentic-commerce-decision-receipt.md)
 - [`docs/authority-injection-wrapper.md`](docs/authority-injection-wrapper.md)
+- [`docs/local-authority-runtime.md`](docs/local-authority-runtime.md)
 - [`docs/implementation-swat-packet-library.md`](docs/implementation-swat-packet-library.md)
 - [`docs/shadow-agent-inventory-stop-receipt.md`](docs/shadow-agent-inventory-stop-receipt.md)
 - [`docs/authority-path-proof.md`](docs/authority-path-proof.md)
