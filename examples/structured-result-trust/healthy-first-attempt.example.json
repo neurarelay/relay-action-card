@@ -1,0 +1,55 @@
+{
+  "standard": "neura-structured-result-trust-receipt-v0.1-draft",
+  "receipt_ref": "receipt:result-trust:healthy-first-attempt",
+  "trace_ref": "trace:result-trust:healthy-first-attempt",
+  "operation_ref": "operation:synthetic:review-001",
+  "result_ref": "result:synthetic:review-001",
+  "producer": {
+    "runtime": "synthetic-agent-runtime",
+    "provider": "synthetic-provider",
+    "model": "synthetic-model",
+    "adapter": "native-schema-adapter"
+  },
+  "contract": {
+    "schema_ref": "schema:synthetic:review-v1",
+    "schema_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "enforcement_mode": "native_strict",
+    "validation_engine": "provider-native-json-schema",
+    "validation_passed": true,
+    "expected_channel": "native_structured_output",
+    "observed_channel": "native_structured_output",
+    "channel_preserved": true
+  },
+  "generation": {
+    "attempts_used": 1,
+    "max_attempts": 5,
+    "validation_failures": 0,
+    "retry_exhausted": false,
+    "final_acceptance": "accepted_first_attempt"
+  },
+  "semantic_checks": {
+    "status": "passed",
+    "check_refs": ["check:required-evidence-refs", "check:non-placeholder-content"]
+  },
+  "trust": {
+    "asserted_state": "trusted",
+    "reason_codes": ["strict_schema_valid", "semantic_checks_passed"]
+  },
+  "downstream": {
+    "asserted_route": "allow",
+    "override_required": false
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "result_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "provider_integration_claimed": false,
+    "customer_adoption_claimed": false
+  }
+}
