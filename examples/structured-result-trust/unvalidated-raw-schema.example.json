@@ -1,0 +1,55 @@
+{
+  "standard": "neura-structured-result-trust-receipt-v0.1-draft",
+  "receipt_ref": "receipt:result-trust:unvalidated-raw-schema",
+  "trace_ref": "trace:result-trust:unvalidated-raw-schema",
+  "operation_ref": "operation:synthetic:review-004",
+  "result_ref": "result:synthetic:review-004",
+  "producer": {
+    "runtime": "synthetic-agent-runtime",
+    "provider": "synthetic-provider",
+    "model": "synthetic-model",
+    "adapter": "raw-json-schema-adapter"
+  },
+  "contract": {
+    "schema_ref": "schema:synthetic:dynamic-review-v1",
+    "schema_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "enforcement_mode": "none",
+    "validation_engine": "none",
+    "validation_passed": null,
+    "expected_channel": "structured_tool_result",
+    "observed_channel": "structured_tool_result",
+    "channel_preserved": true
+  },
+  "generation": {
+    "attempts_used": 1,
+    "max_attempts": 3,
+    "validation_failures": 0,
+    "retry_exhausted": false,
+    "final_acceptance": "not_observed"
+  },
+  "semantic_checks": {
+    "status": "not_run",
+    "check_refs": []
+  },
+  "trust": {
+    "asserted_state": "unknown",
+    "reason_codes": ["schema_validation_not_observed"]
+  },
+  "downstream": {
+    "asserted_route": "stop",
+    "override_required": true
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "result_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "provider_integration_claimed": false,
+    "customer_adoption_claimed": false
+  }
+}

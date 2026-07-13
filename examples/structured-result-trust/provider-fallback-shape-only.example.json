@@ -1,0 +1,55 @@
+{
+  "standard": "neura-structured-result-trust-receipt-v0.1-draft",
+  "receipt_ref": "receipt:result-trust:provider-fallback",
+  "trace_ref": "trace:result-trust:provider-fallback",
+  "operation_ref": "operation:synthetic:review-005",
+  "result_ref": "result:synthetic:review-005",
+  "producer": {
+    "runtime": "synthetic-agent-runtime",
+    "provider": "synthetic-openai-compatible-provider",
+    "model": "synthetic-model",
+    "adapter": "json-object-fallback-adapter"
+  },
+  "contract": {
+    "schema_ref": "schema:synthetic:review-v1",
+    "schema_digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "enforcement_mode": "shape_only",
+    "validation_engine": "posthoc-application-validator",
+    "validation_passed": true,
+    "expected_channel": "provider_json_schema",
+    "observed_channel": "provider_json_object",
+    "channel_preserved": true
+  },
+  "generation": {
+    "attempts_used": 1,
+    "max_attempts": 3,
+    "validation_failures": 0,
+    "retry_exhausted": false,
+    "final_acceptance": "accepted_first_attempt"
+  },
+  "semantic_checks": {
+    "status": "passed",
+    "check_refs": ["check:required-evidence-refs"]
+  },
+  "trust": {
+    "asserted_state": "degraded",
+    "reason_codes": ["provider_enforcement_downgraded", "shape_only_enforcement"]
+  },
+  "downstream": {
+    "asserted_route": "human_review",
+    "override_required": true
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "result_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "provider_integration_claimed": false,
+    "customer_adoption_claimed": false
+  }
+}

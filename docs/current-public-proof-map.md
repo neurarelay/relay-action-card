@@ -1,7 +1,7 @@
 # Current Public Proof Map
 
 Status: public runtime proof map; no customer, provider, ecosystem, approval, listing, integration, endorsement, or partnership claim
-Last updated: 2026-07-07
+Last updated: 2026-07-12
 
 Use this map when you need to route an evaluator, validator, or agent-runtime conversation into the smallest Neura Relay proof that can create useful evidence.
 
@@ -55,6 +55,7 @@ npm run first-proof -- --source=github --campaign=package_reality_first_proof --
 | Show injected authority before a tool executes | Tool-call Authority Injection Wrapper | `npm run proof:authority-injection-wrapper -- --dry-run --json` | `wrapTool`, `beforeAction`, `resolveAuthority`, `afterAction`, Agent I/O Events, Decision Receipt, changed args / expired / one-shot rejection |
 | Show local runtime authority binding | Local Authority Runtime | `npm run proof:local-authority-runtime -- --dry-run --json` | redacted manifest, Node wrapper dry-run, MCP fixture dry-run, controlled Relay receipt bridge, scoped local-runtime route bridge, binding verifier, local ledger, changed args / target / actor / expired / one-shot / non-proceed rejection |
 | Convert a concrete maintainer ask into implementation help | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` | schema/test/example/PR-scope templates with no public action until exact approval |
+| Distinguish schema-valid output from trustworthy output | Structured Result Trust Receipt | `npm run verify:structured-result-trust-receipt` | enforcement mode, retry history, output-channel preservation, semantic checks, and allow/review/stop route |
 | Show shadow-agent audit and stop framing | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` | refs-only inventory findings, stop recommendation receipts, and customer-runtime shutdown boundary |
 | Show tool-call governance for MCP-capable runtimes | Protected MCP path | `NEURA_RELAY_MCP_ACCESS_TOKEN=... npm run example:mcp-proof -- --json` | five Neura tools, validation, resolution, receipt lookup, trace replay, Agent Passport lookup |
 | Show local autonomous-agent compatibility | OpenClaw-style local proof | `npm run openclaw:five-minute-demo` | message send, file delete, and package publish reviewed before local execution |
