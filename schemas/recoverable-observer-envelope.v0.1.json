@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.neurarelay.com/schemas/recoverable-observer-envelope.v0.1.json",
+  "title": "Recoverable Observer Envelope v0.1 Draft",
+  "description": "Implementation-neutral, payload-free lifecycle observation envelope for snapshot, ordered transition, resynchronization, and closure events.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "event_id",
+    "event_kind",
+    "cursor",
+    "scope",
+    "identity",
+    "run_sequence",
+    "previous_status",
+    "current_status",
+    "reason_code",
+    "occurred_at",
+    "observed_at",
+    "payload_free"
+  ],
+  "properties": {
+    "standard": { "const": "recoverable-observer-envelope-v0.1-draft" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "event_kind": {
+      "enum": ["snapshot", "lifecycle_transition", "resync_required", "stream_closed"]
+    },
+    "cursor": { "type": "string", "minLength": 1 },
+    "scope": { "$ref": "#/$defs/scope" },
+    "identity": { "$ref": "#/$defs/identity" },
+    "run_sequence": { "type": ["integer", "null"], "minimum": 1 },
+    "previous_status": { "$ref": "#/$defs/nullable_status" },
+    "current_status": { "$ref": "#/$defs/nullable_status" },
+    "reason_code": { "type": "string", "minLength": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "payload_free": { "const": true },
+    "needs_input": { "$ref": "#/$defs/needs_input" },
+    "snapshot": { "$ref": "#/$defs/snapshot" },
+    "resync": { "$ref": "#/$defs/resync" },
+    "closure": { "$ref": "#/$defs/closure" }
+  },
+  "$defs": {
+    "nullable_id": { "type": ["string", "null"], "minLength": 1 },
+    "status": {
+      "enum": ["queued", "running", "needs_input", "completed", "failed", "cancelled"]
+    },
+    "nullable_status": {
+      "type": ["string", "null"],
+      "enum": ["queued", "running", "needs_input", "completed", "failed", "cancelled", null]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["extension_id", "profile_id", "workspace_id", "remote_authority_id"],
+      "properties": {
+        "extension_id": { "type": "string", "minLength": 1 },
+        "profile_id": { "type": "string", "minLength": 1 },
+        "workspace_id": { "type": "string", "minLength": 1 },
+        "remote_authority_id": { "type": ["string", "null"], "minLength": 1 }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_id", "run_attempt_id", "delegation_id"],
+      "properties": {
+        "session_id": { "$ref": "#/$defs/nullable_id" },
+        "run_attempt_id": { "$ref": "#/$defs/nullable_id" },
+        "delegation_id": { "$ref": "#/$defs/nullable_id" }
+      }
+    },
+    "needs_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["request_id", "input_kind"],
+      "properties": {
+        "request_id": { "type": "string", "minLength": 1 },
+        "input_kind": { "enum": ["confirmation", "selection", "text", "credential", "other"] }
+      }
+    },
+    "visible_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity", "run_sequence", "current_status", "reason_code"],
+      "properties": {
+        "identity": { "$ref": "#/$defs/identity" },
+        "run_sequence": { "type": "integer", "minimum": 1 },
+        "current_status": { "$ref": "#/$defs/status" },
+        "reason_code": { "type": "string", "minLength": 1 }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resume_cursor", "visible_runs"],
+      "properties": {
+        "resume_cursor": { "type": "string", "minLength": 1 },
+        "visible_runs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/visible_run" }
+        }
+      }
+    },
+    "resync": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cause", "fresh_snapshot_required"],
+      "properties": {
+        "cause": {
+          "enum": ["missed_event", "duplicate_event", "reordered_event", "conflicting_event"]
+        },
+        "fresh_snapshot_required": { "const": true }
+      }
+    },
+    "closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cause", "fresh_snapshot_required"],
+      "properties": {
+        "cause": {
+          "enum": ["consent_revoked", "observer_disconnected", "cursor_expired", "buffer_overflow"]
+        },
+        "fresh_snapshot_required": { "const": true }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "event_kind": { "const": "snapshot" } } },
+      "then": { "required": ["snapshot"] }
+    },
+    {
+      "if": { "properties": { "event_kind": { "const": "resync_required" } } },
+      "then": { "required": ["resync"] }
+    },
+    {
+      "if": { "properties": { "event_kind": { "const": "stream_closed" } } },
+      "then": { "required": ["closure"] }
+    }
+  ]
+}
