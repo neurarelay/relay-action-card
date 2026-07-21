@@ -55,9 +55,11 @@ Use [`examples/openclaw/QUICKSTART.md`](examples/openclaw/QUICKSTART.md) for the
 
 Choose the lane that matches what you want to prove with the OpenClaw-style receipt kit:
 
-- **OpenClaw Developer Journey Proof:** read [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md), then run `npm run openclaw:proof`. The source is [`examples/openclaw/run-developer-journey-proof.mjs`](examples/openclaw/run-developer-journey-proof.mjs); an explicitly authorized live test uses `npm run openclaw:proof -- --live`.
-- **OpenClaw OS Decision Receipt Surface:** read [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md), then run `npm run openclaw:workspace-proof`. The source is [`examples/openclaw/run-workspace-decision-surface.mjs`](examples/openclaw/run-workspace-decision-surface.mjs).
-- **Near-miss workbench:** run `npm run openclaw:workbench`, review [`docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png`](docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png), and inspect `artifacts/openclaw-near-miss-workbench/report.html`.
+- **OpenClaw Developer Journey Proof:** read [`docs/openclaw-developer-journey.md`](docs/openclaw-developer-journey.md), then run `npm run openclaw:proof`. The source is [`examples/openclaw/run-developer-journey-proof.mjs`](examples/openclaw/run-developer-journey-proof.mjs); an explicitly authorized live test uses `npm run openclaw:proof -- --live`. Verify clean installation with `npm run verify:openclaw-clean-consumer`.
+- **OpenClaw OS Decision Receipt Surface:** read [`docs/openclaw-os-decision-receipt-surface.md`](docs/openclaw-os-decision-receipt-surface.md), then run `npm run openclaw:workspace-proof` and `npm run verify:openclaw-workspace-surface`. The source is [`examples/openclaw/run-workspace-decision-surface.mjs`](examples/openclaw/run-workspace-decision-surface.mjs); verifier anchors are `verify-openclaw-workspace-surface.mjs` and `openclaw-workspace-surface.test.mjs`.
+- **Near-miss workbench:** read [`docs/openclaw-near-miss-workbench.md`](docs/openclaw-near-miss-workbench.md), run `npm run openclaw:workbench`, review [`docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png`](docs/assets/openclaw-near-miss-workbench/near-miss-workbench-desktop.png), and inspect `artifacts/openclaw-near-miss-workbench/report.html`. The report shows what the agent was about to do, what Neura caught, the receipt route, and the developer-owned next step. Verify the route with `npm run verify:openclaw-workbench`.
+- **Severe Scenario Proof Pack:** read [`docs/openclaw-severe-scenario-proof-pack.md`](docs/openclaw-severe-scenario-proof-pack.md), run `npm run openclaw:severe-proof`, verify with `npm run verify:openclaw-severe-proof`, test with `npm run test:openclaw-severe-proof`, and inspect `artifacts/openclaw-severe-scenario-proof/report.html`.
+- **Severe Preflight Queue:** read [`docs/openclaw-severe-preflight-queue.md`](docs/openclaw-severe-preflight-queue.md), run `npm run openclaw:severe-preflight`, verify with `npm run verify:openclaw-severe-preflight`, test with `npm run test:openclaw-severe-preflight`, and inspect `artifacts/openclaw-severe-preflight-queue/transcript.html`.
 
 The OpenClaw route keeps its implementation under `examples/openclaw/`, including `near-miss-workbench/`, `workspace-surface/`, and `preflight-adapter/`; reusable operator material remains under `skills/openclaw/`. The workspace proof writes `artifacts/openclaw-workspace-decision-surface/report.html`.
 
@@ -108,6 +110,14 @@ npm audit --audit-level=high
 ```
 
 GitHub runs the Node 24 proof-contract gate and one Node `22.14.0` public-compatibility job. Branch protection requires the deterministic `local-contract` and `verify` checks on an up-to-date branch.
+
+Stable proof snapshot and Action Receipt Kit compatibility index:
+
+- Local and receipt modes: `npm run openclaw:dry-run` and `npm run openclaw:receipts`.
+- Contract gates: `npm run verify:openclaw-action-receipt-kit`, `npm run verify:openclaw-developer-journey`, `npm run test:openclaw-kit`, and `npm run test:openclaw-kit:e2e`.
+- Verifier anchors: `verify-openclaw-near-miss-workbench.mjs`, `verify-openclaw-developer-journey.mjs`, and `openclaw-action-receipt-kit.yml`; historical release notes remain in `CHANGELOG.md`.
+- Fixture routes include `openclaw-memory-write` and `openclaw-data-export`. CI now runs the local kit contract; live receipts remain explicitly authorized and separate.
+- The preserved Action Receipt Pack index is [`docs/openclaw-action-receipt-pack.md`](docs/openclaw-action-receipt-pack.md), with fixtures under `examples/openclaw/action-cards`, skills under `skills/openclaw/neura-action-card`, and route identifiers including `openclaw-send-message` and `openclaw-shell-command`.
 
 ## Contributing And Security
 
