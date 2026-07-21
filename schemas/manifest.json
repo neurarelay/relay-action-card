@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "status": "public_mirror",
+  "canonicalRepository": "rpelevin/neura-protocol-web",
+  "artifacts": [
+    {
+      "id": "action-card",
+      "version": "v0.1",
+      "canonicalPath": "contracts/v0.1/action-card.v0.1.json",
+      "path": "schemas/action-card.v0.1.json",
+      "sha256": "e1be3d82fb7dfe74d598c34cad6cd86f07392f370ba618e6791ff3d12140f18b"
+    },
+    {
+      "id": "decision-receipt",
+      "version": "v0.1",
+      "canonicalPath": "contracts/v0.1/decision-receipt.v0.1.json",
+      "path": "schemas/decision-receipt.v0.1.json",
+      "sha256": "06d7e5061c8387bd0b2bd4934106ceb94309b33dbfe977f2c4832f162701194a"
+    },
+    {
+      "id": "agent-io-event-envelope",
+      "version": "v0.1",
+      "canonicalPath": "contracts/v0.1/agent-io-event-envelope.v0.1.json",
+      "path": "schemas/agent-io-event-envelope.v0.1.json",
+      "sha256": "323fc746b7370ef463c0c2487ecc82d62acb794897ec4f112ba009b15907d28f"
+    },
+    {
+      "id": "mcp-approval-receipt",
+      "version": "v0.1",
+      "canonicalPath": "contracts/v0.1/mcp-approval-receipt.v0.1.json",
+      "path": "schemas/mcp-approval-receipt.v0.1.json",
+      "sha256": "457b0b890afb6843344a3f0d2a904871132cd6304c37c157389f0eb04bbf2756"
+    },
+    {
+      "id": "recoverable-observer-envelope",
+      "version": "v0.1",
+      "canonicalPath": "contracts/v0.1/recoverable-observer-envelope.v0.1.json",
+      "path": "schemas/recoverable-observer-envelope.v0.1.json",
+      "sha256": "aa4f276c9184d1b745ebff4e11dd08f71cecda3a702ec99c1d99e193b7d7d298"
+    },
+    {
+      "id": "structured-result-trust-receipt",
+      "version": "v0.1",
+      "canonicalPath": "contracts/v0.1/structured-result-trust-receipt.v0.1.json",
+      "path": "schemas/structured-result-trust-receipt.v0.1.json",
+      "sha256": "4d9d037ed7911c846253af0b2131e3aabb75b63838b8f1b90041e65b3c1f7663"
+    }
+  ]
+}
