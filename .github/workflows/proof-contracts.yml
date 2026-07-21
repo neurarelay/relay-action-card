@@ -5,6 +5,9 @@ on:
     paths:
       - ".github/workflows/proof-contracts.yml"
       - "README.md"
+      - "CONTRIBUTING.md"
+      - "SECURITY.md"
+      - ".github/CODEOWNERS"
       - "package.json"
       - "package-lock.json"
       - "docs/current-public-proof-map.md"
@@ -13,9 +16,9 @@ on:
       - "examples/lib/structured-result-trust.mjs"
       - "examples/recoverable-observer/**"
       - "examples/structured-result-trust/**"
-      - "schemas/recoverable-observer-envelope.v0.1.json"
-      - "schemas/structured-result-trust-receipt.v0.1.json"
+      - "schemas/**"
       - "scripts/verify-recoverable-observer-fixture-pack.mjs"
+      - "scripts/verify-protocol-contract-mirror.mjs"
       - "scripts/verify-structured-result-trust-receipt.mjs"
       - "tests/recoverable-observer-fixture-pack.test.mjs"
       - "tests/structured-result-trust-receipt.test.mjs"
@@ -25,6 +28,9 @@ on:
     paths:
       - ".github/workflows/proof-contracts.yml"
       - "README.md"
+      - "CONTRIBUTING.md"
+      - "SECURITY.md"
+      - ".github/CODEOWNERS"
       - "package.json"
       - "package-lock.json"
       - "docs/current-public-proof-map.md"
@@ -33,9 +39,9 @@ on:
       - "examples/lib/structured-result-trust.mjs"
       - "examples/recoverable-observer/**"
       - "examples/structured-result-trust/**"
-      - "schemas/recoverable-observer-envelope.v0.1.json"
-      - "schemas/structured-result-trust-receipt.v0.1.json"
+      - "schemas/**"
       - "scripts/verify-recoverable-observer-fixture-pack.mjs"
+      - "scripts/verify-protocol-contract-mirror.mjs"
       - "scripts/verify-structured-result-trust-receipt.mjs"
       - "tests/recoverable-observer-fixture-pack.test.mjs"
       - "tests/structured-result-trust-receipt.test.mjs"
@@ -66,3 +72,24 @@ jobs:
 
       - name: Audit dependencies
         run: npm audit --audit-level=high
+
+  node-22-compatibility:
+    name: Node 22 public compatibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Node 22
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.14.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify public compatibility
+        run: npm run check
