@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.neurarelay.com/schemas/structured-result-trust-receipt.v0.1.json",
+  "title": "Neura Structured Result Trust Receipt v0.1 Draft",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "receipt_ref",
+    "trace_ref",
+    "operation_ref",
+    "result_ref",
+    "producer",
+    "contract",
+    "generation",
+    "semantic_checks",
+    "trust",
+    "downstream",
+    "payload",
+    "boundary"
+  ],
+  "properties": {
+    "standard": { "const": "neura-structured-result-trust-receipt-v0.1-draft" },
+    "receipt_ref": { "type": "string", "minLength": 1 },
+    "trace_ref": { "type": "string", "minLength": 1 },
+    "operation_ref": { "type": "string", "minLength": 1 },
+    "result_ref": { "type": "string", "minLength": 1 },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime", "provider", "model", "adapter"],
+      "properties": {
+        "runtime": { "type": "string", "minLength": 1 },
+        "provider": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "adapter": { "type": "string", "minLength": 1 }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_ref",
+        "schema_digest",
+        "enforcement_mode",
+        "validation_engine",
+        "validation_passed",
+        "expected_channel",
+        "observed_channel",
+        "channel_preserved"
+      ],
+      "properties": {
+        "schema_ref": { "type": "string", "minLength": 1 },
+        "schema_digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "enforcement_mode": {
+          "enum": ["native_strict", "tool_strict", "posthoc_json_schema", "shape_only", "none"]
+        },
+        "validation_engine": { "type": "string", "minLength": 1 },
+        "validation_passed": { "type": ["boolean", "null"] },
+        "expected_channel": { "type": "string", "minLength": 1 },
+        "observed_channel": { "type": "string", "minLength": 1 },
+        "channel_preserved": { "type": "boolean" }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attempts_used",
+        "max_attempts",
+        "validation_failures",
+        "retry_exhausted",
+        "final_acceptance"
+      ],
+      "properties": {
+        "attempts_used": { "type": "integer", "minimum": 1 },
+        "max_attempts": { "type": "integer", "minimum": 1 },
+        "validation_failures": { "type": "integer", "minimum": 0 },
+        "retry_exhausted": { "type": "boolean" },
+        "final_acceptance": {
+          "enum": [
+            "accepted_first_attempt",
+            "accepted_after_retry",
+            "accepted_at_retry_cap",
+            "rejected",
+            "not_observed"
+          ]
+        }
+      }
+    },
+    "semantic_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "check_refs"],
+      "properties": {
+        "status": { "enum": ["passed", "failed", "not_run"] },
+        "check_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "trust": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asserted_state", "reason_codes"],
+      "properties": {
+        "asserted_state": { "enum": ["trusted", "recovered", "degraded", "rejected", "unknown"] },
+        "reason_codes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "downstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asserted_route", "override_required"],
+      "properties": {
+        "asserted_route": { "enum": ["allow", "human_review", "stop"] },
+        "override_required": { "type": "boolean" }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier", "redaction_status", "private_payload_stored", "result_digest"],
+      "properties": {
+        "tier": { "const": "T0" },
+        "redaction_status": { "const": "metadata_refs_hashes_only" },
+        "private_payload_stored": { "const": false },
+        "result_digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "downstream_execution_performed_by_neura",
+        "private_payload_stored",
+        "provider_approval_claimed",
+        "provider_integration_claimed",
+        "customer_adoption_claimed"
+      ],
+      "properties": {
+        "downstream_execution_performed_by_neura": { "const": false },
+        "private_payload_stored": { "const": false },
+        "provider_approval_claimed": { "const": false },
+        "provider_integration_claimed": { "const": false },
+        "customer_adoption_claimed": { "const": false }
+      }
+    }
+  }
+}

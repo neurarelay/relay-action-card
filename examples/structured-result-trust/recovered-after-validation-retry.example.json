@@ -1,0 +1,55 @@
+{
+  "standard": "neura-structured-result-trust-receipt-v0.1-draft",
+  "receipt_ref": "receipt:result-trust:recovered-after-retry",
+  "trace_ref": "trace:result-trust:recovered-after-retry",
+  "operation_ref": "operation:synthetic:review-002",
+  "result_ref": "result:synthetic:review-002",
+  "producer": {
+    "runtime": "synthetic-agent-runtime",
+    "provider": "synthetic-provider",
+    "model": "synthetic-model",
+    "adapter": "posthoc-schema-adapter"
+  },
+  "contract": {
+    "schema_ref": "schema:synthetic:review-v1",
+    "schema_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "enforcement_mode": "posthoc_json_schema",
+    "validation_engine": "draft-2020-12-validator",
+    "validation_passed": true,
+    "expected_channel": "structured_tool_result",
+    "observed_channel": "structured_tool_result",
+    "channel_preserved": true
+  },
+  "generation": {
+    "attempts_used": 3,
+    "max_attempts": 5,
+    "validation_failures": 2,
+    "retry_exhausted": false,
+    "final_acceptance": "accepted_after_retry"
+  },
+  "semantic_checks": {
+    "status": "passed",
+    "check_refs": ["check:required-evidence-refs", "check:non-placeholder-content"]
+  },
+  "trust": {
+    "asserted_state": "recovered",
+    "reason_codes": ["validated_after_retry", "semantic_checks_passed"]
+  },
+  "downstream": {
+    "asserted_route": "allow",
+    "override_required": false
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "result_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "provider_integration_claimed": false,
+    "customer_adoption_claimed": false
+  }
+}

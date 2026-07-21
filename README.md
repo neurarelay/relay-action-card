@@ -106,6 +106,7 @@ The path is the same proof spine: Action Card in, Decision Receipt out, runtime-
 | 08 | Local Authority Runtime | `npm run proof:local-authority-runtime -- --dry-run --json` |
 | 09 | Implementation SWAT Packet Library | `npm run verify:implementation-swat-pack` |
 | 10 | Shadow Agent Inventory / Stop Receipt | `npm run proof:shadow-agent-inventory -- --dry-run --json` |
+| 11 | Structured Result Trust Receipt | `npm run verify:structured-result-trust-receipt` |
 
 Applied examples also include:
 
@@ -158,14 +159,17 @@ The package includes core checks plus applied synthetic cases:
 - CommerceOps Fire Drill: commerce actions receive receipts before money-moving or customer-facing execution.
 - Authority Path Proof: authority path depth, scope envelope, purpose fit, and sequence context become pre-action receipts.
 - Shadow Agent Inventory / Stop Receipt: refs-only traffic becomes inventory findings and stop recommendation receipts while customer runtime owns shutdown.
+- Structured Result Trust Receipt: schema enforcement, retry history, output-channel preservation, and semantic checks become a refs-only trust route before downstream use.
 - ClinicOps Synthetic Proof: an applied synthetic case for scheduling, patient-message, prior-auth, insurance follow-up, and policy-exception actions.
 
 Run:
 
 ```bash
+npm run check
 npm run proof:pre-action-authority -- --dry-run --json
 npm run verify:pre-action-authority
 npm run verify:decision-receipt-standard
+npm run verify:structured-result-trust-receipt
 npm run proof:agent-action-firewall -- --dry-run --json
 npm run verify:agent-action-firewall
 npm run proof:mcp-risk-gate -- --dry-run --json

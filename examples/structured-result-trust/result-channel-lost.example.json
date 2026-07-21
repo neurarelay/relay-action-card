@@ -1,0 +1,55 @@
+{
+  "standard": "neura-structured-result-trust-receipt-v0.1-draft",
+  "receipt_ref": "receipt:result-trust:channel-lost",
+  "trace_ref": "trace:result-trust:channel-lost",
+  "operation_ref": "operation:synthetic:review-006",
+  "result_ref": "result:synthetic:review-006",
+  "producer": {
+    "runtime": "synthetic-agent-runtime",
+    "provider": "synthetic-provider",
+    "model": "synthetic-model",
+    "adapter": "event-stream-adapter"
+  },
+  "contract": {
+    "schema_ref": "schema:synthetic:review-v1",
+    "schema_digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+    "enforcement_mode": "native_strict",
+    "validation_engine": "provider-native-json-schema",
+    "validation_passed": true,
+    "expected_channel": "structured_event_output",
+    "observed_channel": "assistant_text",
+    "channel_preserved": false
+  },
+  "generation": {
+    "attempts_used": 1,
+    "max_attempts": 3,
+    "validation_failures": 0,
+    "retry_exhausted": false,
+    "final_acceptance": "rejected"
+  },
+  "semantic_checks": {
+    "status": "not_run",
+    "check_refs": []
+  },
+  "trust": {
+    "asserted_state": "rejected",
+    "reason_codes": ["structured_result_channel_lost"]
+  },
+  "downstream": {
+    "asserted_route": "stop",
+    "override_required": true
+  },
+  "payload": {
+    "tier": "T0",
+    "redaction_status": "metadata_refs_hashes_only",
+    "private_payload_stored": false,
+    "result_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "boundary": {
+    "downstream_execution_performed_by_neura": false,
+    "private_payload_stored": false,
+    "provider_approval_claimed": false,
+    "provider_integration_claimed": false,
+    "customer_adoption_claimed": false
+  }
+}

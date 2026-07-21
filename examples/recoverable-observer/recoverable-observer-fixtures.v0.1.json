@@ -1,0 +1,386 @@
+{
+  "standard": "recoverable-observer-fixture-pack-v0.1-draft",
+  "boundary": {
+    "implementation_neutral": true,
+    "read_only_observation": true,
+    "payload_free": true,
+    "vs_code_api_validated": false,
+    "ventoview_tested": false,
+    "provider_approval_claimed": false
+  },
+  "scope": {
+    "extension_id": "extension_ref_observer_demo",
+    "profile_id": "profile_ref_demo",
+    "workspace_id": "workspace_ref_demo",
+    "remote_authority_id": "remote_ref_local"
+  },
+  "cases": [
+    {
+      "case_id": "late_attach_snapshot_then_ordered_delta",
+      "expected": "A late observer receives a coherent snapshot and continues only after the returned cursor.",
+      "envelopes": [
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_snapshot_001",
+          "event_kind": "snapshot",
+          "cursor": "cursor_0042",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": { "session_id": null, "run_attempt_id": null, "delegation_id": null },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "late_attach_snapshot",
+          "occurred_at": "2026-07-13T11:20:00Z",
+          "observed_at": "2026-07-13T11:20:00Z",
+          "payload_free": true,
+          "snapshot": {
+            "resume_cursor": "cursor_0042",
+            "visible_runs": [
+              {
+                "identity": {
+                  "session_id": "session_001",
+                  "run_attempt_id": "run_002",
+                  "delegation_id": "delegation_001"
+                },
+                "run_sequence": 2,
+                "current_status": "running",
+                "reason_code": "subagent_active"
+              }
+            ]
+          }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_transition_0043",
+          "event_kind": "lifecycle_transition",
+          "cursor": "cursor_0043",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_001",
+            "run_attempt_id": "run_002",
+            "delegation_id": "delegation_001"
+          },
+          "run_sequence": 3,
+          "previous_status": "running",
+          "current_status": "needs_input",
+          "reason_code": "input_requested",
+          "occurred_at": "2026-07-13T11:20:05Z",
+          "observed_at": "2026-07-13T11:20:05Z",
+          "payload_free": true,
+          "needs_input": {
+            "request_id": "input_request_001",
+            "input_kind": "confirmation"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "event_anomalies_require_resync",
+      "expected": "Missed, duplicate, reordered, and conflicting events are explicit and require a fresh snapshot.",
+      "envelopes": [
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_resync_missed_001",
+          "event_kind": "resync_required",
+          "cursor": "cursor_0050",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_001",
+            "run_attempt_id": "run_002",
+            "delegation_id": "delegation_001"
+          },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "event_gap_detected",
+          "occurred_at": "2026-07-13T11:20:10Z",
+          "observed_at": "2026-07-13T11:20:10Z",
+          "payload_free": true,
+          "resync": { "cause": "missed_event", "fresh_snapshot_required": true }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_resync_duplicate_001",
+          "event_kind": "resync_required",
+          "cursor": "cursor_0051",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_001",
+            "run_attempt_id": "run_002",
+            "delegation_id": "delegation_001"
+          },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "duplicate_event_detected",
+          "occurred_at": "2026-07-13T11:20:11Z",
+          "observed_at": "2026-07-13T11:20:11Z",
+          "payload_free": true,
+          "resync": { "cause": "duplicate_event", "fresh_snapshot_required": true }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_resync_reordered_001",
+          "event_kind": "resync_required",
+          "cursor": "cursor_0052",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_001",
+            "run_attempt_id": "run_002",
+            "delegation_id": "delegation_001"
+          },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "reordered_event_detected",
+          "occurred_at": "2026-07-13T11:20:12Z",
+          "observed_at": "2026-07-13T11:20:12Z",
+          "payload_free": true,
+          "resync": { "cause": "reordered_event", "fresh_snapshot_required": true }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_resync_conflict_001",
+          "event_kind": "resync_required",
+          "cursor": "cursor_0053",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_001",
+            "run_attempt_id": "run_002",
+            "delegation_id": "delegation_001"
+          },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "terminal_conflict_detected",
+          "occurred_at": "2026-07-13T11:20:13Z",
+          "observed_at": "2026-07-13T11:20:13Z",
+          "payload_free": true,
+          "resync": { "cause": "conflicting_event", "fresh_snapshot_required": true }
+        }
+      ]
+    },
+    {
+      "case_id": "retry_creates_fresh_run_attempt",
+      "expected": "A terminal attempt remains immutable and the retry starts with a new run-attempt id and sequence one.",
+      "envelopes": [
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_attempt_old_failed",
+          "event_kind": "lifecycle_transition",
+          "cursor": "cursor_0060",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_retry_001",
+            "run_attempt_id": "run_attempt_old",
+            "delegation_id": "delegation_retry_001"
+          },
+          "run_sequence": 4,
+          "previous_status": "running",
+          "current_status": "failed",
+          "reason_code": "attempt_failed_terminal",
+          "occurred_at": "2026-07-13T11:21:00Z",
+          "observed_at": "2026-07-13T11:21:00Z",
+          "payload_free": true
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_attempt_new_started",
+          "event_kind": "lifecycle_transition",
+          "cursor": "cursor_0061",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_retry_001",
+            "run_attempt_id": "run_attempt_new",
+            "delegation_id": "delegation_retry_001"
+          },
+          "run_sequence": 1,
+          "previous_status": "queued",
+          "current_status": "running",
+          "reason_code": "retry_started",
+          "occurred_at": "2026-07-13T11:21:05Z",
+          "observed_at": "2026-07-13T11:21:05Z",
+          "payload_free": true
+        }
+      ]
+    },
+    {
+      "case_id": "parent_cancellation_settles_child",
+      "expected": "Parent cancellation produces one deterministic terminal outcome for the active child attempt.",
+      "envelopes": [
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_child_cancelled_001",
+          "event_kind": "lifecycle_transition",
+          "cursor": "cursor_0070",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": {
+            "session_id": "session_parent_001",
+            "run_attempt_id": "run_child_001",
+            "delegation_id": "delegation_child_001"
+          },
+          "run_sequence": 3,
+          "previous_status": "running",
+          "current_status": "cancelled",
+          "reason_code": "parent_cancelled",
+          "occurred_at": "2026-07-13T11:22:00Z",
+          "observed_at": "2026-07-13T11:22:00Z",
+          "payload_free": true
+        }
+      ]
+    },
+    {
+      "case_id": "closure_outcomes_are_explicit",
+      "expected": "Consent revocation, disconnect, cursor expiry, and buffer overflow close the stream explicitly and require a fresh snapshot.",
+      "envelopes": [
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_closed_consent_001",
+          "event_kind": "stream_closed",
+          "cursor": "cursor_0080",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": { "session_id": null, "run_attempt_id": null, "delegation_id": null },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "consent_revoked",
+          "occurred_at": "2026-07-13T11:23:00Z",
+          "observed_at": "2026-07-13T11:23:00Z",
+          "payload_free": true,
+          "closure": { "cause": "consent_revoked", "fresh_snapshot_required": true }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_closed_disconnect_001",
+          "event_kind": "stream_closed",
+          "cursor": "cursor_0081",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": { "session_id": null, "run_attempt_id": null, "delegation_id": null },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "observer_disconnected",
+          "occurred_at": "2026-07-13T11:23:01Z",
+          "observed_at": "2026-07-13T11:23:01Z",
+          "payload_free": true,
+          "closure": { "cause": "observer_disconnected", "fresh_snapshot_required": true }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_closed_cursor_001",
+          "event_kind": "stream_closed",
+          "cursor": "cursor_0082",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": { "session_id": null, "run_attempt_id": null, "delegation_id": null },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "cursor_expired",
+          "occurred_at": "2026-07-13T11:23:02Z",
+          "observed_at": "2026-07-13T11:23:02Z",
+          "payload_free": true,
+          "closure": { "cause": "cursor_expired", "fresh_snapshot_required": true }
+        },
+        {
+          "standard": "recoverable-observer-envelope-v0.1-draft",
+          "event_id": "evt_closed_overflow_001",
+          "event_kind": "stream_closed",
+          "cursor": "cursor_0083",
+          "scope": {
+            "extension_id": "extension_ref_observer_demo",
+            "profile_id": "profile_ref_demo",
+            "workspace_id": "workspace_ref_demo",
+            "remote_authority_id": "remote_ref_local"
+          },
+          "identity": { "session_id": null, "run_attempt_id": null, "delegation_id": null },
+          "run_sequence": null,
+          "previous_status": null,
+          "current_status": null,
+          "reason_code": "buffer_overflow",
+          "occurred_at": "2026-07-13T11:23:03Z",
+          "observed_at": "2026-07-13T11:23:03Z",
+          "payload_free": true,
+          "closure": { "cause": "buffer_overflow", "fresh_snapshot_required": true }
+        }
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "scope_mismatch_rejected",
+      "expected_error": "scope_mismatch",
+      "observer_scope": {
+        "extension_id": "extension_ref_observer_demo",
+        "profile_id": "profile_ref_demo",
+        "workspace_id": "workspace_ref_demo",
+        "remote_authority_id": "remote_ref_local"
+      },
+      "envelope_scope": {
+        "extension_id": "extension_ref_other",
+        "profile_id": "profile_ref_other",
+        "workspace_id": "workspace_ref_other",
+        "remote_authority_id": "remote_ref_other"
+      }
+    }
+  ]
+}
