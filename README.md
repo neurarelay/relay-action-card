@@ -165,6 +165,7 @@ The package includes core checks plus applied synthetic cases:
 Run:
 
 ```bash
+npm run check
 npm run proof:pre-action-authority -- --dry-run --json
 npm run verify:pre-action-authority
 npm run verify:decision-receipt-standard

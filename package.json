@@ -7,6 +7,7 @@
     "node": ">=22.14.0"
   },
   "scripts": {
+    "check": "npm test && npm run test:structured-result-trust-receipt && npm run test:recoverable-observer && npm run verify:structured-result-trust-receipt && npm run verify:recoverable-observer",
     "example:relay": "node examples/core/resolve-action-card.mjs",
     "example:sdk": "node examples/sdk/resolve-action-card-sdk.mjs",
     "example:sdk:authority-routing": "node examples/sdk/authority-routing.mjs",

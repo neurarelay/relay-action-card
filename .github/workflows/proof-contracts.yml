@@ -1,0 +1,68 @@
+name: Proof contracts
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/proof-contracts.yml"
+      - "README.md"
+      - "package.json"
+      - "package-lock.json"
+      - "docs/current-public-proof-map.md"
+      - "docs/recoverable-observer-fixture-pack.md"
+      - "docs/structured-result-trust-receipt.md"
+      - "examples/lib/structured-result-trust.mjs"
+      - "examples/recoverable-observer/**"
+      - "examples/structured-result-trust/**"
+      - "schemas/recoverable-observer-envelope.v0.1.json"
+      - "schemas/structured-result-trust-receipt.v0.1.json"
+      - "scripts/verify-recoverable-observer-fixture-pack.mjs"
+      - "scripts/verify-structured-result-trust-receipt.mjs"
+      - "tests/recoverable-observer-fixture-pack.test.mjs"
+      - "tests/structured-result-trust-receipt.test.mjs"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/proof-contracts.yml"
+      - "README.md"
+      - "package.json"
+      - "package-lock.json"
+      - "docs/current-public-proof-map.md"
+      - "docs/recoverable-observer-fixture-pack.md"
+      - "docs/structured-result-trust-receipt.md"
+      - "examples/lib/structured-result-trust.mjs"
+      - "examples/recoverable-observer/**"
+      - "examples/structured-result-trust/**"
+      - "schemas/recoverable-observer-envelope.v0.1.json"
+      - "schemas/structured-result-trust-receipt.v0.1.json"
+      - "scripts/verify-recoverable-observer-fixture-pack.mjs"
+      - "scripts/verify-structured-result-trust-receipt.mjs"
+      - "tests/recoverable-observer-fixture-pack.test.mjs"
+      - "tests/structured-result-trust-receipt.test.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify proof contracts
+        run: npm run check
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
