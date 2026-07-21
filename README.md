@@ -98,6 +98,8 @@ The OpenClaw preflight adapter is sourced from this public repository and has pr
 
 Existing versions must not be mutated or republished. Before any future SDK or OpenAI Agents version, publishable source, repository metadata, Trusted Publishing identity, provenance, and release tags must be aligned prospectively.
 
+OpenClaw submission-readiness evidence remains indexed at [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). Verify it with `npm run verify:openclaw-submission-readiness` and `npm run verify:openclaw-clawhub-release`; the controlled publisher verifier is `verify-openclaw-founder-clawhub-publisher.mjs`. Recorded package coordinates are `@neurarelay/openclaw-preflight-adapter@0.1.4` and the legacy `@rpelevin/neura-relay-preflight-adapter@0.1.1`. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or integration claim exists.
+
 ## Verification
 
 Primary development and CI:
