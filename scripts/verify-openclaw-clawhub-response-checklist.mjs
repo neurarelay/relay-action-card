@@ -9,8 +9,8 @@ const docPath = join(repoRoot, "docs/openclaw-clawhub-response-checklist.md");
 const doc = readFileSync(docPath, "utf8");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const currentPackageVersion = "0.1.4";
-const nextPolishVersion = "0.1.5";
+const currentPackageVersion = "0.1.5";
+const nextPolishVersion = "0.1.6";
 
 for (const required of [
   "If Maintainers/Admins Respond",
@@ -22,7 +22,7 @@ for (const required of [
   "--dry-run --json",
   `Approved: publish ${packageName}@${nextPolishVersion} to ClawHub.`,
   `openclaw plugins install clawhub:${packageName}@${nextPolishVersion}`,
-  "canonical `@neurarelay` `0.1.4` community package",
+  "canonical `@neurarelay` `0.1.5` community package",
   "no official OpenClaw / ClawHub integration",
   "no downstream execution by Neura",
   "no private payload exposure",
