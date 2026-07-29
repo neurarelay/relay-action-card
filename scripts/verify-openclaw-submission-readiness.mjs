@@ -9,7 +9,7 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
 const packageVersion = "0.1.5";
-const currentClawHubVersion = "0.1.4";
+const currentClawHubVersion = "0.1.5";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -175,7 +175,7 @@ rejectUnsafe("publish_workflow", publishWorkflow);
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
-  `canonical \`@neurarelay\` package \`${packageVersion}\` published on npm latest; ClawHub community package remains \`${currentClawHubVersion}\``,
+  `canonical \`@neurarelay\` package \`${packageVersion}\` published on npm and ClawHub with \`latest,stable\``,
   packageName,
   packageVersion,
   pluginId,

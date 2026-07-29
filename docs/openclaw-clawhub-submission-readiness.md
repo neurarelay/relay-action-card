@@ -1,6 +1,6 @@
 # OpenClaw / ClawHub Submission Readiness Packet
 
-Status: canonical `@neurarelay` package `0.1.5` published on npm latest; ClawHub community package remains `0.1.4`; approved ClawHub `0.1.5` publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7` but authoritative reads still expose `0.1.4`; founder-publisher fallback remains published; no official OpenClaw / ClawHub approval or listing claim
+Status: canonical `@neurarelay` package `0.1.5` published on npm and ClawHub with `latest,stable`; founder-publisher fallback remains published; no official OpenClaw / ClawHub approval or listing claim
 Date: 2026-07-29
 
 This is the current Development packet for the ClawHub and npm publication path. Roman approved the founder-publisher fallback on May 13, 2026, and the community package remains published under `@rpelevin`. On May 18, the canonical `@neurarelay` publisher login became available, but the direct `0.1.1` canonical ClawHub publish was blocked because the fallback already claimed plugin id `neura-relay-preflight-adapter`. Roman then approved the canonical `0.1.3` metadata repair release using the distinct plugin id `neurarelay-openclaw-preflight-adapter`, followed by the `0.1.4` README-only polish release. On May 28, 2026, Roman approved npm publication and `@neurarelay/openclaw-preflight-adapter@0.1.4` was published to npm `latest` through Trusted Publishing. On July 29, 2026, Roman approved the exact npm `0.1.5` source delta, which aligns the adapter to `@neurarelay/sdk@0.1.3`; ClawHub remains at `0.1.4` and was not updated.
@@ -11,7 +11,7 @@ The related ClawHub issue remains the public request/history thread:
 
 `https://github.com/openclaw/clawhub/issues/2190`
 
-Current truth: npm latest is `@neurarelay/openclaw-preflight-adapter@0.1.5`; authoritative ClawHub reads still expose the canonical community package as `@neurarelay/openclaw-preflight-adapter@0.1.4`; an approved `0.1.5` publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7` but is not visible through version, download, or history reads; and the founder-publisher fallback remains published to ClawHub's community channel as `@rpelevin/neura-relay-preflight-adapter@0.1.1`. None of this implies endorsement, official listing, official approval, or partnership.
+Current truth: npm and ClawHub both expose the canonical community package as `@neurarelay/openclaw-preflight-adapter@0.1.5` with `latest=0.1.5` and `stable=0.1.5`; the artifact scan is clean; and the founder-publisher fallback remains published to ClawHub's community channel as `@rpelevin/neura-relay-preflight-adapter@0.1.1`. None of this implies endorsement, official listing, official approval, or partnership.
 
 The fallback path remains founder-led publication under Roman's established publisher handle while preserving Neura branding and source attribution:
 
@@ -22,11 +22,11 @@ The fallback path remains founder-led publication under Roman's established publ
 - Current ClawHub source commit: `794f1d8c5088312b99806fe61b5ae2eddb724723`
 - Current ClawHub release id: `rd75hckdpqz0bxee3g8e18g18s86ncm2`
 - Current ClawHub artifact SHA-256: `f6b9e10753110b303d0ef4d69dc99671f1b2556020cf07b8a2ac9bab7d9fb9ea`
-- Canonical ClawHub community package is published as: `@neurarelay/openclaw-preflight-adapter@0.1.4`
+- Canonical ClawHub community package is published as: `@neurarelay/openclaw-preflight-adapter@0.1.5`
 - Canonical ClawHub plugin id is: `neurarelay-openclaw-preflight-adapter`
 - The canonical package preserves the distinct plugin id and uses `latest,stable` tags so ClawHub exposes a current version/readme surface
 - npm latest is `@neurarelay/openclaw-preflight-adapter@0.1.5` and depends on `@neurarelay/sdk@0.1.3`
-- Package-level ClawHub indexing reports security audits pending while ClawScan and VirusTotal complete. ClawHub version `0.1.4` is source-linked, README-visible, static-scan clean, tagged `latest,stable`, and exposes `toolNames=["neura_relay_preflight_action"]`.
+- ClawHub version `0.1.5` is source-linked, README-visible, artifact-scan clean, tagged `latest,stable`, and exposes `toolNames=["neura_relay_preflight_action"]`.
 
 These ClawHub packages are community publications only. They are not OpenClaw / ClawHub official approvals, official listings, endorsements, partnerships, or official integration claims.
 
@@ -35,7 +35,7 @@ These ClawHub packages are community publications only. They are not OpenClaw / 
 | Field | Value |
 | --- | --- |
 | Package | `@neurarelay/openclaw-preflight-adapter` |
-| Version | `0.1.5` for npm latest; ClawHub authoritative latest remains `0.1.4`; approved `0.1.5` publication is unverified |
+| Version | `0.1.5` for npm and ClawHub `latest,stable` |
 | npm install | `npm install @neurarelay/openclaw-preflight-adapter` |
 | npm tags | `latest=0.1.5`; `rc=0.1.0-rc.2` |
 | Source repo | `neurarelay/relay-action-card` |
@@ -71,12 +71,12 @@ The current public OpenClaw / ClawHub docs support this release shape:
 
 | Surface | Expected Truth |
 | --- | --- |
-| GitHub README | Shows canonical npm `@neurarelay/openclaw-preflight-adapter@0.1.5`, ClawHub `0.1.4`, the historical fallback package, and no official OpenClaw / ClawHub claim |
-| GitHub package folder | Shows npm `0.1.5`, separate ClawHub `0.1.4`, distinct plugin id, stable npm install path, and developer-owned execution |
+| GitHub README | Shows canonical npm and ClawHub `@neurarelay/openclaw-preflight-adapter@0.1.5`, the historical fallback package, and no official OpenClaw / ClawHub claim |
+| GitHub package folder | Shows canonical `0.1.5`, distinct plugin id, stable install paths, and developer-owned execution |
 | GitHub release `v0.1.6-openclaw-action-receipt-kit` | Describes `0.1.0` and states the no-official-claim boundary |
 | npm registry | `version=0.1.5`, `latest=0.1.5`, `rc=0.1.0-rc.2` |
 | npm package README | Contains current version, `Install From npm`, stable npm install, and no official OpenClaw / ClawHub claim |
-| Canonical ClawHub community package | Authoritative reads still expose `@neurarelay/openclaw-preflight-adapter@0.1.4`; `isOfficial=false`; README visible; tags `latest=0.1.4`, `stable=0.1.4`; `toolNames=["neura_relay_preflight_action"]`; static analysis pass; ClawScan and VirusTotal pending; approved `0.1.5` publish attempt is not visible |
+| Canonical ClawHub community package | `@neurarelay/openclaw-preflight-adapter@0.1.5`; `isOfficial=false`; README visible; tags `latest=0.1.5`, `stable=0.1.5`; `toolNames=["neura_relay_preflight_action"]`; artifact scan clean |
 | Historical ClawHub community fallback | `@rpelevin/neura-relay-preflight-adapter@0.1.1`; community channel; `isOfficial=false`; source-linked to `neurarelay/relay-action-card@794f1d8c5088312b99806fe61b5ae2eddb724723`; README fetchable; `toolNames=["neura_relay_preflight_action"]`; static/LLM/VirusTotal clean; package-level `scanStatus=pending`; `latestVersion=null` |
 
 ## Verification Commands
@@ -178,8 +178,8 @@ Publish result:
 Current visible ClawHub state:
 
 - package URL: `https://clawhub.ai/plugins/@neurarelay/openclaw-preflight-adapter`
-- current version: `v0.1.4`
-- tags: `latest 0.1.4`, `stable 0.1.4`
+- current version: `v0.1.5`
+- tags: `latest 0.1.5`, `stable 0.1.5`
 - README visible
 - install command visible: `openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter`
 - audits: ClawScan pending, Static analysis pass, VirusTotal pending
@@ -190,7 +190,7 @@ Do not run a further publish command without Roman's exact approval for the dest
 Current README-polish publish command:
 
 ```bash
-clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.4 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
+clawhub package publish examples/openclaw/preflight-adapter --family code-plugin --owner neurarelay --name @neurarelay/openclaw-preflight-adapter --display-name "Neura Relay Preflight Adapter" --version 0.1.5 --tags latest,stable --source-repo neurarelay/relay-action-card --source-path examples/openclaw/preflight-adapter
 ```
 
 Historical publish command:
@@ -233,7 +233,7 @@ Publish result:
 Canonical namespace post-publish install check:
 
 ```bash
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.5
 openclaw plugins inspect neurarelay-openclaw-preflight-adapter --runtime --json
 ```
 
@@ -317,7 +317,7 @@ Neura Relay Preflight Adapter is an OpenClaw-style plugin surface for developers
 Allowed:
 
 - npm latest package `@neurarelay/openclaw-preflight-adapter@0.1.5` is published
-- canonical ClawHub community package `@neurarelay/openclaw-preflight-adapter@0.1.4` is published, visible, tagged `latest,stable`, and scan-pending
+- canonical ClawHub community package `@neurarelay/openclaw-preflight-adapter@0.1.5` is published, visible, tagged `latest,stable`, and artifact-scan clean
 - ClawHub community fallback package `@rpelevin/neura-relay-preflight-adapter@0.1.1` is published
 - public GitHub examples are available
 - package is shaped for OpenClaw / ClawHub plugin publication
@@ -346,7 +346,7 @@ Not allowed:
 Before any further official submission, package-version release, README polish release, metadata change, or public-copy action, Roman should approve one of these exact decisions:
 
 ```text
-Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.1.4.
+Approved: run ClawHub dry-run only for @neurarelay/openclaw-preflight-adapter@0.1.5.
 ```
 
 ```text

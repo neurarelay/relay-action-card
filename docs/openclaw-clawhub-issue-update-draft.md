@@ -3,13 +3,13 @@
 Status: historical draft; superseded by May 18 canonical package publication; do not post without Roman approval
 Date: 2026-05-18
 
-Use only as historical context. The current ClawHub truth is in [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md): the canonical `@neurarelay/openclaw-preflight-adapter@0.1.4` community package is published and visible, security audits are pending, and no official OpenClaw / ClawHub approval, listing, endorsement, integration, or partnership claim exists.
+Use only as historical context. The current ClawHub truth is in [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md): the canonical `@neurarelay/openclaw-preflight-adapter@0.1.5` community package is published and visible with `latest,stable` tags and a clean artifact scan, and no official OpenClaw / ClawHub approval, listing, endorsement, integration, or partnership claim exists.
 
 ```markdown
 Historical draft from the `@neurarelay` side:
 
 - Stable npm package at draft time: `@neurarelay/openclaw-preflight-adapter@0.1.1`; current package truth lives in `openclaw-clawhub-submission-readiness.md`
-- Canonical ClawHub community package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
+- Canonical ClawHub community package: `@neurarelay/openclaw-preflight-adapter@0.1.5`
 - Source path: `neurarelay/relay-action-card`, `examples/openclaw/preflight-adapter`
 - Green CI for the current OpenClaw-style integration commit: https://github.com/neurarelay/relay-action-card/actions/runs/25795608585
 - Maintainer evidence packet: https://github.com/neurarelay/relay-action-card/blob/main/docs/openclaw-clawhub-maintainer-packet.md
