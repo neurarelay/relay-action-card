@@ -11,7 +11,7 @@ const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
 const canonicalPackageVersion = "0.1.5";
-const currentClawHubVersion = "0.1.4";
+const currentClawHubVersion = "0.1.5";
 const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackClawHubPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -200,7 +200,7 @@ requireIncludes("release_doc", releaseDoc, [
   "Node `24`",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
   `npm package \`${packageName}@${canonicalPackageVersion}\` is published`,
-  `canonical \`@neurarelay\` ClawHub community package remains \`${currentClawHubVersion}\``,
+  `canonical \`@neurarelay\` ClawHub community package is publicly visible at \`@neurarelay/openclaw-preflight-adapter@${currentClawHubVersion}\``,
   "Roman's explicit approval",
   "https://docs.openclaw.ai/plugins/manifest",
   "https://docs.openclaw.ai/plugins/building-plugins",
@@ -219,7 +219,7 @@ requireIncludes("approval_doc", approvalDoc, [
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
   "Do not run a future package-version or README-polish release without Roman approval",
-  `canonical \`@neurarelay\` ClawHub community package \`${currentClawHubVersion}\` remains published with audits pending`,
+  `canonical \`@neurarelay\` ClawHub community package \`${currentClawHubVersion}\` is published with \`latest,stable\` tags and a clean artifact scan`,
 ]);
 rejectUnsafe("approval_doc", approvalDoc);
 
