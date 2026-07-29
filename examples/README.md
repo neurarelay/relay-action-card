@@ -35,6 +35,8 @@ The MCP path is only an adapter:
 MCP runtime -> protected Neura MCP tool -> same Relay decision spine
 ```
 
+After the first receipt, open a first-receipt feedback issue or request controlled MCP access with refs only. Registry is required for production identity and standing validation; it does not approve the action.
+
 The local runtime path mirrors Neura Local's accepted boundary:
 
 ```text
@@ -164,6 +166,12 @@ examples/
 `examples/openclaw` contains OpenClaw-style public-safe examples only. The npm adapter is stable and public, but this compatibility lane is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership.
 
 ## Fast Checks
+
+After a first receipt:
+
+- Open a first-receipt feedback issue with safe receipt and trace refs.
+- Request controlled MCP access only for a concrete governed-action use case.
+- Create the production Registry Agent Passport before production identity validation.
 
 Run the public core path:
 

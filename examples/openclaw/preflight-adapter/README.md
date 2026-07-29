@@ -3,7 +3,7 @@
 Claim-safe OpenClaw-style preflight adapter package for Neura Relay:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.4
+@neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
 The ClawHub community fallback package remains:
@@ -12,7 +12,7 @@ The ClawHub community fallback package remains:
 @rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
-The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` package is published at `0.1.4` on npm `latest` and as the canonical ClawHub community package with the distinct plugin id `neurarelay-openclaw-preflight-adapter`, so it does not collide with the fallback's already-claimed `neura-relay-preflight-adapter` id. ClawHub shows the canonical package with `latest` and `stable` tags, current version `v0.1.4`, visible README, and security audits still pending.
+The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` package is published at `0.1.5` on npm `latest`. The separate canonical ClawHub community package remains `v0.1.4` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`; no ClawHub update is included in this release, so its existing `latest` and `stable` tags, visible README, and pending security audits remain unchanged.
 
 This adapter is the OpenClaw-style compatibility path for the same Relay review boundary used by the core examples, the SDK, protected MCP/A2A paths, and Neura Local. Use it when a local runtime wants a Decision Receipt before execution while preserving developer-owned execution.
 
@@ -41,7 +41,7 @@ It is not an official OpenClaw or ClawHub integration, listing, approval, public
 npm install @neurarelay/openclaw-preflight-adapter
 ```
 
-This is the stable npm install path. It resolves to `@neurarelay/openclaw-preflight-adapter@0.1.4` under npm `latest`.
+This is the stable npm install path. It resolves to `@neurarelay/openclaw-preflight-adapter@0.1.5` under npm `latest`.
 
 When installing the current canonical ClawHub community package, use:
 
@@ -49,7 +49,7 @@ When installing the current canonical ClawHub community package, use:
 openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter
 ```
 
-Pin `0.1.4` when you need the exact current ClawHub package version:
+Pin `0.1.4` when you need the exact currently published ClawHub package version:
 
 ```bash
 openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4

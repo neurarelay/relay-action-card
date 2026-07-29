@@ -65,7 +65,17 @@ The OpenClaw route keeps its implementation under `examples/openclaw/`, includin
 
 ### SDK And A2A
 
-Use [`examples/sdk/README.md`](examples/sdk/README.md) and [`examples/a2a/README.md`](examples/a2a/README.md) for protected Relay client examples. Production access still requires the relevant Relay authentication and product boundary.
+Use [`examples/sdk/README.md`](examples/sdk/README.md) and [`examples/a2a/README.md`](examples/a2a/README.md) for protected Relay client examples. Run `npm run example:sdk:authority-routing` to see `hold_for_registry_backed_authority` for unverified public demo context. The current SDK is `0.1.3`; the route is runtime-owned and has no public API keys. Production access still requires the relevant Relay authentication and product boundary.
+
+#### A2A Protected Client Proof
+
+The [A2A Controlled Client Pack v0.2](docs/a2a-controlled-client-pack.md) demonstrates the [A2A Controlled Runtime v1](docs/a2a-controlled-client-pack.md) boundary:
+
+```text
+A2A client -> public Agent Card -> protected `/a2a` message/send -> Decision Receipt task
+```
+
+Run public discovery with `npm run example:a2a -- --agent-card-only`. With controlled access, run `RELAY_A2A_ACCESS_TOKEN=... npm run example:a2a -- --json`. The route uses `examples/a2a`, keeps execution developer-owned, and preserves no public A2A token issuance, no public API keys, and no unprotected execution.
 
 ## Canonical Schemas
 
@@ -98,7 +108,19 @@ The OpenClaw preflight adapter is sourced from this public repository and has pr
 
 Existing versions must not be mutated or republished. Before any future SDK or OpenAI Agents version, publishable source, repository metadata, Trusted Publishing identity, provenance, and release tags must be aligned prospectively.
 
-OpenClaw submission-readiness evidence remains indexed at [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). Verify it with `npm run verify:openclaw-submission-readiness` and `npm run verify:openclaw-clawhub-release`; the controlled publisher verifier is `verify-openclaw-founder-clawhub-publisher.mjs`. Recorded package coordinates are `@neurarelay/openclaw-preflight-adapter@0.1.4` and the legacy `@rpelevin/neura-relay-preflight-adapter@0.1.1`. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or integration claim exists.
+OpenClaw submission-readiness evidence remains indexed at [`docs/openclaw-clawhub-submission-readiness.md`](docs/openclaw-clawhub-submission-readiness.md). Verify it with `npm run verify:openclaw-submission-readiness` and `npm run verify:openclaw-clawhub-release`; the controlled publisher verifier is `verify-openclaw-founder-clawhub-publisher.mjs`. The current npm package is `@neurarelay/openclaw-preflight-adapter@0.1.5`; the separately published ClawHub community package remains `0.1.4`, alongside the legacy `@rpelevin/neura-relay-preflight-adapter@0.1.1`. No official OpenClaw or ClawHub listing, approval, endorsement, partnership, or integration claim exists.
+
+## After The First Receipt
+
+Run the public proof first, then choose the next route:
+
+- Open a **First receipt feedback** issue with receipt and trace refs only.
+- Request **Sandbox MCP access** through the signed-in Relay Workspace.
+- Request **Production/private MCP access** only for a concrete governed-action use case.
+- **Create the production Agent Passport** in Neura Registry before production identity validation: `https://www.neuraregistry.com/sign-up?next=%2Fbuilder%2Fagents%2Fnew`.
+- The **Official MCP Registry** and `com.neurarelay/relay-mcp` are distribution references only; they do not establish approval, listing, endorsement, partnership, or integration.
+
+Share refs only. Do not paste private payloads, credentials, tokens, or customer data into issues or documentation.
 
 ## Verification
 

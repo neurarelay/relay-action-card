@@ -10,7 +10,8 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const canonicalClawHubVersion = "0.1.4";
+const canonicalPackageVersion = "0.1.5";
+const currentClawHubVersion = "0.1.4";
 const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackClawHubPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -129,14 +130,14 @@ const pluginPackage = readJson("examples/openclaw/preflight-adapter/package.json
 if (pluginPackage.name !== packageName) {
   failures.push("plugin_package_wrong_name");
 }
-if (pluginPackage.version !== canonicalClawHubVersion) failures.push("plugin_package_wrong_version");
+if (pluginPackage.version !== canonicalPackageVersion) failures.push("plugin_package_wrong_version");
 if (pluginPackage.private !== false) failures.push("plugin_package_must_be_publish_ready");
 if (pluginPackage.type !== "module") failures.push("plugin_package_must_be_esm");
 if (pluginPackage.license !== "MIT") failures.push("plugin_package_missing_license");
 if (pluginPackage.engines?.node !== ">=22.14.0") failures.push("plugin_package_wrong_node_engine");
 if (pluginPackage.publishConfig?.access !== "public") failures.push("plugin_package_publish_access");
 if (pluginPackage.publishConfig?.tag !== "latest") failures.push("plugin_package_publish_tag");
-if (pluginPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.1") {
+if (pluginPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.3") {
   failures.push("plugin_package_missing_sdk_dependency");
 }
 if (!pluginPackage.files?.includes("openclaw.plugin.json")) {
@@ -154,7 +155,7 @@ if (pluginPackage.openclaw?.compat?.pluginApi !== ">=2026.3.24-beta.2") {
 if (pluginPackage.openclaw?.build?.openclawVersion !== "2026.3.24-beta.2") {
   failures.push("plugin_package_wrong_build_version");
 }
-if (pluginPackage.openclaw?.install?.npmSpec !== `${packageName}@${canonicalClawHubVersion}`) {
+if (pluginPackage.openclaw?.install?.npmSpec !== `${packageName}@${canonicalPackageVersion}`) {
   failures.push("plugin_package_wrong_install_spec");
 }
 if (pluginPackage.neura?.releaseCandidateOnly !== false || pluginPackage.neura?.stableRelease !== true) {
@@ -192,13 +193,14 @@ const releaseDoc = read("docs/openclaw-plugin-release-candidate.md");
 requireIncludes("release_doc", releaseDoc, [
   "OpenClaw Plugin Stable Package v0.1",
   packageName,
-  canonicalClawHubVersion,
+  currentClawHubVersion,
   "npm run openclaw:plugin:pack:dry-run",
   "npm run verify:openclaw-plugin-rc",
   "npm run verify:openclaw-runtime-approval",
   "Node `24`",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
-  "canonical `@neurarelay` ClawHub community package has been published as `0.1.4`",
+  `npm package \`${packageName}@${canonicalPackageVersion}\` is published`,
+  `canonical \`@neurarelay\` ClawHub community package remains \`${currentClawHubVersion}\``,
   "Roman's explicit approval",
   "https://docs.openclaw.ai/plugins/manifest",
   "https://docs.openclaw.ai/plugins/building-plugins",
@@ -209,7 +211,7 @@ rejectUnsafe("release_doc", releaseDoc);
 const approvalDoc = read("docs/openclaw-runtime-verification-and-publish-approval.md");
 requireIncludes("approval_doc", approvalDoc, [
   "OpenClaw Runtime Verification And Publish Approval Packet",
-  `${packageName}@${canonicalClawHubVersion}`,
+  `${packageName}@${canonicalPackageVersion}`,
   canonicalPluginId,
   "npm run verify:openclaw-npm-package",
   "Use Node `24`",
@@ -217,7 +219,7 @@ requireIncludes("approval_doc", approvalDoc, [
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
   "Do not run a future package-version or README-polish release without Roman approval",
-  "canonical `@neurarelay` ClawHub community package `0.1.4` is published with audits pending",
+  `canonical \`@neurarelay\` ClawHub community package \`${currentClawHubVersion}\` remains published with audits pending`,
 ]);
 rejectUnsafe("approval_doc", approvalDoc);
 
