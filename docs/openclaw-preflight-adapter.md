@@ -1,6 +1,6 @@
 # OpenClaw-Style Preflight Adapter v0.1
 
-Status: npm `0.1.5` published with SDK `0.1.3`; canonical ClawHub community package remains `0.1.4`; further OpenClaw / ClawHub changes remain approval-gated
+Status: npm and canonical ClawHub community package `0.1.5` published with SDK `0.1.3`; further OpenClaw / ClawHub changes remain approval-gated
 Date: 2026-07-29
 
 This adapter turns the Action Receipt Kit into a plugin-ready runtime contract for the OpenClaw-style compatibility lane:
@@ -59,10 +59,10 @@ This is the stable npm install path. npm `latest` resolves to `0.1.5`; the old `
 Published canonical ClawHub community package:
 
 ```text
-clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
+clawhub:@neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
-ClawHub currently shows current version `v0.1.4`, `latest` and `stable` tags, visible README, Static analysis pass, and ClawScan / VirusTotal pending. This is community package availability only, not an official OpenClaw or ClawHub approval, listing, endorsement, integration, or partnership.
+ClawHub currently shows current version `v0.1.5`, `latest` and `stable` tags, a visible README, and a clean artifact scan. This is community package availability only, not an official OpenClaw or ClawHub approval, listing, endorsement, integration, or partnership.
 
 Use the package surface:
 

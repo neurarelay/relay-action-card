@@ -1,6 +1,6 @@
 # ClawHub Response Checklist
 
-Status: local response plan; canonical `@neurarelay` `0.1.4` community package published; no ClawHub listing, approval, or partnership claim
+Status: local response plan; canonical `@neurarelay` `0.1.5` community package published with `latest,stable`; no ClawHub listing, approval, or partnership claim
 Date: 2026-05-18
 
 Use this when `openclaw/clawhub#2190` receives maintainer/admin feedback.

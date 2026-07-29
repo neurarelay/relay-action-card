@@ -46,4 +46,4 @@ npm run verify:openclaw-five-minute-demo
 npm run test:openclaw-five-minute-demo
 ```
 
-This is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. It is a claim-safe OpenClaw-style developer proof; the canonical ClawHub community package is visible separately as `@neurarelay/openclaw-preflight-adapter@0.1.4` while security audits remain pending.
+This is not an official OpenClaw or ClawHub integration, listing, approval, publication, or partnership. It is a claim-safe OpenClaw-style developer proof; the canonical ClawHub community package is visible as `@neurarelay/openclaw-preflight-adapter@0.1.5` with `latest,stable` tags and a clean artifact scan.

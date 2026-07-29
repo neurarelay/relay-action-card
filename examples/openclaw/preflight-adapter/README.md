@@ -12,7 +12,7 @@ The ClawHub community fallback package remains:
 @rpelevin/neura-relay-preflight-adapter@0.1.1
 ```
 
-The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` package is published at `0.1.5` on npm `latest`. The separate canonical ClawHub community package remains `v0.1.4` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`; no ClawHub update is included in this release, so its existing `latest` and `stable` tags, visible README, and pending security audits remain unchanged.
+The founder-publisher package remains a historical community fallback. The canonical `@neurarelay` package is published at `0.1.5` on npm and ClawHub `latest,stable` with the distinct plugin id `neurarelay-openclaw-preflight-adapter`; the artifact scan is clean.
 
 This adapter is the OpenClaw-style compatibility path for the same Relay review boundary used by the core examples, the SDK, protected MCP/A2A paths, and Neura Local. Use it when a local runtime wants a Decision Receipt before execution while preserving developer-owned execution.
 
@@ -49,10 +49,10 @@ When installing the current canonical ClawHub community package, use:
 openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter
 ```
 
-Pin `0.1.4` when you need the exact currently published ClawHub package version:
+Pin `0.1.5` when you need the exact currently published ClawHub package version:
 
 ```bash
-openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
+openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
 When installing the historical founder-publisher fallback, pin the published version:

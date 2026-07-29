@@ -186,10 +186,10 @@ openclaw plugins install clawhub:@neurarelay/openclaw-preflight-adapter@0.1.4
 Usable today:
 
 - `@neurarelay/openclaw-preflight-adapter` is the canonical npm package path
-- `clawhub:@neurarelay/openclaw-preflight-adapter` is the canonical ClawHub community package path at version `0.1.4`
-- ClawHub runtime hook package: `@neurarelay/openclaw-preflight-adapter@0.1.4`
+- `clawhub:@neurarelay/openclaw-preflight-adapter` is the canonical ClawHub community package path at version `0.1.5`
+- ClawHub runtime hook package: `@neurarelay/openclaw-preflight-adapter@0.1.5`
 - ClawHub agent workflow skill: [`neura-openclaw-core@0.1.0`](https://clawhub.ai/neurarelay/neura-openclaw-core)
-- ClawHub currently shows current version `v0.1.4`, `latest` and `stable` tags, visible README, and security audits pending
+- ClawHub currently shows current version `v0.1.5`, `latest` and `stable` tags, visible README, and a clean artifact scan
 - local proof surfaces cover messages, files, browser submits, shell commands, workflow transitions, memory writes, data exports, and package publishing
 
 Boundary:
