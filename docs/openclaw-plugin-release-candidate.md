@@ -13,7 +13,7 @@ Current npm package:
 @neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
-The canonical `@neurarelay` ClawHub community package remains publicly visible as `0.1.4` at `@neurarelay/openclaw-preflight-adapter@0.1.4` and uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback. The approved `0.1.5` ClawHub publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7`, but version, download, and history reads do not expose it; the publication is unverified.
+The canonical `@neurarelay` ClawHub community package remains `0.1.4` and is publicly visible at `@neurarelay/openclaw-preflight-adapter@0.1.4`. It uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback. The approved `0.1.5` ClawHub publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7`, but version, download, and history reads do not expose it; the publication is unverified.
 
 The package turns a proposed local computer-use action into a refs-only Action Card, asks Neura Relay for a Decision Receipt, and returns a developer-owned execution route. Neura does not execute the downstream action.
 
