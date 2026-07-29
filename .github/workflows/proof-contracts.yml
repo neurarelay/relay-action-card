@@ -13,6 +13,7 @@ on:
       - "docs/current-public-proof-map.md"
       - "docs/recoverable-observer-fixture-pack.md"
       - "docs/structured-result-trust-receipt.md"
+      - "docs/openclaw-clawhub-submission-readiness.md"
       - "examples/lib/structured-result-trust.mjs"
       - "examples/recoverable-observer/**"
       - "examples/structured-result-trust/**"
@@ -20,6 +21,7 @@ on:
       - "scripts/verify-recoverable-observer-fixture-pack.mjs"
       - "scripts/verify-protocol-contract-mirror.mjs"
       - "scripts/verify-structured-result-trust-receipt.mjs"
+      - "scripts/verify-openclaw-submission-readiness.mjs"
       - "tests/recoverable-observer-fixture-pack.test.mjs"
       - "tests/structured-result-trust-receipt.test.mjs"
   push:
@@ -36,6 +38,7 @@ on:
       - "docs/current-public-proof-map.md"
       - "docs/recoverable-observer-fixture-pack.md"
       - "docs/structured-result-trust-receipt.md"
+      - "docs/openclaw-clawhub-submission-readiness.md"
       - "examples/lib/structured-result-trust.mjs"
       - "examples/recoverable-observer/**"
       - "examples/structured-result-trust/**"
@@ -43,6 +46,7 @@ on:
       - "scripts/verify-recoverable-observer-fixture-pack.mjs"
       - "scripts/verify-protocol-contract-mirror.mjs"
       - "scripts/verify-structured-result-trust-receipt.mjs"
+      - "scripts/verify-openclaw-submission-readiness.mjs"
       - "tests/recoverable-observer-fixture-pack.test.mjs"
       - "tests/structured-result-trust-receipt.test.mjs"
 

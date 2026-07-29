@@ -1,6 +1,6 @@
 # OpenClaw Plugin Stable Package v0.1
 
-Status: npm package `0.1.5` published with SDK `0.1.3`; canonical ClawHub community package remains `0.1.4`; further ClawHub changes remain approval-gated
+Status: npm package `0.1.5` published with SDK `0.1.3`; authoritative ClawHub reads still expose `0.1.4` after the approved `0.1.5` publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7`; visibility remains unresolved
 Date: 2026-07-29
 
 This document is the claim-safe release-readiness packet for the Neura Relay OpenClaw preflight adapter.
@@ -13,7 +13,7 @@ Current npm package:
 @neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
-The canonical `@neurarelay` ClawHub community package remains `0.1.4` at `@neurarelay/openclaw-preflight-adapter@0.1.4` and uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback. This release updates npm only; it does not update ClawHub.
+The canonical `@neurarelay` ClawHub community package remains `0.1.4` and is publicly visible at `@neurarelay/openclaw-preflight-adapter@0.1.4`. It uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback. The approved `0.1.5` ClawHub publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7`, but version, download, and history reads do not expose it; the publication is unverified.
 
 The package turns a proposed local computer-use action into a refs-only Action Card, asks Neura Relay for a Decision Receipt, and returns a developer-owned execution route. Neura does not execute the downstream action.
 
@@ -21,7 +21,7 @@ The package turns a proposed local computer-use action into a refs-only Action C
 
 - package metadata is shaped for OpenClaw plugin discovery and npm/ClawHub packaging
 - npm package `@neurarelay/openclaw-preflight-adapter@0.1.5` is published with the `latest` tag and depends on `@neurarelay/sdk@0.1.3`
-- the separate ClawHub community package remains `v0.1.4` with `latest,stable` tags, visible README, Static analysis pass, ClawScan pending, and VirusTotal pending
+- the separate ClawHub community package remains publicly visible as `v0.1.4` with `latest,stable` tags, visible README, Static analysis pass, ClawScan pending, and VirusTotal pending; the approved `0.1.5` publish attempt is not visible through authoritative reads
 - developers can use `npm install @neurarelay/openclaw-preflight-adapter`; ClawHub remains pinned separately at `0.1.4` until a separately approved update
 - clean local package consumer proof is available through `npm run verify:openclaw-plugin-rc`
 - native manifest is present at `examples/openclaw/preflight-adapter/openclaw.plugin.json`

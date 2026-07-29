@@ -9,7 +9,7 @@ This packet records the actual OpenClaw / ClawHub release gate for the canonical
 @neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
-The canonical `0.1.5` npm package uses the same plugin metadata and depends on SDK `0.1.3`. The separately published `0.1.4` ClawHub community package uses plugin id `neurarelay-openclaw-preflight-adapter` so it does not collide with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback, whose plugin id is already claimed in ClawHub. This release updates npm only.
+The canonical `0.1.5` npm package uses the same plugin metadata and depends on SDK `0.1.3`. The publicly visible `0.1.4` ClawHub community package uses plugin id `neurarelay-openclaw-preflight-adapter` so it does not collide with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback, whose plugin id is already claimed in ClawHub. The approved `0.1.5` ClawHub publish attempt returned release id `rd7eprbkeze331tnt7tsg2kswd8bfys7`, but authoritative version, download, and history reads still expose only `0.1.4`; publication visibility remains unresolved.
 
 It does not list, approve, or partner the plugin through OpenClaw / ClawHub. It records the verified runtime and package facts so Roman can make clean future OpenClaw / ClawHub decisions from current truth.
 
