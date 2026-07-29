@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.4";
+const packageVersion = "0.1.5";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 const issueUrl = "https://github.com/openclaw/clawhub/issues/2190";
 const failures = [];
@@ -180,7 +180,7 @@ function verifyPackageSurface() {
       adapterPackage.publishConfig?.tag === "latest",
     package_runtime: adapterPackage.type === "module" &&
       adapterPackage.engines?.node === ">=22.14.0",
-    package_sdk: adapterPackage.dependencies?.["@neurarelay/sdk"] === "0.1.1",
+    package_sdk: adapterPackage.dependencies?.["@neurarelay/sdk"] === "0.1.3",
     package_openclaw_extension: adapterPackage.openclaw?.extensions?.includes("./index.mjs"),
     package_clawhub_tool_metadata: adapterPackage.openclaw?.tools?.some(
       (tool) => tool?.name === "neura_relay_preflight_action",
@@ -370,7 +370,7 @@ const report = {
     state:
       "publisher login available; canonical @neurarelay package is published as a community package with audits pending",
     blocker_resolved:
-      "0.1.4 is a README-only polish release that preserves the distinct plugin id and latest,stable tags",
+      "0.1.5 aligns the package to @neurarelay/sdk@0.1.3; the approved ClawHub publish attempt returned a release id but public version reads still expose 0.1.4",
   },
   package: {
     name: packageSurface.adapterPackage.name,
