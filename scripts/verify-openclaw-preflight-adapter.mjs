@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const canonicalClawHubVersion = "0.1.4";
+const canonicalPackageVersion = "0.1.5";
 const canonicalPluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackClawHubPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -126,12 +126,12 @@ const adapterPackage = readJson("examples/openclaw/preflight-adapter/package.jso
 if (adapterPackage.name !== packageName) {
   failures.push("adapter_package_wrong_name");
 }
-if (adapterPackage.version !== canonicalClawHubVersion) {
+if (adapterPackage.version !== canonicalPackageVersion) {
   failures.push("adapter_package_wrong_version");
 }
 if (adapterPackage.private !== false) failures.push("adapter_package_must_be_publish_ready");
 if (adapterPackage.engines?.node !== ">=22.14.0") failures.push("adapter_package_wrong_node_engine");
-if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.1") {
+if (adapterPackage.dependencies?.["@neurarelay/sdk"] !== "0.1.3") {
   failures.push("adapter_package_missing_sdk_dependency");
 }
 if (!adapterPackage.openclaw?.extensions?.includes("./index.mjs")) {
@@ -148,7 +148,7 @@ for (const tag of ["policy-evidence", "authority-decision", "computer-use"]) {
 if (!adapterPackage.openclaw?.compat?.pluginApi || !adapterPackage.openclaw?.build?.openclawVersion) {
   failures.push("adapter_package_missing_openclaw_compat_or_build");
 }
-if (adapterPackage.openclaw?.install?.npmSpec !== `${packageName}@${canonicalClawHubVersion}`) {
+if (adapterPackage.openclaw?.install?.npmSpec !== `${packageName}@${canonicalPackageVersion}`) {
   failures.push("adapter_package_missing_install_npm_spec");
 }
 if (adapterPackage.neura?.officialOpenClawOrClawHubClaim !== false) {
@@ -162,7 +162,7 @@ const nativeManifest = readJson("examples/openclaw/preflight-adapter/openclaw.pl
 if (nativeManifest.id !== canonicalPluginId) {
   failures.push("native_manifest_wrong_id");
 }
-if (nativeManifest.version !== canonicalClawHubVersion) {
+if (nativeManifest.version !== canonicalPackageVersion) {
   failures.push("native_manifest_wrong_version");
 }
 if (!nativeManifest.configSchema || nativeManifest.configSchema.type !== "object") {

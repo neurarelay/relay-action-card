@@ -1,28 +1,28 @@
 # OpenClaw Plugin Stable Package v0.1
 
-Status: canonical ClawHub community package `0.1.4` published; further OpenClaw / ClawHub package changes remain approval-gated
-Date: 2026-05-18
+Status: npm package `0.1.5` published with SDK `0.1.3`; canonical ClawHub community package remains `0.1.4`; further ClawHub changes remain approval-gated
+Date: 2026-07-29
 
 This document is the claim-safe release-readiness packet for the Neura Relay OpenClaw preflight adapter.
 
 For the final Roman approval packet before any OpenClaw / ClawHub submission or package publication action, see [`openclaw-clawhub-submission-readiness.md`](openclaw-clawhub-submission-readiness.md).
 
-Canonical ClawHub community package:
+Current npm package:
 
 ```text
-@neurarelay/openclaw-preflight-adapter@0.1.4
+@neurarelay/openclaw-preflight-adapter@0.1.5
 ```
 
-This ClawHub package uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback.
+The canonical `@neurarelay` ClawHub community package remains `0.1.4` at `@neurarelay/openclaw-preflight-adapter@0.1.4` and uses plugin id `neurarelay-openclaw-preflight-adapter` so it can coexist with the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` community fallback. This release updates npm only; it does not update ClawHub.
 
 The package turns a proposed local computer-use action into a refs-only Action Card, asks Neura Relay for a Decision Receipt, and returns a developer-owned execution route. Neura does not execute the downstream action.
 
 ## Current Status
 
 - package metadata is shaped for OpenClaw plugin discovery and npm/ClawHub packaging
-- canonical ClawHub community package `@neurarelay/openclaw-preflight-adapter@0.1.4` is published with the `latest,stable` tags
-- ClawHub shows current version `v0.1.4`, visible README, Static analysis pass, ClawScan pending, and VirusTotal pending
-- developers can still use `npm install @neurarelay/openclaw-preflight-adapter`; any npm version change requires separate Roman approval before publication
+- npm package `@neurarelay/openclaw-preflight-adapter@0.1.5` is published with the `latest` tag and depends on `@neurarelay/sdk@0.1.3`
+- the separate ClawHub community package remains `v0.1.4` with `latest,stable` tags, visible README, Static analysis pass, ClawScan pending, and VirusTotal pending
+- developers can use `npm install @neurarelay/openclaw-preflight-adapter`; ClawHub remains pinned separately at `0.1.4` until a separately approved update
 - clean local package consumer proof is available through `npm run verify:openclaw-plugin-rc`
 - native manifest is present at `examples/openclaw/preflight-adapter/openclaw.plugin.json`
 - runtime entrypoint is declared through `package.json` `openclaw.extensions`
@@ -31,7 +31,7 @@ The package turns a proposed local computer-use action into a refs-only Action C
 - stable package verifier is available through `npm run verify:openclaw-plugin-rc`
 - runtime install/inspect proof is available through `npm run verify:openclaw-runtime-approval` when running under Node 22.14+; this repo pins Node `24` in `.nvmrc`
 
-The canonical `@neurarelay` ClawHub community package has been published as `0.1.4`; the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` package remains a historical community fallback only. No official listing, approval, partnership, endorsement, or provider claim exists. Any further OpenClaw / ClawHub submission, package-version release, README polish release, metadata change, or public-copy action requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
+The canonical `@neurarelay` ClawHub community package remains published as `0.1.4`; the existing `@rpelevin/neura-relay-preflight-adapter@0.1.1` package remains a historical community fallback only. No official listing, approval, partnership, endorsement, or provider claim exists. Any further OpenClaw / ClawHub submission, package-version release, README polish release, metadata change, or public-copy action requires Roman's explicit approval of the exact package name, metadata, public copy, and publish/submission action.
 
 ## Official Source Alignment
 

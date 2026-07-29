@@ -8,7 +8,8 @@ import { fileURLToPath } from "node:url";
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.4";
+const packageVersion = "0.1.5";
+const currentClawHubVersion = "0.1.4";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 const fallbackPackage = "@rpelevin/neura-relay-preflight-adapter@0.1.1";
 
@@ -174,7 +175,7 @@ rejectUnsafe("publish_workflow", publishWorkflow);
 const packet = read("docs/openclaw-clawhub-submission-readiness.md");
 requireIncludes("submission_packet", packet, [
   "OpenClaw / ClawHub Submission Readiness Packet",
-  "canonical `@neurarelay` package `0.1.4` published on npm latest and ClawHub community",
+  `canonical \`@neurarelay\` package \`${packageVersion}\` published on npm latest; ClawHub community package remains \`${currentClawHubVersion}\``,
   packageName,
   packageVersion,
   pluginId,
@@ -199,11 +200,11 @@ requireIncludes("submission_packet", packet, [
   "npm run verify:openclaw-runtime-approval",
   "clawhub package publish examples/openclaw/preflight-adapter --family code-plugin",
   "--dry-run --json",
-  `openclaw plugins install clawhub:${packageName}@${packageVersion}`,
+  `openclaw plugins install clawhub:${packageName}@${currentClawHubVersion}`,
   "Public-Safe Copy",
   "Claim Boundaries",
   "Roman Approval Decision",
-  `Approved: run ClawHub dry-run only for ${packageName}@${packageVersion}.`,
+  `Approved: run ClawHub dry-run only for ${packageName}@${currentClawHubVersion}.`,
   "Approved: publish a future README-only ClawHub polish release",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.0 to ClawHub as the founder-publisher fallback",
   "Approved: publish @rpelevin/neura-relay-preflight-adapter@0.1.1 to ClawHub as a community founder-publisher metadata/readme correction",

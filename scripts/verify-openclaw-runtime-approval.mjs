@@ -10,7 +10,7 @@ const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const pluginRoot = join(repoRoot, "examples/openclaw/preflight-adapter");
 const failures = [];
 const packageName = "@neurarelay/openclaw-preflight-adapter";
-const packageVersion = "0.1.4";
+const packageVersion = "0.1.5";
 const pluginId = "neurarelay-openclaw-preflight-adapter";
 
 const requiredNode = [22, 14, 0];
@@ -95,7 +95,7 @@ for (const phrase of [
   "Use Node `24`",
   "registered tool: `neura_relay_preflight_action`",
   "ClawHub publish dry-run succeeded",
-  "canonical `@neurarelay` ClawHub community package `0.1.4` is published with audits pending",
+  "canonical `@neurarelay` ClawHub community package `0.1.4` remains published with audits pending",
   "Do not run a future package-version or README-polish release without Roman approval",
 ]) {
   if (!approvalDoc.includes(phrase)) failures.push(`approval_doc_missing_${phrase}`);
